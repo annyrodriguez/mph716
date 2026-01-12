@@ -1,0 +1,307 @@
+/* ============================================================
+   QUARTO BOOK THEME
+   Neutral off-white base + pink sidebars + fun headings
+============================================================ */
+
+/* ---------- Palette ---------- */
+:root{
+  /* Neutrals */
+  --page-bg: #F7F4EF;          /* warm off-white */
+  --content-bg: #FFFFFF;
+  --text: #1F2933;
+  --muted: #6B7280;
+  --border: #E6E3DC;
+
+  /* Pops (DesignPixie-inspired) */
+  --pink: #FF6B6B;             /* main pink (coral-pink) */
+  --pink-soft: #FFE6E6;        /* lighter pink for hover/accents */
+  --pink-deep: #E84F6A;        /* deeper pink for emphasis */
+  --aqua: #2CB7B3;             /* supporting pop */
+  --butter: #F6C945;
+  --sage: #7BC9A4;
+  --lavender: #9B8CFF;
+
+  /* Links */
+  --link: var(--aqua);
+  --link-hover: var(--pink);
+  --link-visited: var(--lavender);
+
+  --shadow: 0 10px 24px rgba(0,0,0,.08);
+  --shadow-soft: 0 6px 18px rgba(0,0,0,.06);
+
+  /* Focus ring */
+  --focus: color-mix(in srgb, var(--butter) 60%, var(--aqua));
+}
+
+/* ---------- Kill Bootstrap blue everywhere ---------- */
+:root, body{
+  --bs-body-bg: var(--page-bg);
+  --bs-body-color: var(--text);
+
+  --bs-link-color: var(--link);
+  --bs-link-hover-color: var(--link-hover);
+
+  /* Bootstrap “primary” is used by some nav/controls */
+  --bs-primary: var(--pink);
+  --bs-primary-rgb: 255,107,107;
+}
+
+/* ---------- Base ---------- */
+body{
+  background: var(--page-bg) !important;
+  color: var(--text) !important;
+}
+
+/* Reading surface */
+main.content{
+  background: var(--content-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.6rem;
+  box-shadow: var(--shadow-soft);
+}
+
+/* ---------- Fun headings (tasteful + readable) ---------- */
+h1, h2, h3, h4, h5, h6{
+  color: var(--text) !important;
+  letter-spacing: .2px;
+}
+
+/* Gradient “fun” effect for larger headings */
+h1, h2{
+  background: linear-gradient(90deg, var(--pink-deep), var(--aqua));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+
+/* Slight pop for smaller headings */
+h3, h4{
+  color: color-mix(in srgb, var(--pink-deep) 55%, var(--text)) !important;
+}
+
+/* Title in banner */
+.quarto-title-block .quarto-title{
+  background: linear-gradient(90deg, var(--pink-deep), var(--aqua));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  letter-spacing: .2px;
+}
+
+/* ---------- Links (force all states/contexts) ---------- */
+a, a:link,
+main.content a,
+#quarto-content a,
+.toc a,
+nav a,
+.navbar a,
+.nav-link,
+.dropdown-item,
+.page-sidebar a,
+.column-margin a,
+.footnote-ref,
+.footnote-back,
+a code{
+  color: var(--link) !important;
+  text-decoration-color: color-mix(in srgb, var(--link) 40%, transparent);
+  text-underline-offset: .15em;
+  text-decoration-thickness: .08em;
+}
+
+a:visited,
+main.content a:visited{
+  color: var(--link-visited) !important;
+}
+
+a:hover, a:focus,
+main.content a:hover,
+#quarto-content a:hover,
+.toc a:hover,
+nav a:hover,
+.navbar a:hover,
+.nav-link:hover,
+.dropdown-item:hover,
+.page-sidebar a:hover,
+.column-margin a:hover,
+.footnote-ref:hover,
+.footnote-back:hover{
+  color: var(--link-hover) !important;
+  text-decoration-color: var(--link-hover) !important;
+}
+
+a:focus-visible{
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: .35rem;
+}
+
+/* ---------- Left sidebar (pink!) ---------- */
+.sidebar{
+  background: var(--pink-soft) !important;
+  color: #ffffff !important;
+  border-right: 1px solid color-mix(in srgb, #fff 18%, transparent) !important;
+}
+
+.sidebar a,
+.sidebar .nav-link,
+.sidebar .sidebar-item-text,
+.sidebar .nav-link span{
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-weight: 550;
+}
+
+/* Hover state in sidebar */
+.sidebar a:hover,
+.sidebar .nav-link:hover{
+  color: rgba(255,255,255,.85) !important;
+}
+
+/* Active page in sidebar */
+.sidebar .nav-link.active{
+  background: rgba(255,255,255,.28) !important;
+  color: #ffffff !important;
+  border-radius: 12px;
+}
+
+/* Little dot marker */
+.sidebar .nav-link.active::before{
+  content: "";
+  display: inline-block;
+  width: .55rem;
+  height: .55rem;
+  margin-right: .5rem;
+  border-radius: 999px;
+  background: var(--butter);
+  vertical-align: middle;
+}
+
+/* Make the Table of Contents title bold and more prominent */
+.page-sidebar .title{
+  font-weight: 900 !important;
+  letter-spacing: .3px;
+  color: var(--text) !important;
+}
+
+
+/* ---------- Right TOC / margin area ---------- */
+.page-sidebar, .column-margin{
+  background: transparent !important;
+  color: var(--muted) !important;
+}
+
+/* Make TOC feel a bit more designed */
+.page-sidebar .active, .toc-active{
+  border-left-color: var(--pink-deep) !important;
+}
+
+/* ---------- Callouts ---------- */
+.callout{
+  border-radius: 18px !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-soft);
+}
+
+.callout .callout-header{
+  font-weight: 800 !important;
+  letter-spacing: .2px;
+}
+
+/* Note (aqua) */
+.callout-note{
+  border-left: 7px solid var(--aqua) !important;
+  background: rgba(44,183,179,.08) !important;
+}
+
+/* Tip (sage) */
+.callout-tip{
+  border-left: 7px solid var(--sage) !important;
+  background: rgba(123,201,164,.10) !important;
+}
+
+/* Warning (butter) */
+.callout-warning{
+  border-left: 7px solid var(--butter) !important;
+  background: rgba(246,201,69,.14) !important;
+}
+
+/* Important (pink) */
+.callout-important{
+  border-left: 7px solid var(--pink-deep) !important;
+  background: rgba(232,79,106,.10) !important;
+}
+
+/* ---------- Tables ---------- */
+table{
+  border-collapse: collapse;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  background: var(--content-bg) !important;
+}
+
+thead{
+  background: rgba(255,107,107,.16) !important; /* pink tint */
+}
+
+th, td{
+  border: 1px solid var(--border);
+}
+
+/* ---------- Code ---------- */
+code{
+  background: rgba(44,183,179,.14);
+  color: var(--pink-deep);
+  border-radius: 6px;
+  padding: .15em .3em;
+}
+
+pre, div.sourceCode{
+  background: #F3F4F6 !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 14px !important;
+  padding: 1rem;
+}
+
+/* ---------- Lists (keep markers visible) ---------- */
+main.content ul,
+main.content ol{
+  list-style: revert;
+  padding-left: 1.6rem;
+}
+
+/* ---------- Title banner (soft + playful) ---------- */
+.quarto-title-banner{
+  background:
+    radial-gradient(18rem 12rem at 10% 20%, rgba(255,107,107,.22), transparent 60%),
+    radial-gradient(20rem 14rem at 80% 40%, rgba(44,183,179,.18), transparent 60%),
+    radial-gradient(18rem 12rem at 60% 85%, rgba(246,201,69,.20), transparent 60%),
+    linear-gradient(135deg, #FAFAF8, #FFFFFF) !important;
+}
+
+/* ---------- Buttons ---------- */
+.btn, .quarto-btn, button{
+  border-radius: 999px !important;
+}
+
+.btn-primary, .quarto-btn-primary{
+  background: var(--pink) !important;
+  border-color: var(--pink) !important;
+  color: #fff !important;
+}
+
+.btn-primary:hover, .quarto-btn-primary:hover{
+  background: var(--aqua) !important;
+  border-color: var(--aqua) !important;
+}
+
+/* Mobile spacing */
+@media (max-width: 991px){
+  main.content{
+    border-radius: 16px;
+    padding: 1.1rem;
+  }
+}
+
+

@@ -5,3 +5,5 @@
 .quarto/
 *_cache/
 .DS_Store
+
+/.quarto/
