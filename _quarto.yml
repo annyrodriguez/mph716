@@ -4,6 +4,7 @@ project:
 
 book:
   title: "R and Health Sciences"
+  site-url: https://annyrodriguez.github.io/mph716/
   author: "Anny D. Rodriguez, PhD, MPH"
   chapters:
     - index.qmd
