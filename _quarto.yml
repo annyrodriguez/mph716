@@ -1,0 +1,22 @@
+project:
+  type: book
+  output-dir: _site
+
+book:
+  title: "R and Health Sciences"
+  author: "Anny D. Rodriguez, PhD, MPH"
+  chapters:
+    - index.qmd
+    - 01-intro.qmd
+    - 02-quarto.qmd
+    - 02b-inline.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    number-sections: false
+
+
+

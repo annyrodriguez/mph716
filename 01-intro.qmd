@@ -1,0 +1,405 @@
+---
+title: "Lesson 1: Getting Started with R and RStudio"
+---
+
+# First Things First
+
+This course is designed to help you become **familiar** with R and RStudio, you're not expected to become a professional R programmer at the end of it. There is a learning curve and there will be moments where you might want to give up (or throw your computer), but I *encourage* you to stick with it. One day, after practicing and potentially crying about it, it will click and you will be so happy you stuck with it. **I believe in you**.
+
+## Important Resources
+
+I've designed this course using free online resources - since R, itself, is a free program. You're going to want to bookmark the following resources as you will definitely be using these for the duration of this course (and possible beyond):
+
+- <a href="https://moderndive.com" target="_blank">ModernDive</a>
+- <a href="https://r4ds.had.co.nz/" target="_blank">R for Data Science</a>
+- <a href="https://gabrielodom.github.io/PHC6701_r4ds/" target="_blank">Advanced R</a>
+
+
+## Learning Goals
+
+By the end of this week, you should be able to:
+
+- Open RStudio and identify the main panes.
+- Run basic R commands in the Console and from a script.
+- Load and use the tidyverse package.
+- Describe how R and reproducible workflows support public health research.
+
+## Readings
+
+- ModernDive, Chapter 1: Introduction to Data Science
+- OpenIntro Biostatistics, Chapter 1: Introduction to Data
+
+## Topics
+
+- What is data science in the context of public health?
+- R and RStudio basics
+- R scripts vs Console
+- Loading packages (tidyverse)
+- Good habits for saving and organizing work
+
+# What is Data Science?
+
+Data science is an interdisciplinary field that focuses on: 
+
+- collecting data,
+- cleaning and managing data,
+- analyzing data,
+- and communicating insights to support decision-making.
+
+It combines skills from:
+
+- statistics,
+- computer programming,
+- data visualization,
+- and domain knowledge.
+
+In public health, data science is used to turn complex health data into actionable evidence.
+
+
+## Why data science matters in public health.
+
+Public health decisions affect entire populations. Data science allows public health professionals to:
+
+  - identify health disparities,
+  - monitor disease trends,
+  - evaluate interventions,
+  - and allocate resources effectively.
+
+Without data science, public health decisions would rely more heavily on anecdotal evidence rather than systematic analysis.
+
+
+## Types of data used in public health data science
+
+Public health data come from many sources, including:
+
+  - surveillance systems,
+  - surveys and questionnaires,
+  - electronic health records,
+  - clinical trials,
+  - administrative and claims data,
+  - environmental and geographic data.
+
+Data science methods help integrate these data sources into a coherent analytical framework.
+
+
+## Key applications of data science in public health
+
+### Disease surveillance and outbreak detection
+
+Data science helps:
+
+  - detect unusual patterns in disease incidence,
+  - identify emerging outbreaks,
+  - track disease spread over time and across locations.
+
+Timely analysis can inform rapid public health responses.
+
+
+### Health disparities and equity
+
+Data science allows researchers to:
+
+  - examine differences in health outcomes across populations,
+  - identify structural and social determinants of health,
+  - quantify inequities by race, ethnicity, income, geography, and language.
+
+These analyses support equity-focused public health interventions.
+
+
+### Program evaluation and policy analysis
+
+Public health programs and policies must be evaluated to determine whether they work.
+
+Data science supports:
+
+  - impact evaluation,
+  - cost-effectiveness analysis,
+  - longitudinal and causal modeling,
+  - evidence-based policy making.
+
+
+
+### Predictive modeling and risk assessment
+
+Using historical data, data science can:
+
+  - predict disease risk,
+  - identify high-risk populations,
+  - support prevention and early intervention strategies.
+
+These models complement traditional epidemiologic approaches.
+
+
+## The role of R in public health data science
+
+R is widely used in public health because it:
+
+  - supports statistical modeling,
+  - handles large and complex datasets,
+  - creates publication-quality visualizations,
+  - enables reproducible research through scripts and Quarto documents.
+
+Learning R allows public health professionals to implement data science workflows transparently and efficiently.
+
+
+## Reproducibility and transparency
+
+Reproducibility is a core principle of both data science and public health.
+
+Best practices include:
+
+  - writing clean, well-documented code,
+  - using scripts and Quarto documents,
+  - tracking data processing steps,
+  - rerunning analyses from raw data to final results.
+
+Reproducible workflows increase trust in public health findings.
+
+
+# R and RStudio Basics
+
+## What is R?
+
+R is a **programming language** used for:
+
+  - data analysis and statistics,
+  - data visualization,
+  - reproducible research,
+  - and reporting results.
+
+R itself runs in the background. It does the actual computation, stores objects in memory, and executes your code.
+
+## What is RStudio?
+
+RStudio is an **integrated development environment (IDE)** for R.
+
+Think of R as the engine of a car, and RStudio as the dashboard. RStudio makes it easier to:
+
+  - write and organize code,
+  - run analyses,
+  - view plots and data,
+  - manage files and projects,
+  - and create Quarto documents.
+
+You can use R without RStudio, but almost everyone uses R *through* RStudio because it is more efficient and user friendly.
+
+## R vs RStudio (key distinction)
+
+- **R** does the computing  
+- **RStudio** helps you interact with R  
+
+:::{.callout-warning}
+If R is not installed, RStudio will not work.
+:::
+
+## The RStudio interface
+
+When you open RStudio, you typically see four panes.
+
+### Source pane (top-left)
+
+This is where you:
+
+  - write R scripts (`.R`),
+  - write Quarto documents (`.qmd`),
+  - edit code without running it immediately.
+
+Nothing in this pane runs until you tell R to run it.
+
+### Console pane (bottom-left)
+
+The Console is where:
+
+  - R actually runs code,
+  - results and error messages appear,
+  - commands are executed line by line.
+
+You can type code directly here, but for reproducibility, most code should live in scripts or Quarto files.
+
+### Environment / History pane (top-right)
+
+The Environment tab shows:
+
+  - objects currently loaded in memory,
+  - data frames, vectors, functions, and values.
+
+If you restart R, this pane clears because the session memory resets.
+
+### Files / Plots / Packages / Help pane (bottom-right)
+
+This pane lets you:
+
+  - browse project files,
+  - view plots,
+  - manage installed packages,
+  - read help documentation.
+
+## What is an R session?
+
+An R session is the **current working instance of R**.
+
+During a session:
+
+  - objects live in memory,
+  - loaded packages are available,
+  - results depend on what you have already run.
+
+When you restart R:
+
+  - memory is cleared,
+  - packages must be reloaded,
+  - scripts must be re-run.
+
+This is why reproducible workflows matter.
+
+## Writing and running code
+
+### Writing code
+
+Write code in the Source pane, for example:
+
+```{r}
+x <- 5
+y <- 10
+x + y
+```
+
+## R & RStudio Keyboard Shortcuts (Quick Reference)
+
+Using keyboard shortcuts will make you faster, reduce errors, and improve reproducibility. These shortcuts work in **RStudio** unless otherwise noted.
+
+## Running code
+
+| Action | Windows / Linux | macOS |
+|------|-----------------|-------|
+| Run current line / selection | `Ctrl + Enter` | `Cmd + Enter` |
+| Run entire script | `Ctrl + Alt + R` | `Cmd + Option + R` |
+| Re-run previous command | `↑` | `↑` |
+
+
+## Code editing & formatting
+
+| Action | Windows / Linux | macOS |
+|------|-----------------|-------|
+| Comment / uncomment lines | `Ctrl + Shift + C` | `Cmd + Shift + C` |
+| Re-indent code | `Ctrl + I` | `Cmd + I` |
+| Auto-complete | `Tab` | `Tab` |
+| Show function arguments | `Ctrl + Shift + A` | `Cmd + Shift + A` |
+| Rename object (refactor) | `Ctrl + Shift + Alt + M` | `Cmd + Shift + Option + M` |
+
+
+## Navigating scripts
+
+| Action | Windows / Linux | macOS |
+|------|-----------------|-------|
+| Go to line | `Ctrl + G` | `Cmd + G` |
+| Jump to function / section | `Ctrl + .` | `Cmd + .` |
+| Fold / unfold code | `Alt + L` | `Option + L` |
+| Expand all folds | `Alt + Shift + L` | `Option + Shift + L` |
+
+
+## Working with files & panes
+
+| Action | Windows / Linux | macOS |
+|------|-----------------|-------|
+| New script | `Ctrl + Shift + N` | `Cmd + Shift + N` |
+| Save file | `Ctrl + S` | `Cmd + S` |
+| Switch between tabs | `Ctrl + Tab` | `Cmd + Option + →` |
+| Zoom active pane | `Ctrl + Shift + 1` | `Cmd + Shift + 1` |
+| Restore panes | `Ctrl + Shift + 0` | `Cmd + Shift + 0` |
+
+
+## Console & environment management
+
+| Action | Windows / Linux | macOS |
+|------|-----------------|-------|
+| Clear console | `Ctrl + L` | `Cmd + L` |
+| Interrupt running code | `Esc` | `Esc` |
+| Restart R session | `Ctrl + Shift + F10` | `Cmd + Shift + F10` |
+| Clear workspace | `Ctrl + Shift + F9` | `Cmd + Shift + F9` |
+
+
+## Pipes & assignment helpers
+
+| Action | Windows / Linux | macOS |
+|------|-----------------|-------|
+| Insert pipe `%>%` or `|>` | `Ctrl + Shift + M` | `Cmd + Shift + M` |
+| Insert assignment `<-` | `Alt + -` | `Option + -` |
+
+
+## Quarto / R Markdown shortcuts
+
+| Action | Windows / Linux | macOS |
+|------|-----------------|-------|
+| Knit / Render document | `Ctrl + Shift + K` | `Cmd + Shift + K` |
+| Insert code chunk | `Ctrl + Alt + I` | `Cmd + Option + I` |
+| Preview Quarto document | `Ctrl + Shift + K` | `Cmd + Shift + K` |
+
+
+## Recommended shortcuts to memorize first
+
+If you memorize only a few, start with these:
+
+  - Run code: `Ctrl/Cmd + Enter`
+  - Insert pipe: `Ctrl/Cmd + Shift + M`
+  - Comment code: `Ctrl/Cmd + Shift + C`
+  - Restart R: `Ctrl/Cmd + Shift + F10`
+  - Knit Quarto: `Ctrl/Cmd + Shift + K`
+
+
+:::{.callout-note title="Practice"}
+
+
+1. Open a new R script.
+2. Write a short pipeline using the pipe shortcut.
+3. Comment out the code using the comment shortcut.
+4. Restart your R session and re-run the script.
+:::
+
+:::{.callout-tip}
+You can view or customize shortcuts in RStudio:
+**Tools → Modify Keyboard Shortcuts**
+:::
+
+## Working with R Libraries
+
+In R, the words **package** and **library** are often used interchangeably.
+
+A **package** is a bundle of:
+
+  - functions (tools you can call),
+  - datasets (sometimes),
+  - documentation (help files),
+  - and other code that expands what base R can do.
+
+A **library** is the collection of installed packages on your computer, and `library()` is the function we use to **load** a package for use in the current session.
+
+## Why do we need packages?
+
+Base R can do a lot, but packages make R powerful and efficient. We use packages to:
+
+  - clean and reshape data more easily,
+  - make high-quality plots,
+  - import/export many file types,
+  - run statistical models and machine learning,
+  - write reproducible reports (Quarto),
+  - and share standardized tools across projects.
+
+In this course, you’ll use packages so that everyone can run the same code and get the same results.
+
+## Installing vs loading: the key difference
+
+**Install** a package once (or whenever you update R / need a newer version).  
+**Load** a package every time you start a new R session and want to use it.
+
+Think of it like an app:
+
+  - Installing is downloading the app to your phone.
+  - Loading is opening the app to use it.
+
+## How to install a package
+
+Use `install.packages()` with the package name in quotes.
+
+The first package we will install is `tidyverse`. We will also install `quarto`.
+

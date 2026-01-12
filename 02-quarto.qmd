@@ -1,0 +1,249 @@
+---
+title: "Lesson 2: Quarto and Reproducible Reporting"
+---
+
+## Learning goals
+
+By the end of this lesson, you will be able to:
+
+- Explain what Quarto is and why it is used in public health research
+- Create and render a Quarto document
+- Use Markdown to structure writing
+- Insert and run R code chunks
+- Use inline R code to report values reproducibly
+
+---
+
+# What is Quarto?
+
+Quarto is a tool for creating **reproducible documents** that combine writing and data analysis in one place. A Quarto document can include text, code, results, tables, and figures so that your report updates automatically when your analysis changes.
+
+In public health, Quarto supports transparency and accuracy by keeping your analysis and your writing connected.
+
+In this course, all homework assignments and projects will be written in Quarto.
+
+---
+
+## What does "reproducible" mean?
+
+A reproducible document is one where another person (or future you) can:
+
+- open the file
+- run the code
+- get the same results
+- see exactly how the results were produced
+
+Reproducibility helps prevent errors that happen when people copy and paste numbers or figures from the Console into a report.
+
+---
+
+## Anatomy of a Quarto document
+
+A Quarto document typically has three pieces:
+
+1. A YAML header (at the very top)
+2. Written text (formatted using Markdown)
+3. Code chunks (R code that runs when you render)
+
+You will see all three in this lesson.
+
+---
+
+## Creating a Quarto document in RStudio
+
+To create a new Quarto document:
+
+1. Go to File → New File → Quarto Document
+2. Choose HTML as the output format
+3. Give the file a descriptive name
+4. Click Create
+
+To render:
+
+- Click the Render button, or
+- Use Quarto Render from the Build tab (depending on your setup)
+
+:::{.callout-tip}
+When you render, Quarto runs the code chunks from top to bottom and builds the final output.
+:::
+---
+
+## Markdown: formatting your writing
+
+Markdown is a simple way to format text. In this course, Markdown will be used for headings, lists, emphasis, links, and section organization.
+
+### Headings
+
+Headings help organize reports. In Markdown, headings use the number sign.
+
+Example:
+
+    # Main section
+    ## Subsection
+    ### Smaller subsection
+
+### Bold and italics
+
+Example:
+
+    **bold text**
+    *italic text*
+
+### Lists
+
+Example:
+
+    - first item
+    - second item
+    - third item
+
+Markdown keeps your writing clean and readable.
+
+---
+
+## Code chunks: where analysis happens
+
+R code is written inside code chunks. Code chunks run when you render the document.
+
+Here is a simple code chunk:
+
+```{r}
+2 + 2
+```
+
+---
+
+## Running chunks vs rendering the document
+
+You can run code in two ways:
+
+- Run a single chunk using the green Run button inside the chunk
+- Render the entire document to produce the final report
+
+In this course, you should always **render** your document before submitting so your outputs are up to date.
+
+---
+
+## A simple data example
+
+Below we create a small vector and compute summary statistics.
+
+```{r}
+ages <- c(21, 34, 29, 45, 38, 41)
+
+mean(ages)
+sd(ages)
+length(ages)
+```
+
+---
+
+## Inline R code
+
+Inline code allows you to insert R results directly into a sentence. This is one of the most important skills in the course because it prevents copy and paste errors.
+
+Inline code looks like this inside a sentence:
+
+The sample included `r length(ages)` participants, and the mean age was `r round(mean(ages), 1)` years.
+
+When you render, Quarto replaces the inline code with the calculated value.
+
+---
+
+## Why inline code matters in public health writing
+
+Inline code helps you:
+
+- keep your writing consistent with your analysis
+- update values automatically when your data change
+- reduce mistakes when reporting results
+
+In this course, students are expected to use inline code for reported statistics whenever possible, especially in Projects 2 through 4.
+
+---
+
+## Showing or hiding code
+
+Sometimes you want to show the results but hide the code (for a polished report). You can hide code using an option at the top of the chunk.
+
+```{r}
+#| echo: false
+mean(ages)
+```
+
+In the rendered document, the code will be hidden and only the result will appear.
+
+---
+
+## Common mistakes to avoid
+
+Avoid these common issues:
+
+- Typing numeric results manually into your report instead of using inline code
+- Copying results from the Console into your writing
+- Forgetting to render after changing code or data
+- Using inline code that refers to an object that has not been created yet
+
+A simple rule is: if a number appears in your report, ask yourself whether it was produced by R during rendering.
+
+---
+
+## Course expectations for Quarto work
+
+In this course, students are expected to:
+
+- complete homework and projects in Quarto
+- organize work using headings and clear sections
+- write interpretations in complete sentences
+- use inline code for key reported numbers when possible
+- render before submitting
+
+Perfection is not expected. Consistent effort and honest engagement are the priority.
+
+---
+
+## Weekly assignment reminder
+
+Students will:
+
+- Create their first Quarto document
+- Add headings, text, and code chunks
+- Include at least one chunk that prints a small dataset or summary
+- Write 1–2 paragraphs explaining what reproducibility means in science
+
+Goal: Establish documentation habits early
+
+---
+
+## Practice section
+
+Create a new section in your own homework file and complete the tasks below.
+
+1. Create a numeric vector with at least 6 values.
+2. Use inline code to report:
+   - sample size
+   - mean
+   - standard deviation
+3. Change one value and re-render to confirm the sentence updates.
+
+Here is a starter example you may adapt:
+
+```{r}
+x <- c(4, 6, 9, 12, 15, 18)
+```
+
+Write a sentence like:
+
+The sample size was `r length(x)`, the mean was `r round(mean(x), 2)`, and the standard deviation was `r round(sd(x), 2)`.
+
+---
+
+## Key takeaways
+
+Quarto allows you to combine writing and analysis. Markdown organizes your text. Code chunks run R. Inline code inserts calculated results into sentences. Reproducibility is a core skill for public health data science.
+
+---
+
+## Looking ahead
+
+Next week, we will begin data visualization using ggplot2 and you will continue writing all work in Quarto.

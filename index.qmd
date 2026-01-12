@@ -1,0 +1,23 @@
+---
+title: "R and Health Sciences"
+---
+
+# Welcome
+
+Welcome to **R and Health Sciences**.
+
+This course introduces graduate public health students to the foundations of
+data science using R. You will learn to import, wrangle, visualize, and model
+health data, and to communicate your findings using reproducible documents.
+
+## Course Information
+
+- **Instructor:** Anny D. Rodriguez, PhD, MPH
+- **Email:** adrodriguez@msm.edu
+- **Term:** Spring 2026 
+- **Meeting Times:** M & W 1:30-3pm / Lab: **TBD** 
+- **Location:** Public Health Simulation Lab 
+
+For further details regarding course-specific information like grading and attendance policies, please refer to your syllabus available on Canvas.
+
+

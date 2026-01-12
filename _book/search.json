@@ -1,0 +1,682 @@
+[
+  {
+    "objectID": "01-intro.html",
+    "href": "01-intro.html",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "",
+    "text": "First Things First\nThis course is designed to help you become familiar with R and RStudio, you’re not expected to become a professional R programmer at the end of it. There is a learning curve and there will be moments where you might want to give up (or throw your computer), but I encourage you to stick with it. One day, after practicing and potentially crying about it, it will click and you will be so happy you stuck with it. I believe in you.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#example-code",
+    "href": "01-intro.html#example-code",
+    "title": "Module 1: Getting Started with R and RStudio",
+    "section": "Example Code",
+    "text": "Example Code\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nhealth_demo &lt;- tibble(\n  id  = 1:4,\n  age = c(34, 52, 28, 45),\n  bmi = c(22.4, 31.2, 26.8, 29.1)\n)\n\nhealth_demo\n\n# A tibble: 4 × 3\n     id   age   bmi\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     1    34  22.4\n2     2    52  31.2\n3     3    28  26.8\n4     4    45  29.1",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Module 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R and Health Sciences",
+    "section": "",
+    "text": "Welcome\nWelcome to R and Health Sciences.\nThis course introduces graduate public health students to the foundations of data science using R. You will learn to import, wrangle, visualize, and model health data, and to communicate your findings using reproducible documents.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R and Health Sciences</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#course-information",
+    "href": "index.html#course-information",
+    "title": "R and Health Sciences",
+    "section": "Course Information",
+    "text": "Course Information\n\nInstructor: Anny D. Rodriguez, PhD, MPH\nEmail: adrodriguez@msm.edu\nTerm: Spring 2026\nMeeting Times: M & W 1:30-3pm / Lab: TBD\nLocation: Public Health Simulation Lab\n\nFor further details regarding course-specific information like grading and attendance policies, please refer to your syllabus available on Canvas.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R and Health Sciences</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#important-resources",
+    "href": "01-intro.html#important-resources",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Important Resources",
+    "text": "Important Resources\nI’ve designed this course using free online resources - since R, itself, is a free program. You’re going to want to bookmark the following resources as you will definitely be using these for the duration of this course (and possible beyond):\n\nModernDive\nR for Data Science\nAdvanced R",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#learning-goals",
+    "href": "01-intro.html#learning-goals",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Learning Goals",
+    "text": "Learning Goals\nBy the end of this week, you should be able to:\n\nOpen RStudio and identify the main panes.\nRun basic R commands in the Console and from a script.\nLoad and use the tidyverse package.\nDescribe how R and reproducible workflows support public health research.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#readings",
+    "href": "01-intro.html#readings",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Readings",
+    "text": "Readings\n\nModernDive, Chapter 1: Introduction to Data Science\nOpenIntro Biostatistics, Chapter 1: Introduction to Data",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#topics",
+    "href": "01-intro.html#topics",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Topics",
+    "text": "Topics\n\nWhat is data science in the context of public health?\nR and RStudio basics\nR scripts vs Console\nLoading packages (tidyverse)\nGood habits for saving and organizing work",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#what-is-data-science-1",
+    "href": "01-intro.html#what-is-data-science-1",
+    "title": "Module 1: Getting Started with R and RStudio",
+    "section": "What is data science?",
+    "text": "What is data science?\nData science is an interdisciplinary field that focuses on: - collecting data, - cleaning and managing data, - analyzing data, - and communicating insights to support decision-making.\nIt combines skills from: - statistics, - computer programming, - data visualization, - and domain knowledge.\nIn public health, data science is used to turn complex health data into actionable evidence.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Module 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#why-data-science-matters-in-public-health",
+    "href": "01-intro.html#why-data-science-matters-in-public-health",
+    "title": "Module 1: Getting Started with R and RStudio",
+    "section": "Why data science matters in public health",
+    "text": "Why data science matters in public health\nPublic health decisions affect entire populations. Data science allows public health professionals to: - identify health disparities, - monitor disease trends, - evaluate interventions, - and allocate resources effectively.\nWithout data science, public health decisions would rely more heavily on anecdotal evidence rather than systematic analysis.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Module 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#types-of-data-used-in-public-health-data-science",
+    "href": "01-intro.html#types-of-data-used-in-public-health-data-science",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Types of data used in public health data science",
+    "text": "Types of data used in public health data science\nPublic health data come from many sources, including:\n\nsurveillance systems,\nsurveys and questionnaires,\nelectronic health records,\nclinical trials,\nadministrative and claims data,\nenvironmental and geographic data.\n\nData science methods help integrate these data sources into a coherent analytical framework.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#key-applications-of-data-science-in-public-health",
+    "href": "01-intro.html#key-applications-of-data-science-in-public-health",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Key applications of data science in public health",
+    "text": "Key applications of data science in public health\n\nDisease surveillance and outbreak detection\nData science helps:\n\ndetect unusual patterns in disease incidence,\nidentify emerging outbreaks,\ntrack disease spread over time and across locations.\n\nTimely analysis can inform rapid public health responses.\n\n\nHealth disparities and equity\nData science allows researchers to:\n\nexamine differences in health outcomes across populations,\nidentify structural and social determinants of health,\nquantify inequities by race, ethnicity, income, geography, and language.\n\nThese analyses support equity-focused public health interventions.\n\n\nProgram evaluation and policy analysis\nPublic health programs and policies must be evaluated to determine whether they work.\nData science supports:\n\nimpact evaluation,\ncost-effectiveness analysis,\nlongitudinal and causal modeling,\nevidence-based policy making.\n\n\n\nPredictive modeling and risk assessment\nUsing historical data, data science can:\n\npredict disease risk,\nidentify high-risk populations,\nsupport prevention and early intervention strategies.\n\nThese models complement traditional epidemiologic approaches.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#the-role-of-r-in-public-health-data-science",
+    "href": "01-intro.html#the-role-of-r-in-public-health-data-science",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "The role of R in public health data science",
+    "text": "The role of R in public health data science\nR is widely used in public health because it:\n\nsupports statistical modeling,\nhandles large and complex datasets,\ncreates publication-quality visualizations,\nenables reproducible research through scripts and Quarto documents.\n\nLearning R allows public health professionals to implement data science workflows transparently and efficiently.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#reproducibility-and-transparency",
+    "href": "01-intro.html#reproducibility-and-transparency",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Reproducibility and transparency",
+    "text": "Reproducibility and transparency\nReproducibility is a core principle of both data science and public health.\nBest practices include:\n\nwriting clean, well-documented code,\nusing scripts and Quarto documents,\ntracking data processing steps,\nrerunning analyses from raw data to final results.\n\nReproducible workflows increase trust in public health findings.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#what-is-r",
+    "href": "01-intro.html#what-is-r",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "What is R?",
+    "text": "What is R?\nR is a programming language used for:\n\ndata analysis and statistics,\ndata visualization,\nreproducible research,\nand reporting results.\n\nR itself runs in the background. It does the actual computation, stores objects in memory, and executes your code.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#what-is-rstudio",
+    "href": "01-intro.html#what-is-rstudio",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "What is RStudio?",
+    "text": "What is RStudio?\nRStudio is an integrated development environment (IDE) for R.\nThink of R as the engine of a car, and RStudio as the dashboard. RStudio makes it easier to:\n\nwrite and organize code,\nrun analyses,\nview plots and data,\nmanage files and projects,\nand create Quarto documents.\n\nYou can use R without RStudio, but almost everyone uses R through RStudio because it is more efficient and user friendly.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#r-vs-rstudio-key-distinction",
+    "href": "01-intro.html#r-vs-rstudio-key-distinction",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "R vs RStudio (key distinction)",
+    "text": "R vs RStudio (key distinction)\n\nR does the computing\n\nRStudio helps you interact with R\n\n\n\n\n\n\n\nWarning\n\n\n\nIf R is not installed, RStudio will not work.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#the-rstudio-interface",
+    "href": "01-intro.html#the-rstudio-interface",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "The RStudio interface",
+    "text": "The RStudio interface\nWhen you open RStudio, you typically see four panes.\n\nSource pane (top-left)\nThis is where you:\n\nwrite R scripts (.R),\nwrite Quarto documents (.qmd),\nedit code without running it immediately.\n\nNothing in this pane runs until you tell R to run it.\n\n\nConsole pane (bottom-left)\nThe Console is where:\n\nR actually runs code,\nresults and error messages appear,\ncommands are executed line by line.\n\nYou can type code directly here, but for reproducibility, most code should live in scripts or Quarto files.\n\n\nEnvironment / History pane (top-right)\nThe Environment tab shows:\n\nobjects currently loaded in memory,\ndata frames, vectors, functions, and values.\n\nIf you restart R, this pane clears because the session memory resets.\n\n\nFiles / Plots / Packages / Help pane (bottom-right)\nThis pane lets you:\n\nbrowse project files,\nview plots,\nmanage installed packages,\nread help documentation.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#what-is-an-r-session",
+    "href": "01-intro.html#what-is-an-r-session",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "What is an R session?",
+    "text": "What is an R session?\nAn R session is the current working instance of R.\nDuring a session:\n\nobjects live in memory,\nloaded packages are available,\nresults depend on what you have already run.\n\nWhen you restart R:\n\nmemory is cleared,\npackages must be reloaded,\nscripts must be re-run.\n\nThis is why reproducible workflows matter.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#writing-and-running-code",
+    "href": "01-intro.html#writing-and-running-code",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Writing and running code",
+    "text": "Writing and running code\n\nWriting code\nWrite code in the Source pane, for example:\n\nx &lt;- 5\ny &lt;- 10\nx + y\n\n[1] 15",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#r-rstudio-keyboard-shortcuts-quick-reference",
+    "href": "01-intro.html#r-rstudio-keyboard-shortcuts-quick-reference",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "R & RStudio Keyboard Shortcuts (Quick Reference)",
+    "text": "R & RStudio Keyboard Shortcuts (Quick Reference)\nUsing keyboard shortcuts will make you faster, reduce errors, and improve reproducibility. These shortcuts work in RStudio unless otherwise noted.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#running-code",
+    "href": "01-intro.html#running-code",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Running code",
+    "text": "Running code\n\n\n\nAction\nWindows / Linux\nmacOS\n\n\n\n\nRun current line / selection\nCtrl + Enter\nCmd + Enter\n\n\nRun entire script\nCtrl + Alt + R\nCmd + Option + R\n\n\nRe-run previous command\n↑\n↑",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#code-editing-formatting",
+    "href": "01-intro.html#code-editing-formatting",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Code editing & formatting",
+    "text": "Code editing & formatting\n\n\n\n\n\n\n\n\nAction\nWindows / Linux\nmacOS\n\n\n\n\nComment / uncomment lines\nCtrl + Shift + C\nCmd + Shift + C\n\n\nRe-indent code\nCtrl + I\nCmd + I\n\n\nAuto-complete\nTab\nTab\n\n\nShow function arguments\nCtrl + Shift + A\nCmd + Shift + A\n\n\nRename object (refactor)\nCtrl + Shift + Alt + M\nCmd + Shift + Option + M",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#navigating-scripts",
+    "href": "01-intro.html#navigating-scripts",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Navigating scripts",
+    "text": "Navigating scripts\n\n\n\nAction\nWindows / Linux\nmacOS\n\n\n\n\nGo to line\nCtrl + G\nCmd + G\n\n\nJump to function / section\nCtrl + .\nCmd + .\n\n\nFold / unfold code\nAlt + L\nOption + L\n\n\nExpand all folds\nAlt + Shift + L\nOption + Shift + L",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#working-with-files-panes",
+    "href": "01-intro.html#working-with-files-panes",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Working with files & panes",
+    "text": "Working with files & panes\n\n\n\nAction\nWindows / Linux\nmacOS\n\n\n\n\nNew script\nCtrl + Shift + N\nCmd + Shift + N\n\n\nSave file\nCtrl + S\nCmd + S\n\n\nSwitch between tabs\nCtrl + Tab\nCmd + Option + →\n\n\nZoom active pane\nCtrl + Shift + 1\nCmd + Shift + 1\n\n\nRestore panes\nCtrl + Shift + 0\nCmd + Shift + 0",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#console-environment-management",
+    "href": "01-intro.html#console-environment-management",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Console & environment management",
+    "text": "Console & environment management\n\n\n\nAction\nWindows / Linux\nmacOS\n\n\n\n\nClear console\nCtrl + L\nCmd + L\n\n\nInterrupt running code\nEsc\nEsc\n\n\nRestart R session\nCtrl + Shift + F10\nCmd + Shift + F10\n\n\nClear workspace\nCtrl + Shift + F9\nCmd + Shift + F9",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#pipes-assignment-helpers",
+    "href": "01-intro.html#pipes-assignment-helpers",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Pipes & assignment helpers",
+    "text": "Pipes & assignment helpers\n\n\n\nAction\nWindows / Linux\nmacOS\n\n\n\n\nInsert pipe %&gt;% or |&gt;\nCtrl + Shift + M\nCmd + Shift + M\n\n\nInsert assignment &lt;-\nAlt + -\nOption + -",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#quarto-r-markdown-shortcuts",
+    "href": "01-intro.html#quarto-r-markdown-shortcuts",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Quarto / R Markdown shortcuts",
+    "text": "Quarto / R Markdown shortcuts\n\n\n\nAction\nWindows / Linux\nmacOS\n\n\n\n\nKnit / Render document\nCtrl + Shift + K\nCmd + Shift + K\n\n\nInsert code chunk\nCtrl + Alt + I\nCmd + Option + I\n\n\nPreview Quarto document\nCtrl + Shift + K\nCmd + Shift + K",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#recommended-shortcuts-to-memorize-first",
+    "href": "01-intro.html#recommended-shortcuts-to-memorize-first",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Recommended shortcuts to memorize first",
+    "text": "Recommended shortcuts to memorize first\nIf you memorize only a few, start with these:\n\nRun code: Ctrl/Cmd + Enter\nInsert pipe: Ctrl/Cmd + Shift + M\nComment code: Ctrl/Cmd + Shift + C\nRestart R: Ctrl/Cmd + Shift + F10\nKnit Quarto: Ctrl/Cmd + Shift + K\n\n\n\n\n\n\n\nPractice\n\n\n\n\nOpen a new R script.\nWrite a short pipeline using the pipe shortcut.\nComment out the code using the comment shortcut.\nRestart your R session and re-run the script.\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nYou can view or customize shortcuts in RStudio: Tools → Modify Keyboard Shortcuts",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#practice",
+    "href": "01-intro.html#practice",
+    "title": "Module 1: Getting Started with R and RStudio",
+    "section": "Practice",
+    "text": "Practice\n\nOpen a new R script.\nWrite a short pipeline using the pipe shortcut.\nComment out the code using the comment shortcut.\nRestart your R session and re-run the script.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Module 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#tip",
+    "href": "01-intro.html#tip",
+    "title": "Module 1: Getting Started with R and RStudio",
+    "section": "Tip",
+    "text": "Tip\nYou can view or customize shortcuts in RStudio: Tools → Modify Keyboard Shortcuts",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Module 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#working-with-r-libraries",
+    "href": "01-intro.html#working-with-r-libraries",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Working with R Libraries",
+    "text": "Working with R Libraries\nIn R, the words package and library are often used interchangeably.\nA package is a bundle of:\n\nfunctions (tools you can call),\ndatasets (sometimes),\ndocumentation (help files),\nand other code that expands what base R can do.\n\nA library is the collection of installed packages on your computer, and library() is the function we use to load a package for use in the current session.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#why-do-we-need-packages",
+    "href": "01-intro.html#why-do-we-need-packages",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Why do we need packages?",
+    "text": "Why do we need packages?\nBase R can do a lot, but packages make R powerful and efficient. We use packages to:\n\nclean and reshape data more easily,\nmake high-quality plots,\nimport/export many file types,\nrun statistical models and machine learning,\nwrite reproducible reports (Quarto),\nand share standardized tools across projects.\n\nIn this course, you’ll use packages so that everyone can run the same code and get the same results.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#installing-vs-loading-the-key-difference",
+    "href": "01-intro.html#installing-vs-loading-the-key-difference",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Installing vs loading: the key difference",
+    "text": "Installing vs loading: the key difference\nInstall a package once (or whenever you update R / need a newer version).\nLoad a package every time you start a new R session and want to use it.\nThink of it like an app:\n\nInstalling is downloading the app to your phone.\nLoading is opening the app to use it.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#how-to-install-a-package",
+    "href": "01-intro.html#how-to-install-a-package",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "How to install a package",
+    "text": "How to install a package\nUse install.packages() with the package name in quotes.\nThe first package we will install is tidyverse. We will also install quarto.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "01-intro.html#why-data-science-matters-in-public-health.",
+    "href": "01-intro.html#why-data-science-matters-in-public-health.",
+    "title": "Lesson 1: Getting Started with R and RStudio",
+    "section": "Why data science matters in public health.",
+    "text": "Why data science matters in public health.\nPublic health decisions affect entire populations. Data science allows public health professionals to:\n\nidentify health disparities,\nmonitor disease trends,\nevaluate interventions,\nand allocate resources effectively.\n\nWithout data science, public health decisions would rely more heavily on anecdotal evidence rather than systematic analysis.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lesson 1: Getting Started with R and RStudio</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html",
+    "href": "02-quarto.html",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "",
+    "text": "Learning goals\nBy the end of this lesson, you will be able to:",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#learning-goals",
+    "href": "02-quarto.html#learning-goals",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "",
+    "text": "Explain what Quarto is and why it is used in public health research\nCreate and render a Quarto document\nUse Markdown to structure writing\nInsert and run R code chunks\nUse inline R code to report values reproducibly",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#what-does-reproducible-mean",
+    "href": "02-quarto.html#what-does-reproducible-mean",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "What does “reproducible” mean?",
+    "text": "What does “reproducible” mean?\nA reproducible document is one where another person (or future you) can:\n\nopen the file\nrun the code\nget the same results\nsee exactly how the results were produced\n\nReproducibility helps prevent errors that happen when people copy and paste numbers or figures from the Console into a report.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#anatomy-of-a-quarto-document",
+    "href": "02-quarto.html#anatomy-of-a-quarto-document",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Anatomy of a Quarto document",
+    "text": "Anatomy of a Quarto document\nA Quarto document typically has three pieces:\n\nA YAML header (at the very top)\nWritten text (formatted using Markdown)\nCode chunks (R code that runs when you render)\n\nYou will see all three in this lesson.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#creating-a-quarto-document-in-rstudio",
+    "href": "02-quarto.html#creating-a-quarto-document-in-rstudio",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Creating a Quarto document in RStudio",
+    "text": "Creating a Quarto document in RStudio\nTo create a new Quarto document:\n\nGo to File → New File → Quarto Document\nChoose HTML as the output format\nGive the file a descriptive name\nClick Create\n\nTo render:\n\nClick the Render button, or\nUse Quarto Render from the Build tab (depending on your setup)\n\n\n\n\n\n\n\nTip\n\n\n\nWhen you render, Quarto runs the code chunks from top to bottom and builds the final output.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#markdown-formatting-your-writing",
+    "href": "02-quarto.html#markdown-formatting-your-writing",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Markdown: formatting your writing",
+    "text": "Markdown: formatting your writing\nMarkdown is a simple way to format text. In this course, Markdown will be used for headings, lists, emphasis, links, and section organization.\n\nHeadings\nHeadings help organize reports. In Markdown, headings use the number sign.\nExample:\n# Main section\n## Subsection\n### Smaller subsection\n\n\nBold and italics\nExample:\n**bold text**\n*italic text*\n\n\nLists\nExample:\n- first item\n- second item\n- third item\nMarkdown keeps your writing clean and readable.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#code-chunks-where-analysis-happens",
+    "href": "02-quarto.html#code-chunks-where-analysis-happens",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Code chunks: where analysis happens",
+    "text": "Code chunks: where analysis happens\nR code is written inside code chunks. Code chunks run when you render the document.\nHere is a simple code chunk:\n\n2 + 2\n\n[1] 4",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#running-chunks-vs-rendering-the-document",
+    "href": "02-quarto.html#running-chunks-vs-rendering-the-document",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Running chunks vs rendering the document",
+    "text": "Running chunks vs rendering the document\nYou can run code in two ways:\n\nRun a single chunk using the green Run button inside the chunk\nRender the entire document to produce the final report\n\nIn this course, you should always render your document before submitting so your outputs are up to date.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#a-simple-data-example",
+    "href": "02-quarto.html#a-simple-data-example",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "A simple data example",
+    "text": "A simple data example\nBelow we create a small vector and compute summary statistics.\n\nages &lt;- c(21, 34, 29, 45, 38, 41)\n\nmean(ages)\n\n[1] 34.66667\n\nsd(ages)\n\n[1] 8.687155\n\nlength(ages)\n\n[1] 6",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#inline-r-code",
+    "href": "02-quarto.html#inline-r-code",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Inline R code",
+    "text": "Inline R code\nInline code allows you to insert R results directly into a sentence. This is one of the most important skills in the course because it prevents copy and paste errors.\nInline code looks like this inside a sentence:\nThe sample included 6 participants, and the mean age was 34.7 years.\nWhen you render, Quarto replaces the inline code with the calculated value.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#why-inline-code-matters-in-public-health-writing",
+    "href": "02-quarto.html#why-inline-code-matters-in-public-health-writing",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Why inline code matters in public health writing",
+    "text": "Why inline code matters in public health writing\nInline code helps you:\n\nkeep your writing consistent with your analysis\nupdate values automatically when your data change\nreduce mistakes when reporting results\n\nIn this course, students are expected to use inline code for reported statistics whenever possible, especially in Projects 2 through 4.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#showing-or-hiding-code",
+    "href": "02-quarto.html#showing-or-hiding-code",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Showing or hiding code",
+    "text": "Showing or hiding code\nSometimes you want to show the results but hide the code (for a polished report). You can hide code using an option at the top of the chunk.\n\n\n[1] 34.66667\n\n\nIn the rendered document, the code will be hidden and only the result will appear.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#common-mistakes-to-avoid",
+    "href": "02-quarto.html#common-mistakes-to-avoid",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Common mistakes to avoid",
+    "text": "Common mistakes to avoid\nAvoid these common issues:\n\nTyping numeric results manually into your report instead of using inline code\nCopying results from the Console into your writing\nForgetting to render after changing code or data\nUsing inline code that refers to an object that has not been created yet\n\nA simple rule is: if a number appears in your report, ask yourself whether it was produced by R during rendering.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#course-expectations-for-quarto-work",
+    "href": "02-quarto.html#course-expectations-for-quarto-work",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Course expectations for Quarto work",
+    "text": "Course expectations for Quarto work\nIn this course, students are expected to:\n\ncomplete homework and projects in Quarto\norganize work using headings and clear sections\nwrite interpretations in complete sentences\nuse inline code for key reported numbers when possible\nrender before submitting\n\nPerfection is not expected. Consistent effort and honest engagement are the priority.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#weekly-assignment-reminder",
+    "href": "02-quarto.html#weekly-assignment-reminder",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Weekly assignment reminder",
+    "text": "Weekly assignment reminder\nFor this week, you will complete Homework 02. Your submission will include:\n\na Quarto document with headings and formatted text\nat least two R code chunks\nat least two sentences that use inline R code\na short reflection on reproducibility in public health",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#practice-section-recommended",
+    "href": "02-quarto.html#practice-section-recommended",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Practice section (recommended)",
+    "text": "Practice section (recommended)\nCreate a new section in your own homework file and complete the tasks below.\n\nCreate a numeric vector with at least 6 values.\nUse inline code to report:\n\nsample size\nmean\nstandard deviation\n\nChange one value and re-render to confirm the sentence updates.\n\nHere is a starter example you may adapt:\n\nx &lt;- c(4, 6, 9, 12, 15, 18)\n\nWrite a sentence like:\nThe sample size was 6, the mean was 10.67, and the standard deviation was 5.35.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#key-takeaways",
+    "href": "02-quarto.html#key-takeaways",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Key takeaways",
+    "text": "Key takeaways\nQuarto allows you to combine writing and analysis. Markdown organizes your text. Code chunks run R. Inline code inserts calculated results into sentences. Reproducibility is a core skill for public health data science.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02-quarto.html#looking-ahead",
+    "href": "02-quarto.html#looking-ahead",
+    "title": "Lesson 2: Quarto and Reproducible Reporting",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext week, we will begin data visualization using ggplot2 and you will continue writing all work in Quarto.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lesson 2: Quarto and Reproducible Reporting</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html",
+    "href": "02b-inline.html",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "",
+    "text": "Learning goals\nBy the end of this lesson, you will be able to:",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html#learning-goals",
+    "href": "02b-inline.html#learning-goals",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "",
+    "text": "Explain what inline R code is\nUse inline code to report values in sentences\nFormat numbers for professional writing\nUse inline code with summaries and model results\nAvoid common reproducibility mistakes",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html#what-is-inline-code",
+    "href": "02b-inline.html#what-is-inline-code",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "What is inline code?",
+    "text": "What is inline code?\nInline code is R code that runs inside a sentence. Instead of typing numbers by hand, you let R calculate and insert them automatically when the document is rendered.\nThis keeps your writing and your analysis synchronized.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html#why-inline-code-matters-in-public-health",
+    "href": "02b-inline.html#why-inline-code-matters-in-public-health",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "Why inline code matters in public health",
+    "text": "Why inline code matters in public health\nPublic health decisions depend on accurate numbers. Inline code:\n\nprevents copy and paste errors\n\nensures reported values match the analysis\n\nallows results to update automatically\n\nsupports transparency and trust\n\nIn this course, all reported statistics should come from inline code whenever possible.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html#a-simple-example",
+    "href": "02b-inline.html#a-simple-example",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "A simple example",
+    "text": "A simple example\nFirst create a vector of values.\n\nages &lt;- c(23, 35, 41, 29, 50)\n\nNow write a sentence using inline code.\n\n\n\n\n\n\nTip\n\n\n\nThis includes a backtick, the letter r, a space, your R code, and a closing backtick.\n\n\nThe sample included 5 participants, and the mean age was 35.6 years.\nWhen you render the document, those numbers are inserted automatically.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html#what-happens-when-data-change",
+    "href": "02b-inline.html#what-happens-when-data-change",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "What happens when data change?",
+    "text": "What happens when data change?\nChange one value.\n\nages[1] &lt;- 28\n\nNow re-render the document.\nThe mean age is now 36.6 years.\nBecause the number comes from inline code, it updates automatically.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html#formatting-inline-values",
+    "href": "02b-inline.html#formatting-inline-values",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "Formatting inline values",
+    "text": "Formatting inline values\nYou will often need to format numbers.\n\nRounding\nUse the round() function.\nThe average age was 36.6 years.\n\n\nPercentages\n\nprop_smoker &lt;- 0.237\n\nApproximately 23.7% of participants were smokers.\n\n\nSample sizes\nThe analytic sample included 5 participants.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html#inline-code-with-small-datasets",
+    "href": "02b-inline.html#inline-code-with-small-datasets",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "Inline code with small datasets",
+    "text": "Inline code with small datasets\n\ndf &lt;- data.frame(\n  bmi = c(21.7, 27.4, 31.2, 29.8, 26.3, 24.9),\n  smoker = c(\"No\", \"Yes\", \"No\", \"No\", \"No\", \"Yes\")\n)\n\n\nmean_bmi &lt;- mean(df$bmi)\nsd_bmi &lt;- sd(df$bmi)\nprop_smoker &lt;- mean(df$smoker == \"Yes\")\n\nThe mean BMI was 26.9 kg/m² (SD = 3.4), and 33.3% of participants reported smoking.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html#inline-code-with-regression-models",
+    "href": "02b-inline.html#inline-code-with-regression-models",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "Inline code with regression models",
+    "text": "Inline code with regression models\n\nm1 &lt;- lm(bmi ~ smoker, data = df)\ncoef(m1)\n\n(Intercept)   smokerYes \n      27.25       -1.10 \n\n\n\nb_smoker &lt;- coef(m1)[2]\n\nCompared with non-smokers, smokers had an estimated BMI difference of -1.1 units in this sample.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html#common-mistakes-to-avoid",
+    "href": "02b-inline.html#common-mistakes-to-avoid",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "Common mistakes to avoid",
+    "text": "Common mistakes to avoid\nAvoid these errors:\n\nTyping numbers into your paper by hand\n\nCopying results from the Console\n\nForgetting to re-render after changing data\n\nUsing inline code before the object exists\n\nIf a number appears in your report, it should almost always come from inline code.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html#course-expectations",
+    "href": "02b-inline.html#course-expectations",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "Course expectations",
+    "text": "Course expectations\nIn Projects 1–4:\n\nsummary statistics should be written using inline code\n\nregression coefficients should be reported using inline code\n\ntables and figures should be generated in R\n\nThis is how real scientific manuscripts are written.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html#practice-section",
+    "href": "02b-inline.html#practice-section",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "Practice section",
+    "text": "Practice section\nCreate a section in your own homework file and complete the following:\n\nCreate a numeric vector with at least 6 values\n\nUse inline code to report:\n\nsample size\n\nmean\n\nstandard deviation\n\n\nChange one value\n\nRe-render and confirm the sentence updates\n\nStarter:\n\nx &lt;- c(4, 6, 9, 12, 15, 18)\n\nWrite a sentence like:\nThe sample size was 6, the mean was 10.67, and the standard deviation was 5.35.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html#key-takeaways",
+    "href": "02b-inline.html#key-takeaways",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "Key takeaways",
+    "text": "Key takeaways\nInline code connects your writing to your analysis. It keeps numbers accurate, makes your work reproducible, and is a core skill for data-driven public health.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  },
+  {
+    "objectID": "02b-inline.html#looking-ahead",
+    "href": "02b-inline.html#looking-ahead",
+    "title": "Lesson 2b: Inline Code for Reproducible Writing",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nYou will use inline code in every project, especially when writing your final manuscript in Quarto.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
+    ]
+  }
+]
