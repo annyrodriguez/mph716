@@ -1,0 +1,288 @@
+---
+title: "Project 1 Lesson: Exploratory Data Story with Gapminder"
+format:
+  html:
+    toc: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Purpose of Project 1
+
+Project 1 is designed to help you practice the **core workflow** of this course before working with complex health datasets.
+
+This project focuses on:
+
+- working comfortably in R and Quarto  
+- exploring a dataset using descriptive statistics  
+- creating clear data visualizations  
+- writing interpretations in plain public health language  
+- using inline R code to report values reproducibly  
+
+This is **not** a modeling project. The goal is exploration, clarity, and workflow.
+
+---
+
+## Why we use Gapminder for Project 1
+
+The Gapminder dataset is:
+
+- clean and well-documented  
+- structured in tidy format  
+- widely used in teaching data science  
+- rich enough to tell meaningful public health stories  
+
+Using Gapminder allows you to focus on **skills**, not data complexity. These same skills will transfer directly to NHANES later in the course.
+
+---
+
+## What you are expected to demonstrate
+
+By the end of Project 1, you should be able to:
+
+- work entirely in a Quarto document  
+- load and explore a dataset  
+- compute descriptive summaries  
+- create at least two well-labeled figures  
+- interpret patterns in writing  
+- use inline code for reported values  
+
+Effort, clarity, and reproducibility matter more than sophistication.
+
+---
+
+## Project setup
+
+Create a new Quarto document named:
+
+```
+project1-lastname.qmd
+```
+
+At the top of your document, include a clear title and your name.
+
+---
+
+## Loading the data
+
+Install packages if needed (only once):
+
+```{r}
+# install.packages("tidyverse")
+# install.packages("gapminder")
+```
+
+Load packages each session:
+
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+Load the dataset:
+
+```{r}
+gapminder
+```
+
+---
+
+## Choosing a focus
+
+You will be assigned a country and you will be comparing all results to the **United States**.
+
+Once selected, filter the dataset.
+
+```{r}
+country_df <- gapminder %>%
+  filter(country == "United States")
+
+country_df
+```
+
+Your entire project should focus on **one country and the clearly defined comparison**.
+
+---
+
+## Section 1: Introduction
+
+In your Introduction section, briefly describe:
+
+- the country you are examining  
+- why it is of interest from a public health perspective  
+- what outcomes you plan to explore  
+
+This section should be written in complete sentences and should not include code.
+
+---
+
+## Section 1: Introduction
+
+In your Introduction section, briefly describe:
+
+- the country you are examining  
+- why it is of interest from a public health perspective  
+- what outcomes you plan to explore  
+
+This section should be written in complete sentences and should not include code.
+
+---
+
+## Section 2: Descriptive exploration
+
+Start by computing basic descriptive statistics.
+
+```{r}
+mean_lifeExp <- mean(country_df$lifeExp)
+sd_lifeExp <- sd(country_df$lifeExp)
+n_years <- length(unique(country_df$year))
+```
+
+Report values using **inline code**, not by typing numbers manually.
+
+Example:
+
+Across `r n_years` years of available data, the mean life expectancy was `r round(mean_lifeExp, 1)` years (SD = `r round(sd_lifeExp, 1)`).
+
+---
+
+## Section 3: Visualizations
+
+You must include **at least two figures**.
+
+### Required figure: trend over time
+
+```{r}
+ggplot(country_df, aes(x = year, y = lifeExp)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Life Expectancy Over Time",
+    x = "Year",
+    y = "Life Expectancy (years)"
+  )
+```
+
+### Optional second figure (examples)
+
+You may choose one of the following:
+
+- GDP per capita vs life expectancy  
+- population trends over time  
+- comparison with another country  
+
+Example:
+
+```{r}
+ggplot(country_df, 
+       aes(
+         x = gdpPercap, 
+         y = lifeExp)
+       ) +
+  geom_point() +
+  scale_x_log10() +
+  labs(
+    title = "Life Expectancy vs GDP per Capita",
+    x = "GDP per Capita (log scale)",
+    y = "Life Expectancy (years)"
+  )
+```
+
+---
+
+## Writing interpretation paragraphs
+
+Every figure must be followed by a short interpretation paragraph.
+
+A strong interpretation includes:
+
+- what the plot shows  
+- notable trends or changes  
+- a public health interpretation  
+- a brief limitation  
+
+Example structure:
+
+- What do you observe?  
+- When do changes occur?  
+- Why might this matter for population health?  
+
+Do not describe code or aesthetics. Focus on meaning.
+
+---
+
+## Section 4: Data quality and limitations
+
+Include a short section discussing:
+
+- missingness (if any)  
+- time coverage of the data  
+- what the data cannot tell us  
+
+This helps build good scientific habits early.
+
+---
+
+## Section 5: Reflection
+
+Conclude with a brief reflection addressing:
+
+- what you learned from exploring the data  
+- what surprised you  
+- what questions you would explore next  
+
+This section is about **thinking**, not technical skill.
+
+---
+
+## Formatting and reproducibility requirements
+
+Your project must:
+
+- be written entirely in Quarto  
+- render without errors  
+- use inline code for reported values  
+- include labeled figures  
+- avoid screenshots of plots  
+- be clearly organized with headings
+- have peer-reviewed sources (at least 8)
+
+:::{.callout-warning}
+Projects that do not render cleanly cannot be graded.
+:::
+---
+
+## Submission instructions
+
+Submit:
+
+- the rendered document (word)  
+- the `.qmd` source file  
+
+Both are required.
+
+---
+
+## How this project prepares you for the rest of the course
+
+Project 1 builds the foundation for:
+
+- Project 2 (cleaning NHANES data)  
+- Project 3 (modeling and inference)  
+- Project 4 (final manuscript)  
+
+The workflow you practice here will be reused all semester.
+
+---
+
+## Key takeaways
+
+Project 1 is about learning how to explore data, write clearly, and work reproducibly in Quarto. Focus on effort, clarity, and honest interpretation. You are not expected to be an expert — you are expected to engage.
+
+---
+
+## Looking ahead
+
+After Project 1, we will transition to **real U.S. health data** and begin preparing datasets for modeling and inference.

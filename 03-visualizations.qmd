@@ -1,0 +1,290 @@
+---
+title: "Lesson 3: Data Visualization with ggplot2"
+format:
+  html:
+    toc: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Learning goals
+
+By the end of this lesson, you will be able to:
+
+- Explain why visualization is essential in public health data science
+- Create common plot types using `ggplot2`
+- Map variables to aesthetics (x, y, color, size)
+- Add labels and improve readability for a public health audience
+- Produce a plot and write a short interpretation paragraph
+- Keep your work reproducible in Quarto
+
+---
+
+## Why we visualize data in public health
+
+Data visualization helps you identify patterns, compare groups, detect outliers, and communicate findings clearly. In public health, visualization is often the first step in understanding the distribution of outcomes and how they vary across time, geography, and population groups.
+
+A good figure should be:
+
+- accurate
+- readable
+- clearly labeled
+- interpreted in writing
+
+In this course, and for everything moving forward, every figure you create should be paired with a short interpretation.
+
+---
+
+## Setup
+
+:::{.callout-tip}
+Install packages (only needed once), then load them each session.
+:::
+
+```{r}
+# install.packages("tidyverse")
+# install.packages("gapminder")
+```
+
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+---
+
+## The Gapminder dataset
+
+Gapminder includes country-level indicators across time such as life expectancy, GDP per capita, and population.
+
+```{r}
+gapminder
+```
+
+A quick look at the first rows:
+
+```{r}
+head(gapminder)
+```
+
+---
+
+## The grammar of graphics (ggplot2)
+
+ggplot2 is built around a simple idea: you build a plot in layers.
+
+A basic plot has:
+
+1. a dataset  
+2. aesthetic mappings (x and y)  
+3. a geometric object (points, lines, bars)
+
+---
+
+## Your first scatterplot
+
+Let’s visualize the relationship between GDP per capita and life expectancy.
+
+```{r}
+ggplot(data = gapminder, 
+       aes(
+         x = gdpPercap, 
+         y = lifeExp)
+       ) +
+  geom_point()
+```
+
+This plot is difficult to read because GDP per capita ranges widely. A common approach is to use a log scale.
+
+```{r}
+ggplot(data = gapminder, 
+       aes(
+         x = gdpPercap, 
+         y = lifeExp)
+       ) +
+  geom_point() +
+  scale_x_log10()
+```
+
+---
+
+## Adding labels and improving readability
+
+Clear labels matter.
+
+```{r}
+ggplot(data = gapminder, 
+       aes(
+         x = gdpPercap, 
+         y = lifeExp)
+       ) +
+  geom_point(alpha = 0.6) +
+  scale_x_log10() +
+  labs(
+    title = "Life Expectancy vs GDP per Capita",
+    x = "GDP per Capita (log scale)",
+    y = "Life Expectancy (years)"
+  )
+```
+
+---
+
+## Mapping a third variable: color
+
+We can color points by continent.
+
+```{r}
+ggplot(data = gapminder, 
+       aes(
+         x = gdpPercap, 
+         y = lifeExp, color = continent)
+       ) +
+  geom_point(alpha = 0.7) +
+  scale_x_log10() +
+  labs(
+    title = "Life Expectancy vs GDP per Capita by Continent",
+    x = "GDP per Capita (log scale)",
+    y = "Life Expectancy (years)",
+    color = "Continent"
+  )
+```
+
+---
+
+## Subsetting data: one year
+
+Often, you will want to focus on a single year.
+
+```{r}
+gap_2007 <- gapminder %>% filter(year == 2007)
+gap_2007
+```
+
+Plot for 2007:
+
+```{r}
+ggplot(gap_2007, 
+       aes(
+         x = gdpPercap, 
+         y = lifeExp, 
+         color = continent)
+       ) +
+  geom_point(alpha = 0.8) +
+  scale_x_log10() +
+  labs(
+    title = "Life Expectancy vs GDP per Capita (2007)",
+    x = "GDP per Capita (log scale)",
+    y = "Life Expectancy (years)"
+  )
+```
+
+---
+
+## Line plots: trends over time
+
+Visualization is especially useful for describing trends.
+
+Choose a country:
+
+```{r}
+country_df <- gapminder %>% filter(country == "United States")
+country_df
+```
+
+Plot life expectancy over time:
+
+```{r}
+ggplot(country_df, 
+       aes(
+         x = year, 
+         y = lifeExp)
+       ) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Life Expectancy Over Time: United States",
+    x = "Year",
+    y = "Life Expectancy (years)"
+  )
+```
+
+---
+
+## Bar charts: comparing groups
+
+Bar charts are useful for comparing summary values across groups.
+
+Example: mean life expectancy in 2007 by continent.
+
+```{r}
+cont_summary <- gap_2007 %>%
+  group_by(continent) %>%
+  summarise(mean_lifeExp = mean(lifeExp), .groups = "drop")
+
+cont_summary
+```
+
+```{r}
+ggplot(cont_summary, 
+       aes(
+         x = continent, 
+         y = mean_lifeExp)
+       ) +
+  geom_col() +
+  labs(
+    title = "Mean Life Expectancy by Continent (2007)",
+    x = "Continent",
+    y = "Mean Life Expectancy (years)"
+  )
+```
+
+---
+
+## Writing interpretation paragraphs
+
+Every figure should be followed by a short interpretation. A strong interpretation includes:
+
+- what you see in the plot
+- differences across groups (if applicable)
+- a public health interpretation in plain language
+- a limitation or next question (optional)
+
+Example interpretation (write your own in assignments):
+
+The figure suggests that life expectancy generally increases as GDP per capita increases, though the relationship appears stronger at lower income levels. Countries in different continents show clustering patterns, indicating that regional or structural factors may influence both wealth and health. Because this is observational country-level data, the plot does not establish causality.
+
+---
+
+## Reproducibility reminder
+
+In this course:
+
+- create figures in code chunks
+- label axes and include titles
+- re-render your document before submitting
+- avoid screenshots of plots
+- interpret figures in writing
+
+---
+
+## Weekly assignment reminder
+
+This week you will complete **HW 03: ggplot2 Practice**.
+
+---
+
+## Key takeaways
+
+Visualization helps you explore patterns and communicate results. `ggplot2` builds plots using layers. Clear labels and thoughtful interpretation are required for professional public health reporting.
+
+---
+
+## Optional practice
+
+Choose a different country or a different year and:
+
+- create one scatterplot (GDP vs life expectancy) with log scale
+- create one time trend plot for your country
+- write two short interpretation paragraphs

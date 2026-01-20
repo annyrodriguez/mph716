@@ -11,6 +11,12 @@ book:
     - 01-intro.qmd
     - 02-quarto.qmd
     - 02b-inline.qmd
+    - 02c-review.qmd
+    - 03-visualizations.qmd
+    - 04-dplyr.qmd
+    - project1.qmd
+    - 05-tidydata.qmd
+    
 
 format:
   html:

@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Lesson 2 Review: R Workflow, Quarto, and Core Functions – R and Health Sciences</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03-visualizations.html" rel="next">
+<link href="./02b-inline.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-485d01fc63b59abcd3ee1bf1e8e2748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02c-review.html"><span class="chapter-title">Lesson 2 Review: R Workflow, Quarto, and Core Functions</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R and Health Sciences</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">R and Health Sciences</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 1: Getting Started with R and RStudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-quarto.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 2: Quarto and Reproducible Reporting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02b-inline.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 2b: Inline Code for Reproducible Writing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02c-review.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Lesson 2 Review: R Workflow, Quarto, and Core Functions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-visualizations.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 3: Data Visualization with ggplot2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-dplyr.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 4: Data Wrangling with dplyr</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-tidydata.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 5: Tidy Data and Reshaping</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#purpose-of-this-review-lesson" id="toc-purpose-of-this-review-lesson" class="nav-link active" data-scroll-target="#purpose-of-this-review-lesson">Purpose of this review lesson</a></li>
+  <li><a href="#r-workflow-overview" id="toc-r-workflow-overview" class="nav-link" data-scroll-target="#r-workflow-overview">R workflow overview</a></li>
+  <li><a href="#r-scripts-vs-quarto-documents" id="toc-r-scripts-vs-quarto-documents" class="nav-link" data-scroll-target="#r-scripts-vs-quarto-documents">R scripts vs Quarto documents</a>
+  <ul class="collapse">
+  <li><a href="#r-scripts-.r-files" id="toc-r-scripts-.r-files" class="nav-link" data-scroll-target="#r-scripts-.r-files">R scripts (<code>.R</code> files)</a></li>
+  <li><a href="#quarto-documents-.qmd-files" id="toc-quarto-documents-.qmd-files" class="nav-link" data-scroll-target="#quarto-documents-.qmd-files">Quarto documents (<code>.qmd</code> files)</a></li>
+  </ul></li>
+  <li><a href="#key-difference-important" id="toc-key-difference-important" class="nav-link" data-scroll-target="#key-difference-important">Key difference (important)</a></li>
+  <li><a href="#review-week-1-concepts-r-basics" id="toc-review-week-1-concepts-r-basics" class="nav-link" data-scroll-target="#review-week-1-concepts-r-basics">Review: Week 1 concepts (R basics)</a>
+  <ul class="collapse">
+  <li><a href="#rstudio-interface" id="toc-rstudio-interface" class="nav-link" data-scroll-target="#rstudio-interface">RStudio interface</a></li>
+  <li><a href="#objects-and-assignment" id="toc-objects-and-assignment" class="nav-link" data-scroll-target="#objects-and-assignment">Objects and assignment</a></li>
+  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors">Vectors</a></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
+  </ul></li>
+  <li><a href="#review-week-2-concepts-quarto-reproducibility" id="toc-review-week-2-concepts-quarto-reproducibility" class="nav-link" data-scroll-target="#review-week-2-concepts-quarto-reproducibility">Review: Week 2 concepts (Quarto &amp; reproducibility)</a>
+  <ul class="collapse">
+  <li><a href="#yaml-header" id="toc-yaml-header" class="nav-link" data-scroll-target="#yaml-header">YAML header</a></li>
+  <li><a href="#markdown" id="toc-markdown" class="nav-link" data-scroll-target="#markdown">Markdown</a></li>
+  <li><a href="#code-chunks" id="toc-code-chunks" class="nav-link" data-scroll-target="#code-chunks">Code chunks</a></li>
+  <li><a href="#rendering" id="toc-rendering" class="nav-link" data-scroll-target="#rendering">Rendering</a></li>
+  <li><a href="#inline-r-code" id="toc-inline-r-code" class="nav-link" data-scroll-target="#inline-r-code">Inline R code</a></li>
+  </ul></li>
+  <li><a href="#go-to-r-functions-bookmark-this-section" id="toc-go-to-r-functions-bookmark-this-section" class="nav-link" data-scroll-target="#go-to-r-functions-bookmark-this-section">Go-to R functions (bookmark this section)</a>
+  <ul class="collapse">
+  <li><a href="#basic-r-functions" id="toc-basic-r-functions" class="nav-link" data-scroll-target="#basic-r-functions">Basic R functions</a></li>
+  <li><a href="#data-wrangling-tidyverse" id="toc-data-wrangling-tidyverse" class="nav-link" data-scroll-target="#data-wrangling-tidyverse">Data wrangling (tidyverse)</a></li>
+  <li><a href="#data-reshaping" id="toc-data-reshaping" class="nav-link" data-scroll-target="#data-reshaping">Data reshaping</a></li>
+  <li><a href="#visualization-preview" id="toc-visualization-preview" class="nav-link" data-scroll-target="#visualization-preview">Visualization (preview)</a></li>
+  <li><a href="#modeling-coming-soon" id="toc-modeling-coming-soon" class="nav-link" data-scroll-target="#modeling-coming-soon">Modeling (coming soon)</a></li>
+  </ul></li>
+  <li><a href="#reproducibility-expectations-review" id="toc-reproducibility-expectations-review" class="nav-link" data-scroll-target="#reproducibility-expectations-review">Reproducibility expectations (review)</a></li>
+  <li><a href="#self-check-recommended" id="toc-self-check-recommended" class="nav-link" data-scroll-target="#self-check-recommended">Self-check (recommended)</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Lesson 2 Review: R Workflow, Quarto, and Core Functions</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="purpose-of-this-review-lesson" class="level2">
+<h2 class="anchored" data-anchor-id="purpose-of-this-review-lesson">Purpose of this review lesson</h2>
+<p>This lesson reviews and reinforces the foundational material from <strong>Lessons 1 and 2</strong>. Before moving on to visualization and data wrangling, it is important that you understand:</p>
+<ul>
+<li>how R scripts differ from Quarto documents<br>
+</li>
+<li>how RStudio, Quarto, code chunks, and inline code fit together<br>
+</li>
+<li>the core workflow expected in this course<br>
+</li>
+<li>essential R functions you will use repeatedly</li>
+</ul>
+<p>This lesson is designed as a reference you can return to throughout the semester.</p>
+<hr>
+</section>
+<section id="r-workflow-overview" class="level2">
+<h2 class="anchored" data-anchor-id="r-workflow-overview">R workflow overview</h2>
+<p>In this course, your workflow follows this pattern:</p>
+<ol type="1">
+<li>Write code in R scripts or Quarto documents<br>
+</li>
+<li>Use R to create objects, summaries, figures, and models<br>
+</li>
+<li>Use Quarto to combine analysis and writing<br>
+</li>
+<li>Render documents to produce final reports</li>
+</ol>
+<p>Understanding when to use <strong>a script</strong> versus <strong>a Quarto document</strong> is critical.</p>
+<hr>
+</section>
+<section id="r-scripts-vs-quarto-documents" class="level2">
+<h2 class="anchored" data-anchor-id="r-scripts-vs-quarto-documents">R scripts vs Quarto documents</h2>
+<section id="r-scripts-.r-files" class="level3">
+<h3 class="anchored" data-anchor-id="r-scripts-.r-files">R scripts (<code>.R</code> files)</h3>
+<p>An R script is a plain text file that contains <strong>only R code</strong>.</p>
+<p>You use R scripts to:</p>
+<ul>
+<li>write and test code<br>
+</li>
+<li>clean and prepare data<br>
+</li>
+<li>experiment with analyses<br>
+</li>
+<li>run code step by step</li>
+</ul>
+<p>R scripts do <strong>not</strong> include formatted writing, figures with captions, or narrative interpretation.</p>
+<p>Example use case: You are cleaning a dataset or testing code before putting results into a report.</p>
+<hr>
+</section>
+<section id="quarto-documents-.qmd-files" class="level3">
+<h3 class="anchored" data-anchor-id="quarto-documents-.qmd-files">Quarto documents (<code>.qmd</code> files)</h3>
+<p>A Quarto document combines <strong>writing and R code</strong> in a single file.</p>
+<p>You use Quarto documents to:</p>
+<ul>
+<li>write homework assignments<br>
+</li>
+<li>create reports and manuscripts<br>
+</li>
+<li>integrate code, figures, tables, and interpretation<br>
+</li>
+<li>produce reproducible outputs</li>
+</ul>
+<p>A Quarto document includes: - a YAML header<br>
+- written text (Markdown)<br>
+- R code chunks<br>
+- inline R code</p>
+<p>In this course, <strong>all submitted work must be written in Quarto</strong> unless otherwise stated.</p>
+<hr>
+</section>
+</section>
+<section id="key-difference-important" class="level2">
+<h2 class="anchored" data-anchor-id="key-difference-important">Key difference (important)</h2>
+<ul>
+<li>Use <strong>R scripts</strong> to <em>develop and test</em> code<br>
+</li>
+<li>Use <strong>Quarto documents</strong> to <em>present and submit</em> work</li>
+</ul>
+<p>Most students will use <strong>both</strong>: Write code in scripts → move finalized code into Quarto.</p>
+<hr>
+</section>
+<section id="review-week-1-concepts-r-basics" class="level2">
+<h2 class="anchored" data-anchor-id="review-week-1-concepts-r-basics">Review: Week 1 concepts (R basics)</h2>
+<p>From Week 1, you should understand:</p>
+<section id="rstudio-interface" class="level3">
+<h3 class="anchored" data-anchor-id="rstudio-interface">RStudio interface</h3>
+<ul>
+<li>Source: where scripts and Quarto documents are written<br>
+</li>
+<li>Console: where R runs code<br>
+</li>
+<li>Environment: where objects are stored<br>
+</li>
+<li>Files/Plots/Help: where outputs appear</li>
+</ul>
+<p>You should primarily work in the <strong>Source pane</strong>, not the Console.</p>
+<hr>
+</section>
+<section id="objects-and-assignment" class="level3">
+<h3 class="anchored" data-anchor-id="objects-and-assignment">Objects and assignment</h3>
+<p>You create objects using <code>&lt;-</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Objects store values so you can reuse them.</p>
+<hr>
+</section>
+<section id="vectors" class="level3">
+<h3 class="anchored" data-anchor-id="vectors">Vectors</h3>
+<p>Vectors store multiple values of the same type.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">35</span>, <span class="dv">41</span>, <span class="dv">29</span>, <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Common functions for vectors:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 35.6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 35</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.47855</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="functions" class="level3">
+<h3 class="anchored" data-anchor-id="functions">Functions</h3>
+<p>Functions take inputs and return outputs.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 35.6</code></pre>
+</div>
+</div>
+<p>Understanding how to use functions is more important than memorizing them.</p>
+<hr>
+</section>
+<section id="packages" class="level3">
+<h3 class="anchored" data-anchor-id="packages">Packages</h3>
+<p>Packages extend R.</p>
+<p>You install once:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("tidyverse")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You load every session:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+</section>
+<section id="review-week-2-concepts-quarto-reproducibility" class="level2">
+<h2 class="anchored" data-anchor-id="review-week-2-concepts-quarto-reproducibility">Review: Week 2 concepts (Quarto &amp; reproducibility)</h2>
+<section id="yaml-header" class="level3">
+<h3 class="anchored" data-anchor-id="yaml-header">YAML header</h3>
+<p>Every Quarto document begins with a YAML header.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Document"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The YAML controls document settings.</p>
+<hr>
+</section>
+<section id="markdown" class="level3">
+<h3 class="anchored" data-anchor-id="markdown">Markdown</h3>
+<p>Markdown formats your writing using simple syntax.</p>
+<p>You use it for: - headings<br>
+- lists<br>
+- emphasis<br>
+- document structure</p>
+<p>Markdown keeps reports readable and professional.</p>
+<hr>
+</section>
+<section id="code-chunks" class="level3">
+<h3 class="anchored" data-anchor-id="code-chunks">Code chunks</h3>
+<p>R code is written inside code chunks.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<p>Code chunks run when you <strong>render</strong> the document.</p>
+<hr>
+</section>
+<section id="rendering" class="level3">
+<h3 class="anchored" data-anchor-id="rendering">Rendering</h3>
+<p>Rendering: - runs all code chunks<br>
+- generates the final document<br>
+- updates all figures and inline values</p>
+<p>Always render before submitting.</p>
+<hr>
+</section>
+<section id="inline-r-code" class="level3">
+<h3 class="anchored" data-anchor-id="inline-r-code">Inline R code</h3>
+<p>Inline code inserts R results into sentences.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">35</span>, <span class="dv">41</span>, <span class="dv">29</span>, <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The sample included 5 participants, and the mean age was 35.6 years.</p>
+<p>Inline code prevents copy-and-paste errors and is required for reporting values in this course.</p>
+<hr>
+</section>
+</section>
+<section id="go-to-r-functions-bookmark-this-section" class="level2">
+<h2 class="anchored" data-anchor-id="go-to-r-functions-bookmark-this-section">Go-to R functions (bookmark this section)</h2>
+<p>These are functions you will use <strong>throughout the semester</strong>.</p>
+<hr>
+<section id="basic-r-functions" class="level3">
+<h3 class="anchored" data-anchor-id="basic-r-functions">Basic R functions</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Purpose</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Create vector</td>
+<td><code>c()</code></td>
+</tr>
+<tr class="even">
+<td>Mean</td>
+<td><code>mean()</code></td>
+</tr>
+<tr class="odd">
+<td>Median</td>
+<td><code>median()</code></td>
+</tr>
+<tr class="even">
+<td>Standard deviation</td>
+<td><code>sd()</code></td>
+</tr>
+<tr class="odd">
+<td>Sample size</td>
+<td><code>length()</code></td>
+</tr>
+<tr class="even">
+<td>Summary</td>
+<td><code>summary()</code></td>
+</tr>
+<tr class="odd">
+<td>View data</td>
+<td><code>head()</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="data-wrangling-tidyverse" class="level3">
+<h3 class="anchored" data-anchor-id="data-wrangling-tidyverse">Data wrangling (tidyverse)</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Select columns</td>
+<td><code>select()</code></td>
+</tr>
+<tr class="even">
+<td>Filter rows</td>
+<td><code>filter()</code></td>
+</tr>
+<tr class="odd">
+<td>Create variables</td>
+<td><code>mutate()</code></td>
+</tr>
+<tr class="even">
+<td>Sort data</td>
+<td><code>arrange()</code></td>
+</tr>
+<tr class="odd">
+<td>Group data</td>
+<td><code>group_by()</code></td>
+</tr>
+<tr class="even">
+<td>Summarize data</td>
+<td><code>summarise()</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="data-reshaping" class="level3">
+<h3 class="anchored" data-anchor-id="data-reshaping">Data reshaping</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wide → long</td>
+<td><code>pivot_longer()</code></td>
+</tr>
+<tr class="even">
+<td>Long → wide</td>
+<td><code>pivot_wider()</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="visualization-preview" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-preview">Visualization (preview)</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Create plot</td>
+<td><code>ggplot()</code></td>
+</tr>
+<tr class="even">
+<td>Scatterplot</td>
+<td><code>geom_point()</code></td>
+</tr>
+<tr class="odd">
+<td>Line plot</td>
+<td><code>geom_line()</code></td>
+</tr>
+<tr class="even">
+<td>Bar chart</td>
+<td><code>geom_col()</code></td>
+</tr>
+<tr class="odd">
+<td>Labels</td>
+<td><code>labs()</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="modeling-coming-soon" class="level3">
+<h3 class="anchored" data-anchor-id="modeling-coming-soon">Modeling (coming soon)</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Linear model</td>
+<td><code>lm()</code></td>
+</tr>
+<tr class="even">
+<td>Logistic model</td>
+<td><code>glm()</code></td>
+</tr>
+<tr class="odd">
+<td>Model summary</td>
+<td><code>summary()</code></td>
+</tr>
+<tr class="even">
+<td>Confidence intervals</td>
+<td><code>confint()</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="reproducibility-expectations-review" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-expectations-review">Reproducibility expectations (review)</h2>
+<p>In this course:</p>
+<ul>
+<li>analysis and writing live together in Quarto<br>
+</li>
+<li>numbers should be generated by R, not typed<br>
+</li>
+<li>scripts and documents should be organized<br>
+</li>
+<li>work should render without errors</li>
+</ul>
+<p>Reproducibility is a professional skill, not just a technical one.</p>
+<hr>
+</section>
+<section id="self-check-recommended" class="level2">
+<h2 class="anchored" data-anchor-id="self-check-recommended">Self-check (recommended)</h2>
+<p>Before moving forward, ask yourself:</p>
+<ol type="1">
+<li>Do I know when to use a script vs a Quarto document?<br>
+</li>
+<li>Can I explain what rendering does?<br>
+</li>
+<li>Can I write a sentence using inline R code?<br>
+</li>
+<li>Do I recognize the core functions listed above?</li>
+</ol>
+<p>If not, revisit Weeks 1 and 2 before continuing.</p>
+<hr>
+</section>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
+<p>Next week, you will begin <strong>data visualization with ggplot2</strong>, where you will apply everything you learned about Quarto, reproducibility, and tidy workflows.</p>
+<p>This review lesson is your foundation — keep it bookmarked.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/annyrodriguez\.github\.io\/mph716\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02b-inline.html" class="pagination-link" aria-label="Lesson 2b: Inline Code for Reproducible Writing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Lesson 2b: Inline Code for Reproducible Writing</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03-visualizations.html" class="pagination-link" aria-label="Lesson 3: Data Visualization with ggplot2">
+        <span class="nav-page-text"><span class="chapter-title">Lesson 3: Data Visualization with ggplot2</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

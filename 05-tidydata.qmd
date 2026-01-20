@@ -1,0 +1,259 @@
+---
+title: "Lesson 5: Tidy Data and Reshaping"
+format:
+  html:
+    toc: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Learning goals
+
+By the end of this lesson, you will be able to:
+
+- Explain what tidy data are and why they matter in public health
+- Identify tidy vs untidy data structures
+- Reshape data using `pivot_longer()` and `pivot_wider()`
+- Prepare datasets for visualization, modeling, and tables
+- Maintain a reproducible data workflow in Quarto
+
+---
+
+## What is tidy data?
+
+Tidy data follow three simple rules:
+
+1. Each **row** is one observation  
+2. Each **column** is one variable  
+3. Each **cell** contains one value  
+
+Most R tools for visualization, modeling, and tables expect data in tidy format.
+
+In public health, tidy data make analyses clearer, more reproducible, and less error-prone.
+
+---
+
+## Why tidy data matter in public health
+
+Public health datasets often come from surveys, surveillance systems, or administrative sources. These datasets are frequently not tidy when first received.
+
+Tidy data allow you to:
+
+- compare groups consistently  
+- visualize trends easily  
+- fit statistical models correctly  
+- generate tables and figures efficiently  
+
+Understanding tidy data will save you time later in the semester.
+
+---
+
+## Setup
+
+Load the packages used in this lesson.
+
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+---
+
+## Recognizing tidy vs untidy data
+
+Let’s start with a tidy dataset you have already seen.
+
+```{r}
+gapminder
+```
+
+Each row is a country-year observation, and each column is a variable. This dataset is tidy.
+
+---
+
+## An untidy example
+
+Now consider a simplified untidy dataset.
+
+```{r}
+lifeexp_wide <- tibble(
+  country = c("A", "B", "C"),
+  lifeExp_2000 = c(60, 72, 68),
+  lifeExp_2005 = c(62, 74, 70),
+  lifeExp_2010 = c(65, 76, 73)
+)
+
+lifeexp_wide
+```
+
+Here, years are embedded in column names. This structure makes analysis harder.
+
+---
+
+## Making data tidy with `pivot_longer()`
+
+We can convert wide data into tidy (long) format using `pivot_longer()`.
+
+```{r}
+lifeexp_long <- lifeexp_wide %>%
+  pivot_longer(
+    cols = starts_with("lifeExp"),
+    names_to = "year",
+    values_to = "lifeExp"
+  )
+
+lifeexp_long
+```
+
+Now:
+
+- each row is a country-year observation  
+- `year` is a variable  
+- `lifeExp` is a variable  
+
+This structure is tidy.
+
+---
+
+## Cleaning variable values after reshaping
+
+The `year` variable still contains text. We can clean it.
+
+```{r}
+lifeexp_long <- lifeexp_long %>%
+  mutate(
+    year = as.numeric(gsub("lifeExp_", "", year))
+  )
+
+lifeexp_long
+```
+
+Cleaning variables after reshaping is common in public health workflows.
+
+---
+
+## When to use `pivot_longer()`
+
+Use `pivot_longer()` when:
+
+- multiple columns represent the same variable across time or groups  
+- column names contain values (years, categories)  
+- you want to create plots or models  
+
+Most visualization and modeling functions expect long (tidy) data.
+
+---
+
+## Converting long data to wide with `pivot_wider()`
+
+Sometimes you need wide data, for example for tables or reporting.
+
+```{r}
+lifeexp_wide_again <- lifeexp_long %>%
+  pivot_wider(
+    names_from = year,
+    values_from = lifeExp
+  )
+
+lifeexp_wide_again
+```
+
+This recreates a wide format.
+
+---
+
+## Tidy data and visualization
+
+Tidy data work naturally with ggplot2.
+
+```{r}
+ggplot(lifeexp_long, aes(x = year, y = lifeExp, color = country)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Life Expectancy Over Time",
+    x = "Year",
+    y = "Life Expectancy"
+  )
+```
+
+This would be difficult to do with the original wide dataset.
+
+---
+
+## Tidy data and modeling
+
+Models also expect tidy data.
+
+```{r}
+lm(lifeExp ~ year + country, data = lifeexp_long)
+```
+
+Each observation is clearly defined, making interpretation easier.
+
+---
+
+## Example with Gapminder
+
+Let’s reshape a subset of Gapminder.
+
+```{r}
+gap_subset <- gapminder %>%
+  filter(country %in% c("United States", "Canada")) %>%
+  select(country, year, lifeExp)
+
+gap_subset
+```
+
+This dataset is already tidy and ready for visualization or modeling.
+
+---
+
+## Common tidy data mistakes
+
+Common issues include:
+
+- mixing multiple variables into one column  
+- encoding values in column names  
+- inconsistent variable types  
+- reshaping data without documenting decisions  
+
+Always inspect your data after reshaping.
+
+---
+
+## Reproducibility reminder
+
+In this course:
+
+- reshaping must be done in code  
+- data structure decisions should be documented  
+- tidy data should be used for analysis and modeling  
+- your workflow should be reproducible from raw data to results  
+
+Data structure is part of your scientific record.
+
+---
+
+## Weekly assignment reminder
+
+This week you will complete **HW 05: Tidy Data Reshaping**, where you will:
+
+- identify a wide dataset  
+- convert it to tidy format  
+- explain why tidy data are useful  
+- demonstrate one visualization or summary  
+
+---
+
+## Key takeaways
+
+Tidy data have one observation per row and one variable per column. `pivot_longer()` and `pivot_wider()` allow you to reshape data for analysis. Tidy data support clear, reproducible public health research.
+
+---
+
+## Looking ahead
+
+Next week, we will begin **simple linear regression**, using tidy data to model relationships and interpret results in a public health context.

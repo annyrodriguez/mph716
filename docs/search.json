@@ -628,5 +628,655 @@
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Lesson 2b: Inline Code for Reproducible Writing</span>"
     ]
+  },
+  {
+    "objectID": "04-dplyr.html",
+    "href": "04-dplyr.html",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "",
+    "text": "Learning goals\nBy the end of this lesson, you will be able to:",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#learning-goals",
+    "href": "04-dplyr.html#learning-goals",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "",
+    "text": "Explain why data wrangling is essential in public health research\n\nUse core dplyr verbs to manipulate datasets\n\nFilter rows and select variables of interest\n\nCreate new variables using mutate()\n\nSummarize data using group_by() and summarise()\n\nWrite short, clear interpretations of cleaned data\n\nMaintain a reproducible workflow in Quarto",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#why-data-wrangling-matters-in-public-health",
+    "href": "04-dplyr.html#why-data-wrangling-matters-in-public-health",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Why data wrangling matters in public health",
+    "text": "Why data wrangling matters in public health\nReal-world public health data are rarely ready for analysis. Variables may be poorly named, values may need recoding, and datasets often include far more information than is needed for a specific research question.\nData wrangling allows you to:\n\nfocus on relevant variables\n\nprepare data for visualization and modeling\n\ndocument decisions transparently\n\nreduce errors before analysis\n\nClean data are the foundation of valid public health conclusions.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#setup",
+    "href": "04-dplyr.html#setup",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Setup",
+    "text": "Setup\nLoad the packages we will use in this lesson.\n\nlibrary(tidyverse)\nlibrary(gapminder)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#the-gapminder-dataset-review",
+    "href": "04-dplyr.html#the-gapminder-dataset-review",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "The Gapminder dataset (review)",
+    "text": "The Gapminder dataset (review)\nGapminder contains country-level data over time, including life expectancy, population, and GDP per capita.\n\ngapminder\n\n# A tibble: 1,704 × 6\n   country     continent  year lifeExp      pop gdpPercap\n   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n 1 Afghanistan Asia       1952    28.8  8425333      779.\n 2 Afghanistan Asia       1957    30.3  9240934      821.\n 3 Afghanistan Asia       1962    32.0 10267083      853.\n 4 Afghanistan Asia       1967    34.0 11537966      836.\n 5 Afghanistan Asia       1972    36.1 13079460      740.\n 6 Afghanistan Asia       1977    38.4 14880372      786.\n 7 Afghanistan Asia       1982    39.9 12881816      978.\n 8 Afghanistan Asia       1987    40.8 13867957      852.\n 9 Afghanistan Asia       1992    41.7 16317921      649.\n10 Afghanistan Asia       1997    41.8 22227415      635.\n# ℹ 1,694 more rows\n\n\nEach row represents a country-year observation. Each column is a variable.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#selecting-variables-with-select",
+    "href": "04-dplyr.html#selecting-variables-with-select",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Selecting variables with select()",
+    "text": "Selecting variables with select()\nOften, you only need a subset of variables.\n\ngap_select &lt;- gapminder %&gt;%\n  select(country, year, lifeExp, gdpPercap)\n\nhead(gap_select)\n\n# A tibble: 6 × 4\n  country      year lifeExp gdpPercap\n  &lt;fct&gt;       &lt;int&gt;   &lt;dbl&gt;     &lt;dbl&gt;\n1 Afghanistan  1952    28.8      779.\n2 Afghanistan  1957    30.3      821.\n3 Afghanistan  1962    32.0      853.\n4 Afghanistan  1967    34.0      836.\n5 Afghanistan  1972    36.1      740.\n6 Afghanistan  1977    38.4      786.\n\n\nSelecting variables makes datasets easier to read and work with.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#filtering-rows-with-filter",
+    "href": "04-dplyr.html#filtering-rows-with-filter",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Filtering rows with filter()",
+    "text": "Filtering rows with filter()\nUse filter() to keep only rows that meet a condition.\nExample: data from a single year.\n\ngap_2007 &lt;- gapminder %&gt;%\n  filter(year == 2007)\n\nhead(gap_2007)\n\n# A tibble: 6 × 6\n  country     continent  year lifeExp      pop gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n1 Afghanistan Asia       2007    43.8 31889923      975.\n2 Albania     Europe     2007    76.4  3600523     5937.\n3 Algeria     Africa     2007    72.3 33333216     6223.\n4 Angola      Africa     2007    42.7 12420476     4797.\n5 Argentina   Americas   2007    75.3 40301927    12779.\n6 Australia   Oceania    2007    81.2 20434176    34435.\n\n\nExample: data for a single country.\n\ngap_us &lt;- gapminder %&gt;%\n  filter(country == \"United States\")\n\nhead(gap_us)\n\n# A tibble: 6 × 6\n  country       continent  year lifeExp       pop gdpPercap\n  &lt;fct&gt;         &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;\n1 United States Americas   1952    68.4 157553000    13990.\n2 United States Americas   1957    69.5 171984000    14847.\n3 United States Americas   1962    70.2 186538000    16173.\n4 United States Americas   1967    70.8 198712000    19530.\n5 United States Americas   1972    71.3 209896000    21806.\n6 United States Americas   1977    73.4 220239000    24073.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#combining-verbs-with-the-pipe",
+    "href": "04-dplyr.html#combining-verbs-with-the-pipe",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Combining verbs with the pipe",
+    "text": "Combining verbs with the pipe\nThe pipe (%&gt;%) passes the result of one step into the next. This makes code easier to read.\n\ngap_us_2007 &lt;- gapminder %&gt;%\n  filter(country == \"United States\", year == 2007) %&gt;%\n  select(country, year, lifeExp, gdpPercap, pop)\n\ngap_us_2007\n\n# A tibble: 1 × 5\n  country        year lifeExp gdpPercap       pop\n  &lt;fct&gt;         &lt;int&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;int&gt;\n1 United States  2007    78.2    42952. 301139947\n\n\nRead this as: “Take Gapminder, then filter, then select.”",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#creating-new-variables-with-mutate",
+    "href": "04-dplyr.html#creating-new-variables-with-mutate",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Creating new variables with mutate()",
+    "text": "Creating new variables with mutate()\nUse mutate() to create new variables.\nExample: log-transform GDP per capita.\n\ngap_2007 &lt;- gap_2007 %&gt;%\n  mutate(log_gdpPercap = log(gdpPercap))\n\nhead(gap_2007)\n\n# A tibble: 6 × 7\n  country     continent  year lifeExp      pop gdpPercap log_gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 Afghanistan Asia       2007    43.8 31889923      975.          6.88\n2 Albania     Europe     2007    76.4  3600523     5937.          8.69\n3 Algeria     Africa     2007    72.3 33333216     6223.          8.74\n4 Angola      Africa     2007    42.7 12420476     4797.          8.48\n5 Argentina   Americas   2007    75.3 40301927    12779.          9.46\n6 Australia   Oceania    2007    81.2 20434176    34435.         10.4 \n\n\nCreating new variables is common in public health analyses.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#sorting-data-with-arrange",
+    "href": "04-dplyr.html#sorting-data-with-arrange",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Sorting data with arrange()",
+    "text": "Sorting data with arrange()\nUse arrange() to order rows.\n\ngap_2007 %&gt;%\n  arrange(desc(lifeExp)) %&gt;%\n  select(country, lifeExp) %&gt;%\n  head()\n\n# A tibble: 6 × 2\n  country          lifeExp\n  &lt;fct&gt;              &lt;dbl&gt;\n1 Japan               82.6\n2 Hong Kong, China    82.2\n3 Iceland             81.8\n4 Switzerland         81.7\n5 Australia           81.2\n6 Spain               80.9\n\n\nThis helps identify countries with the highest or lowest values.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#grouped-summaries-with-group_by-and-summarise",
+    "href": "04-dplyr.html#grouped-summaries-with-group_by-and-summarise",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Grouped summaries with group_by() and summarise()",
+    "text": "Grouped summaries with group_by() and summarise()\nGrouped summaries allow you to compute statistics by group.\nExample: mean life expectancy by continent in 2007.\n\ncont_summary &lt;- gap_2007 %&gt;%\n  group_by(continent) %&gt;%\n  summarise(\n    mean_lifeExp = mean(lifeExp),\n    median_lifeExp = median(lifeExp),\n    n_countries = n(),\n    .groups = \"drop\"\n  )\n\ncont_summary\n\n# A tibble: 5 × 4\n  continent mean_lifeExp median_lifeExp n_countries\n  &lt;fct&gt;            &lt;dbl&gt;          &lt;dbl&gt;       &lt;int&gt;\n1 Africa            54.8           52.9          52\n2 Americas          73.6           72.9          25\n3 Asia              70.7           72.4          33\n4 Europe            77.6           78.6          30\n5 Oceania           80.7           80.7           2\n\n\nThis is a common workflow in descriptive public health analyses.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#writing-interpretations-with-summaries",
+    "href": "04-dplyr.html#writing-interpretations-with-summaries",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Writing interpretations with summaries",
+    "text": "Writing interpretations with summaries\nSummaries should always be interpreted in writing.\nExample sentence using inline code:\nIn 2007, the mean life expectancy in Africa was 54.8 years, which was lower than that observed in other continents.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#chaining-multiple-steps-together",
+    "href": "04-dplyr.html#chaining-multiple-steps-together",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Chaining multiple steps together",
+    "text": "Chaining multiple steps together\nYou will often combine many verbs into one pipeline.\n\ngap_summary &lt;- gapminder %&gt;%\n  filter(year == 2007) %&gt;%\n  group_by(continent) %&gt;%\n  summarise(\n    mean_lifeExp = mean(lifeExp),\n    mean_gdpPercap = mean(gdpPercap),\n    .groups = \"drop\"\n  )\n\ngap_summary\n\n# A tibble: 5 × 3\n  continent mean_lifeExp mean_gdpPercap\n  &lt;fct&gt;            &lt;dbl&gt;          &lt;dbl&gt;\n1 Africa            54.8          3089.\n2 Americas          73.6         11003.\n3 Asia              70.7         12473.\n4 Europe            77.6         25054.\n5 Oceania           80.7         29810.\n\n\nPipelines make your workflow transparent and reproducible.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#common-data-wrangling-mistakes",
+    "href": "04-dplyr.html#common-data-wrangling-mistakes",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Common data wrangling mistakes",
+    "text": "Common data wrangling mistakes\nCommon mistakes include:\n\noverwriting your original dataset unintentionally\n\nforgetting to drop grouping after summarise()\n\nfiltering incorrectly due to misspelled values\n\ncreating variables without documenting why\n\nUse clear object names and comment your code when decisions matter.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#reproducibility-reminder",
+    "href": "04-dplyr.html#reproducibility-reminder",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Reproducibility reminder",
+    "text": "Reproducibility reminder\nIn this course:\n\nall data cleaning must be done in code\n\ntransformations should be documented\n\ndatasets used for analysis should be reproducible\n\nyou should never manually edit data files\n\nData preparation is part of your scientific record.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#weekly-assignment-reminder",
+    "href": "04-dplyr.html#weekly-assignment-reminder",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Weekly assignment reminder",
+    "text": "Weekly assignment reminder\nThis week you will complete HW 04: Data Wrangling with dplyr.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#key-takeaways",
+    "href": "04-dplyr.html#key-takeaways",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Key takeaways",
+    "text": "Key takeaways\nData wrangling prepares data for analysis. dplyr verbs make transformations readable and transparent. Grouped summaries are central to descriptive public health research. Clean data support valid conclusions.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#looking-ahead",
+    "href": "04-dplyr.html#looking-ahead",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext week, you will learn about tidy data and reshaping datasets, which will help prepare data for visualization, modeling, and tables.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "02c-review.html",
+    "href": "02c-review.html",
+    "title": "Lesson 2 Review: R Workflow, Quarto, and Core Functions",
+    "section": "",
+    "text": "Purpose of this review lesson\nThis lesson reviews and reinforces the foundational material from Lessons 1 and 2. Before moving on to visualization and data wrangling, it is important that you understand:\nThis lesson is designed as a reference you can return to throughout the semester.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lesson 2 Review: R Workflow, Quarto, and Core Functions</span>"
+    ]
+  },
+  {
+    "objectID": "02c-review.html#purpose-of-this-review-lesson",
+    "href": "02c-review.html#purpose-of-this-review-lesson",
+    "title": "Lesson 2 Review: R Workflow, Quarto, and Core Functions",
+    "section": "",
+    "text": "how R scripts differ from Quarto documents\n\nhow RStudio, Quarto, code chunks, and inline code fit together\n\nthe core workflow expected in this course\n\nessential R functions you will use repeatedly",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lesson 2 Review: R Workflow, Quarto, and Core Functions</span>"
+    ]
+  },
+  {
+    "objectID": "02c-review.html#r-workflow-overview",
+    "href": "02c-review.html#r-workflow-overview",
+    "title": "Lesson 2 Review: R Workflow, Quarto, and Core Functions",
+    "section": "R workflow overview",
+    "text": "R workflow overview\nIn this course, your workflow follows this pattern:\n\nWrite code in R scripts or Quarto documents\n\nUse R to create objects, summaries, figures, and models\n\nUse Quarto to combine analysis and writing\n\nRender documents to produce final reports\n\nUnderstanding when to use a script versus a Quarto document is critical.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lesson 2 Review: R Workflow, Quarto, and Core Functions</span>"
+    ]
+  },
+  {
+    "objectID": "02c-review.html#r-scripts-vs-quarto-documents",
+    "href": "02c-review.html#r-scripts-vs-quarto-documents",
+    "title": "Lesson 2 Review: R Workflow, Quarto, and Core Functions",
+    "section": "R scripts vs Quarto documents",
+    "text": "R scripts vs Quarto documents\n\nR scripts (.R files)\nAn R script is a plain text file that contains only R code.\nYou use R scripts to:\n\nwrite and test code\n\nclean and prepare data\n\nexperiment with analyses\n\nrun code step by step\n\nR scripts do not include formatted writing, figures with captions, or narrative interpretation.\nExample use case: You are cleaning a dataset or testing code before putting results into a report.\n\n\n\nQuarto documents (.qmd files)\nA Quarto document combines writing and R code in a single file.\nYou use Quarto documents to:\n\nwrite homework assignments\n\ncreate reports and manuscripts\n\nintegrate code, figures, tables, and interpretation\n\nproduce reproducible outputs\n\nA Quarto document includes: - a YAML header\n- written text (Markdown)\n- R code chunks\n- inline R code\nIn this course, all submitted work must be written in Quarto unless otherwise stated.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lesson 2 Review: R Workflow, Quarto, and Core Functions</span>"
+    ]
+  },
+  {
+    "objectID": "02c-review.html#key-difference-important",
+    "href": "02c-review.html#key-difference-important",
+    "title": "Lesson 2 Review: R Workflow, Quarto, and Core Functions",
+    "section": "Key difference (important)",
+    "text": "Key difference (important)\n\nUse R scripts to develop and test code\n\nUse Quarto documents to present and submit work\n\nMost students will use both: Write code in scripts → move finalized code into Quarto.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lesson 2 Review: R Workflow, Quarto, and Core Functions</span>"
+    ]
+  },
+  {
+    "objectID": "02c-review.html#review-week-1-concepts-r-basics",
+    "href": "02c-review.html#review-week-1-concepts-r-basics",
+    "title": "Lesson 2 Review: R Workflow, Quarto, and Core Functions",
+    "section": "Review: Week 1 concepts (R basics)",
+    "text": "Review: Week 1 concepts (R basics)\nFrom Week 1, you should understand:\n\nRStudio interface\n\nSource: where scripts and Quarto documents are written\n\nConsole: where R runs code\n\nEnvironment: where objects are stored\n\nFiles/Plots/Help: where outputs appear\n\nYou should primarily work in the Source pane, not the Console.\n\n\n\nObjects and assignment\nYou create objects using &lt;-.\n\nx &lt;- 10\ny &lt;- 5\n\nObjects store values so you can reuse them.\n\n\n\nVectors\nVectors store multiple values of the same type.\n\nages &lt;- c(23, 35, 41, 29, 50)\n\nCommon functions for vectors:\n\nmean(ages)\n\n[1] 35.6\n\nmedian(ages)\n\n[1] 35\n\nsd(ages)\n\n[1] 10.47855\n\nlength(ages)\n\n[1] 5\n\n\n\n\n\nFunctions\nFunctions take inputs and return outputs.\n\nmean(ages)\n\n[1] 35.6\n\n\nUnderstanding how to use functions is more important than memorizing them.\n\n\n\nPackages\nPackages extend R.\nYou install once:\n\n# install.packages(\"tidyverse\")\n\nYou load every session:\n\nlibrary(tidyverse)",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lesson 2 Review: R Workflow, Quarto, and Core Functions</span>"
+    ]
+  },
+  {
+    "objectID": "02c-review.html#review-week-2-concepts-quarto-reproducibility",
+    "href": "02c-review.html#review-week-2-concepts-quarto-reproducibility",
+    "title": "Lesson 2 Review: R Workflow, Quarto, and Core Functions",
+    "section": "Review: Week 2 concepts (Quarto & reproducibility)",
+    "text": "Review: Week 2 concepts (Quarto & reproducibility)\n\nYAML header\nEvery Quarto document begins with a YAML header.\n---\ntitle: \"My Document\"\nformat: html\n---\nThe YAML controls document settings.\n\n\n\nMarkdown\nMarkdown formats your writing using simple syntax.\nYou use it for: - headings\n- lists\n- emphasis\n- document structure\nMarkdown keeps reports readable and professional.\n\n\n\nCode chunks\nR code is written inside code chunks.\n\n2 + 2\n\n[1] 4\n\n\nCode chunks run when you render the document.\n\n\n\nRendering\nRendering: - runs all code chunks\n- generates the final document\n- updates all figures and inline values\nAlways render before submitting.\n\n\n\nInline R code\nInline code inserts R results into sentences.\n\nages &lt;- c(23, 35, 41, 29, 50)\n\nThe sample included 5 participants, and the mean age was 35.6 years.\nInline code prevents copy-and-paste errors and is required for reporting values in this course.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lesson 2 Review: R Workflow, Quarto, and Core Functions</span>"
+    ]
+  },
+  {
+    "objectID": "02c-review.html#go-to-r-functions-bookmark-this-section",
+    "href": "02c-review.html#go-to-r-functions-bookmark-this-section",
+    "title": "Lesson 2 Review: R Workflow, Quarto, and Core Functions",
+    "section": "Go-to R functions (bookmark this section)",
+    "text": "Go-to R functions (bookmark this section)\nThese are functions you will use throughout the semester.\n\n\nBasic R functions\n\n\n\nPurpose\nFunction\n\n\n\n\nCreate vector\nc()\n\n\nMean\nmean()\n\n\nMedian\nmedian()\n\n\nStandard deviation\nsd()\n\n\nSample size\nlength()\n\n\nSummary\nsummary()\n\n\nView data\nhead()\n\n\n\n\n\n\nData wrangling (tidyverse)\n\n\n\nTask\nFunction\n\n\n\n\nSelect columns\nselect()\n\n\nFilter rows\nfilter()\n\n\nCreate variables\nmutate()\n\n\nSort data\narrange()\n\n\nGroup data\ngroup_by()\n\n\nSummarize data\nsummarise()\n\n\n\n\n\n\nData reshaping\n\n\n\nTask\nFunction\n\n\n\n\nWide → long\npivot_longer()\n\n\nLong → wide\npivot_wider()\n\n\n\n\n\n\nVisualization (preview)\n\n\n\nTask\nFunction\n\n\n\n\nCreate plot\nggplot()\n\n\nScatterplot\ngeom_point()\n\n\nLine plot\ngeom_line()\n\n\nBar chart\ngeom_col()\n\n\nLabels\nlabs()\n\n\n\n\n\n\nModeling (coming soon)\n\n\n\nTask\nFunction\n\n\n\n\nLinear model\nlm()\n\n\nLogistic model\nglm()\n\n\nModel summary\nsummary()\n\n\nConfidence intervals\nconfint()",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lesson 2 Review: R Workflow, Quarto, and Core Functions</span>"
+    ]
+  },
+  {
+    "objectID": "02c-review.html#reproducibility-expectations-review",
+    "href": "02c-review.html#reproducibility-expectations-review",
+    "title": "Lesson 2 Review: R Workflow, Quarto, and Core Functions",
+    "section": "Reproducibility expectations (review)",
+    "text": "Reproducibility expectations (review)\nIn this course:\n\nanalysis and writing live together in Quarto\n\nnumbers should be generated by R, not typed\n\nscripts and documents should be organized\n\nwork should render without errors\n\nReproducibility is a professional skill, not just a technical one.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lesson 2 Review: R Workflow, Quarto, and Core Functions</span>"
+    ]
+  },
+  {
+    "objectID": "02c-review.html#self-check-recommended",
+    "href": "02c-review.html#self-check-recommended",
+    "title": "Lesson 2 Review: R Workflow, Quarto, and Core Functions",
+    "section": "Self-check (recommended)",
+    "text": "Self-check (recommended)\nBefore moving forward, ask yourself:\n\nDo I know when to use a script vs a Quarto document?\n\nCan I explain what rendering does?\n\nCan I write a sentence using inline R code?\n\nDo I recognize the core functions listed above?\n\nIf not, revisit Weeks 1 and 2 before continuing.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lesson 2 Review: R Workflow, Quarto, and Core Functions</span>"
+    ]
+  },
+  {
+    "objectID": "02c-review.html#looking-ahead",
+    "href": "02c-review.html#looking-ahead",
+    "title": "Lesson 2 Review: R Workflow, Quarto, and Core Functions",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext week, you will begin data visualization with ggplot2, where you will apply everything you learned about Quarto, reproducibility, and tidy workflows.\nThis review lesson is your foundation — keep it bookmarked.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lesson 2 Review: R Workflow, Quarto, and Core Functions</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html",
+    "href": "03-visualizations.html",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "",
+    "text": "Learning goals\nBy the end of this lesson, you will be able to:",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#learning-goals",
+    "href": "03-visualizations.html#learning-goals",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "",
+    "text": "Explain why visualization is essential in public health data science\nCreate common plot types using ggplot2\nMap variables to aesthetics (x, y, color, size)\nAdd labels and improve readability for a public health audience\nProduce a plot and write a short interpretation paragraph\nKeep your work reproducible in Quarto",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#why-we-visualize-data-in-public-health",
+    "href": "03-visualizations.html#why-we-visualize-data-in-public-health",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "Why we visualize data in public health",
+    "text": "Why we visualize data in public health\nData visualization helps you identify patterns, compare groups, detect outliers, and communicate findings clearly. In public health, visualization is often the first step in understanding the distribution of outcomes and how they vary across time, geography, and population groups.\nA good figure should be:\n\naccurate\nreadable\nclearly labeled\ninterpreted in writing\n\nIn this course, and for everything moving forward, every figure you create should be paired with a short interpretation.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#setup",
+    "href": "03-visualizations.html#setup",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "Setup",
+    "text": "Setup\n\n\n\n\n\n\nTip\n\n\n\nInstall packages (only needed once), then load them each session.\n\n\n\n# install.packages(\"tidyverse\")\n# install.packages(\"gapminder\")\n\n\nlibrary(tidyverse)\nlibrary(gapminder)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#the-gapminder-dataset",
+    "href": "03-visualizations.html#the-gapminder-dataset",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "The Gapminder dataset",
+    "text": "The Gapminder dataset\nGapminder includes country-level indicators across time such as life expectancy, GDP per capita, and population.\n\ngapminder\n\n# A tibble: 1,704 × 6\n   country     continent  year lifeExp      pop gdpPercap\n   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n 1 Afghanistan Asia       1952    28.8  8425333      779.\n 2 Afghanistan Asia       1957    30.3  9240934      821.\n 3 Afghanistan Asia       1962    32.0 10267083      853.\n 4 Afghanistan Asia       1967    34.0 11537966      836.\n 5 Afghanistan Asia       1972    36.1 13079460      740.\n 6 Afghanistan Asia       1977    38.4 14880372      786.\n 7 Afghanistan Asia       1982    39.9 12881816      978.\n 8 Afghanistan Asia       1987    40.8 13867957      852.\n 9 Afghanistan Asia       1992    41.7 16317921      649.\n10 Afghanistan Asia       1997    41.8 22227415      635.\n# ℹ 1,694 more rows\n\n\nA quick look at the first rows:\n\nhead(gapminder)\n\n# A tibble: 6 × 6\n  country     continent  year lifeExp      pop gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n1 Afghanistan Asia       1952    28.8  8425333      779.\n2 Afghanistan Asia       1957    30.3  9240934      821.\n3 Afghanistan Asia       1962    32.0 10267083      853.\n4 Afghanistan Asia       1967    34.0 11537966      836.\n5 Afghanistan Asia       1972    36.1 13079460      740.\n6 Afghanistan Asia       1977    38.4 14880372      786.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#the-grammar-of-graphics-ggplot2",
+    "href": "03-visualizations.html#the-grammar-of-graphics-ggplot2",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "The grammar of graphics (ggplot2)",
+    "text": "The grammar of graphics (ggplot2)\nggplot2 is built around a simple idea: you build a plot in layers.\nA basic plot has:\n\na dataset\n\naesthetic mappings (x and y)\n\na geometric object (points, lines, bars)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#your-first-scatterplot",
+    "href": "03-visualizations.html#your-first-scatterplot",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "Your first scatterplot",
+    "text": "Your first scatterplot\nLet’s visualize the relationship between GDP per capita and life expectancy.\n\nggplot(data = gapminder, \n       aes(\n         x = gdpPercap, \n         y = lifeExp)\n       ) +\n  geom_point()\n\n\n\n\n\n\n\n\nThis plot is difficult to read because GDP per capita ranges widely. A common approach is to use a log scale.\n\nggplot(data = gapminder, \n       aes(\n         x = gdpPercap, \n         y = lifeExp)\n       ) +\n  geom_point() +\n  scale_x_log10()",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#adding-labels-and-improving-readability",
+    "href": "03-visualizations.html#adding-labels-and-improving-readability",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "Adding labels and improving readability",
+    "text": "Adding labels and improving readability\nClear labels matter.\n\nggplot(data = gapminder, \n       aes(\n         x = gdpPercap, \n         y = lifeExp)\n       ) +\n  geom_point(alpha = 0.6) +\n  scale_x_log10() +\n  labs(\n    title = \"Life Expectancy vs GDP per Capita\",\n    x = \"GDP per Capita (log scale)\",\n    y = \"Life Expectancy (years)\"\n  )",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#mapping-a-third-variable-color",
+    "href": "03-visualizations.html#mapping-a-third-variable-color",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "Mapping a third variable: color",
+    "text": "Mapping a third variable: color\nWe can color points by continent.\n\nggplot(data = gapminder, \n       aes(\n         x = gdpPercap, \n         y = lifeExp, color = continent)\n       ) +\n  geom_point(alpha = 0.7) +\n  scale_x_log10() +\n  labs(\n    title = \"Life Expectancy vs GDP per Capita by Continent\",\n    x = \"GDP per Capita (log scale)\",\n    y = \"Life Expectancy (years)\",\n    color = \"Continent\"\n  )",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#subsetting-data-one-year",
+    "href": "03-visualizations.html#subsetting-data-one-year",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "Subsetting data: one year",
+    "text": "Subsetting data: one year\nOften, you will want to focus on a single year.\n\ngap_2007 &lt;- gapminder %&gt;% filter(year == 2007)\ngap_2007\n\n# A tibble: 142 × 6\n   country     continent  year lifeExp       pop gdpPercap\n   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;\n 1 Afghanistan Asia       2007    43.8  31889923      975.\n 2 Albania     Europe     2007    76.4   3600523     5937.\n 3 Algeria     Africa     2007    72.3  33333216     6223.\n 4 Angola      Africa     2007    42.7  12420476     4797.\n 5 Argentina   Americas   2007    75.3  40301927    12779.\n 6 Australia   Oceania    2007    81.2  20434176    34435.\n 7 Austria     Europe     2007    79.8   8199783    36126.\n 8 Bahrain     Asia       2007    75.6    708573    29796.\n 9 Bangladesh  Asia       2007    64.1 150448339     1391.\n10 Belgium     Europe     2007    79.4  10392226    33693.\n# ℹ 132 more rows\n\n\nPlot for 2007:\n\nggplot(gap_2007, \n       aes(\n         x = gdpPercap, \n         y = lifeExp, \n         color = continent)\n       ) +\n  geom_point(alpha = 0.8) +\n  scale_x_log10() +\n  labs(\n    title = \"Life Expectancy vs GDP per Capita (2007)\",\n    x = \"GDP per Capita (log scale)\",\n    y = \"Life Expectancy (years)\"\n  )",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#line-plots-trends-over-time",
+    "href": "03-visualizations.html#line-plots-trends-over-time",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "Line plots: trends over time",
+    "text": "Line plots: trends over time\nVisualization is especially useful for describing trends.\nChoose a country:\n\ncountry_df &lt;- gapminder %&gt;% filter(country == \"United States\")\ncountry_df\n\n# A tibble: 12 × 6\n   country       continent  year lifeExp       pop gdpPercap\n   &lt;fct&gt;         &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;\n 1 United States Americas   1952    68.4 157553000    13990.\n 2 United States Americas   1957    69.5 171984000    14847.\n 3 United States Americas   1962    70.2 186538000    16173.\n 4 United States Americas   1967    70.8 198712000    19530.\n 5 United States Americas   1972    71.3 209896000    21806.\n 6 United States Americas   1977    73.4 220239000    24073.\n 7 United States Americas   1982    74.6 232187835    25010.\n 8 United States Americas   1987    75.0 242803533    29884.\n 9 United States Americas   1992    76.1 256894189    32004.\n10 United States Americas   1997    76.8 272911760    35767.\n11 United States Americas   2002    77.3 287675526    39097.\n12 United States Americas   2007    78.2 301139947    42952.\n\n\nPlot life expectancy over time:\n\nggplot(country_df, \n       aes(\n         x = year, \n         y = lifeExp)\n       ) +\n  geom_line() +\n  geom_point() +\n  labs(\n    title = \"Life Expectancy Over Time: United States\",\n    x = \"Year\",\n    y = \"Life Expectancy (years)\"\n  )",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#bar-charts-comparing-groups",
+    "href": "03-visualizations.html#bar-charts-comparing-groups",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "Bar charts: comparing groups",
+    "text": "Bar charts: comparing groups\nBar charts are useful for comparing summary values across groups.\nExample: mean life expectancy in 2007 by continent.\n\ncont_summary &lt;- gap_2007 %&gt;%\n  group_by(continent) %&gt;%\n  summarise(mean_lifeExp = mean(lifeExp), .groups = \"drop\")\n\ncont_summary\n\n# A tibble: 5 × 2\n  continent mean_lifeExp\n  &lt;fct&gt;            &lt;dbl&gt;\n1 Africa            54.8\n2 Americas          73.6\n3 Asia              70.7\n4 Europe            77.6\n5 Oceania           80.7\n\n\n\nggplot(cont_summary, \n       aes(\n         x = continent, \n         y = mean_lifeExp)\n       ) +\n  geom_col() +\n  labs(\n    title = \"Mean Life Expectancy by Continent (2007)\",\n    x = \"Continent\",\n    y = \"Mean Life Expectancy (years)\"\n  )",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#writing-interpretation-paragraphs",
+    "href": "03-visualizations.html#writing-interpretation-paragraphs",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "Writing interpretation paragraphs",
+    "text": "Writing interpretation paragraphs\nEvery figure should be followed by a short interpretation. A strong interpretation includes:\n\nwhat you see in the plot\ndifferences across groups (if applicable)\na public health interpretation in plain language\na limitation or next question (optional)\n\nExample interpretation (write your own in assignments):\nThe figure suggests that life expectancy generally increases as GDP per capita increases, though the relationship appears stronger at lower income levels. Countries in different continents show clustering patterns, indicating that regional or structural factors may influence both wealth and health. Because this is observational country-level data, the plot does not establish causality.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#reproducibility-reminder",
+    "href": "03-visualizations.html#reproducibility-reminder",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "Reproducibility reminder",
+    "text": "Reproducibility reminder\nIn this course:\n\ncreate figures in code chunks\nlabel axes and include titles\nre-render your document before submitting\navoid screenshots of plots\ninterpret figures in writing",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#weekly-assignment-reminder",
+    "href": "03-visualizations.html#weekly-assignment-reminder",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "Weekly assignment reminder",
+    "text": "Weekly assignment reminder\nThis week you will complete HW 03: ggplot2 Practice.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#key-takeaways",
+    "href": "03-visualizations.html#key-takeaways",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "Key takeaways",
+    "text": "Key takeaways\nVisualization helps you explore patterns and communicate results. ggplot2 builds plots using layers. Clear labels and thoughtful interpretation are required for professional public health reporting.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "03-visualizations.html#optional-practice",
+    "href": "03-visualizations.html#optional-practice",
+    "title": "Lesson 3: Data Visualization with ggplot2",
+    "section": "Optional practice",
+    "text": "Optional practice\nChoose a different country or a different year and:\n\ncreate one scatterplot (GDP vs life expectancy) with log scale\ncreate one time trend plot for your country\nwrite two short interpretation paragraphs",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lesson 3: Data Visualization with ggplot2</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html",
+    "href": "05-tidydata.html",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "",
+    "text": "Learning goals\nBy the end of this lesson, you will be able to:",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#learning-goals",
+    "href": "05-tidydata.html#learning-goals",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "",
+    "text": "Explain what tidy data are and why they matter in public health\nIdentify tidy vs untidy data structures\nReshape data using pivot_longer() and pivot_wider()\nPrepare datasets for visualization, modeling, and tables\nMaintain a reproducible data workflow in Quarto",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#what-is-tidy-data",
+    "href": "05-tidydata.html#what-is-tidy-data",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "What is tidy data?",
+    "text": "What is tidy data?\nTidy data follow three simple rules:\n\nEach row is one observation\n\nEach column is one variable\n\nEach cell contains one value\n\nMost R tools for visualization, modeling, and tables expect data in tidy format.\nIn public health, tidy data make analyses clearer, more reproducible, and less error-prone.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#why-tidy-data-matter-in-public-health",
+    "href": "05-tidydata.html#why-tidy-data-matter-in-public-health",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Why tidy data matter in public health",
+    "text": "Why tidy data matter in public health\nPublic health datasets often come from surveys, surveillance systems, or administrative sources. These datasets are frequently not tidy when first received.\nTidy data allow you to:\n\ncompare groups consistently\n\nvisualize trends easily\n\nfit statistical models correctly\n\ngenerate tables and figures efficiently\n\nUnderstanding tidy data will save you time later in the semester.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#setup",
+    "href": "05-tidydata.html#setup",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Setup",
+    "text": "Setup\nLoad the packages used in this lesson.\n\nlibrary(tidyverse)\nlibrary(gapminder)",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#recognizing-tidy-vs-untidy-data",
+    "href": "05-tidydata.html#recognizing-tidy-vs-untidy-data",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Recognizing tidy vs untidy data",
+    "text": "Recognizing tidy vs untidy data\nLet’s start with a tidy dataset you have already seen.\n\ngapminder\n\n# A tibble: 1,704 × 6\n   country     continent  year lifeExp      pop gdpPercap\n   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n 1 Afghanistan Asia       1952    28.8  8425333      779.\n 2 Afghanistan Asia       1957    30.3  9240934      821.\n 3 Afghanistan Asia       1962    32.0 10267083      853.\n 4 Afghanistan Asia       1967    34.0 11537966      836.\n 5 Afghanistan Asia       1972    36.1 13079460      740.\n 6 Afghanistan Asia       1977    38.4 14880372      786.\n 7 Afghanistan Asia       1982    39.9 12881816      978.\n 8 Afghanistan Asia       1987    40.8 13867957      852.\n 9 Afghanistan Asia       1992    41.7 16317921      649.\n10 Afghanistan Asia       1997    41.8 22227415      635.\n# ℹ 1,694 more rows\n\n\nEach row is a country-year observation, and each column is a variable. This dataset is tidy.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#an-untidy-example",
+    "href": "05-tidydata.html#an-untidy-example",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "An untidy example",
+    "text": "An untidy example\nNow consider a simplified untidy dataset.\n\nlifeexp_wide &lt;- tibble(\n  country = c(\"A\", \"B\", \"C\"),\n  lifeExp_2000 = c(60, 72, 68),\n  lifeExp_2005 = c(62, 74, 70),\n  lifeExp_2010 = c(65, 76, 73)\n)\n\nlifeexp_wide\n\n# A tibble: 3 × 4\n  country lifeExp_2000 lifeExp_2005 lifeExp_2010\n  &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;\n1 A                 60           62           65\n2 B                 72           74           76\n3 C                 68           70           73\n\n\nHere, years are embedded in column names. This structure makes analysis harder.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#making-data-tidy-with-pivot_longer",
+    "href": "05-tidydata.html#making-data-tidy-with-pivot_longer",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Making data tidy with pivot_longer()",
+    "text": "Making data tidy with pivot_longer()\nWe can convert wide data into tidy (long) format using pivot_longer().\n\nlifeexp_long &lt;- lifeexp_wide %&gt;%\n  pivot_longer(\n    cols = starts_with(\"lifeExp\"),\n    names_to = \"year\",\n    values_to = \"lifeExp\"\n  )\n\nlifeexp_long\n\n# A tibble: 9 × 3\n  country year         lifeExp\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 A       lifeExp_2000      60\n2 A       lifeExp_2005      62\n3 A       lifeExp_2010      65\n4 B       lifeExp_2000      72\n5 B       lifeExp_2005      74\n6 B       lifeExp_2010      76\n7 C       lifeExp_2000      68\n8 C       lifeExp_2005      70\n9 C       lifeExp_2010      73\n\n\nNow:\n\neach row is a country-year observation\n\nyear is a variable\n\nlifeExp is a variable\n\nThis structure is tidy.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#cleaning-variable-values-after-reshaping",
+    "href": "05-tidydata.html#cleaning-variable-values-after-reshaping",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Cleaning variable values after reshaping",
+    "text": "Cleaning variable values after reshaping\nThe year variable still contains text. We can clean it.\n\nlifeexp_long &lt;- lifeexp_long %&gt;%\n  mutate(\n    year = as.numeric(gsub(\"lifeExp_\", \"\", year))\n  )\n\nlifeexp_long\n\n# A tibble: 9 × 3\n  country  year lifeExp\n  &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 A        2000      60\n2 A        2005      62\n3 A        2010      65\n4 B        2000      72\n5 B        2005      74\n6 B        2010      76\n7 C        2000      68\n8 C        2005      70\n9 C        2010      73\n\n\nCleaning variables after reshaping is common in public health workflows.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#when-to-use-pivot_longer",
+    "href": "05-tidydata.html#when-to-use-pivot_longer",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "When to use pivot_longer()",
+    "text": "When to use pivot_longer()\nUse pivot_longer() when:\n\nmultiple columns represent the same variable across time or groups\n\ncolumn names contain values (years, categories)\n\nyou want to create plots or models\n\nMost visualization and modeling functions expect long (tidy) data.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#converting-long-data-to-wide-with-pivot_wider",
+    "href": "05-tidydata.html#converting-long-data-to-wide-with-pivot_wider",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Converting long data to wide with pivot_wider()",
+    "text": "Converting long data to wide with pivot_wider()\nSometimes you need wide data, for example for tables or reporting.\n\nlifeexp_wide_again &lt;- lifeexp_long %&gt;%\n  pivot_wider(\n    names_from = year,\n    values_from = lifeExp\n  )\n\nlifeexp_wide_again\n\n# A tibble: 3 × 4\n  country `2000` `2005` `2010`\n  &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1 A           60     62     65\n2 B           72     74     76\n3 C           68     70     73\n\n\nThis recreates a wide format.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#tidy-data-and-visualization",
+    "href": "05-tidydata.html#tidy-data-and-visualization",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Tidy data and visualization",
+    "text": "Tidy data and visualization\nTidy data work naturally with ggplot2.\n\nggplot(lifeexp_long, aes(x = year, y = lifeExp, color = country)) +\n  geom_line() +\n  geom_point() +\n  labs(\n    title = \"Life Expectancy Over Time\",\n    x = \"Year\",\n    y = \"Life Expectancy\"\n  )\n\n\n\n\n\n\n\n\nThis would be difficult to do with the original wide dataset.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#tidy-data-and-modeling",
+    "href": "05-tidydata.html#tidy-data-and-modeling",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Tidy data and modeling",
+    "text": "Tidy data and modeling\nModels also expect tidy data.\n\nlm(lifeExp ~ year + country, data = lifeexp_long)\n\n\nCall:\nlm(formula = lifeExp ~ year + country, data = lifeexp_long)\n\nCoefficients:\n(Intercept)         year     countryB     countryC  \n  -873.3333       0.4667      11.6667       8.0000  \n\n\nEach observation is clearly defined, making interpretation easier.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#example-with-gapminder",
+    "href": "05-tidydata.html#example-with-gapminder",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Example with Gapminder",
+    "text": "Example with Gapminder\nLet’s reshape a subset of Gapminder.\n\ngap_subset &lt;- gapminder %&gt;%\n  filter(country %in% c(\"United States\", \"Canada\")) %&gt;%\n  select(country, year, lifeExp)\n\ngap_subset\n\n# A tibble: 24 × 3\n   country  year lifeExp\n   &lt;fct&gt;   &lt;int&gt;   &lt;dbl&gt;\n 1 Canada   1952    68.8\n 2 Canada   1957    70.0\n 3 Canada   1962    71.3\n 4 Canada   1967    72.1\n 5 Canada   1972    72.9\n 6 Canada   1977    74.2\n 7 Canada   1982    75.8\n 8 Canada   1987    76.9\n 9 Canada   1992    78.0\n10 Canada   1997    78.6\n# ℹ 14 more rows\n\n\nThis dataset is already tidy and ready for visualization or modeling.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#common-tidy-data-mistakes",
+    "href": "05-tidydata.html#common-tidy-data-mistakes",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Common tidy data mistakes",
+    "text": "Common tidy data mistakes\nCommon issues include:\n\nmixing multiple variables into one column\n\nencoding values in column names\n\ninconsistent variable types\n\nreshaping data without documenting decisions\n\nAlways inspect your data after reshaping.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#reproducibility-reminder",
+    "href": "05-tidydata.html#reproducibility-reminder",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Reproducibility reminder",
+    "text": "Reproducibility reminder\nIn this course:\n\nreshaping must be done in code\n\ndata structure decisions should be documented\n\ntidy data should be used for analysis and modeling\n\nyour workflow should be reproducible from raw data to results\n\nData structure is part of your scientific record.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#weekly-assignment-reminder",
+    "href": "05-tidydata.html#weekly-assignment-reminder",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Weekly assignment reminder",
+    "text": "Weekly assignment reminder\nThis week you will complete HW 05: Tidy Data Reshaping, where you will:\n\nidentify a wide dataset\n\nconvert it to tidy format\n\nexplain why tidy data are useful\n\ndemonstrate one visualization or summary",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#key-takeaways",
+    "href": "05-tidydata.html#key-takeaways",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Key takeaways",
+    "text": "Key takeaways\nTidy data have one observation per row and one variable per column. pivot_longer() and pivot_wider() allow you to reshape data for analysis. Tidy data support clear, reproducible public health research.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
+  },
+  {
+    "objectID": "05-tidydata.html#looking-ahead",
+    "href": "05-tidydata.html#looking-ahead",
+    "title": "Lesson 5: Tidy Data and Reshaping",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext week, we will begin simple linear regression, using tidy data to model relationships and interpret results in a public health context.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+    ]
   }
 ]

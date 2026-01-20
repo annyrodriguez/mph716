@@ -1,0 +1,245 @@
+---
+title: "Lesson 4: Data Wrangling with dplyr"
+format:
+  html:
+    toc: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Learning goals
+
+By the end of this lesson, you will be able to:
+
+- Explain why data wrangling is essential in public health research  
+- Use core `dplyr` verbs to manipulate datasets  
+- Filter rows and select variables of interest  
+- Create new variables using `mutate()`  
+- Summarize data using `group_by()` and `summarise()`  
+- Write short, clear interpretations of cleaned data  
+- Maintain a reproducible workflow in Quarto  
+
+---
+
+## Why data wrangling matters in public health
+
+Real-world public health data are rarely ready for analysis. Variables may be poorly named, values may need recoding, and datasets often include far more information than is needed for a specific research question.
+
+Data wrangling allows you to:
+
+- focus on relevant variables  
+- prepare data for visualization and modeling  
+- document decisions transparently  
+- reduce errors before analysis  
+
+Clean data are the foundation of valid public health conclusions.
+
+---
+
+## Setup
+
+Load the packages we will use in this lesson.
+
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+---
+
+## The Gapminder dataset (review)
+
+Gapminder contains country-level data over time, including life expectancy, population, and GDP per capita.
+
+```{r}
+gapminder
+```
+
+Each row represents a country-year observation. Each column is a variable.
+
+---
+
+## Selecting variables with `select()`
+
+Often, you only need a subset of variables.
+
+```{r}
+gap_select <- gapminder %>%
+  select(country, year, lifeExp, gdpPercap)
+
+head(gap_select)
+```
+
+Selecting variables makes datasets easier to read and work with.
+
+---
+
+## Filtering rows with `filter()`
+
+Use `filter()` to keep only rows that meet a condition.
+
+Example: data from a single year.
+
+```{r}
+gap_2007 <- gapminder %>%
+  filter(year == 2007)
+
+head(gap_2007)
+```
+
+Example: data for a single country.
+
+```{r}
+gap_us <- gapminder %>%
+  filter(country == "United States")
+
+head(gap_us)
+```
+
+---
+
+## Combining verbs with the pipe
+
+The pipe (`%>%`) passes the result of one step into the next. This makes code easier to read.
+
+```{r}
+gap_us_2007 <- gapminder %>%
+  filter(country == "United States", year == 2007) %>%
+  select(country, year, lifeExp, gdpPercap, pop)
+
+gap_us_2007
+```
+
+Read this as: “Take Gapminder, then filter, then select.”
+
+---
+
+## Creating new variables with `mutate()`
+
+Use `mutate()` to create new variables.
+
+Example: log-transform GDP per capita.
+
+```{r}
+gap_2007 <- gap_2007 %>%
+  mutate(log_gdpPercap = log(gdpPercap))
+
+head(gap_2007)
+```
+
+Creating new variables is common in public health analyses.
+
+---
+
+## Sorting data with `arrange()`
+
+Use `arrange()` to order rows.
+
+```{r}
+gap_2007 %>%
+  arrange(desc(lifeExp)) %>%
+  select(country, lifeExp) %>%
+  head()
+```
+
+This helps identify countries with the highest or lowest values.
+
+---
+
+## Grouped summaries with `group_by()` and `summarise()`
+
+Grouped summaries allow you to compute statistics by group.
+
+Example: mean life expectancy by continent in 2007.
+
+```{r}
+cont_summary <- gap_2007 %>%
+  group_by(continent) %>%
+  summarise(
+    mean_lifeExp = mean(lifeExp),
+    median_lifeExp = median(lifeExp),
+    n_countries = n(),
+    .groups = "drop"
+  )
+
+cont_summary
+```
+
+This is a common workflow in descriptive public health analyses.
+
+---
+
+## Writing interpretations with summaries
+
+Summaries should always be interpreted in writing.
+
+Example sentence using inline code:
+
+In 2007, the mean life expectancy in Africa was `r round(cont_summary$mean_lifeExp[cont_summary$continent == "Africa"], 1)` years, which was lower than that observed in other continents.
+
+---
+
+## Chaining multiple steps together
+
+You will often combine many verbs into one pipeline.
+
+```{r}
+gap_summary <- gapminder %>%
+  filter(year == 2007) %>%
+  group_by(continent) %>%
+  summarise(
+    mean_lifeExp = mean(lifeExp),
+    mean_gdpPercap = mean(gdpPercap),
+    .groups = "drop"
+  )
+
+gap_summary
+```
+
+Pipelines make your workflow transparent and reproducible.
+
+---
+
+## Common data wrangling mistakes
+
+Common mistakes include:
+
+- overwriting your original dataset unintentionally  
+- forgetting to drop grouping after `summarise()`  
+- filtering incorrectly due to misspelled values  
+- creating variables without documenting why  
+
+Use clear object names and comment your code when decisions matter.
+
+---
+
+## Reproducibility reminder
+
+In this course:
+
+- all data cleaning must be done in code  
+- transformations should be documented  
+- datasets used for analysis should be reproducible  
+- you should never manually edit data files  
+
+Data preparation is part of your scientific record.
+
+---
+
+## Weekly assignment reminder
+
+This week you will complete **HW 04: Data Wrangling with dplyr**.
+
+---
+
+## Key takeaways
+
+Data wrangling prepares data for analysis. `dplyr` verbs make transformations readable and transparent. Grouped summaries are central to descriptive public health research. Clean data support valid conclusions.
+
+---
+
+## Looking ahead
+
+Next week, you will learn about **tidy data and reshaping datasets**, which will help prepare data for visualization, modeling, and tables.

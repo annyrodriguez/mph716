@@ -1,0 +1,329 @@
+---
+title: "Lesson 2 Review: R Workflow, Quarto, and Core Functions"
+format:
+  html:
+    toc: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Purpose of this review lesson
+
+This lesson reviews and reinforces the foundational material from **Lessons 1 and 2**. Before moving on to visualization and data wrangling, it is important that you understand:
+
+- how R scripts differ from Quarto documents  
+- how RStudio, Quarto, code chunks, and inline code fit together  
+- the core workflow expected in this course  
+- essential R functions you will use repeatedly  
+
+This lesson is designed as a reference you can return to throughout the semester.
+
+---
+
+## R workflow overview
+
+In this course, your workflow follows this pattern:
+
+1. Write code in R scripts or Quarto documents  
+2. Use R to create objects, summaries, figures, and models  
+3. Use Quarto to combine analysis and writing  
+4. Render documents to produce final reports  
+
+Understanding when to use **a script** versus **a Quarto document** is critical.
+
+---
+
+## R scripts vs Quarto documents
+
+### R scripts (`.R` files)
+
+An R script is a plain text file that contains **only R code**.
+
+You use R scripts to:
+
+- write and test code  
+- clean and prepare data  
+- experiment with analyses  
+- run code step by step  
+
+R scripts do **not** include formatted writing, figures with captions, or narrative interpretation.
+
+Example use case:
+You are cleaning a dataset or testing code before putting results into a report.
+
+---
+
+### Quarto documents (`.qmd` files)
+
+A Quarto document combines **writing and R code** in a single file.
+
+You use Quarto documents to:
+
+- write homework assignments  
+- create reports and manuscripts  
+- integrate code, figures, tables, and interpretation  
+- produce reproducible outputs  
+
+A Quarto document includes:
+- a YAML header  
+- written text (Markdown)  
+- R code chunks  
+- inline R code  
+
+In this course, **all submitted work must be written in Quarto** unless otherwise stated.
+
+---
+
+## Key difference (important)
+
+- Use **R scripts** to *develop and test* code  
+- Use **Quarto documents** to *present and submit* work  
+
+Most students will use **both**:
+Write code in scripts → move finalized code into Quarto.
+
+---
+
+## Review: Week 1 concepts (R basics)
+
+From Week 1, you should understand:
+
+### RStudio interface
+
+- Source: where scripts and Quarto documents are written  
+- Console: where R runs code  
+- Environment: where objects are stored  
+- Files/Plots/Help: where outputs appear  
+
+You should primarily work in the **Source pane**, not the Console.
+
+---
+
+### Objects and assignment
+
+You create objects using `<-`.
+
+```{r}
+x <- 10
+y <- 5
+```
+
+Objects store values so you can reuse them.
+
+---
+
+### Vectors
+
+Vectors store multiple values of the same type.
+
+```{r}
+ages <- c(23, 35, 41, 29, 50)
+```
+
+Common functions for vectors:
+
+```{r}
+mean(ages)
+median(ages)
+sd(ages)
+length(ages)
+```
+
+---
+
+### Functions
+
+Functions take inputs and return outputs.
+
+```{r}
+mean(ages)
+```
+
+Understanding how to use functions is more important than memorizing them.
+
+---
+
+### Packages
+
+Packages extend R.
+
+You install once:
+
+```{r}
+# install.packages("tidyverse")
+```
+
+You load every session:
+
+```{r}
+library(tidyverse)
+```
+
+---
+
+## Review: Week 2 concepts (Quarto & reproducibility)
+
+### YAML header
+
+Every Quarto document begins with a YAML header.
+
+```yaml
+---
+title: "My Document"
+format: html
+---
+```
+
+The YAML controls document settings.
+
+---
+
+### Markdown
+
+Markdown formats your writing using simple syntax.
+
+You use it for:
+- headings  
+- lists  
+- emphasis  
+- document structure  
+
+Markdown keeps reports readable and professional.
+
+---
+
+### Code chunks
+
+R code is written inside code chunks.
+
+```{r}
+2 + 2
+```
+
+Code chunks run when you **render** the document.
+
+---
+
+### Rendering
+
+Rendering:
+- runs all code chunks  
+- generates the final document  
+- updates all figures and inline values  
+
+Always render before submitting.
+
+---
+
+### Inline R code
+
+Inline code inserts R results into sentences.
+
+```{r}
+ages <- c(23, 35, 41, 29, 50)
+```
+
+The sample included `r length(ages)` participants, and the mean age was `r round(mean(ages), 1)` years.
+
+Inline code prevents copy-and-paste errors and is required for reporting values in this course.
+
+---
+
+## Go-to R functions (bookmark this section)
+
+These are functions you will use **throughout the semester**.
+
+---
+
+### Basic R functions
+
+| Purpose | Function |
+|------|---------|
+| Create vector | `c()` |
+| Mean | `mean()` |
+| Median | `median()` |
+| Standard deviation | `sd()` |
+| Sample size | `length()` |
+| Summary | `summary()` |
+| View data | `head()` |
+
+---
+
+### Data wrangling (tidyverse)
+
+| Task | Function |
+|---|---|
+| Select columns | `select()` |
+| Filter rows | `filter()` |
+| Create variables | `mutate()` |
+| Sort data | `arrange()` |
+| Group data | `group_by()` |
+| Summarize data | `summarise()` |
+
+---
+
+### Data reshaping
+
+| Task | Function |
+|---|---|
+| Wide → long | `pivot_longer()` |
+| Long → wide | `pivot_wider()` |
+
+---
+
+### Visualization (preview)
+
+| Task | Function |
+|---|---|
+| Create plot | `ggplot()` |
+| Scatterplot | `geom_point()` |
+| Line plot | `geom_line()` |
+| Bar chart | `geom_col()` |
+| Labels | `labs()` |
+
+---
+
+### Modeling (coming soon)
+
+| Task | Function |
+|---|---|
+| Linear model | `lm()` |
+| Logistic model | `glm()` |
+| Model summary | `summary()` |
+| Confidence intervals | `confint()` |
+
+---
+
+## Reproducibility expectations (review)
+
+In this course:
+
+- analysis and writing live together in Quarto  
+- numbers should be generated by R, not typed  
+- scripts and documents should be organized  
+- work should render without errors  
+
+Reproducibility is a professional skill, not just a technical one.
+
+---
+
+## Self-check (recommended)
+
+Before moving forward, ask yourself:
+
+1. Do I know when to use a script vs a Quarto document?  
+2. Can I explain what rendering does?  
+3. Can I write a sentence using inline R code?  
+4. Do I recognize the core functions listed above?  
+
+If not, revisit Weeks 1 and 2 before continuing.
+
+---
+
+## Looking ahead
+
+Next week, you will begin **data visualization with ggplot2**, where you will apply everything you learned about Quarto, reproducibility, and tidy workflows.
+
+This review lesson is your foundation — keep it bookmarked.
