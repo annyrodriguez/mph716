@@ -17,6 +17,7 @@ health data, and to communicate your findings using reproducible documents.
 - **Term:** Spring 2026 
 - **Meeting Times:** M & W 1:30-3pm / Lab: **TBD** 
 - **Location:** Public Health Simulation Lab 
+- **Website:** <a href="https://annyrodriguez.github.io/anny-website/" target="_blank">Digital CV</a>
 
 For further details regarding course-specific information like grading and attendance policies, please refer to your syllabus available on Canvas.
 
