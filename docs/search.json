@@ -630,186 +630,6 @@
     ]
   },
   {
-    "objectID": "04-dplyr.html",
-    "href": "04-dplyr.html",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "",
-    "text": "Learning goals\nBy the end of this lesson, you will be able to:",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#learning-goals",
-    "href": "04-dplyr.html#learning-goals",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "",
-    "text": "Explain why data wrangling is essential in public health research\n\nUse core dplyr verbs to manipulate datasets\n\nFilter rows and select variables of interest\n\nCreate new variables using mutate()\n\nSummarize data using group_by() and summarise()\n\nWrite short, clear interpretations of cleaned data\n\nMaintain a reproducible workflow in Quarto",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#why-data-wrangling-matters-in-public-health",
-    "href": "04-dplyr.html#why-data-wrangling-matters-in-public-health",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Why data wrangling matters in public health",
-    "text": "Why data wrangling matters in public health\nReal-world public health data are rarely ready for analysis. Variables may be poorly named, values may need recoding, and datasets often include far more information than is needed for a specific research question.\nData wrangling allows you to:\n\nfocus on relevant variables\n\nprepare data for visualization and modeling\n\ndocument decisions transparently\n\nreduce errors before analysis\n\nClean data are the foundation of valid public health conclusions.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#setup",
-    "href": "04-dplyr.html#setup",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Setup",
-    "text": "Setup\nLoad the packages we will use in this lesson.\n\nlibrary(tidyverse)\nlibrary(gapminder)",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#the-gapminder-dataset-review",
-    "href": "04-dplyr.html#the-gapminder-dataset-review",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "The Gapminder dataset (review)",
-    "text": "The Gapminder dataset (review)\nGapminder contains country-level data over time, including life expectancy, population, and GDP per capita.\n\ngapminder\n\n# A tibble: 1,704 × 6\n   country     continent  year lifeExp      pop gdpPercap\n   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n 1 Afghanistan Asia       1952    28.8  8425333      779.\n 2 Afghanistan Asia       1957    30.3  9240934      821.\n 3 Afghanistan Asia       1962    32.0 10267083      853.\n 4 Afghanistan Asia       1967    34.0 11537966      836.\n 5 Afghanistan Asia       1972    36.1 13079460      740.\n 6 Afghanistan Asia       1977    38.4 14880372      786.\n 7 Afghanistan Asia       1982    39.9 12881816      978.\n 8 Afghanistan Asia       1987    40.8 13867957      852.\n 9 Afghanistan Asia       1992    41.7 16317921      649.\n10 Afghanistan Asia       1997    41.8 22227415      635.\n# ℹ 1,694 more rows\n\n\nEach row represents a country-year observation. Each column is a variable.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#selecting-variables-with-select",
-    "href": "04-dplyr.html#selecting-variables-with-select",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Selecting variables with select()",
-    "text": "Selecting variables with select()\nOften, you only need a subset of variables.\n\ngap_select &lt;- gapminder %&gt;%\n  select(country, year, lifeExp, gdpPercap)\n\nhead(gap_select)\n\n# A tibble: 6 × 4\n  country      year lifeExp gdpPercap\n  &lt;fct&gt;       &lt;int&gt;   &lt;dbl&gt;     &lt;dbl&gt;\n1 Afghanistan  1952    28.8      779.\n2 Afghanistan  1957    30.3      821.\n3 Afghanistan  1962    32.0      853.\n4 Afghanistan  1967    34.0      836.\n5 Afghanistan  1972    36.1      740.\n6 Afghanistan  1977    38.4      786.\n\n\nSelecting variables makes datasets easier to read and work with.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#filtering-rows-with-filter",
-    "href": "04-dplyr.html#filtering-rows-with-filter",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Filtering rows with filter()",
-    "text": "Filtering rows with filter()\nUse filter() to keep only rows that meet a condition.\nExample: data from a single year.\n\ngap_2007 &lt;- gapminder %&gt;%\n  filter(year == 2007)\n\nhead(gap_2007)\n\n# A tibble: 6 × 6\n  country     continent  year lifeExp      pop gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n1 Afghanistan Asia       2007    43.8 31889923      975.\n2 Albania     Europe     2007    76.4  3600523     5937.\n3 Algeria     Africa     2007    72.3 33333216     6223.\n4 Angola      Africa     2007    42.7 12420476     4797.\n5 Argentina   Americas   2007    75.3 40301927    12779.\n6 Australia   Oceania    2007    81.2 20434176    34435.\n\n\nExample: data for a single country.\n\ngap_us &lt;- gapminder %&gt;%\n  filter(country == \"United States\")\n\nhead(gap_us)\n\n# A tibble: 6 × 6\n  country       continent  year lifeExp       pop gdpPercap\n  &lt;fct&gt;         &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;\n1 United States Americas   1952    68.4 157553000    13990.\n2 United States Americas   1957    69.5 171984000    14847.\n3 United States Americas   1962    70.2 186538000    16173.\n4 United States Americas   1967    70.8 198712000    19530.\n5 United States Americas   1972    71.3 209896000    21806.\n6 United States Americas   1977    73.4 220239000    24073.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#combining-verbs-with-the-pipe",
-    "href": "04-dplyr.html#combining-verbs-with-the-pipe",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Combining verbs with the pipe",
-    "text": "Combining verbs with the pipe\nThe pipe (%&gt;%) passes the result of one step into the next. This makes code easier to read.\n\ngap_us_2007 &lt;- gapminder %&gt;%\n  filter(country == \"United States\", year == 2007) %&gt;%\n  select(country, year, lifeExp, gdpPercap, pop)\n\ngap_us_2007\n\n# A tibble: 1 × 5\n  country        year lifeExp gdpPercap       pop\n  &lt;fct&gt;         &lt;int&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;int&gt;\n1 United States  2007    78.2    42952. 301139947\n\n\nRead this as: “Take Gapminder, then filter, then select.”",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#creating-new-variables-with-mutate",
-    "href": "04-dplyr.html#creating-new-variables-with-mutate",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Creating new variables with mutate()",
-    "text": "Creating new variables with mutate()\nUse mutate() to create new variables.\nExample: log-transform GDP per capita.\n\ngap_2007 &lt;- gap_2007 %&gt;%\n  mutate(log_gdpPercap = log(gdpPercap))\n\nhead(gap_2007)\n\n# A tibble: 6 × 7\n  country     continent  year lifeExp      pop gdpPercap log_gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 Afghanistan Asia       2007    43.8 31889923      975.          6.88\n2 Albania     Europe     2007    76.4  3600523     5937.          8.69\n3 Algeria     Africa     2007    72.3 33333216     6223.          8.74\n4 Angola      Africa     2007    42.7 12420476     4797.          8.48\n5 Argentina   Americas   2007    75.3 40301927    12779.          9.46\n6 Australia   Oceania    2007    81.2 20434176    34435.         10.4 \n\n\nCreating new variables is common in public health analyses.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#sorting-data-with-arrange",
-    "href": "04-dplyr.html#sorting-data-with-arrange",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Sorting data with arrange()",
-    "text": "Sorting data with arrange()\nUse arrange() to order rows.\n\ngap_2007 %&gt;%\n  arrange(desc(lifeExp)) %&gt;%\n  select(country, lifeExp) %&gt;%\n  head()\n\n# A tibble: 6 × 2\n  country          lifeExp\n  &lt;fct&gt;              &lt;dbl&gt;\n1 Japan               82.6\n2 Hong Kong, China    82.2\n3 Iceland             81.8\n4 Switzerland         81.7\n5 Australia           81.2\n6 Spain               80.9\n\n\nThis helps identify countries with the highest or lowest values.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#grouped-summaries-with-group_by-and-summarise",
-    "href": "04-dplyr.html#grouped-summaries-with-group_by-and-summarise",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Grouped summaries with group_by() and summarise()",
-    "text": "Grouped summaries with group_by() and summarise()\nGrouped summaries allow you to compute statistics by group.\nExample: mean life expectancy by continent in 2007.\n\ncont_summary &lt;- gap_2007 %&gt;%\n  group_by(continent) %&gt;%\n  summarise(\n    mean_lifeExp = mean(lifeExp),\n    median_lifeExp = median(lifeExp),\n    n_countries = n(),\n    .groups = \"drop\"\n  )\n\ncont_summary\n\n# A tibble: 5 × 4\n  continent mean_lifeExp median_lifeExp n_countries\n  &lt;fct&gt;            &lt;dbl&gt;          &lt;dbl&gt;       &lt;int&gt;\n1 Africa            54.8           52.9          52\n2 Americas          73.6           72.9          25\n3 Asia              70.7           72.4          33\n4 Europe            77.6           78.6          30\n5 Oceania           80.7           80.7           2\n\n\nThis is a common workflow in descriptive public health analyses.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#writing-interpretations-with-summaries",
-    "href": "04-dplyr.html#writing-interpretations-with-summaries",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Writing interpretations with summaries",
-    "text": "Writing interpretations with summaries\nSummaries should always be interpreted in writing.\nExample sentence using inline code:\nIn 2007, the mean life expectancy in Africa was 54.8 years, which was lower than that observed in other continents.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#chaining-multiple-steps-together",
-    "href": "04-dplyr.html#chaining-multiple-steps-together",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Chaining multiple steps together",
-    "text": "Chaining multiple steps together\nYou will often combine many verbs into one pipeline.\n\ngap_summary &lt;- gapminder %&gt;%\n  filter(year == 2007) %&gt;%\n  group_by(continent) %&gt;%\n  summarise(\n    mean_lifeExp = mean(lifeExp),\n    mean_gdpPercap = mean(gdpPercap),\n    .groups = \"drop\"\n  )\n\ngap_summary\n\n# A tibble: 5 × 3\n  continent mean_lifeExp mean_gdpPercap\n  &lt;fct&gt;            &lt;dbl&gt;          &lt;dbl&gt;\n1 Africa            54.8          3089.\n2 Americas          73.6         11003.\n3 Asia              70.7         12473.\n4 Europe            77.6         25054.\n5 Oceania           80.7         29810.\n\n\nPipelines make your workflow transparent and reproducible.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#common-data-wrangling-mistakes",
-    "href": "04-dplyr.html#common-data-wrangling-mistakes",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Common data wrangling mistakes",
-    "text": "Common data wrangling mistakes\nCommon mistakes include:\n\noverwriting your original dataset unintentionally\n\nforgetting to drop grouping after summarise()\n\nfiltering incorrectly due to misspelled values\n\ncreating variables without documenting why\n\nUse clear object names and comment your code when decisions matter.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#reproducibility-reminder",
-    "href": "04-dplyr.html#reproducibility-reminder",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Reproducibility reminder",
-    "text": "Reproducibility reminder\nIn this course:\n\nall data cleaning must be done in code\n\ntransformations should be documented\n\ndatasets used for analysis should be reproducible\n\nyou should never manually edit data files\n\nData preparation is part of your scientific record.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#weekly-assignment-reminder",
-    "href": "04-dplyr.html#weekly-assignment-reminder",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Weekly assignment reminder",
-    "text": "Weekly assignment reminder\nThis week you will complete HW 04: Data Wrangling with dplyr.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#key-takeaways",
-    "href": "04-dplyr.html#key-takeaways",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Key takeaways",
-    "text": "Key takeaways\nData wrangling prepares data for analysis. dplyr verbs make transformations readable and transparent. Grouped summaries are central to descriptive public health research. Clean data support valid conclusions.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
-    "objectID": "04-dplyr.html#looking-ahead",
-    "href": "04-dplyr.html#looking-ahead",
-    "title": "Lesson 4: Data Wrangling with dplyr",
-    "section": "Looking ahead",
-    "text": "Looking ahead\nNext week, you will learn about tidy data and reshaping datasets, which will help prepare data for visualization, modeling, and tables.",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
-    ]
-  },
-  {
     "objectID": "02c-review.html",
     "href": "02c-review.html",
     "title": "Lesson 2 Review: R Workflow, Quarto, and Core Functions",
@@ -1090,13 +910,383 @@
     ]
   },
   {
+    "objectID": "04-dplyr.html",
+    "href": "04-dplyr.html",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "",
+    "text": "Learning goals\nBy the end of this lesson, you will be able to:",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#learning-goals",
+    "href": "04-dplyr.html#learning-goals",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "",
+    "text": "Explain why data wrangling is essential in public health research\n\nUse core dplyr verbs to manipulate datasets\n\nFilter rows and select variables of interest\n\nCreate new variables using mutate()\n\nSummarize data using group_by() and summarise()\n\nWrite short, clear interpretations of cleaned data\n\nMaintain a reproducible workflow in Quarto",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#why-data-wrangling-matters-in-public-health",
+    "href": "04-dplyr.html#why-data-wrangling-matters-in-public-health",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Why data wrangling matters in public health",
+    "text": "Why data wrangling matters in public health\nReal-world public health data are rarely ready for analysis. Variables may be poorly named, values may need recoding, and datasets often include far more information than is needed for a specific research question.\nData wrangling allows you to:\n\nfocus on relevant variables\n\nprepare data for visualization and modeling\n\ndocument decisions transparently\n\nreduce errors before analysis\n\nClean data are the foundation of valid public health conclusions.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#setup",
+    "href": "04-dplyr.html#setup",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Setup",
+    "text": "Setup\nLoad the packages we will use in this lesson.\n\nlibrary(tidyverse)\nlibrary(gapminder)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#the-gapminder-dataset-review",
+    "href": "04-dplyr.html#the-gapminder-dataset-review",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "The Gapminder dataset (review)",
+    "text": "The Gapminder dataset (review)\nGapminder contains country-level data over time, including life expectancy, population, and GDP per capita.\n\ngapminder\n\n# A tibble: 1,704 × 6\n   country     continent  year lifeExp      pop gdpPercap\n   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n 1 Afghanistan Asia       1952    28.8  8425333      779.\n 2 Afghanistan Asia       1957    30.3  9240934      821.\n 3 Afghanistan Asia       1962    32.0 10267083      853.\n 4 Afghanistan Asia       1967    34.0 11537966      836.\n 5 Afghanistan Asia       1972    36.1 13079460      740.\n 6 Afghanistan Asia       1977    38.4 14880372      786.\n 7 Afghanistan Asia       1982    39.9 12881816      978.\n 8 Afghanistan Asia       1987    40.8 13867957      852.\n 9 Afghanistan Asia       1992    41.7 16317921      649.\n10 Afghanistan Asia       1997    41.8 22227415      635.\n# ℹ 1,694 more rows\n\n\nEach row represents a country-year observation. Each column is a variable.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#selecting-variables-with-select",
+    "href": "04-dplyr.html#selecting-variables-with-select",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Selecting variables with select()",
+    "text": "Selecting variables with select()\nOften, you only need a subset of variables.\n\ngap_select &lt;- gapminder %&gt;%\n  select(country, year, lifeExp, gdpPercap)\n\nhead(gap_select)\n\n# A tibble: 6 × 4\n  country      year lifeExp gdpPercap\n  &lt;fct&gt;       &lt;int&gt;   &lt;dbl&gt;     &lt;dbl&gt;\n1 Afghanistan  1952    28.8      779.\n2 Afghanistan  1957    30.3      821.\n3 Afghanistan  1962    32.0      853.\n4 Afghanistan  1967    34.0      836.\n5 Afghanistan  1972    36.1      740.\n6 Afghanistan  1977    38.4      786.\n\n\nSelecting variables makes datasets easier to read and work with.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#filtering-rows-with-filter",
+    "href": "04-dplyr.html#filtering-rows-with-filter",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Filtering rows with filter()",
+    "text": "Filtering rows with filter()\nUse filter() to keep only rows that meet a condition.\nExample: data from a single year.\n\ngap_2007 &lt;- gapminder %&gt;%\n  filter(year == 2007)\n\nhead(gap_2007)\n\n# A tibble: 6 × 6\n  country     continent  year lifeExp      pop gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n1 Afghanistan Asia       2007    43.8 31889923      975.\n2 Albania     Europe     2007    76.4  3600523     5937.\n3 Algeria     Africa     2007    72.3 33333216     6223.\n4 Angola      Africa     2007    42.7 12420476     4797.\n5 Argentina   Americas   2007    75.3 40301927    12779.\n6 Australia   Oceania    2007    81.2 20434176    34435.\n\n\nExample: data for a single country.\n\ngap_us &lt;- gapminder %&gt;%\n  filter(country == \"United States\")\n\nhead(gap_us)\n\n# A tibble: 6 × 6\n  country       continent  year lifeExp       pop gdpPercap\n  &lt;fct&gt;         &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;\n1 United States Americas   1952    68.4 157553000    13990.\n2 United States Americas   1957    69.5 171984000    14847.\n3 United States Americas   1962    70.2 186538000    16173.\n4 United States Americas   1967    70.8 198712000    19530.\n5 United States Americas   1972    71.3 209896000    21806.\n6 United States Americas   1977    73.4 220239000    24073.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#combining-verbs-with-the-pipe",
+    "href": "04-dplyr.html#combining-verbs-with-the-pipe",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Combining verbs with the pipe",
+    "text": "Combining verbs with the pipe\nThe pipe (%&gt;%) passes the result of one step into the next. This makes code easier to read.\n\ngap_us_2007 &lt;- gapminder %&gt;%\n  filter(country == \"United States\", year == 2007) %&gt;%\n  select(country, year, lifeExp, gdpPercap, pop)\n\ngap_us_2007\n\n# A tibble: 1 × 5\n  country        year lifeExp gdpPercap       pop\n  &lt;fct&gt;         &lt;int&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;int&gt;\n1 United States  2007    78.2    42952. 301139947\n\n\nRead this as: “Take Gapminder, then filter, then select.”",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#creating-new-variables-with-mutate",
+    "href": "04-dplyr.html#creating-new-variables-with-mutate",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Creating new variables with mutate()",
+    "text": "Creating new variables with mutate()\nUse mutate() to create new variables.\nExample: log-transform GDP per capita.\n\ngap_2007 &lt;- gap_2007 %&gt;%\n  mutate(log_gdpPercap = log(gdpPercap))\n\nhead(gap_2007)\n\n# A tibble: 6 × 7\n  country     continent  year lifeExp      pop gdpPercap log_gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 Afghanistan Asia       2007    43.8 31889923      975.          6.88\n2 Albania     Europe     2007    76.4  3600523     5937.          8.69\n3 Algeria     Africa     2007    72.3 33333216     6223.          8.74\n4 Angola      Africa     2007    42.7 12420476     4797.          8.48\n5 Argentina   Americas   2007    75.3 40301927    12779.          9.46\n6 Australia   Oceania    2007    81.2 20434176    34435.         10.4 \n\n\nCreating new variables is common in public health analyses.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#sorting-data-with-arrange",
+    "href": "04-dplyr.html#sorting-data-with-arrange",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Sorting data with arrange()",
+    "text": "Sorting data with arrange()\nUse arrange() to order rows.\n\ngap_2007 %&gt;%\n  arrange(desc(lifeExp)) %&gt;%\n  select(country, lifeExp) %&gt;%\n  head()\n\n# A tibble: 6 × 2\n  country          lifeExp\n  &lt;fct&gt;              &lt;dbl&gt;\n1 Japan               82.6\n2 Hong Kong, China    82.2\n3 Iceland             81.8\n4 Switzerland         81.7\n5 Australia           81.2\n6 Spain               80.9\n\n\nThis helps identify countries with the highest or lowest values.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#grouped-summaries-with-group_by-and-summarise",
+    "href": "04-dplyr.html#grouped-summaries-with-group_by-and-summarise",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Grouped summaries with group_by() and summarise()",
+    "text": "Grouped summaries with group_by() and summarise()\nGrouped summaries allow you to compute statistics by group.\nExample: mean life expectancy by continent in 2007.\n\ncont_summary &lt;- gap_2007 %&gt;%\n  group_by(continent) %&gt;%\n  summarise(\n    mean_lifeExp = mean(lifeExp),\n    median_lifeExp = median(lifeExp),\n    n_countries = n(),\n    .groups = \"drop\"\n  )\n\ncont_summary\n\n# A tibble: 5 × 4\n  continent mean_lifeExp median_lifeExp n_countries\n  &lt;fct&gt;            &lt;dbl&gt;          &lt;dbl&gt;       &lt;int&gt;\n1 Africa            54.8           52.9          52\n2 Americas          73.6           72.9          25\n3 Asia              70.7           72.4          33\n4 Europe            77.6           78.6          30\n5 Oceania           80.7           80.7           2\n\n\nThis is a common workflow in descriptive public health analyses.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#writing-interpretations-with-summaries",
+    "href": "04-dplyr.html#writing-interpretations-with-summaries",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Writing interpretations with summaries",
+    "text": "Writing interpretations with summaries\nSummaries should always be interpreted in writing.\nExample sentence using inline code:\nIn 2007, the mean life expectancy in Africa was 54.8 years, which was lower than that observed in other continents.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#chaining-multiple-steps-together",
+    "href": "04-dplyr.html#chaining-multiple-steps-together",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Chaining multiple steps together",
+    "text": "Chaining multiple steps together\nYou will often combine many verbs into one pipeline.\n\ngap_summary &lt;- gapminder %&gt;%\n  filter(year == 2007) %&gt;%\n  group_by(continent) %&gt;%\n  summarise(\n    mean_lifeExp = mean(lifeExp),\n    mean_gdpPercap = mean(gdpPercap),\n    .groups = \"drop\"\n  )\n\ngap_summary\n\n# A tibble: 5 × 3\n  continent mean_lifeExp mean_gdpPercap\n  &lt;fct&gt;            &lt;dbl&gt;          &lt;dbl&gt;\n1 Africa            54.8          3089.\n2 Americas          73.6         11003.\n3 Asia              70.7         12473.\n4 Europe            77.6         25054.\n5 Oceania           80.7         29810.\n\n\nPipelines make your workflow transparent and reproducible.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#common-data-wrangling-mistakes",
+    "href": "04-dplyr.html#common-data-wrangling-mistakes",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Common data wrangling mistakes",
+    "text": "Common data wrangling mistakes\nCommon mistakes include:\n\noverwriting your original dataset unintentionally\n\nforgetting to drop grouping after summarise()\n\nfiltering incorrectly due to misspelled values\n\ncreating variables without documenting why\n\nUse clear object names and comment your code when decisions matter.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#reproducibility-reminder",
+    "href": "04-dplyr.html#reproducibility-reminder",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Reproducibility reminder",
+    "text": "Reproducibility reminder\nIn this course:\n\nall data cleaning must be done in code\n\ntransformations should be documented\n\ndatasets used for analysis should be reproducible\n\nyou should never manually edit data files\n\nData preparation is part of your scientific record.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#weekly-assignment-reminder",
+    "href": "04-dplyr.html#weekly-assignment-reminder",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Weekly assignment reminder",
+    "text": "Weekly assignment reminder\nThis week you will complete HW 04: Data Wrangling with dplyr.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#key-takeaways",
+    "href": "04-dplyr.html#key-takeaways",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Key takeaways",
+    "text": "Key takeaways\nData wrangling prepares data for analysis. dplyr verbs make transformations readable and transparent. Grouped summaries are central to descriptive public health research. Clean data support valid conclusions.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "04-dplyr.html#looking-ahead",
+    "href": "04-dplyr.html#looking-ahead",
+    "title": "Lesson 4: Data Wrangling with dplyr",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext week, you will learn about tidy data and reshaping datasets, which will help prepare data for visualization, modeling, and tables.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lesson 4: Data Wrangling with dplyr</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html",
+    "href": "project1.html",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "",
+    "text": "Purpose of Project 1\nProject 1 is designed to help you practice the core workflow of this course before working with complex health datasets.\nThis project focuses on:\nThis is not a modeling project. The goal is exploration, clarity, and workflow.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#purpose-of-project-1",
+    "href": "project1.html#purpose-of-project-1",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "",
+    "text": "working comfortably in R and Quarto\n\nexploring a dataset using descriptive statistics\n\ncreating clear data visualizations\n\nwriting interpretations in plain public health language\n\nusing inline R code to report values reproducibly",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#why-we-use-gapminder-for-project-1",
+    "href": "project1.html#why-we-use-gapminder-for-project-1",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Why we use Gapminder for Project 1",
+    "text": "Why we use Gapminder for Project 1\nThe Gapminder dataset is:\n\nclean and well-documented\n\nstructured in tidy format\n\nwidely used in teaching data science\n\nrich enough to tell meaningful public health stories\n\nUsing Gapminder allows you to focus on skills, not data complexity. These same skills will transfer directly to NHANES later in the course.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#what-you-are-expected-to-demonstrate",
+    "href": "project1.html#what-you-are-expected-to-demonstrate",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "What you are expected to demonstrate",
+    "text": "What you are expected to demonstrate\nBy the end of Project 1, you should be able to:\n\nwork entirely in a Quarto document\n\nload and explore a dataset\n\ncompute descriptive summaries\n\ncreate at least two well-labeled figures\n\ninterpret patterns in writing\n\nuse inline code for reported values\n\nEffort, clarity, and reproducibility matter more than sophistication.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#project-setup",
+    "href": "project1.html#project-setup",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Project setup",
+    "text": "Project setup\nCreate a new Quarto document named:\nproject1-lastname.qmd\nAt the top of your document, include a clear title and your name.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#loading-the-data",
+    "href": "project1.html#loading-the-data",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Loading the data",
+    "text": "Loading the data\nInstall packages if needed (only once):\n\n# install.packages(\"tidyverse\")\n# install.packages(\"gapminder\")\n\nLoad packages each session:\n\nlibrary(tidyverse)\nlibrary(gapminder)\n\nLoad the dataset:\n\ngapminder\n\n# A tibble: 1,704 × 6\n   country     continent  year lifeExp      pop gdpPercap\n   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n 1 Afghanistan Asia       1952    28.8  8425333      779.\n 2 Afghanistan Asia       1957    30.3  9240934      821.\n 3 Afghanistan Asia       1962    32.0 10267083      853.\n 4 Afghanistan Asia       1967    34.0 11537966      836.\n 5 Afghanistan Asia       1972    36.1 13079460      740.\n 6 Afghanistan Asia       1977    38.4 14880372      786.\n 7 Afghanistan Asia       1982    39.9 12881816      978.\n 8 Afghanistan Asia       1987    40.8 13867957      852.\n 9 Afghanistan Asia       1992    41.7 16317921      649.\n10 Afghanistan Asia       1997    41.8 22227415      635.\n# ℹ 1,694 more rows",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#choosing-a-focus",
+    "href": "project1.html#choosing-a-focus",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Choosing a focus",
+    "text": "Choosing a focus\nYou will be assigned a country and you will be comparing all results to the United States.\nOnce selected, filter the dataset.\n\ncountry_df &lt;- gapminder %&gt;%\n  filter(country == \"United States\")\n\ncountry_df\n\n# A tibble: 12 × 6\n   country       continent  year lifeExp       pop gdpPercap\n   &lt;fct&gt;         &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;\n 1 United States Americas   1952    68.4 157553000    13990.\n 2 United States Americas   1957    69.5 171984000    14847.\n 3 United States Americas   1962    70.2 186538000    16173.\n 4 United States Americas   1967    70.8 198712000    19530.\n 5 United States Americas   1972    71.3 209896000    21806.\n 6 United States Americas   1977    73.4 220239000    24073.\n 7 United States Americas   1982    74.6 232187835    25010.\n 8 United States Americas   1987    75.0 242803533    29884.\n 9 United States Americas   1992    76.1 256894189    32004.\n10 United States Americas   1997    76.8 272911760    35767.\n11 United States Americas   2002    77.3 287675526    39097.\n12 United States Americas   2007    78.2 301139947    42952.\n\n\nYour entire project should focus on one country and the clearly defined comparison.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#section-1-introduction",
+    "href": "project1.html#section-1-introduction",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Section 1: Introduction",
+    "text": "Section 1: Introduction\nIn your Introduction section, briefly describe:\n\nthe country you are examining\n\nwhy it is of interest from a public health perspective\n\nwhat outcomes you plan to explore\n\nThis section should be written in complete sentences and should not include code.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#section-1-introduction-1",
+    "href": "project1.html#section-1-introduction-1",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Section 1: Introduction",
+    "text": "Section 1: Introduction\nIn your Introduction section, briefly describe:\n\nthe country you are examining\n\nwhy it is of interest from a public health perspective\n\nwhat outcomes you plan to explore\n\nThis section should be written in complete sentences and should not include code.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#section-2-descriptive-exploration",
+    "href": "project1.html#section-2-descriptive-exploration",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Section 2: Descriptive exploration",
+    "text": "Section 2: Descriptive exploration\nStart by computing basic descriptive statistics.\n\nmean_lifeExp &lt;- mean(country_df$lifeExp)\nsd_lifeExp &lt;- sd(country_df$lifeExp)\nn_years &lt;- length(unique(country_df$year))\n\nReport values using inline code, not by typing numbers manually.\nExample:\nAcross 12 years of available data, the mean life expectancy was 73.5 years (SD = 3.3).",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#section-3-visualizations",
+    "href": "project1.html#section-3-visualizations",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Section 3: Visualizations",
+    "text": "Section 3: Visualizations\nYou must include at least two figures.\n\nRequired figure: trend over time\n\nggplot(country_df, aes(x = year, y = lifeExp)) +\n  geom_line() +\n  geom_point() +\n  labs(\n    title = \"Life Expectancy Over Time\",\n    x = \"Year\",\n    y = \"Life Expectancy (years)\"\n  )\n\n\n\n\n\n\n\n\n\n\nOptional second figure (examples)\nYou may choose one of the following:\n\nGDP per capita vs life expectancy\n\npopulation trends over time\n\ncomparison with another country\n\nExample:\n\nggplot(country_df, \n       aes(\n         x = gdpPercap, \n         y = lifeExp)\n       ) +\n  geom_point() +\n  scale_x_log10() +\n  labs(\n    title = \"Life Expectancy vs GDP per Capita\",\n    x = \"GDP per Capita (log scale)\",\n    y = \"Life Expectancy (years)\"\n  )",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#writing-interpretation-paragraphs",
+    "href": "project1.html#writing-interpretation-paragraphs",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Writing interpretation paragraphs",
+    "text": "Writing interpretation paragraphs\nEvery figure must be followed by a short interpretation paragraph.\nA strong interpretation includes:\n\nwhat the plot shows\n\nnotable trends or changes\n\na public health interpretation\n\na brief limitation\n\nExample structure:\n\nWhat do you observe?\n\nWhen do changes occur?\n\nWhy might this matter for population health?\n\nDo not describe code or aesthetics. Focus on meaning.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#section-4-data-quality-and-limitations",
+    "href": "project1.html#section-4-data-quality-and-limitations",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Section 4: Data quality and limitations",
+    "text": "Section 4: Data quality and limitations\nInclude a short section discussing:\n\nmissingness (if any)\n\ntime coverage of the data\n\nwhat the data cannot tell us\n\nThis helps build good scientific habits early.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#section-5-reflection",
+    "href": "project1.html#section-5-reflection",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Section 5: Reflection",
+    "text": "Section 5: Reflection\nConclude with a brief reflection addressing:\n\nwhat you learned from exploring the data\n\nwhat surprised you\n\nwhat questions you would explore next\n\nThis section is about thinking, not technical skill.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#formatting-and-reproducibility-requirements",
+    "href": "project1.html#formatting-and-reproducibility-requirements",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Formatting and reproducibility requirements",
+    "text": "Formatting and reproducibility requirements\nYour project must:\n\nbe written entirely in Quarto\n\nrender without errors\n\nuse inline code for reported values\n\ninclude labeled figures\n\navoid screenshots of plots\n\nbe clearly organized with headings\nhave peer-reviewed sources (at least 8)\n\n\n\n\n\n\n\nWarning\n\n\n\nProjects that do not render cleanly cannot be graded.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#submission-instructions",
+    "href": "project1.html#submission-instructions",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Submission instructions",
+    "text": "Submission instructions\nSubmit:\n\nthe rendered document (word)\n\nthe .qmd source file\n\nBoth are required.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#how-this-project-prepares-you-for-the-rest-of-the-course",
+    "href": "project1.html#how-this-project-prepares-you-for-the-rest-of-the-course",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "How this project prepares you for the rest of the course",
+    "text": "How this project prepares you for the rest of the course\nProject 1 builds the foundation for:\n\nProject 2 (cleaning NHANES data)\n\nProject 3 (modeling and inference)\n\nProject 4 (final manuscript)\n\nThe workflow you practice here will be reused all semester.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#key-takeaways",
+    "href": "project1.html#key-takeaways",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Key takeaways",
+    "text": "Key takeaways\nProject 1 is about learning how to explore data, write clearly, and work reproducibly in Quarto. Focus on effort, clarity, and honest interpretation. You are not expected to be an expert — you are expected to engage.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
+    "objectID": "project1.html#looking-ahead",
+    "href": "project1.html#looking-ahead",
+    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nAfter Project 1, we will transition to real U.S. health data and begin preparing datasets for modeling and inference.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
+    ]
+  },
+  {
     "objectID": "05-tidydata.html",
     "href": "05-tidydata.html",
     "title": "Lesson 5: Tidy Data and Reshaping",
     "section": "",
     "text": "Learning goals\nBy the end of this lesson, you will be able to:",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1106,7 +1296,7 @@
     "section": "",
     "text": "Explain what tidy data are and why they matter in public health\nIdentify tidy vs untidy data structures\nReshape data using pivot_longer() and pivot_wider()\nPrepare datasets for visualization, modeling, and tables\nMaintain a reproducible data workflow in Quarto",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1116,7 +1306,7 @@
     "section": "What is tidy data?",
     "text": "What is tidy data?\nTidy data follow three simple rules:\n\nEach row is one observation\n\nEach column is one variable\n\nEach cell contains one value\n\nMost R tools for visualization, modeling, and tables expect data in tidy format.\nIn public health, tidy data make analyses clearer, more reproducible, and less error-prone.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1126,7 +1316,7 @@
     "section": "Why tidy data matter in public health",
     "text": "Why tidy data matter in public health\nPublic health datasets often come from surveys, surveillance systems, or administrative sources. These datasets are frequently not tidy when first received.\nTidy data allow you to:\n\ncompare groups consistently\n\nvisualize trends easily\n\nfit statistical models correctly\n\ngenerate tables and figures efficiently\n\nUnderstanding tidy data will save you time later in the semester.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1136,7 +1326,7 @@
     "section": "Setup",
     "text": "Setup\nLoad the packages used in this lesson.\n\nlibrary(tidyverse)\nlibrary(gapminder)",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1146,7 +1336,7 @@
     "section": "Recognizing tidy vs untidy data",
     "text": "Recognizing tidy vs untidy data\nLet’s start with a tidy dataset you have already seen.\n\ngapminder\n\n# A tibble: 1,704 × 6\n   country     continent  year lifeExp      pop gdpPercap\n   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n 1 Afghanistan Asia       1952    28.8  8425333      779.\n 2 Afghanistan Asia       1957    30.3  9240934      821.\n 3 Afghanistan Asia       1962    32.0 10267083      853.\n 4 Afghanistan Asia       1967    34.0 11537966      836.\n 5 Afghanistan Asia       1972    36.1 13079460      740.\n 6 Afghanistan Asia       1977    38.4 14880372      786.\n 7 Afghanistan Asia       1982    39.9 12881816      978.\n 8 Afghanistan Asia       1987    40.8 13867957      852.\n 9 Afghanistan Asia       1992    41.7 16317921      649.\n10 Afghanistan Asia       1997    41.8 22227415      635.\n# ℹ 1,694 more rows\n\n\nEach row is a country-year observation, and each column is a variable. This dataset is tidy.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1156,7 +1346,7 @@
     "section": "An untidy example",
     "text": "An untidy example\nNow consider a simplified untidy dataset.\n\nlifeexp_wide &lt;- tibble(\n  country = c(\"A\", \"B\", \"C\"),\n  lifeExp_2000 = c(60, 72, 68),\n  lifeExp_2005 = c(62, 74, 70),\n  lifeExp_2010 = c(65, 76, 73)\n)\n\nlifeexp_wide\n\n# A tibble: 3 × 4\n  country lifeExp_2000 lifeExp_2005 lifeExp_2010\n  &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;\n1 A                 60           62           65\n2 B                 72           74           76\n3 C                 68           70           73\n\n\nHere, years are embedded in column names. This structure makes analysis harder.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1166,7 +1356,7 @@
     "section": "Making data tidy with pivot_longer()",
     "text": "Making data tidy with pivot_longer()\nWe can convert wide data into tidy (long) format using pivot_longer().\n\nlifeexp_long &lt;- lifeexp_wide %&gt;%\n  pivot_longer(\n    cols = starts_with(\"lifeExp\"),\n    names_to = \"year\",\n    values_to = \"lifeExp\"\n  )\n\nlifeexp_long\n\n# A tibble: 9 × 3\n  country year         lifeExp\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 A       lifeExp_2000      60\n2 A       lifeExp_2005      62\n3 A       lifeExp_2010      65\n4 B       lifeExp_2000      72\n5 B       lifeExp_2005      74\n6 B       lifeExp_2010      76\n7 C       lifeExp_2000      68\n8 C       lifeExp_2005      70\n9 C       lifeExp_2010      73\n\n\nNow:\n\neach row is a country-year observation\n\nyear is a variable\n\nlifeExp is a variable\n\nThis structure is tidy.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1176,7 +1366,7 @@
     "section": "Cleaning variable values after reshaping",
     "text": "Cleaning variable values after reshaping\nThe year variable still contains text. We can clean it.\n\nlifeexp_long &lt;- lifeexp_long %&gt;%\n  mutate(\n    year = as.numeric(gsub(\"lifeExp_\", \"\", year))\n  )\n\nlifeexp_long\n\n# A tibble: 9 × 3\n  country  year lifeExp\n  &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 A        2000      60\n2 A        2005      62\n3 A        2010      65\n4 B        2000      72\n5 B        2005      74\n6 B        2010      76\n7 C        2000      68\n8 C        2005      70\n9 C        2010      73\n\n\nCleaning variables after reshaping is common in public health workflows.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1186,7 +1376,7 @@
     "section": "When to use pivot_longer()",
     "text": "When to use pivot_longer()\nUse pivot_longer() when:\n\nmultiple columns represent the same variable across time or groups\n\ncolumn names contain values (years, categories)\n\nyou want to create plots or models\n\nMost visualization and modeling functions expect long (tidy) data.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1196,7 +1386,7 @@
     "section": "Converting long data to wide with pivot_wider()",
     "text": "Converting long data to wide with pivot_wider()\nSometimes you need wide data, for example for tables or reporting.\n\nlifeexp_wide_again &lt;- lifeexp_long %&gt;%\n  pivot_wider(\n    names_from = year,\n    values_from = lifeExp\n  )\n\nlifeexp_wide_again\n\n# A tibble: 3 × 4\n  country `2000` `2005` `2010`\n  &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1 A           60     62     65\n2 B           72     74     76\n3 C           68     70     73\n\n\nThis recreates a wide format.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1206,7 +1396,7 @@
     "section": "Tidy data and visualization",
     "text": "Tidy data and visualization\nTidy data work naturally with ggplot2.\n\nggplot(lifeexp_long, aes(x = year, y = lifeExp, color = country)) +\n  geom_line() +\n  geom_point() +\n  labs(\n    title = \"Life Expectancy Over Time\",\n    x = \"Year\",\n    y = \"Life Expectancy\"\n  )\n\n\n\n\n\n\n\n\nThis would be difficult to do with the original wide dataset.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1216,7 +1406,7 @@
     "section": "Tidy data and modeling",
     "text": "Tidy data and modeling\nModels also expect tidy data.\n\nlm(lifeExp ~ year + country, data = lifeexp_long)\n\n\nCall:\nlm(formula = lifeExp ~ year + country, data = lifeexp_long)\n\nCoefficients:\n(Intercept)         year     countryB     countryC  \n  -873.3333       0.4667      11.6667       8.0000  \n\n\nEach observation is clearly defined, making interpretation easier.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1226,7 +1416,7 @@
     "section": "Example with Gapminder",
     "text": "Example with Gapminder\nLet’s reshape a subset of Gapminder.\n\ngap_subset &lt;- gapminder %&gt;%\n  filter(country %in% c(\"United States\", \"Canada\")) %&gt;%\n  select(country, year, lifeExp)\n\ngap_subset\n\n# A tibble: 24 × 3\n   country  year lifeExp\n   &lt;fct&gt;   &lt;int&gt;   &lt;dbl&gt;\n 1 Canada   1952    68.8\n 2 Canada   1957    70.0\n 3 Canada   1962    71.3\n 4 Canada   1967    72.1\n 5 Canada   1972    72.9\n 6 Canada   1977    74.2\n 7 Canada   1982    75.8\n 8 Canada   1987    76.9\n 9 Canada   1992    78.0\n10 Canada   1997    78.6\n# ℹ 14 more rows\n\n\nThis dataset is already tidy and ready for visualization or modeling.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1236,7 +1426,7 @@
     "section": "Common tidy data mistakes",
     "text": "Common tidy data mistakes\nCommon issues include:\n\nmixing multiple variables into one column\n\nencoding values in column names\n\ninconsistent variable types\n\nreshaping data without documenting decisions\n\nAlways inspect your data after reshaping.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1246,7 +1436,7 @@
     "section": "Reproducibility reminder",
     "text": "Reproducibility reminder\nIn this course:\n\nreshaping must be done in code\n\ndata structure decisions should be documented\n\ntidy data should be used for analysis and modeling\n\nyour workflow should be reproducible from raw data to results\n\nData structure is part of your scientific record.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1256,7 +1446,7 @@
     "section": "Weekly assignment reminder",
     "text": "Weekly assignment reminder\nThis week you will complete HW 05: Tidy Data Reshaping, where you will:\n\nidentify a wide dataset\n\nconvert it to tidy format\n\nexplain why tidy data are useful\n\ndemonstrate one visualization or summary",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1266,7 +1456,7 @@
     "section": "Key takeaways",
     "text": "Key takeaways\nTidy data have one observation per row and one variable per column. pivot_longer() and pivot_wider() allow you to reshape data for analysis. Tidy data support clear, reproducible public health research.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   },
   {
@@ -1276,7 +1466,7 @@
     "section": "Looking ahead",
     "text": "Looking ahead\nNext week, we will begin simple linear regression, using tidy data to model relationships and interpret results in a public health context.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lesson 5: Tidy Data and Reshaping</span>"
     ]
   }
 ]
