@@ -16,7 +16,7 @@ book:
     - 04-dplyr.qmd
     - project1.qmd
     - 05-tidydata.qmd
-    
+    - 06a-biostats1review.qmd
 
 format:
   html:
