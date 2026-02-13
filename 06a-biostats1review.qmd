@@ -1,5 +1,395 @@
 ---
 title: "06a-biostats1review"
-format: html
+---
+
+# Lesson 6a: Biostats 1 Review
+
+In this lesson, we will review what you should have learned in Biostats 1. The topics will include:
+
+-   Introduction to Data
+-   Probability
+-   Distribution of Random Variables
+-   Inference
+
+This lesson is not meant to **teach** you these items, but simply **refresh** your memory.
+We will learn how to run all of these items in R/RStudio.
+
+## Chapter 1 refresher: Data and variables
+
+### Types of variables
+
+You should already be familiar with the distinction between:
+
+- **Categorical variables** (e.g., sex, race/ethnicity, region)
+- **Numeric variables** (e.g., age, BMI, blood pressure)
+
+In R, this distinction affects:
+- which summaries are appropriate  
+- how plots are created  
+- how variables enter regression models  
+
+---
+
+### Observations and units of analysis
+
+Each row in a dataset represents **one observational unit**.
+
+Examples:
+- one person (NHANES)
+- one country-year (Gapminder)
+- one clinic visit  
+
+Before analyzing any dataset, you should always be able to answer:
+
+> What does one row represent?
+
+---
+
+### Study design and causality
+
+Chapter 1 distinguishes between:
+
+- **Observational studies**
+- **Experimental studies**
+
+You should be able to explain:
+- whether a study allows causal conclusions  
+- why most public health datasets support **associational**, not causal, claims  
+
+---
+
+### Problem sets
+
+Complete problems from the OpenIntro Book 1.1, 1.3, 1.9, 1.12, 1.16, 1.26, 1.28, 1.33., 1.35, 1.36
+
+---
+
+## Chapter 2 refresher: Probability
+
+### What probability represents
+
+Probability describes the **long-run behavior** of a random process.
+
+A probability:
+- quantifies uncertainty  
+- does not predict individual outcomes  
+
+In public health contexts, probabilities are often expressed as risks or proportions.
+
+---
+
+### Conditional probability and independence
+
+You should be able to reason about:
+- probabilities given additional information  
+- whether events are independent or related  
+
+These ideas support later discussions of risk factors and outcomes.
+
+---
+
+### Common misconceptions
+
+A key goal of Chapter 2 is recognizing incorrect reasoning about chance.
+
+You should be able to explain why:
+- past outcomes do not “force” future outcomes  
+- randomness does not imply lack of structure  
+
+---
+
+### Numerical summaries
+
+Key numerical summaries you should already recognize:
+
+- mean  
+- median  
+- standard deviation  
+- range  
+- interquartile range  
+
+In this course, you will:
+- compute these in R  
+- report them using **inline code**  
+- interpret them in writing  
+
+Example reminder (conceptual):
+
+The mean describes the average, while the standard deviation describes variability.
+
+---
+
+### Shape, center, and spread
+
+When describing a numeric variable, you should think about:
+
+- **center** (mean or median)  
+- **spread** (SD or IQR)  
+- **shape** (symmetric, skewed, multimodal)  
+
+These ideas will come up again when we assess model assumptions.
+
+---
+
+### Problem sets
+
+Complete problems from the OpenIntro Book 2.1, 2.5, 2.9, 2.11, 2.16, and 2.17.
+
+---
+
+## Chapter 3 refresher: Distributions of random variables
+
+### Random variables
+
+A **random variable** assigns a numerical value to the outcome of a random process.
+
+You should be able to:
+- define the random variable in context  
+- state whether it is **discrete or continuous**  
+
+This skill is essential for understanding model outcomes later in the course.
+
+---
+
+### Probability distributions
+
+A probability distribution describes:
+- which values are more or less likely  
+- how variability is structured  
+
+The book introduces common distributions conceptually (e.g., binomial, normal), without emphasizing computation.
+
+---
+
+### Shape, center, and spread
+
+You should be able to describe a distribution in terms of:
+- typical values  
+- variability  
+- skewness or symmetry  
+
+These ideas will reappear when assessing model assumptions.
+
+### Purpose of visualization
+
+Plots help us:
+- identify patterns  
+- detect outliers  
+- compare groups  
+- assess relationships  
+
+In this course, visualization is not optional — every plot must be **interpreted in writing**.
+
+---
+
+### Matching plots to variable types
+
+You should already know:
+
+- categorical → bar charts  
+- numeric → histograms, boxplots  
+- two numeric variables → scatterplots  
+- numeric vs categorical → boxplots  
+
+We will implement these using `ggplot2`, but the **statistical reasoning** comes first.
+
+---
+
+### Problem sets
+
+Complete problems from the OpenIntro Book 3.1, 3.4, 3.8, 3.18, 3.20, 3.21, 3.43, 3.57.
+
+---
+
+## Chapter 4 refresher: Foundations of inference
+
+### Why inference is needed
+
+Chapter 4 explains why we cannot rely on a single sample to know a population value exactly.
+
+Key ideas include:
+- sampling variability  
+- uncertainty in estimates  
+
+Inference provides tools to quantify this uncertainty.
+
+---
+
+### Confidence intervals (conceptual)
+
+A confidence interval gives a **range of plausible values** for a population parameter.
+
+You should be able to:
+- interpret a confidence interval in words  
+- explain what it does *not* mean  
+
+This skill is critical for reporting results in manuscripts.
+
+---
+
+### Hypothesis testing (logic only)
+
+You should recognize:
+- the role of a null hypothesis  
+- what a small p-value suggests conceptually  
+
+You are not expected to memorize testing procedures at this stage.
+
+
+### Why probability matters in public health
+
+Probability underlies:
+- sampling variability  
+- uncertainty in estimates  
+- confidence intervals  
+- statistical inference  
+
+Even when we do not calculate probabilities directly, we rely on probabilistic reasoning.
+
+---
+
+### Sampling vs population
+
+Key distinction:
+
+- **Population**: the group we want to understand  
+- **Sample**: the group we observe  
+
+Most public health data are samples, even large ones.
+
+This distinction motivates:
+- uncertainty estimates  
+- cautious interpretation  
+
+---
+
+### Problem sets
+
+Complete problems from the OpenIntro Book 4.1, 4.4, 4.7, 4.12, 4.16, 4.20, 4.24.
+
+---
+
+## Chapter 5 refresher: Inference for numerical data
+
+### Estimating and comparing means
+
+Chapter 5 applies inference ideas to numerical outcomes.
+
+You should be comfortable:
+- identifying the parameter being estimated  
+- explaining comparisons between groups conceptually  
+
+---
+
+### Statistical vs practical significance
+
+A recurring theme is that:
+- statistical significance does not equal importance  
+- context and magnitude matter  
+
+This distinction is central to public health interpretation.
+
+---
+
+### Scope of inference
+
+You should always consider:
+- who was studied  
+- who the results apply to  
+
+This affects how findings are communicated responsibly.
+
+---
+
+### Variability and uncertainty
+
+Two important ideas:
+
+1. Different samples give different results  
+2. We quantify this variability using statistical methods  
+
+This is why:
+- confidence intervals exist  
+- p-values are used (with caution)  
+
+---
+
+### Confidence intervals (conceptual)
+
+A confidence interval provides a **range of plausible values** for a population parameter.
+
+In this course, you will:
+- compute confidence intervals in R  
+- report them using inline code  
+- interpret them in plain language  
+
+Example interpretation:
+
+> We are reasonably confident the true population value lies within this range.
+
+---
+
+### Statistical significance vs public health relevance
+
+You should already know that:
+
+- statistical significance does not imply importance  
+- large samples can detect small differences  
+- context and magnitude matter  
+
+This distinction is critical in public health writing.
+
+---
+
+### Problem sets
+
+Complete problems from the OpenIntro Book 5.1, 5.2, 5.4, 5.8, 5.17, 5.19, 5.24, 5.36, 5.41, 5.44.
+
+---
+
+## Connecting OpenIntro concepts to R and Quarto
+
+Here is how these concepts show up technically in this course:
+
+| Concept | How it appears in this course |
+|------|-------------------------------|
+| Variables | Column types in datasets |
+| Observations | Rows in data frames |
+| Summaries | `mean()`, `sd()`, `summary()` |
+| Visualization | `ggplot2` |
+| Inference | regression estimates and confidence intervals |
+| Interpretation | inline code + written text |
+
+Statistics guide **what we do**; R helps us **do it reproducibly**.
+
+---
+
+## What you are expected to remember
+
+You are **not** expected to memorize formulas.  
+
+You **are** expected to:
+
+- recognize variable types  
+- choose appropriate summaries  
+- interpret plots and model output  
+- distinguish association from causation  
+- communicate uncertainty clearly  
+
+These skills will be assessed repeatedly.
+
+---
+
+## Self-check
+
+Before moving on, ask yourself:
+
+1. Can I identify the outcome and predictor in a question?
+2. Do I know which summaries are appropriate for different variables?
+3. Can I interpret a confidence interval in words?
+4. Can I explain why uncertainty exists?
+
+If any of these feel shaky, briefly revisit OpenIntro Chapters 1–5 alongside this lesson.
+
 ---
 
