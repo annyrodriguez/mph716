@@ -1,5 +1,5 @@
 ---
-title: "06a-biostats1review"
+title: "Lesson 6a - Biostats 1 Review"
 ---
 
 # Lesson 6a: Biostats 1 Review

@@ -1472,91 +1472,91 @@
   {
     "objectID": "06a-biostats1review.html",
     "href": "06a-biostats1review.html",
-    "title": "06a-biostats1review",
+    "title": "Lesson 6a - Biostats 1 Review",
     "section": "",
     "text": "Lesson 6a: Biostats 1 Review\nIn this lesson, we will review what you should have learned in Biostats 1. The topics will include:\nThis lesson is not meant to teach you these items, but simply refresh your memory. We will learn how to run all of these items in R/RStudio.",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>06a-biostats1review</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
   },
   {
     "objectID": "06a-biostats1review.html#chapter-1-refresher-data-and-variables",
     "href": "06a-biostats1review.html#chapter-1-refresher-data-and-variables",
-    "title": "06a-biostats1review",
+    "title": "Lesson 6a - Biostats 1 Review",
     "section": "Chapter 1 refresher: Data and variables",
     "text": "Chapter 1 refresher: Data and variables\n\nTypes of variables\nYou should already be familiar with the distinction between:\n\nCategorical variables (e.g., sex, race/ethnicity, region)\nNumeric variables (e.g., age, BMI, blood pressure)\n\nIn R, this distinction affects: - which summaries are appropriate\n- how plots are created\n- how variables enter regression models\n\n\n\nObservations and units of analysis\nEach row in a dataset represents one observational unit.\nExamples: - one person (NHANES) - one country-year (Gapminder) - one clinic visit\nBefore analyzing any dataset, you should always be able to answer:\n\nWhat does one row represent?\n\n\n\n\nStudy design and causality\nChapter 1 distinguishes between:\n\nObservational studies\nExperimental studies\n\nYou should be able to explain: - whether a study allows causal conclusions\n- why most public health datasets support associational, not causal, claims\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 1.1, 1.3, 1.9, 1.12, 1.16, 1.26, 1.28, 1.33., 1.35, 1.36",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>06a-biostats1review</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
   },
   {
     "objectID": "06a-biostats1review.html#chapter-2-refresher-probability",
     "href": "06a-biostats1review.html#chapter-2-refresher-probability",
-    "title": "06a-biostats1review",
+    "title": "Lesson 6a - Biostats 1 Review",
     "section": "Chapter 2 refresher: Probability",
     "text": "Chapter 2 refresher: Probability\n\nWhat probability represents\nProbability describes the long-run behavior of a random process.\nA probability: - quantifies uncertainty\n- does not predict individual outcomes\nIn public health contexts, probabilities are often expressed as risks or proportions.\n\n\n\nConditional probability and independence\nYou should be able to reason about: - probabilities given additional information\n- whether events are independent or related\nThese ideas support later discussions of risk factors and outcomes.\n\n\n\nCommon misconceptions\nA key goal of Chapter 2 is recognizing incorrect reasoning about chance.\nYou should be able to explain why: - past outcomes do not “force” future outcomes\n- randomness does not imply lack of structure\n\n\n\nNumerical summaries\nKey numerical summaries you should already recognize:\n\nmean\n\nmedian\n\nstandard deviation\n\nrange\n\ninterquartile range\n\nIn this course, you will: - compute these in R\n- report them using inline code\n- interpret them in writing\nExample reminder (conceptual):\nThe mean describes the average, while the standard deviation describes variability.\n\n\n\nShape, center, and spread\nWhen describing a numeric variable, you should think about:\n\ncenter (mean or median)\n\nspread (SD or IQR)\n\nshape (symmetric, skewed, multimodal)\n\nThese ideas will come up again when we assess model assumptions.\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 2.1, 2.5, 2.9, 2.11, 2.16, and 2.17.",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>06a-biostats1review</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
   },
   {
     "objectID": "06a-biostats1review.html#chapter-3-refresher-distributions-of-random-variables",
     "href": "06a-biostats1review.html#chapter-3-refresher-distributions-of-random-variables",
-    "title": "06a-biostats1review",
+    "title": "Lesson 6a - Biostats 1 Review",
     "section": "Chapter 3 refresher: Distributions of random variables",
     "text": "Chapter 3 refresher: Distributions of random variables\n\nRandom variables\nA random variable assigns a numerical value to the outcome of a random process.\nYou should be able to: - define the random variable in context\n- state whether it is discrete or continuous\nThis skill is essential for understanding model outcomes later in the course.\n\n\n\nProbability distributions\nA probability distribution describes: - which values are more or less likely\n- how variability is structured\nThe book introduces common distributions conceptually (e.g., binomial, normal), without emphasizing computation.\n\n\n\nShape, center, and spread\nYou should be able to describe a distribution in terms of: - typical values\n- variability\n- skewness or symmetry\nThese ideas will reappear when assessing model assumptions.\n\n\nPurpose of visualization\nPlots help us: - identify patterns\n- detect outliers\n- compare groups\n- assess relationships\nIn this course, visualization is not optional — every plot must be interpreted in writing.\n\n\n\nMatching plots to variable types\nYou should already know:\n\ncategorical → bar charts\n\nnumeric → histograms, boxplots\n\ntwo numeric variables → scatterplots\n\nnumeric vs categorical → boxplots\n\nWe will implement these using ggplot2, but the statistical reasoning comes first.\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 3.1, 3.4, 3.8, 3.18, 3.20, 3.21, 3.43, 3.57.",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>06a-biostats1review</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
   },
   {
     "objectID": "06a-biostats1review.html#chapter-4-refresher-foundations-of-inference",
     "href": "06a-biostats1review.html#chapter-4-refresher-foundations-of-inference",
-    "title": "06a-biostats1review",
+    "title": "Lesson 6a - Biostats 1 Review",
     "section": "Chapter 4 refresher: Foundations of inference",
     "text": "Chapter 4 refresher: Foundations of inference\n\nWhy inference is needed\nChapter 4 explains why we cannot rely on a single sample to know a population value exactly.\nKey ideas include: - sampling variability\n- uncertainty in estimates\nInference provides tools to quantify this uncertainty.\n\n\n\nConfidence intervals (conceptual)\nA confidence interval gives a range of plausible values for a population parameter.\nYou should be able to: - interpret a confidence interval in words\n- explain what it does not mean\nThis skill is critical for reporting results in manuscripts.\n\n\n\nHypothesis testing (logic only)\nYou should recognize: - the role of a null hypothesis\n- what a small p-value suggests conceptually\nYou are not expected to memorize testing procedures at this stage.\n\n\nWhy probability matters in public health\nProbability underlies: - sampling variability\n- uncertainty in estimates\n- confidence intervals\n- statistical inference\nEven when we do not calculate probabilities directly, we rely on probabilistic reasoning.\n\n\n\nSampling vs population\nKey distinction:\n\nPopulation: the group we want to understand\n\nSample: the group we observe\n\nMost public health data are samples, even large ones.\nThis distinction motivates: - uncertainty estimates\n- cautious interpretation\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 4.1, 4.4, 4.7, 4.12, 4.16, 4.20, 4.24.",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>06a-biostats1review</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
   },
   {
     "objectID": "06a-biostats1review.html#chapter-5-refresher-inference-for-numerical-data",
     "href": "06a-biostats1review.html#chapter-5-refresher-inference-for-numerical-data",
-    "title": "06a-biostats1review",
+    "title": "Lesson 6a - Biostats 1 Review",
     "section": "Chapter 5 refresher: Inference for numerical data",
     "text": "Chapter 5 refresher: Inference for numerical data\n\nEstimating and comparing means\nChapter 5 applies inference ideas to numerical outcomes.\nYou should be comfortable: - identifying the parameter being estimated\n- explaining comparisons between groups conceptually\n\n\n\nStatistical vs practical significance\nA recurring theme is that: - statistical significance does not equal importance\n- context and magnitude matter\nThis distinction is central to public health interpretation.\n\n\n\nScope of inference\nYou should always consider: - who was studied\n- who the results apply to\nThis affects how findings are communicated responsibly.\n\n\n\nVariability and uncertainty\nTwo important ideas:\n\nDifferent samples give different results\n\nWe quantify this variability using statistical methods\n\nThis is why: - confidence intervals exist\n- p-values are used (with caution)\n\n\n\nConfidence intervals (conceptual)\nA confidence interval provides a range of plausible values for a population parameter.\nIn this course, you will: - compute confidence intervals in R\n- report them using inline code\n- interpret them in plain language\nExample interpretation:\n\nWe are reasonably confident the true population value lies within this range.\n\n\n\n\nStatistical significance vs public health relevance\nYou should already know that:\n\nstatistical significance does not imply importance\n\nlarge samples can detect small differences\n\ncontext and magnitude matter\n\nThis distinction is critical in public health writing.\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 5.1, 5.2, 5.4, 5.8, 5.17, 5.19, 5.24, 5.36, 5.41, 5.44.",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>06a-biostats1review</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
   },
   {
     "objectID": "06a-biostats1review.html#connecting-openintro-concepts-to-r-and-quarto",
     "href": "06a-biostats1review.html#connecting-openintro-concepts-to-r-and-quarto",
-    "title": "06a-biostats1review",
+    "title": "Lesson 6a - Biostats 1 Review",
     "section": "Connecting OpenIntro concepts to R and Quarto",
     "text": "Connecting OpenIntro concepts to R and Quarto\nHere is how these concepts show up technically in this course:\n\n\n\nConcept\nHow it appears in this course\n\n\n\n\nVariables\nColumn types in datasets\n\n\nObservations\nRows in data frames\n\n\nSummaries\nmean(), sd(), summary()\n\n\nVisualization\nggplot2\n\n\nInference\nregression estimates and confidence intervals\n\n\nInterpretation\ninline code + written text\n\n\n\nStatistics guide what we do; R helps us do it reproducibly.",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>06a-biostats1review</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
   },
   {
     "objectID": "06a-biostats1review.html#what-you-are-expected-to-remember",
     "href": "06a-biostats1review.html#what-you-are-expected-to-remember",
-    "title": "06a-biostats1review",
+    "title": "Lesson 6a - Biostats 1 Review",
     "section": "What you are expected to remember",
     "text": "What you are expected to remember\nYou are not expected to memorize formulas.\nYou are expected to:\n\nrecognize variable types\n\nchoose appropriate summaries\n\ninterpret plots and model output\n\ndistinguish association from causation\n\ncommunicate uncertainty clearly\n\nThese skills will be assessed repeatedly.",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>06a-biostats1review</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
   },
   {
     "objectID": "06a-biostats1review.html#self-check",
     "href": "06a-biostats1review.html#self-check",
-    "title": "06a-biostats1review",
+    "title": "Lesson 6a - Biostats 1 Review",
     "section": "Self-check",
     "text": "Self-check\nBefore moving on, ask yourself:\n\nCan I identify the outcome and predictor in a question?\nDo I know which summaries are appropriate for different variables?\nCan I interpret a confidence interval in words?\nCan I explain why uncertainty exists?\n\nIf any of these feel shaky, briefly revisit OpenIntro Chapters 1–5 alongside this lesson.",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>06a-biostats1review</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
   }
 ]
