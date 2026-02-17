@@ -1,5 +1,5 @@
 ---
-title: "Lesson 6a - Biostats 1 Review"
+title: "Lesson 6a: Biostats 1 Review"
 ---
 
 ## Purpose of this Lesson
