@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lesson 2: Quarto and Reproducible Reporting – R and Health Sciences</title>
+<title>Project 2 — Cleaning &amp; Preparing Health Data for Analysis (NHANES) – R and Health Sciences</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -65,8 +30,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02b-inline.html" rel="next">
-<link href="./01-intro.html" rel="prev">
+<link href="./06-slr.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -118,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-quarto.html"><span class="chapter-title">Lesson 2: Quarto and Reproducible Reporting</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project2.html"><span class="chapter-title">Project 2 — Cleaning &amp; Preparing Health Data for Analysis (NHANES)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -155,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-quarto.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Lesson 2: Quarto and Reproducible Reporting</span></a>
+  <a href="./02-quarto.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 2: Quarto and Reproducible Reporting</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -200,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./project2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Project 2 — Cleaning &amp; Preparing Health Data for Analysis (NHANES)</span></a>
+  <a href="./project2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Project 2 — Cleaning &amp; Preparing Health Data for Analysis (NHANES)</span></a>
   </div>
 </li>
     </ul>
@@ -213,31 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link active" data-scroll-target="#learning-goals">Learning goals</a></li>
-  <li><a href="#what-is-quarto" id="toc-what-is-quarto" class="nav-link" data-scroll-target="#what-is-quarto">What is Quarto?</a>
-  <ul class="collapse">
-  <li><a href="#what-does-reproducible-mean" id="toc-what-does-reproducible-mean" class="nav-link" data-scroll-target="#what-does-reproducible-mean">What does “reproducible” mean?</a></li>
-  <li><a href="#anatomy-of-a-quarto-document" id="toc-anatomy-of-a-quarto-document" class="nav-link" data-scroll-target="#anatomy-of-a-quarto-document">Anatomy of a Quarto document</a></li>
-  <li><a href="#creating-a-quarto-document-in-rstudio" id="toc-creating-a-quarto-document-in-rstudio" class="nav-link" data-scroll-target="#creating-a-quarto-document-in-rstudio">Creating a Quarto document in RStudio</a></li>
-  <li><a href="#markdown-formatting-your-writing" id="toc-markdown-formatting-your-writing" class="nav-link" data-scroll-target="#markdown-formatting-your-writing">Markdown: formatting your writing</a>
-  <ul class="collapse">
-  <li><a href="#headings" id="toc-headings" class="nav-link" data-scroll-target="#headings">Headings</a></li>
-  <li><a href="#bold-and-italics" id="toc-bold-and-italics" class="nav-link" data-scroll-target="#bold-and-italics">Bold and italics</a></li>
-  <li><a href="#lists" id="toc-lists" class="nav-link" data-scroll-target="#lists">Lists</a></li>
-  </ul></li>
-  <li><a href="#code-chunks-where-analysis-happens" id="toc-code-chunks-where-analysis-happens" class="nav-link" data-scroll-target="#code-chunks-where-analysis-happens">Code chunks: where analysis happens</a></li>
-  <li><a href="#running-chunks-vs-rendering-the-document" id="toc-running-chunks-vs-rendering-the-document" class="nav-link" data-scroll-target="#running-chunks-vs-rendering-the-document">Running chunks vs rendering the document</a></li>
-  <li><a href="#a-simple-data-example" id="toc-a-simple-data-example" class="nav-link" data-scroll-target="#a-simple-data-example">A simple data example</a></li>
-  <li><a href="#inline-r-code" id="toc-inline-r-code" class="nav-link" data-scroll-target="#inline-r-code">Inline R code</a></li>
-  <li><a href="#why-inline-code-matters-in-public-health-writing" id="toc-why-inline-code-matters-in-public-health-writing" class="nav-link" data-scroll-target="#why-inline-code-matters-in-public-health-writing">Why inline code matters in public health writing</a></li>
-  <li><a href="#showing-or-hiding-code" id="toc-showing-or-hiding-code" class="nav-link" data-scroll-target="#showing-or-hiding-code">Showing or hiding code</a></li>
-  <li><a href="#common-mistakes-to-avoid" id="toc-common-mistakes-to-avoid" class="nav-link" data-scroll-target="#common-mistakes-to-avoid">Common mistakes to avoid</a></li>
-  <li><a href="#course-expectations-for-quarto-work" id="toc-course-expectations-for-quarto-work" class="nav-link" data-scroll-target="#course-expectations-for-quarto-work">Course expectations for Quarto work</a></li>
-  <li><a href="#weekly-assignment-reminder" id="toc-weekly-assignment-reminder" class="nav-link" data-scroll-target="#weekly-assignment-reminder">Weekly assignment reminder</a></li>
-  <li><a href="#practice-section" id="toc-practice-section" class="nav-link" data-scroll-target="#practice-section">Practice section</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key takeaways</a></li>
-  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a></li>
-  </ul></li>
+  <li><a href="#purpose-of-project-2" id="toc-purpose-of-project-2" class="nav-link active" data-scroll-target="#purpose-of-project-2">Purpose of Project 2</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#project-focus" id="toc-project-focus" class="nav-link" data-scroll-target="#project-focus">Project Focus</a></li>
+  <li><a href="#formatting-requirements" id="toc-formatting-requirements" class="nav-link" data-scroll-target="#formatting-requirements">Formatting Requirements</a></li>
+  <li><a href="#submission-requirements" id="toc-submission-requirements" class="nav-link" data-scroll-target="#submission-requirements">Submission Requirements</a></li>
   </ul>
 </nav>
     </div>
@@ -246,7 +191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Lesson 2: Quarto and Reproducible Reporting</span></h1>
+<h1 class="title"><span class="chapter-title">Project 2 — Cleaning &amp; Preparing Health Data for Analysis (NHANES)</span></h1>
 </div>
 
 
@@ -263,245 +208,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="learning-goals" class="level2">
-<h2 class="anchored" data-anchor-id="learning-goals">Learning goals</h2>
-<p>By the end of this lesson, you will be able to:</p>
-<ul>
-<li>Explain what Quarto is and why it is used in public health research</li>
-<li>Create and render a Quarto document</li>
-<li>Use Markdown to structure writing</li>
-<li>Insert and run R code chunks</li>
-<li>Use inline R code to report values reproducibly</li>
-</ul>
-<hr>
+<section id="purpose-of-project-2" class="level2">
+<h2 class="anchored" data-anchor-id="purpose-of-project-2">Purpose of Project 2</h2>
+<p>This project moves you from global health context into real biomedical surveillance data. You will work with the <code>NHANES</code> dataset, which contains nationally representative health, exam, and behavioral measures from U.S. adults and children.</p>
+<p>The goal is to practice:</p>
+<p>• working with real-world health data • cleaning and restructuring data for analysis • managing missing values • creating new variables • documenting analytic decisions • writing clear and reproducible Quarto reports</p>
+<p>This project prepares you for regression modeling and inference in Project 3 and your final manuscript.</p>
 </section>
-<section id="what-is-quarto" class="level1">
-<h1>What is Quarto?</h1>
-<p>Quarto is a tool for creating <strong>reproducible documents</strong> that combine writing and data analysis in one place. A Quarto document can include text, code, results, tables, and figures so that your report updates automatically when your analysis changes.</p>
-<p>In public health, Quarto supports transparency and accuracy by keeping your analysis and your writing connected.</p>
-<p>In this course, all homework assignments and projects will be written in Quarto.</p>
-<hr>
-<section id="what-does-reproducible-mean" class="level2">
-<h2 class="anchored" data-anchor-id="what-does-reproducible-mean">What does “reproducible” mean?</h2>
-<p>A reproducible document is one where another person (or future you) can:</p>
-<ul>
-<li>open the file</li>
-<li>run the code</li>
-<li>get the same results</li>
-<li>see exactly how the results were produced</li>
-</ul>
-<p>Reproducibility helps prevent errors that happen when people copy and paste numbers or figures from the Console into a report.</p>
-<hr>
+<section id="dataset" class="level2">
+<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
+<p>We will use the curated NHANES dataset included in the <code>NHANES</code> R package.</p>
+<p>This dataset includes variables such as:</p>
+<p>• demographics (age, gender, race/ethnicity, education, income) • health status • smoking behavior • BMI • blood pressure • activity levels • depression screening • medical conditions</p>
+<p>It is real data — including missingness, limitations, and measurement constraints.</p>
 </section>
-<section id="anatomy-of-a-quarto-document" class="level2">
-<h2 class="anchored" data-anchor-id="anatomy-of-a-quarto-document">Anatomy of a Quarto document</h2>
-<p>A Quarto document typically has three pieces:</p>
-<ol type="1">
-<li>A YAML header (at the very top)</li>
-<li>Written text (formatted using Markdown)</li>
-<li>Code chunks (R code that runs when you render)</li>
-</ol>
-<p>You will see all three in this lesson.</p>
-<hr>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By completing this project, you will be able to:</p>
+<p>• clean biomedical data using tidyverse tools • identify and manage missing data • construct analytic variables • describe population patterns in health outcomes • explain cleaning choices transparently • submit a fully reproducible Quarto report</p>
+<p>These are core skills for public health data science.</p>
 </section>
-<section id="creating-a-quarto-document-in-rstudio" class="level2">
-<h2 class="anchored" data-anchor-id="creating-a-quarto-document-in-rstudio">Creating a Quarto document in RStudio</h2>
-<p>To create a new Quarto document:</p>
-<ol type="1">
-<li>Go to File → New File → Quarto Document</li>
-<li>Choose HTML as the output format</li>
-<li>Give the file a descriptive name</li>
-<li>Click Create</li>
-</ol>
-<p>To render:</p>
-<ul>
-<li>Click the Render button, or</li>
-<li>Use Quarto Render from the Build tab (depending on your setup)</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="project-focus" class="level2">
+<h2 class="anchored" data-anchor-id="project-focus">Project Focus</h2>
+<p>You will choose one health outcome, such as:</p>
+<p>• Hypertension • BMI (as continuous or categorized) • Depression symptoms • Diabetes status • Self-rated health • Smoking status</p>
+<p>and examine how it varies across predictors such as:</p>
+<p>• age • sex • race/ethnicity • income-to-poverty ratio • education • health behaviors</p>
+<div class=".callout-tip">
+<p>You may propose an alternative outcome with approval.</p>
 </div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When you render, Quarto runs the code chunks from top to bottom and builds the final output.</p>
-</div>
-</div>
-<hr>
+<p>##Project Tasks</p>
+<p>Your Quarto report must include the following sections:</p>
+<p><strong>1. Introduction (≈ 2–3 paragraphs)</strong></p>
+<p>Briefly explain:</p>
+<p>• What NHANES is and why it matters in public health • Your chosen outcome and why it is important • Key predictors you will examine • Your broad guiding question</p>
+<p>(Example: How is hypertension patterned across age and income?)</p>
+<p>Use clear, MPH-appropriate language.</p>
+<p><strong>2. Data Preparation</strong></p>
+<p>Using tidyverse:</p>
+<p>• load the NHANES dataset • select your outcome and predictors • recode variables as needed (e.g., factors) • create at least one new variable, such as: o age category o BMI category o income group o binary hypertension status • remove or document missing data • provide a data dictionary table explaining variables</p>
+<p>All choices must be transparent and explained in writing.</p>
+<p><strong>3. Descriptive Statistics</strong></p>
+<p>Produce:</p>
+<p>• summary statistics (means, proportions, counts) • stratified summaries where appropriate • at least one table formatted for publication style</p>
+<p>Use inline R code whenever possible.</p>
+<p><strong>4. Visualizations</strong></p>
+<p>Create at least two figures, such as:</p>
+<p>• distributions of your outcome • outcome by age group • outcome by race/ethnicity • outcome by income category • outcome by smoking status</p>
+<p>Each figure must include:</p>
+<p>• clear title • labeled axes • readable formatting • a short interpretation paragraph</p>
+<p><strong>5. Missing Data Review</strong></p>
+<p>Briefly describe:</p>
+<p>• where missingness appears • how many cases were removed • why that matters for interpretation • potential bias concerns</p>
+<p>This introduces ethical &amp; methodological thinking.</p>
+<p><strong>6. Reflection &amp; Interpretation (≈ 3–4 paragraphs)</strong></p>
+<p>Discuss:</p>
+<p>• Public-health meaning of the patterns you observe • Possible explanations for disparities • Structural or contextual factors • What you would explore next with modeling</p>
+<p>This section begins to sound like an early manuscript Results + Discussion.</p>
 </section>
-<section id="markdown-formatting-your-writing" class="level2">
-<h2 class="anchored" data-anchor-id="markdown-formatting-your-writing">Markdown: formatting your writing</h2>
-<p>Markdown is a simple way to format text. In this course, Markdown will be used for headings, lists, emphasis, links, and section organization.</p>
-<section id="headings" class="level3">
-<h3 class="anchored" data-anchor-id="headings">Headings</h3>
-<p>Headings help organize reports. In Markdown, headings use the number sign.</p>
-<p>Example:</p>
-<pre><code># Main section
-## Subsection
-### Smaller subsection</code></pre>
+<section id="formatting-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="formatting-requirements">Formatting Requirements</h2>
+<p>Your submission must:</p>
+<p>✔ be written entirely in Quarto ✔ knit without errors ✔ include inline code for reported values ✔ use tidy, readable R code ✔ apply organized section headings ✔ include citations where relevant ✔ use inclusive, professional language</p>
+<p><strong>Target length: 1,200–1,500 words (excluding code)</strong></p>
 </section>
-<section id="bold-and-italics" class="level3">
-<h3 class="anchored" data-anchor-id="bold-and-italics">Bold and italics</h3>
-<p>Example:</p>
-<pre><code>**bold text**
-*italic text*</code></pre>
-</section>
-<section id="lists" class="level3">
-<h3 class="anchored" data-anchor-id="lists">Lists</h3>
-<p>Example:</p>
-<pre><code>- first item
-- second item
-- third item</code></pre>
-<p>Markdown keeps your writing clean and readable.</p>
-<hr>
-</section>
-</section>
-<section id="code-chunks-where-analysis-happens" class="level2">
-<h2 class="anchored" data-anchor-id="code-chunks-where-analysis-happens">Code chunks: where analysis happens</h2>
-<p>R code is written inside code chunks. Code chunks run when you render the document.</p>
-<p>Here is a simple code chunk:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-</div>
-<hr>
-</section>
-<section id="running-chunks-vs-rendering-the-document" class="level2">
-<h2 class="anchored" data-anchor-id="running-chunks-vs-rendering-the-document">Running chunks vs rendering the document</h2>
-<p>You can run code in two ways:</p>
-<ul>
-<li>Run a single chunk using the green Run button inside the chunk</li>
-<li>Render the entire document to produce the final report</li>
-</ul>
-<p>In this course, you should always <strong>render</strong> your document before submitting so your outputs are up to date.</p>
-<hr>
-</section>
-<section id="a-simple-data-example" class="level2">
-<h2 class="anchored" data-anchor-id="a-simple-data-example">A simple data example</h2>
-<p>Below we create a small vector and compute summary statistics.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">34</span>, <span class="dv">29</span>, <span class="dv">45</span>, <span class="dv">38</span>, <span class="dv">41</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 34.66667</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 8.687155</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 6</code></pre>
-</div>
-</div>
-<hr>
-</section>
-<section id="inline-r-code" class="level2">
-<h2 class="anchored" data-anchor-id="inline-r-code">Inline R code</h2>
-<p>Inline code allows you to insert R results directly into a sentence. This is one of the most important skills in the course because it prevents copy and paste errors.</p>
-<p>Inline code looks like this inside a sentence:</p>
-<p>The sample included 6 participants, and the mean age was 34.7 years.</p>
-<p>When you render, Quarto replaces the inline code with the calculated value.</p>
-<hr>
-</section>
-<section id="why-inline-code-matters-in-public-health-writing" class="level2">
-<h2 class="anchored" data-anchor-id="why-inline-code-matters-in-public-health-writing">Why inline code matters in public health writing</h2>
-<p>Inline code helps you:</p>
-<ul>
-<li>keep your writing consistent with your analysis</li>
-<li>update values automatically when your data change</li>
-<li>reduce mistakes when reporting results</li>
-</ul>
-<p>In this course, students are expected to use inline code for reported statistics whenever possible, especially in Projects 2 through 4.</p>
-<hr>
-</section>
-<section id="showing-or-hiding-code" class="level2">
-<h2 class="anchored" data-anchor-id="showing-or-hiding-code">Showing or hiding code</h2>
-<p>Sometimes you want to show the results but hide the code (for a polished report). You can hide code using an option at the top of the chunk.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 34.66667</code></pre>
-</div>
-</div>
-<p>In the rendered document, the code will be hidden and only the result will appear.</p>
-<hr>
-</section>
-<section id="common-mistakes-to-avoid" class="level2">
-<h2 class="anchored" data-anchor-id="common-mistakes-to-avoid">Common mistakes to avoid</h2>
-<p>Avoid these common issues:</p>
-<ul>
-<li>Typing numeric results manually into your report instead of using inline code</li>
-<li>Copying results from the Console into your writing</li>
-<li>Forgetting to render after changing code or data</li>
-<li>Using inline code that refers to an object that has not been created yet</li>
-</ul>
-<p>A simple rule is: if a number appears in your report, ask yourself whether it was produced by R during rendering.</p>
-<hr>
-</section>
-<section id="course-expectations-for-quarto-work" class="level2">
-<h2 class="anchored" data-anchor-id="course-expectations-for-quarto-work">Course expectations for Quarto work</h2>
-<p>In this course, students are expected to:</p>
-<ul>
-<li>complete homework and projects in Quarto</li>
-<li>organize work using headings and clear sections</li>
-<li>write interpretations in complete sentences</li>
-<li>use inline code for key reported numbers when possible</li>
-<li>render before submitting</li>
-</ul>
-<p>Perfection is not expected. Consistent effort and honest engagement are the priority.</p>
-<hr>
-</section>
-<section id="weekly-assignment-reminder" class="level2">
-<h2 class="anchored" data-anchor-id="weekly-assignment-reminder">Weekly assignment reminder</h2>
-<p>Students will:</p>
-<ul>
-<li>Create their first Quarto document</li>
-<li>Add headings, text, and code chunks</li>
-<li>Include at least one chunk that prints a small dataset or summary</li>
-<li>Write 1–2 paragraphs explaining what reproducibility means in science</li>
-</ul>
-<p>Goal: Establish documentation habits early</p>
-<hr>
-</section>
-<section id="practice-section" class="level2">
-<h2 class="anchored" data-anchor-id="practice-section">Practice section</h2>
-<p>Create a new section in your own homework file and complete the tasks below.</p>
-<ol type="1">
-<li>Create a numeric vector with at least 6 values.</li>
-<li>Use inline code to report:
-<ul>
-<li>sample size</li>
-<li>mean</li>
-<li>standard deviation</li>
-</ul></li>
-<li>Change one value and re-render to confirm the sentence updates.</li>
-</ol>
-<p>Here is a starter example you may adapt:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Write a sentence like:</p>
-<p>The sample size was 6, the mean was 10.67, and the standard deviation was 5.35.</p>
-<hr>
-</section>
-<section id="key-takeaways" class="level2">
-<h2 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
-<p>Quarto allows you to combine writing and analysis. Markdown organizes your text. Code chunks run R. Inline code inserts calculated results into sentences. Reproducibility is a core skill for public health data science.</p>
-<hr>
-</section>
-<section id="looking-ahead" class="level2">
-<h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
-<p>Next week, we will begin data visualization using ggplot2 and you will continue writing all work in Quarto.</p>
+<section id="submission-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="submission-requirements">Submission Requirements</h2>
+<p>Submit:</p>
+<p>• your knitted report (word doc) • your .qmd source file • your 3MT slide</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -906,14 +682,11 @@ Tip
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./01-intro.html" class="pagination-link" aria-label="Lesson 1: Getting Started with R and RStudio">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Lesson 1: Getting Started with R and RStudio</span></span>
+      <a href="./06-slr.html" class="pagination-link" aria-label="Lesson 6: Simple Linear Regression">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Lesson 6: Simple Linear Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02b-inline.html" class="pagination-link" aria-label="Lesson 2b: Inline Code for Reproducible Writing">
-        <span class="nav-page-text"><span class="chapter-title">Lesson 2b: Inline Code for Reproducible Writing</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -1,0 +1,178 @@
+---
+title: "Project 2 — Cleaning & Preparing Health Data for Analysis (NHANES)"
+---
+
+## Purpose of Project 2
+
+This project moves you from global health context into real biomedical surveillance data. You will work with the `NHANES` dataset, which contains nationally
+representative health, exam, and behavioral measures from U.S. adults and children.
+
+The goal is to practice:
+
+• working with real-world health data
+• cleaning and restructuring data for analysis
+• managing missing values
+• creating new variables
+• documenting analytic decisions
+• writing clear and reproducible Quarto reports
+
+This project prepares you for regression modeling and inference in Project 3 and your final manuscript.
+
+## Dataset
+
+We will use the curated NHANES dataset included in the `NHANES` R package.
+
+This dataset includes variables such as:
+
+• demographics (age, gender, race/ethnicity, education, income)
+• health status
+• smoking behavior
+• BMI
+• blood pressure
+• activity levels
+• depression screening
+• medical conditions
+
+It is real data — including missingness, limitations, and measurement constraints.
+
+## Learning Objectives
+
+By completing this project, you will be able to:
+
+• clean biomedical data using tidyverse tools
+• identify and manage missing data
+• construct analytic variables
+• describe population patterns in health outcomes
+• explain cleaning choices transparently
+• submit a fully reproducible Quarto report
+
+These are core skills for public health data science.
+
+## Project Focus
+
+You will choose one health outcome, such as:
+
+• Hypertension
+• BMI (as continuous or categorized)
+• Depression symptoms
+• Diabetes status
+• Self-rated health
+• Smoking status
+
+and examine how it varies across predictors such as:
+
+• age
+• sex
+• race/ethnicity
+• income-to-poverty ratio
+• education
+• health behaviors
+
+:::.callout-tip
+You may propose an alternative outcome with approval.
+:::
+
+##Project Tasks
+
+Your Quarto report must include the following sections:
+
+**1. Introduction (≈ 2–3 paragraphs)**
+
+Briefly explain:
+
+• What NHANES is and why it matters in public health
+• Your chosen outcome and why it is important
+• Key predictors you will examine
+• Your broad guiding question
+
+(Example: How is hypertension patterned across age and income?)
+
+Use clear, MPH-appropriate language.
+
+**2. Data Preparation**
+
+Using tidyverse:
+
+• load the NHANES dataset
+• select your outcome and predictors
+• recode variables as needed (e.g., factors)
+• create at least one new variable, such as:
+o     age category
+o     BMI category
+o     income group
+o     binary hypertension status
+• remove or document missing data
+• provide a data dictionary table explaining variables
+
+All choices must be transparent and explained in writing.
+
+**3. Descriptive Statistics**
+
+Produce:
+
+• summary statistics (means, proportions, counts)
+• stratified summaries where appropriate
+• at least one table formatted for publication style
+
+Use inline R code whenever possible.
+
+**4. Visualizations**
+
+Create at least two figures, such as:
+
+• distributions of your outcome
+• outcome by age group
+• outcome by race/ethnicity
+• outcome by income category
+• outcome by smoking status
+
+Each figure must include:
+
+• clear title
+• labeled axes
+• readable formatting
+• a short interpretation paragraph
+
+**5. Missing Data Review**
+
+Briefly describe:
+
+• where missingness appears
+• how many cases were removed
+• why that matters for interpretation
+• potential bias concerns
+
+This introduces ethical & methodological thinking.
+
+**6. Reflection & Interpretation (≈ 3–4 paragraphs)**
+
+Discuss:
+
+• Public-health meaning of the patterns you observe
+• Possible explanations for disparities
+• Structural or contextual factors
+• What you would explore next with modeling
+
+This section begins to sound like an early manuscript Results + Discussion.
+
+## Formatting Requirements
+
+Your submission must:
+
+✔ be written entirely in Quarto
+✔ knit without errors
+✔ include inline code for reported values
+✔ use tidy, readable R code
+✔ apply organized section headings
+✔ include citations where relevant
+✔ use inclusive, professional language
+
+**Target length: 1,200–1,500 words (excluding code)**
+
+## Submission Requirements
+
+Submit:
+
+• your knitted report (word doc)
+• your .qmd source file
+• your 3MT slide
