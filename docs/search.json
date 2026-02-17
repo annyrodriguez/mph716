@@ -1170,16 +1170,6 @@
     ]
   },
   {
-    "objectID": "project1.html#section-1-introduction-1",
-    "href": "project1.html#section-1-introduction-1",
-    "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
-    "section": "Section 1: Introduction",
-    "text": "Section 1: Introduction\nIn your Introduction section, briefly describe:\n\nthe country you are examining\n\nwhy it is of interest from a public health perspective\n\nwhat outcomes you plan to explore\n\nThis section should be written in complete sentences and should not include code.",
-    "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Project 1 Lesson: Exploratory Data Story with Gapminder</span>"
-    ]
-  },
-  {
     "objectID": "project1.html#section-2-descriptive-exploration",
     "href": "project1.html#section-2-descriptive-exploration",
     "title": "Project 1 Lesson: Exploratory Data Story with Gapminder",
@@ -1474,7 +1464,17 @@
     "href": "06a-biostats1review.html",
     "title": "Lesson 6a - Biostats 1 Review",
     "section": "",
-    "text": "Lesson 6a: Biostats 1 Review\nIn this lesson, we will review what you should have learned in Biostats 1. The topics will include:\nThis lesson is not meant to teach you these items, but simply refresh your memory. We will learn how to run all of these items in R/RStudio.",
+    "text": "Purpose of this Lesson\nIn this lesson, we will review what you should have learned in Biostats 1. The topics will include:\nThis lesson is not meant to teach you these items, but simply refresh your memory. We will learn how to run all of these items in R/RStudio.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
+    ]
+  },
+  {
+    "objectID": "06a-biostats1review.html#purpose-of-this-lesson",
+    "href": "06a-biostats1review.html#purpose-of-this-lesson",
+    "title": "Lesson 6a - Biostats 1 Review",
+    "section": "",
+    "text": "Introduction to Data\nProbability\nDistribution of Random Variables\nInference",
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
@@ -1484,7 +1484,7 @@
     "href": "06a-biostats1review.html#chapter-1-refresher-data-and-variables",
     "title": "Lesson 6a - Biostats 1 Review",
     "section": "Chapter 1 refresher: Data and variables",
-    "text": "Chapter 1 refresher: Data and variables\n\nTypes of variables\nYou should already be familiar with the distinction between:\n\nCategorical variables (e.g., sex, race/ethnicity, region)\nNumeric variables (e.g., age, BMI, blood pressure)\n\nIn R, this distinction affects: - which summaries are appropriate\n- how plots are created\n- how variables enter regression models\n\n\n\nObservations and units of analysis\nEach row in a dataset represents one observational unit.\nExamples: - one person (NHANES) - one country-year (Gapminder) - one clinic visit\nBefore analyzing any dataset, you should always be able to answer:\n\nWhat does one row represent?\n\n\n\n\nStudy design and causality\nChapter 1 distinguishes between:\n\nObservational studies\nExperimental studies\n\nYou should be able to explain: - whether a study allows causal conclusions\n- why most public health datasets support associational, not causal, claims\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 1.1, 1.3, 1.9, 1.12, 1.16, 1.26, 1.28, 1.33., 1.35, 1.36",
+    "text": "Chapter 1 refresher: Data and variables\n\nTypes of variables\nYou should already be familiar with the distinction between:\n\nCategorical variables (e.g., sex, race/ethnicity, region)\nNumeric variables (e.g., age, BMI, blood pressure)\n\nIn R, this distinction affects: - which summaries are appropriate\n- how plots are created\n- how variables enter regression models\n\n\n\nObservations and units of analysis\nEach row in a dataset represents one observational unit.\nExamples:\n\none person (NHANES)\none country-year (Gapminder)\none clinic visit\n\nBefore analyzing any dataset, you should always be able to answer:\n\nWhat does one row represent?\n\n\n\n\nStudy design and causality\nChapter 1 distinguishes between:\n\nObservational studies\nExperimental studies\n\nYou should be able to explain:\n\nwhether a study allows causal conclusions\n\nwhy most public health datasets support associational, not causal, claims\n\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 1.1, 1.3, 1.9, 1.12, 1.16, 1.26, 1.28, 1.33., 1.35, 1.36",
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
@@ -1494,7 +1494,7 @@
     "href": "06a-biostats1review.html#chapter-2-refresher-probability",
     "title": "Lesson 6a - Biostats 1 Review",
     "section": "Chapter 2 refresher: Probability",
-    "text": "Chapter 2 refresher: Probability\n\nWhat probability represents\nProbability describes the long-run behavior of a random process.\nA probability: - quantifies uncertainty\n- does not predict individual outcomes\nIn public health contexts, probabilities are often expressed as risks or proportions.\n\n\n\nConditional probability and independence\nYou should be able to reason about: - probabilities given additional information\n- whether events are independent or related\nThese ideas support later discussions of risk factors and outcomes.\n\n\n\nCommon misconceptions\nA key goal of Chapter 2 is recognizing incorrect reasoning about chance.\nYou should be able to explain why: - past outcomes do not “force” future outcomes\n- randomness does not imply lack of structure\n\n\n\nNumerical summaries\nKey numerical summaries you should already recognize:\n\nmean\n\nmedian\n\nstandard deviation\n\nrange\n\ninterquartile range\n\nIn this course, you will: - compute these in R\n- report them using inline code\n- interpret them in writing\nExample reminder (conceptual):\nThe mean describes the average, while the standard deviation describes variability.\n\n\n\nShape, center, and spread\nWhen describing a numeric variable, you should think about:\n\ncenter (mean or median)\n\nspread (SD or IQR)\n\nshape (symmetric, skewed, multimodal)\n\nThese ideas will come up again when we assess model assumptions.\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 2.1, 2.5, 2.9, 2.11, 2.16, and 2.17.",
+    "text": "Chapter 2 refresher: Probability\n\nWhat probability represents\nProbability describes the long-run behavior of a random process.\nA probability:\n\nquantifies uncertainty\n\ndoes not predict individual outcomes\n\nIn public health contexts, probabilities are often expressed as risks or proportions.\n\n\n\nConditional probability and independence\nYou should be able to reason about:\n\nprobabilities given additional information\n\nwhether events are independent or related\n\nThese ideas support later discussions of risk factors and outcomes.\n\n\n\nCommon misconceptions\nA key goal of Chapter 2 is recognizing incorrect reasoning about chance.\nYou should be able to explain why:\n\npast outcomes do not “force” future outcomes\n\nrandomness does not imply lack of structure\n\n\n\n\nNumerical summaries\nKey numerical summaries you should already recognize:\n\nmean\n\nmedian\n\nstandard deviation\n\nrange\n\ninterquartile range\n\nIn this course, you will:\n\ncompute these in R\n\nreport them using inline code\n\ninterpret them in writing\n\nExample reminder (conceptual):\nThe mean describes the average, while the standard deviation describes variability.\n\n\n\nShape, center, and spread\nWhen describing a numeric variable, you should think about:\n\ncenter (mean or median)\n\nspread (SD or IQR)\n\nshape (symmetric, skewed, multimodal)\n\nThese ideas will come up again when we assess model assumptions.\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 2.1, 2.5, 2.9, 2.11, 2.16, and 2.17.",
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
@@ -1504,7 +1504,7 @@
     "href": "06a-biostats1review.html#chapter-3-refresher-distributions-of-random-variables",
     "title": "Lesson 6a - Biostats 1 Review",
     "section": "Chapter 3 refresher: Distributions of random variables",
-    "text": "Chapter 3 refresher: Distributions of random variables\n\nRandom variables\nA random variable assigns a numerical value to the outcome of a random process.\nYou should be able to: - define the random variable in context\n- state whether it is discrete or continuous\nThis skill is essential for understanding model outcomes later in the course.\n\n\n\nProbability distributions\nA probability distribution describes: - which values are more or less likely\n- how variability is structured\nThe book introduces common distributions conceptually (e.g., binomial, normal), without emphasizing computation.\n\n\n\nShape, center, and spread\nYou should be able to describe a distribution in terms of: - typical values\n- variability\n- skewness or symmetry\nThese ideas will reappear when assessing model assumptions.\n\n\nPurpose of visualization\nPlots help us: - identify patterns\n- detect outliers\n- compare groups\n- assess relationships\nIn this course, visualization is not optional — every plot must be interpreted in writing.\n\n\n\nMatching plots to variable types\nYou should already know:\n\ncategorical → bar charts\n\nnumeric → histograms, boxplots\n\ntwo numeric variables → scatterplots\n\nnumeric vs categorical → boxplots\n\nWe will implement these using ggplot2, but the statistical reasoning comes first.\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 3.1, 3.4, 3.8, 3.18, 3.20, 3.21, 3.43, 3.57.",
+    "text": "Chapter 3 refresher: Distributions of random variables\n\nRandom variables\nA random variable assigns a numerical value to the outcome of a random process.\nYou should be able to:\n\ndefine the random variable in context\n\nstate whether it is discrete or continuous\n\nThis skill is essential for understanding model outcomes later in the course.\n\n\n\nProbability distributions\nA probability distribution describes: - which values are more or less likely\n- how variability is structured\nThe book introduces common distributions conceptually (e.g., binomial, normal), without emphasizing computation.\n\n\n\nShape, center, and spread\nYou should be able to describe a distribution in terms of:\n\ntypical values\n\nvariability\n\nskewness or symmetry\n\nThese ideas will reappear when assessing model assumptions.\n\n\nPurpose of visualization\nPlots help us:\n\nidentify patterns\n\ndetect outliers\n\ncompare groups\n\nassess relationships\n\nIn this course, visualization is not optional — every plot must be interpreted in writing.\n\n\n\nMatching plots to variable types\nYou should already know:\n\ncategorical → bar charts\n\nnumeric → histograms, boxplots\n\ntwo numeric variables → scatterplots\n\nnumeric vs categorical → boxplots\n\nWe will implement these using ggplot2, but the statistical reasoning comes first.\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 3.1, 3.4, 3.8, 3.18, 3.20, 3.21, 3.43, 3.57.",
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
@@ -1514,7 +1514,7 @@
     "href": "06a-biostats1review.html#chapter-4-refresher-foundations-of-inference",
     "title": "Lesson 6a - Biostats 1 Review",
     "section": "Chapter 4 refresher: Foundations of inference",
-    "text": "Chapter 4 refresher: Foundations of inference\n\nWhy inference is needed\nChapter 4 explains why we cannot rely on a single sample to know a population value exactly.\nKey ideas include: - sampling variability\n- uncertainty in estimates\nInference provides tools to quantify this uncertainty.\n\n\n\nConfidence intervals (conceptual)\nA confidence interval gives a range of plausible values for a population parameter.\nYou should be able to: - interpret a confidence interval in words\n- explain what it does not mean\nThis skill is critical for reporting results in manuscripts.\n\n\n\nHypothesis testing (logic only)\nYou should recognize: - the role of a null hypothesis\n- what a small p-value suggests conceptually\nYou are not expected to memorize testing procedures at this stage.\n\n\nWhy probability matters in public health\nProbability underlies: - sampling variability\n- uncertainty in estimates\n- confidence intervals\n- statistical inference\nEven when we do not calculate probabilities directly, we rely on probabilistic reasoning.\n\n\n\nSampling vs population\nKey distinction:\n\nPopulation: the group we want to understand\n\nSample: the group we observe\n\nMost public health data are samples, even large ones.\nThis distinction motivates: - uncertainty estimates\n- cautious interpretation\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 4.1, 4.4, 4.7, 4.12, 4.16, 4.20, 4.24.",
+    "text": "Chapter 4 refresher: Foundations of inference\n\nWhy inference is needed\nChapter 4 explains why we cannot rely on a single sample to know a population value exactly.\nKey ideas include:\n\nsampling variability\n\nuncertainty in estimates\n\nInference provides tools to quantify this uncertainty.\n\n\n\nConfidence intervals (conceptual)\nA confidence interval gives a range of plausible values for a population parameter.\nYou should be able to:\n\ninterpret a confidence interval in words\n\nexplain what it does not mean\n\nThis skill is critical for reporting results in manuscripts.\n\n\n\nHypothesis testing (logic only)\nYou should recognize:\n\nthe role of a null hypothesis\n\nwhat a small p-value suggests conceptually\n\nYou are not expected to memorize testing procedures at this stage.\n\n\nWhy probability matters in public health\nProbability underlies:\n\nsampling variability\n\nuncertainty in estimates\n\nconfidence intervals\n\nstatistical inference\n\nEven when we do not calculate probabilities directly, we rely on probabilistic reasoning.\n\n\n\nSampling vs population\nKey distinction:\n\nPopulation: the group we want to understand\n\nSample: the group we observe\n\nMost public health data are samples, even large ones.\nThis distinction motivates:\n\nuncertainty estimates\n\ncautious interpretation\n\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 4.1, 4.4, 4.7, 4.12, 4.16, 4.20, 4.24.",
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
@@ -1524,7 +1524,7 @@
     "href": "06a-biostats1review.html#chapter-5-refresher-inference-for-numerical-data",
     "title": "Lesson 6a - Biostats 1 Review",
     "section": "Chapter 5 refresher: Inference for numerical data",
-    "text": "Chapter 5 refresher: Inference for numerical data\n\nEstimating and comparing means\nChapter 5 applies inference ideas to numerical outcomes.\nYou should be comfortable: - identifying the parameter being estimated\n- explaining comparisons between groups conceptually\n\n\n\nStatistical vs practical significance\nA recurring theme is that: - statistical significance does not equal importance\n- context and magnitude matter\nThis distinction is central to public health interpretation.\n\n\n\nScope of inference\nYou should always consider: - who was studied\n- who the results apply to\nThis affects how findings are communicated responsibly.\n\n\n\nVariability and uncertainty\nTwo important ideas:\n\nDifferent samples give different results\n\nWe quantify this variability using statistical methods\n\nThis is why: - confidence intervals exist\n- p-values are used (with caution)\n\n\n\nConfidence intervals (conceptual)\nA confidence interval provides a range of plausible values for a population parameter.\nIn this course, you will: - compute confidence intervals in R\n- report them using inline code\n- interpret them in plain language\nExample interpretation:\n\nWe are reasonably confident the true population value lies within this range.\n\n\n\n\nStatistical significance vs public health relevance\nYou should already know that:\n\nstatistical significance does not imply importance\n\nlarge samples can detect small differences\n\ncontext and magnitude matter\n\nThis distinction is critical in public health writing.\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 5.1, 5.2, 5.4, 5.8, 5.17, 5.19, 5.24, 5.36, 5.41, 5.44.",
+    "text": "Chapter 5 refresher: Inference for numerical data\n\nEstimating and comparing means\nChapter 5 applies inference ideas to numerical outcomes.\nYou should be comfortable:\n\nidentifying the parameter being estimated\n\nexplaining comparisons between groups conceptually\n\n\n\n\nStatistical vs practical significance\nA recurring theme is that:\n\nstatistical significance does not equal importance\n\ncontext and magnitude matter\n\nThis distinction is central to public health interpretation.\n\n\n\nScope of inference\nYou should always consider:\n\nwho was studied\n\nwho the results apply to\n\nThis affects how findings are communicated responsibly.\n\n\n\nVariability and uncertainty\nTwo important ideas:\n\nDifferent samples give different results\n\nWe quantify this variability using statistical methods\n\nThis is why:\n\nconfidence intervals exist\n\np-values are used (with caution)\n\n\n\n\nConfidence intervals (conceptual)\nA confidence interval provides a range of plausible values for a population parameter.\nIn this course, you will:\n\ncompute confidence intervals in R\n\nreport them using inline code\n\ninterpret them in plain language\n\nExample interpretation:\n\nWe are reasonably confident the true population value lies within this range.\n\n\n\n\nStatistical significance vs public health relevance\nYou should already know that:\n\nstatistical significance does not imply importance\n\nlarge samples can detect small differences\n\ncontext and magnitude matter\n\nThis distinction is critical in public health writing.\n\n\n\nProblem sets\nComplete problems from the OpenIntro Book 5.1, 5.2, 5.4, 5.8, 5.17, 5.19, 5.24, 5.36, 5.41, 5.44.",
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
     ]
@@ -1557,6 +1557,126 @@
     "text": "Self-check\nBefore moving on, ask yourself:\n\nCan I identify the outcome and predictor in a question?\nDo I know which summaries are appropriate for different variables?\nCan I interpret a confidence interval in words?\nCan I explain why uncertainty exists?\n\nIf any of these feel shaky, briefly revisit OpenIntro Chapters 1–5 alongside this lesson.",
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Lesson 6a - Biostats 1 Review</span>"
+    ]
+  },
+  {
+    "objectID": "06-slr.html",
+    "href": "06-slr.html",
+    "title": "Lesson 6: Simple Linear Regression",
+    "section": "",
+    "text": "Purpose of this lesson\nThis lesson introduces simple linear regression using a workflow consistent with the OpenIntro Biostatistics approach: start with a research question, visualize the relationship, fit a model, interpret results in context, and communicate findings responsibly using a reproducible R + Quarto workflow.\nYou are not expected to memorize formulas. You are expected to interpret results and report them clearly.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Lesson 6: Simple Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "06-slr.html#learning-goals",
+    "href": "06-slr.html#learning-goals",
+    "title": "Lesson 6: Simple Linear Regression",
+    "section": "Learning goals",
+    "text": "Learning goals\nBy the end of this lesson, you will be able to:\n\nIdentify the response and predictor variables in a regression question\n\nFit a simple linear regression model using lm()\n\nInterpret the slope as an association (not causation)\n\nVisualize a regression relationship with a fitted line\n\nReport regression results using inline R code\n\nPerform basic visual checks of regression assumptions",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Lesson 6: Simple Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "06-slr.html#key-terms",
+    "href": "06-slr.html#key-terms",
+    "title": "Lesson 6: Simple Linear Regression",
+    "section": "Key Terms",
+    "text": "Key Terms\nYou can refer to this table throughout the lesson (and beyond)\nAs a super quick reminder: In this course, definitions emphasize interpretation and application, not mathematical formulas.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Lesson 6: Simple Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "06-slr.html#key-terms-for-lesson-6",
+    "href": "06-slr.html#key-terms-for-lesson-6",
+    "title": "Lesson 6: Simple Linear Regression",
+    "section": "Key terms for Lesson 6",
+    "text": "Key terms for Lesson 6\n\n\n\n\n\n\n\nTerm\nPlain-language explanation\n\n\n\n\nSimple linear regression\nA statistical method used to describe the average association between one numeric predictor and one numeric outcome.\n\n\nOutcome (response variable)\nThe numeric variable we are trying to explain or understand (e.g., BMI).\n\n\nPredictor (explanatory variable)\nThe numeric variable used to help explain changes in the outcome (e.g., age).\n\n\nObservational unit\nThe entity represented by each row of the dataset (e.g., one survey participant).\n\n\nRegression line\nThe line that represents the model’s estimated average relationship between the predictor and outcome.\n\n\nSlope\nThe estimated average change in the outcome for a one-unit increase in the predictor.\n\n\nIntercept\nThe predicted value of the outcome when the predictor equals zero; often not meaningful in public health contexts.\n\n\nResidual\nThe difference between an observed outcome value and the value predicted by the regression model.\n\n\nLinearity\nThe assumption that the relationship between the predictor and outcome can be reasonably approximated by a straight line.\n\n\nConstant variance (homoscedasticity)\nThe assumption that the variability of residuals is roughly the same across all values of the predictor.\n\n\nNormality of residuals\nThe assumption that residuals are approximately normally distributed; important for confidence intervals and p-values.\n\n\nConfidence interval\nA range of plausible values for the true population-level association, reflecting uncertainty in the estimate.\n\n\nP-value\nA measure of how consistent the observed association is with the assumption of no association in the population.\n\n\nAssociation\nA statistical relationship between variables that does not, by itself, imply causation.\n\n\nCausation\nA relationship where changes in one variable directly produce changes in another; requires stronger study designs than simple regression.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Lesson 6: Simple Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "06-slr.html#setup",
+    "href": "06-slr.html#setup",
+    "title": "Lesson 6: Simple Linear Regression",
+    "section": "Setup",
+    "text": "Setup\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(broom)\n\n# Install once if needed:\n# install.packages(\"NHANES\")\nlibrary(NHANES)",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Lesson 6: Simple Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "06-slr.html#exploring-the-data",
+    "href": "06-slr.html#exploring-the-data",
+    "title": "Lesson 6: Simple Linear Regression",
+    "section": "Exploring the Data",
+    "text": "Exploring the Data\nWe will use a state-level public health dataset distributed with OpenIntro materials. Each row represents one U.S. state.\n\ndata(\"NHANES\")\nglimpse(NHANES)\n\nRows: 10,000\nColumns: 76\n$ ID               &lt;int&gt; 51624, 51624, 51624, 51625, 51630, 51638, 51646, 5164…\n$ SurveyYr         &lt;fct&gt; 2009_10, 2009_10, 2009_10, 2009_10, 2009_10, 2009_10,…\n$ Gender           &lt;fct&gt; male, male, male, male, female, male, male, female, f…\n$ Age              &lt;int&gt; 34, 34, 34, 4, 49, 9, 8, 45, 45, 45, 66, 58, 54, 10, …\n$ AgeDecade        &lt;fct&gt;  30-39,  30-39,  30-39,  0-9,  40-49,  0-9,  0-9,  40…\n$ AgeMonths        &lt;int&gt; 409, 409, 409, 49, 596, 115, 101, 541, 541, 541, 795,…\n$ Race1            &lt;fct&gt; White, White, White, Other, White, White, White, Whit…\n$ Race3            &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Education        &lt;fct&gt; High School, High School, High School, NA, Some Colle…\n$ MaritalStatus    &lt;fct&gt; Married, Married, Married, NA, LivePartner, NA, NA, M…\n$ HHIncome         &lt;fct&gt; 25000-34999, 25000-34999, 25000-34999, 20000-24999, 3…\n$ HHIncomeMid      &lt;int&gt; 30000, 30000, 30000, 22500, 40000, 87500, 60000, 8750…\n$ Poverty          &lt;dbl&gt; 1.36, 1.36, 1.36, 1.07, 1.91, 1.84, 2.33, 5.00, 5.00,…\n$ HomeRooms        &lt;int&gt; 6, 6, 6, 9, 5, 6, 7, 6, 6, 6, 5, 10, 6, 10, 10, 4, 3,…\n$ HomeOwn          &lt;fct&gt; Own, Own, Own, Own, Rent, Rent, Own, Own, Own, Own, O…\n$ Work             &lt;fct&gt; NotWorking, NotWorking, NotWorking, NA, NotWorking, N…\n$ Weight           &lt;dbl&gt; 87.4, 87.4, 87.4, 17.0, 86.7, 29.8, 35.2, 75.7, 75.7,…\n$ Length           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ HeadCirc         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Height           &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.…\n$ BMI              &lt;dbl&gt; 32.22, 32.22, 32.22, 15.30, 30.57, 16.82, 20.64, 27.2…\n$ BMICatUnder20yrs &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ BMI_WHO          &lt;fct&gt; 30.0_plus, 30.0_plus, 30.0_plus, 12.0_18.5, 30.0_plus…\n$ Pulse            &lt;int&gt; 70, 70, 70, NA, 86, 82, 72, 62, 62, 62, 60, 62, 76, 8…\n$ BPSysAve         &lt;int&gt; 113, 113, 113, NA, 112, 86, 107, 118, 118, 118, 111, …\n$ BPDiaAve         &lt;int&gt; 85, 85, 85, NA, 75, 47, 37, 64, 64, 64, 63, 74, 85, 6…\n$ BPSys1           &lt;int&gt; 114, 114, 114, NA, 118, 84, 114, 106, 106, 106, 124, …\n$ BPDia1           &lt;int&gt; 88, 88, 88, NA, 82, 50, 46, 62, 62, 62, 64, 76, 86, 6…\n$ BPSys2           &lt;int&gt; 114, 114, 114, NA, 108, 84, 108, 118, 118, 118, 108, …\n$ BPDia2           &lt;int&gt; 88, 88, 88, NA, 74, 50, 36, 68, 68, 68, 62, 72, 88, 6…\n$ BPSys3           &lt;int&gt; 112, 112, 112, NA, 116, 88, 106, 118, 118, 118, 114, …\n$ BPDia3           &lt;int&gt; 82, 82, 82, NA, 76, 44, 38, 60, 60, 60, 64, 76, 82, 7…\n$ Testosterone     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ DirectChol       &lt;dbl&gt; 1.29, 1.29, 1.29, NA, 1.16, 1.34, 1.55, 2.12, 2.12, 2…\n$ TotChol          &lt;dbl&gt; 3.49, 3.49, 3.49, NA, 6.70, 4.86, 4.09, 5.82, 5.82, 5…\n$ UrineVol1        &lt;int&gt; 352, 352, 352, NA, 77, 123, 238, 106, 106, 106, 113, …\n$ UrineFlow1       &lt;dbl&gt; NA, NA, NA, NA, 0.094, 1.538, 1.322, 1.116, 1.116, 1.…\n$ UrineVol2        &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ UrineFlow2       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Diabetes         &lt;fct&gt; No, No, No, No, No, No, No, No, No, No, No, No, No, N…\n$ DiabetesAge      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ HealthGen        &lt;fct&gt; Good, Good, Good, NA, Good, NA, NA, Vgood, Vgood, Vgo…\n$ DaysPhysHlthBad  &lt;int&gt; 0, 0, 0, NA, 0, NA, NA, 0, 0, 0, 10, 0, 4, NA, NA, 0,…\n$ DaysMentHlthBad  &lt;int&gt; 15, 15, 15, NA, 10, NA, NA, 3, 3, 3, 0, 0, 0, NA, NA,…\n$ LittleInterest   &lt;fct&gt; Most, Most, Most, NA, Several, NA, NA, None, None, No…\n$ Depressed        &lt;fct&gt; Several, Several, Several, NA, Several, NA, NA, None,…\n$ nPregnancies     &lt;int&gt; NA, NA, NA, NA, 2, NA, NA, 1, 1, 1, NA, NA, NA, NA, N…\n$ nBabies          &lt;int&gt; NA, NA, NA, NA, 2, NA, NA, NA, NA, NA, NA, NA, NA, NA…\n$ Age1stBaby       &lt;int&gt; NA, NA, NA, NA, 27, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ SleepHrsNight    &lt;int&gt; 4, 4, 4, NA, 8, NA, NA, 8, 8, 8, 7, 5, 4, NA, 5, 7, N…\n$ SleepTrouble     &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, No, No, No, No, No, Y…\n$ PhysActive       &lt;fct&gt; No, No, No, NA, No, NA, NA, Yes, Yes, Yes, Yes, Yes, …\n$ PhysActiveDays   &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, 5, 5, 5, 7, 5, 1, NA, 2, …\n$ TVHrsDay         &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ CompHrsDay       &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ TVHrsDayChild    &lt;int&gt; NA, NA, NA, 4, NA, 5, 1, NA, NA, NA, NA, NA, NA, 4, N…\n$ CompHrsDayChild  &lt;int&gt; NA, NA, NA, 1, NA, 0, 6, NA, NA, NA, NA, NA, NA, 3, N…\n$ Alcohol12PlusYr  &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, Yes, Yes, Yes, Yes, Y…\n$ AlcoholDay       &lt;int&gt; NA, NA, NA, NA, 2, NA, NA, 3, 3, 3, 1, 2, 6, NA, NA, …\n$ AlcoholYear      &lt;int&gt; 0, 0, 0, NA, 20, NA, NA, 52, 52, 52, 100, 104, 364, N…\n$ SmokeNow         &lt;fct&gt; No, No, No, NA, Yes, NA, NA, NA, NA, NA, No, NA, NA, …\n$ Smoke100         &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, No, No, No, Yes, No, …\n$ Smoke100n        &lt;fct&gt; Smoker, Smoker, Smoker, NA, Smoker, NA, NA, Non-Smoke…\n$ SmokeAge         &lt;int&gt; 18, 18, 18, NA, 38, NA, NA, NA, NA, NA, 13, NA, NA, N…\n$ Marijuana        &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, Yes, Yes, Yes, NA, Ye…\n$ AgeFirstMarij    &lt;int&gt; 17, 17, 17, NA, 18, NA, NA, 13, 13, 13, NA, 19, 15, N…\n$ RegularMarij     &lt;fct&gt; No, No, No, NA, No, NA, NA, No, No, No, NA, Yes, Yes,…\n$ AgeRegMarij      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 20, 15, N…\n$ HardDrugs        &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, No, No, No, No, Yes, …\n$ SexEver          &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, Yes, Yes, Yes, Yes, Y…\n$ SexAge           &lt;int&gt; 16, 16, 16, NA, 12, NA, NA, 13, 13, 13, 17, 22, 12, N…\n$ SexNumPartnLife  &lt;int&gt; 8, 8, 8, NA, 10, NA, NA, 20, 20, 20, 15, 7, 100, NA, …\n$ SexNumPartYear   &lt;int&gt; 1, 1, 1, NA, 1, NA, NA, 0, 0, 0, NA, 1, 1, NA, NA, 1,…\n$ SameSex          &lt;fct&gt; No, No, No, NA, Yes, NA, NA, Yes, Yes, Yes, No, No, N…\n$ SexOrientation   &lt;fct&gt; Heterosexual, Heterosexual, Heterosexual, NA, Heteros…\n$ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n\n\n\n\n\n\n\n\nTip\n\n\n\nDo you know what all of these variables mean? Make sure to understand your dataset before you start to analyze.\n\n\n\nSelecting Variables\nWe need to pick one Response variable and one Predictor variable.\n\nWhat is another way we can phrase this?\n\nIf we follow along our OpenIntro textbook, this aligns with:\n\nnumeric response\nnumeric predictor\nlinear association\ninterpretation before complexity",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Lesson 6: Simple Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "06-slr.html#cleaning-the-data",
+    "href": "06-slr.html#cleaning-the-data",
+    "title": "Lesson 6: Simple Linear Regression",
+    "section": "Cleaning the Data",
+    "text": "Cleaning the Data\nWhat did you first notice about this dataset?\nIf you said “there’s a lot of missing data”, you’re right. This is a real-world dataset, with real-world problems. One of them being that there will be missing data.\nI have decided to use age and bmi as my predictor and response variables, respectively. I noticed that these variables have missing data.\nHow do we handle this? Well, we can do the following:\n\ndf &lt;- NHANES %&gt;%\n  select(Age, BMI) %&gt;%\n  drop_na()\n\n\nWhat happened? And is this the best way to handle this?\n\nShort answer: For the purpose of this course (and this lesson), by using drop_na(), it’s the simplest mechanical way to handle missing data. HOWEVER, this is not the ideal method. We will cover that in a later lesson.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Lesson 6: Simple Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "06-slr.html#lets-visualize",
+    "href": "06-slr.html#lets-visualize",
+    "title": "Lesson 6: Simple Linear Regression",
+    "section": "Let’s Visualize",
+    "text": "Let’s Visualize\nBy now, you’re experts at creating graphs using ggplot.\n\nggplot(df, \n       aes(\n         x = Age, \n         y = BMI)\n       ) +\n  geom_point(\n    alpha = 0.3\n    ) +\n  labs(\n    title = \"BMI vs Age (NHANES)\",\n    x = \"Age (years)\",\n    y = \"Body Mass Index\"\n  )\n\n\n\n\n\n\n\n\nTry to interpret the graph using public health terms and using plain English.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Lesson 6: Simple Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "06-slr.html#fit-simple-linear-regression",
+    "href": "06-slr.html#fit-simple-linear-regression",
+    "title": "Lesson 6: Simple Linear Regression",
+    "section": "Fit Simple Linear Regression",
+    "text": "Fit Simple Linear Regression\n\nmodel &lt;- lm(BMI ~ Age, data = df)\nsummary(model)\n\n\nCall:\nlm(formula = BMI ~ Age, data = df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-16.794  -4.803  -1.236   3.466  55.697 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 21.451688   0.137193  156.36   &lt;2e-16 ***\nAge          0.138033   0.003148   43.84   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 6.735 on 9632 degrees of freedom\nMultiple R-squared:  0.1664,    Adjusted R-squared:  0.1663 \nF-statistic:  1922 on 1 and 9632 DF,  p-value: &lt; 2.2e-16\n\n\nHow would you interpret this table?\nYou are not expected to interpret everything in the regression output.\nInstead, focus on one row only: the row corresponding to Age.\nFrom that row, identify:\n\nEstimate → the slope (average change in BMI per year of age)\np-value → evidence of an association\nDirection → positive or negative relationship\n\nIgnore the following for now:\n\nR-squared\nF-statistic\nInterpretation of the intercept",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Lesson 6: Simple Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "06-slr.html#slope-and-confidence-interval",
+    "href": "06-slr.html#slope-and-confidence-interval",
+    "title": "Lesson 6: Simple Linear Regression",
+    "section": "Slope and Confidence Interval",
+    "text": "Slope and Confidence Interval\n\nslope &lt;- coef(model)[\"Age\"]\nci &lt;- confint(model)[\"Age\", ]\n\nThe slope represents the average change in BMI for a one-year increase in age.\n\nInline reporting (required)\nUse inline R code to report results so that your document updates automatically if the model changes.\nFor each additional year of age, BMI changes by an average of 0.138 units (95% CI: 0.132 to 0.144.\n\n\nHow to interpret this sentence\nThis sentence communicates:\n\nDirection of the association\nMagnitude of the change\nUncertainty in the estimate\n\n\nThis describes an association, not causation.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Lesson 6: Simple Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "06-slr.html#adding-a-regression-line",
+    "href": "06-slr.html#adding-a-regression-line",
+    "title": "Lesson 6: Simple Linear Regression",
+    "section": "Adding a Regression Line",
+    "text": "Adding a Regression Line\n\nggplot(df, aes(x = Age, y = BMI)) +\n  geom_point(alpha = 0.3) +\n  geom_smooth(method = \"lm\", se = TRUE) +\n  labs(\n    title = \"Simple Linear Regression of BMI on Age\",\n    x = \"Age (years)\",\n    y = \"Body Mass Index\"\n  )\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\nThis plot combines:\n\nthe raw data (points), and\nthe model’s predicted average relationship (line).\n\nThe shaded band around the line represents the 95% confidence interval for the mean predicted BMI at each age.\nYou should focus on:\nDirection of the line\n\nDoes the line slope upward or downward?\nThis should match the sign of the slope from the regression output.\n\nHow well the line summarizes the data\n\nDo the points generally cluster around the line?\nOr is there substantial scatter?\n\nUncertainty around the line\n\nIs the confidence band narrow or wide?\nWider bands indicate more uncertainty in the estimated relationship.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Lesson 6: Simple Linear Regression</span>"
+    ]
+  },
+  {
+    "objectID": "06-slr.html#running-diagnostics",
+    "href": "06-slr.html#running-diagnostics",
+    "title": "Lesson 6: Simple Linear Regression",
+    "section": "Running Diagnostics",
+    "text": "Running Diagnostics\n\nplot(model, which = 1)  # Residuals vs Fitted\n\n\n\n\n\n\n\nplot(model, which = 2)  # Normal Q-Q\n\n\n\n\n\n\n\n\nThese plots help assess whether the assumptions of linear regression are reasonably met.\nYou are expected to recognize obvious red flags.\n\nPlot 1: Residuals vs. Fitted\nThis plot checks:\n\nLinearity\nConstant variability (homoscedasticity)\n\nWhat YOU should look for:\n\nResiduals scattered randomly around zero\nNo clear curve or pattern\nRoughly equal spread across fitted values\n\nAcceptable interpretation:\nThe residuals appear randomly scattered around zero with no strong curvature, suggesting the linearity assumption is reasonable. The spread of residuals is fairly consistent across fitted values, indicating approximately constant variance.\nWhat would indicate a concern:\n\nCurved pattern → possible nonlinearity\nFunnel shape → non-constant variance\n\nYou should identify, not fix, these issues (at least not yet anyways).\n\n\nPlot 2: Normasl Q-Q Plot\nWhat this plot checks:\n\nApproximate normality of residuals\n\nThis matters for:\n\nconfidence intervals\np-values\n\nWhat YOU should look for:\n\nPoints falling roughly along the diagonal line\nSmall deviations at the ends are acceptable\n\nNormality is about the residuals, not the outcome variable itself.\n\nIn this course, you are expected to describe diagnostic plots in words and identify major issues if present, not to diagnose or correct subtle statistical problems.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Lesson 6: Simple Linear Regression</span>"
     ]
   }
 ]

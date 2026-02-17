@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./06-slr.html" rel="next">
 <link href="./05-tidydata.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -157,6 +158,11 @@ ul.task-list li input[type="checkbox"] {
   <a href="./06a-biostats1review.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Lesson 6a - Biostats 1 Review</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-slr.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 6: Simple Linear Regression</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -167,8 +173,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lesson-6a-biostats-1-review" id="toc-lesson-6a-biostats-1-review" class="nav-link active" data-scroll-target="#lesson-6a-biostats-1-review">Lesson 6a: Biostats 1 Review</a>
-  <ul class="collapse">
+  <li><a href="#purpose-of-this-lesson" id="toc-purpose-of-this-lesson" class="nav-link active" data-scroll-target="#purpose-of-this-lesson">Purpose of this Lesson</a></li>
   <li><a href="#chapter-1-refresher-data-and-variables" id="toc-chapter-1-refresher-data-and-variables" class="nav-link" data-scroll-target="#chapter-1-refresher-data-and-variables">Chapter 1 refresher: Data and variables</a>
   <ul class="collapse">
   <li><a href="#types-of-variables" id="toc-types-of-variables" class="nav-link" data-scroll-target="#types-of-variables">Types of variables</a></li>
@@ -216,7 +221,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#connecting-openintro-concepts-to-r-and-quarto" id="toc-connecting-openintro-concepts-to-r-and-quarto" class="nav-link" data-scroll-target="#connecting-openintro-concepts-to-r-and-quarto">Connecting OpenIntro concepts to R and Quarto</a></li>
   <li><a href="#what-you-are-expected-to-remember" id="toc-what-you-are-expected-to-remember" class="nav-link" data-scroll-target="#what-you-are-expected-to-remember">What you are expected to remember</a></li>
   <li><a href="#self-check" id="toc-self-check" class="nav-link" data-scroll-target="#self-check">Self-check</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -242,8 +246,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="lesson-6a-biostats-1-review" class="level1">
-<h1>Lesson 6a: Biostats 1 Review</h1>
+<section id="purpose-of-this-lesson" class="level2">
+<h2 class="anchored" data-anchor-id="purpose-of-this-lesson">Purpose of this Lesson</h2>
 <p>In this lesson, we will review what you should have learned in Biostats 1. The topics will include:</p>
 <ul>
 <li>Introduction to Data</li>
@@ -252,6 +256,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Inference</li>
 </ul>
 <p>This lesson is not meant to <strong>teach</strong> you these items, but simply <strong>refresh</strong> your memory. We will learn how to run all of these items in R/RStudio.</p>
+</section>
 <section id="chapter-1-refresher-data-and-variables" class="level2">
 <h2 class="anchored" data-anchor-id="chapter-1-refresher-data-and-variables">Chapter 1 refresher: Data and variables</h2>
 <section id="types-of-variables" class="level3">
@@ -269,7 +274,12 @@ ul.task-list li input[type="checkbox"] {
 <section id="observations-and-units-of-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="observations-and-units-of-analysis">Observations and units of analysis</h3>
 <p>Each row in a dataset represents <strong>one observational unit</strong>.</p>
-<p>Examples: - one person (NHANES) - one country-year (Gapminder) - one clinic visit</p>
+<p>Examples:</p>
+<ul>
+<li>one person (NHANES)</li>
+<li>one country-year (Gapminder)</li>
+<li>one clinic visit</li>
+</ul>
 <p>Before analyzing any dataset, you should always be able to answer:</p>
 <blockquote class="blockquote">
 <p>What does one row represent?</p>
@@ -283,8 +293,12 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Observational studies</strong></li>
 <li><strong>Experimental studies</strong></li>
 </ul>
-<p>You should be able to explain: - whether a study allows causal conclusions<br>
-- why most public health datasets support <strong>associational</strong>, not causal, claims</p>
+<p>You should be able to explain:</p>
+<ul>
+<li>whether a study allows causal conclusions<br>
+</li>
+<li>why most public health datasets support <strong>associational</strong>, not causal, claims</li>
+</ul>
 <hr>
 </section>
 <section id="problem-sets" class="level3">
@@ -298,23 +312,35 @@ ul.task-list li input[type="checkbox"] {
 <section id="what-probability-represents" class="level3">
 <h3 class="anchored" data-anchor-id="what-probability-represents">What probability represents</h3>
 <p>Probability describes the <strong>long-run behavior</strong> of a random process.</p>
-<p>A probability: - quantifies uncertainty<br>
-- does not predict individual outcomes</p>
+<p>A probability:</p>
+<ul>
+<li>quantifies uncertainty<br>
+</li>
+<li>does not predict individual outcomes</li>
+</ul>
 <p>In public health contexts, probabilities are often expressed as risks or proportions.</p>
 <hr>
 </section>
 <section id="conditional-probability-and-independence" class="level3">
 <h3 class="anchored" data-anchor-id="conditional-probability-and-independence">Conditional probability and independence</h3>
-<p>You should be able to reason about: - probabilities given additional information<br>
-- whether events are independent or related</p>
+<p>You should be able to reason about:</p>
+<ul>
+<li>probabilities given additional information<br>
+</li>
+<li>whether events are independent or related</li>
+</ul>
 <p>These ideas support later discussions of risk factors and outcomes.</p>
 <hr>
 </section>
 <section id="common-misconceptions" class="level3">
 <h3 class="anchored" data-anchor-id="common-misconceptions">Common misconceptions</h3>
 <p>A key goal of Chapter 2 is recognizing incorrect reasoning about chance.</p>
-<p>You should be able to explain why: - past outcomes do not “force” future outcomes<br>
-- randomness does not imply lack of structure</p>
+<p>You should be able to explain why:</p>
+<ul>
+<li>past outcomes do not “force” future outcomes<br>
+</li>
+<li>randomness does not imply lack of structure</li>
+</ul>
 <hr>
 </section>
 <section id="numerical-summaries" class="level3">
@@ -331,9 +357,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
 <li>interquartile range</li>
 </ul>
-<p>In this course, you will: - compute these in R<br>
-- report them using <strong>inline code</strong><br>
-- interpret them in writing</p>
+<p>In this course, you will:</p>
+<ul>
+<li>compute these in R<br>
+</li>
+<li>report them using <strong>inline code</strong><br>
+</li>
+<li>interpret them in writing</li>
+</ul>
 <p>Example reminder (conceptual):</p>
 <p>The mean describes the average, while the standard deviation describes variability.</p>
 <hr>
@@ -362,8 +393,12 @@ ul.task-list li input[type="checkbox"] {
 <section id="random-variables" class="level3">
 <h3 class="anchored" data-anchor-id="random-variables">Random variables</h3>
 <p>A <strong>random variable</strong> assigns a numerical value to the outcome of a random process.</p>
-<p>You should be able to: - define the random variable in context<br>
-- state whether it is <strong>discrete or continuous</strong></p>
+<p>You should be able to:</p>
+<ul>
+<li>define the random variable in context<br>
+</li>
+<li>state whether it is <strong>discrete or continuous</strong></li>
+</ul>
 <p>This skill is essential for understanding model outcomes later in the course.</p>
 <hr>
 </section>
@@ -376,17 +411,28 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="shape-center-and-spread-1" class="level3">
 <h3 class="anchored" data-anchor-id="shape-center-and-spread-1">Shape, center, and spread</h3>
-<p>You should be able to describe a distribution in terms of: - typical values<br>
-- variability<br>
-- skewness or symmetry</p>
+<p>You should be able to describe a distribution in terms of:</p>
+<ul>
+<li>typical values<br>
+</li>
+<li>variability<br>
+</li>
+<li>skewness or symmetry</li>
+</ul>
 <p>These ideas will reappear when assessing model assumptions.</p>
 </section>
 <section id="purpose-of-visualization" class="level3">
 <h3 class="anchored" data-anchor-id="purpose-of-visualization">Purpose of visualization</h3>
-<p>Plots help us: - identify patterns<br>
-- detect outliers<br>
-- compare groups<br>
-- assess relationships</p>
+<p>Plots help us:</p>
+<ul>
+<li>identify patterns<br>
+</li>
+<li>detect outliers<br>
+</li>
+<li>compare groups<br>
+</li>
+<li>assess relationships</li>
+</ul>
 <p>In this course, visualization is not optional — every plot must be <strong>interpreted in writing</strong>.</p>
 <hr>
 </section>
@@ -416,31 +462,49 @@ ul.task-list li input[type="checkbox"] {
 <section id="why-inference-is-needed" class="level3">
 <h3 class="anchored" data-anchor-id="why-inference-is-needed">Why inference is needed</h3>
 <p>Chapter 4 explains why we cannot rely on a single sample to know a population value exactly.</p>
-<p>Key ideas include: - sampling variability<br>
-- uncertainty in estimates</p>
+<p>Key ideas include:</p>
+<ul>
+<li>sampling variability<br>
+</li>
+<li>uncertainty in estimates</li>
+</ul>
 <p>Inference provides tools to quantify this uncertainty.</p>
 <hr>
 </section>
 <section id="confidence-intervals-conceptual" class="level3">
 <h3 class="anchored" data-anchor-id="confidence-intervals-conceptual">Confidence intervals (conceptual)</h3>
 <p>A confidence interval gives a <strong>range of plausible values</strong> for a population parameter.</p>
-<p>You should be able to: - interpret a confidence interval in words<br>
-- explain what it does <em>not</em> mean</p>
+<p>You should be able to:</p>
+<ul>
+<li>interpret a confidence interval in words<br>
+</li>
+<li>explain what it does <em>not</em> mean</li>
+</ul>
 <p>This skill is critical for reporting results in manuscripts.</p>
 <hr>
 </section>
 <section id="hypothesis-testing-logic-only" class="level3">
 <h3 class="anchored" data-anchor-id="hypothesis-testing-logic-only">Hypothesis testing (logic only)</h3>
-<p>You should recognize: - the role of a null hypothesis<br>
-- what a small p-value suggests conceptually</p>
+<p>You should recognize:</p>
+<ul>
+<li>the role of a null hypothesis<br>
+</li>
+<li>what a small p-value suggests conceptually</li>
+</ul>
 <p>You are not expected to memorize testing procedures at this stage.</p>
 </section>
 <section id="why-probability-matters-in-public-health" class="level3">
 <h3 class="anchored" data-anchor-id="why-probability-matters-in-public-health">Why probability matters in public health</h3>
-<p>Probability underlies: - sampling variability<br>
-- uncertainty in estimates<br>
-- confidence intervals<br>
-- statistical inference</p>
+<p>Probability underlies:</p>
+<ul>
+<li>sampling variability<br>
+</li>
+<li>uncertainty in estimates<br>
+</li>
+<li>confidence intervals<br>
+</li>
+<li>statistical inference</li>
+</ul>
 <p>Even when we do not calculate probabilities directly, we rely on probabilistic reasoning.</p>
 <hr>
 </section>
@@ -453,8 +517,12 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Sample</strong>: the group we observe</li>
 </ul>
 <p>Most public health data are samples, even large ones.</p>
-<p>This distinction motivates: - uncertainty estimates<br>
-- cautious interpretation</p>
+<p>This distinction motivates:</p>
+<ul>
+<li>uncertainty estimates<br>
+</li>
+<li>cautious interpretation</li>
+</ul>
 <hr>
 </section>
 <section id="problem-sets-3" class="level3">
@@ -468,21 +536,33 @@ ul.task-list li input[type="checkbox"] {
 <section id="estimating-and-comparing-means" class="level3">
 <h3 class="anchored" data-anchor-id="estimating-and-comparing-means">Estimating and comparing means</h3>
 <p>Chapter 5 applies inference ideas to numerical outcomes.</p>
-<p>You should be comfortable: - identifying the parameter being estimated<br>
-- explaining comparisons between groups conceptually</p>
+<p>You should be comfortable:</p>
+<ul>
+<li>identifying the parameter being estimated<br>
+</li>
+<li>explaining comparisons between groups conceptually</li>
+</ul>
 <hr>
 </section>
 <section id="statistical-vs-practical-significance" class="level3">
 <h3 class="anchored" data-anchor-id="statistical-vs-practical-significance">Statistical vs practical significance</h3>
-<p>A recurring theme is that: - statistical significance does not equal importance<br>
-- context and magnitude matter</p>
+<p>A recurring theme is that:</p>
+<ul>
+<li>statistical significance does not equal importance<br>
+</li>
+<li>context and magnitude matter</li>
+</ul>
 <p>This distinction is central to public health interpretation.</p>
 <hr>
 </section>
 <section id="scope-of-inference" class="level3">
 <h3 class="anchored" data-anchor-id="scope-of-inference">Scope of inference</h3>
-<p>You should always consider: - who was studied<br>
-- who the results apply to</p>
+<p>You should always consider:</p>
+<ul>
+<li>who was studied<br>
+</li>
+<li>who the results apply to</li>
+</ul>
 <p>This affects how findings are communicated responsibly.</p>
 <hr>
 </section>
@@ -494,16 +574,25 @@ ul.task-list li input[type="checkbox"] {
 </li>
 <li>We quantify this variability using statistical methods</li>
 </ol>
-<p>This is why: - confidence intervals exist<br>
-- p-values are used (with caution)</p>
+<p>This is why:</p>
+<ul>
+<li>confidence intervals exist<br>
+</li>
+<li>p-values are used (with caution)</li>
+</ul>
 <hr>
 </section>
 <section id="confidence-intervals-conceptual-1" class="level3">
 <h3 class="anchored" data-anchor-id="confidence-intervals-conceptual-1">Confidence intervals (conceptual)</h3>
 <p>A confidence interval provides a <strong>range of plausible values</strong> for a population parameter.</p>
-<p>In this course, you will: - compute confidence intervals in R<br>
-- report them using inline code<br>
-- interpret them in plain language</p>
+<p>In this course, you will:</p>
+<ul>
+<li>compute confidence intervals in R<br>
+</li>
+<li>report them using inline code<br>
+</li>
+<li>interpret them in plain language</li>
+</ul>
 <p>Example interpretation:</p>
 <blockquote class="blockquote">
 <p>We are reasonably confident the true population value lies within this range.</p>
@@ -600,7 +689,6 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1010,6 +1098,9 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./06-slr.html" class="pagination-link" aria-label="Lesson 6: Simple Linear Regression">
+        <span class="nav-page-text"><span class="chapter-title">Lesson 6: Simple Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

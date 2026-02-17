@@ -17,7 +17,8 @@ book:
     - project1.qmd
     - 05-tidydata.qmd
     - 06a-biostats1review.qmd
-
+    - 06-slr.qmd
+    
 format:
   html:
     theme: cosmo

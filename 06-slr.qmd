@@ -1,4 +1,279 @@
 ---
-title: "06-slr"
+title: "Lesson 6: Simple Linear Regression"
 ---
 
+## Purpose of this lesson
+
+This lesson introduces **simple linear regression** using a workflow consistent with the OpenIntro Biostatistics approach: start with a research question, visualize the relationship, fit a model, interpret results in context, and communicate findings responsibly using a reproducible R + Quarto workflow.
+
+You are not expected to memorize formulas. You are expected to interpret results and report them clearly.
+
+
+## Learning goals
+
+By the end of this lesson, you will be able to:
+
+-   Identify the response and predictor variables in a regression question\
+-   Fit a simple linear regression model using `lm()`\
+-   Interpret the slope as an association (not causation)\
+-   Visualize a regression relationship with a fitted line\
+-   Report regression results using inline R code\
+-   Perform basic visual checks of regression assumptions
+
+## Key Terms
+
+You can refer to this table throughout the lesson (and beyond)
+
+As a **super quick** reminder: In this course, definitions emphasize interpretation and application, not mathematical formulas.
+
+## Key terms for Lesson 6
+
+| Term | Plain-language explanation |
+|------|----------------------------|
+| Simple linear regression | A statistical method used to describe the average association between one numeric predictor and one numeric outcome. |
+| Outcome (response variable) | The numeric variable we are trying to explain or understand (e.g., BMI). |
+| Predictor (explanatory variable) | The numeric variable used to help explain changes in the outcome (e.g., age). |
+| Observational unit | The entity represented by each row of the dataset (e.g., one survey participant). |
+| Regression line | The line that represents the model’s estimated average relationship between the predictor and outcome. |
+| Slope | The estimated average change in the outcome for a one-unit increase in the predictor. |
+| Intercept | The predicted value of the outcome when the predictor equals zero; often not meaningful in public health contexts. |
+| Residual | The difference between an observed outcome value and the value predicted by the regression model. |
+| Linearity | The assumption that the relationship between the predictor and outcome can be reasonably approximated by a straight line. |
+| Constant variance (homoscedasticity) | The assumption that the variability of residuals is roughly the same across all values of the predictor. |
+| Normality of residuals | The assumption that residuals are approximately normally distributed; important for confidence intervals and p-values. |
+| Confidence interval | A range of plausible values for the true population-level association, reflecting uncertainty in the estimate. |
+| P-value | A measure of how consistent the observed association is with the assumption of no association in the population. |
+| Association | A statistical relationship between variables that does not, by itself, imply causation. |
+| Causation | A relationship where changes in one variable directly produce changes in another; requires stronger study designs than simple regression. |
+
+## Setup
+
+```{r}
+library(tidyverse)
+library(broom)
+
+# Install once if needed:
+# install.packages("NHANES")
+library(NHANES)
+```
+
+## Exploring the Data
+
+We will use a state-level public health dataset distributed with OpenIntro materials. Each row represents **one U.S. state**.
+
+```{r}
+data("NHANES")
+glimpse(NHANES)
+```
+
+::: callout-tip
+Do you know what all of these variables mean? Make sure to understand your dataset before you start to analyze.
+:::
+
+### Selecting Variables
+
+We need to pick one **Response** variable and one **Predictor** variable.
+
+::: callout-question
+What is another way we can phrase this?
+:::
+
+If we follow along our OpenIntro textbook, this aligns with:
+
+-   numeric response
+-   numeric predictor
+-   linear association
+-   interpretation before complexity
+
+## Cleaning the Data
+
+What did you first notice about this dataset?
+
+If you said "there's a lot of missing data", you're right. This is a real-world dataset, with real-world problems. One of them being that there will be missing data.
+
+I have decided to use `age` and `bmi` as my predictor and response variables, respectively. I noticed that these variables have missing data.
+
+How do we handle this? Well, we can do the following:
+
+```{r}
+df <- NHANES %>%
+  select(Age, BMI) %>%
+  drop_na()
+```
+
+::: callout-question
+What happened? And is this the best way to handle this?
+:::
+
+Short answer: For the purpose of this course (and this lesson), by using `drop_na()`, it's the simplest mechanical way to handle missing data. **HOWEVER**, this is not the ideal method. We will cover that in a later lesson.
+
+## Let's Visualize
+
+By now, you're experts at creating graphs using `ggplot`.
+
+```{r}
+ggplot(df, 
+       aes(
+         x = Age, 
+         y = BMI)
+       ) +
+  geom_point(
+    alpha = 0.3
+    ) +
+  labs(
+    title = "BMI vs Age (NHANES)",
+    x = "Age (years)",
+    y = "Body Mass Index"
+  )
+
+```
+
+Try to interpret the graph using **public health** terms and using **plain English**.
+
+## Fit Simple Linear Regression
+
+```{r}
+model <- lm(BMI ~ Age, data = df)
+summary(model)
+```
+
+How would you interpret this table?
+
+You are not expected to interpret everything in the regression output.
+
+Instead, focus on one row only: the row corresponding to **Age**.
+
+From that row, identify:
+
+-   **Estimate** → the slope (average change in BMI per year of age)
+-   **p-value** → evidence of an association
+-   **Direction** → positive or negative relationship
+
+Ignore the following for now:
+
+-   R-squared
+-   F-statistic
+-   Interpretation of the intercept
+
+## Slope and Confidence Interval
+
+```{r}
+slope <- coef(model)["Age"]
+ci <- confint(model)["Age", ]
+```
+
+The **slope** represents the average change in BMI for a **one-year increase in age**.
+
+### Inline reporting (required)
+
+Use inline R code to report results so that your document updates automatically if the model changes.
+
+For each additional year of age, BMI changes by an average of `r round(slope, 3)` units (95% CI: `r round(ci[1], 3)` to `r round(ci[2], 3)`.
+
+::: callout.tip
+### How to interpret this sentence
+
+This sentence communicates:
+
+-   Direction of the association
+-   Magnitude of the change
+-   Uncertainty in the estimate
+:::
+
+This describes an **association**, not causation.
+
+## Adding a Regression Line
+
+```{r}
+ggplot(df, aes(x = Age, y = BMI)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(
+    title = "Simple Linear Regression of BMI on Age",
+    x = "Age (years)",
+    y = "Body Mass Index"
+  )
+
+```
+
+This plot combines:
+
+-   the raw data (points), and
+-   the model’s predicted average relationship (line).
+
+The shaded band around the line represents the **95% confidence interval** for the *mean* predicted BMI at each age.
+
+You should focus on:
+
+**Direction of the line**
+
+-   Does the line slope upward or downward?
+-   This should match the sign of the slope from the regression output.
+
+**How well the line summarizes the data**
+
+- Do the points generally cluster around the line?
+- Or is there substantial scatter?
+
+
+**Uncertainty around the line**
+
+- Is the confidence band narrow or wide?
+- Wider bands indicate more uncertainty in the estimated relationship.
+
+## Running Diagnostics
+
+```{r}
+plot(model, which = 1)  # Residuals vs Fitted
+plot(model, which = 2)  # Normal Q-Q
+```
+
+These plots help assess whether the assumptions of linear regression are reasonably met.
+
+You are expected to recognize **obvious red flags**.
+
+### Plot 1: Residuals vs. Fitted
+
+This plot checks:
+
+- Linearity
+- Constant variability (homoscedasticity)
+
+What **YOU** should look for:
+
+- Residuals scattered randomly around zero
+- No clear curve or pattern
+- Roughly equal spread across fitted values
+
+Acceptable interpretation:
+
+The residuals appear randomly scattered around zero with no strong curvature, suggesting the linearity assumption is reasonable. The spread of residuals is fairly consistent across fitted values, indicating approximately constant variance.
+
+What would indicate a concern:
+
+- Curved pattern → possible nonlinearity
+- Funnel shape → non-constant variance
+
+You should identify, not fix, these issues (at least not yet anyways).
+
+### Plot 2: Normasl Q-Q Plot
+
+What this plot checks:
+
+- Approximate normality of residuals
+
+This matters for:
+
+- confidence intervals
+- p-values
+
+What **YOU** should look for:
+
+- Points falling roughly along the diagonal line
+- Small deviations at the ends are acceptable
+
+Normality is about the **residuals**, not the outcome variable itself.
+
+:::.callout-warning
+In this course, you are expected to describe diagnostic plots in words and identify major issues if present, not to diagnose or correct subtle statistical problems.
+:::

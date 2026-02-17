@@ -118,18 +118,6 @@ This section should be written in complete sentences and should not include code
 
 ---
 
-## Section 1: Introduction
-
-In your Introduction section, briefly describe:
-
-- the country you are examining  
-- why it is of interest from a public health perspective  
-- what outcomes you plan to explore  
-
-This section should be written in complete sentences and should not include code.
-
----
-
 ## Section 2: Descriptive exploration
 
 Start by computing basic descriptive statistics.
