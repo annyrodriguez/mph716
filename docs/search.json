@@ -1682,61 +1682,81 @@
   {
     "objectID": "project2.html",
     "href": "project2.html",
-    "title": "Project 2 — Cleaning & Preparing Health Data for Analysis (NHANES)",
+    "title": "Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)",
     "section": "",
-    "text": "Purpose of Project 2\nThis project moves you from global health context into real biomedical surveillance data. You will work with the NHANES dataset, which contains nationally representative health, exam, and behavioral measures from U.S. adults and children.\nThe goal is to practice:\n• working with real-world health data • cleaning and restructuring data for analysis • managing missing values • creating new variables • documenting analytic decisions • writing clear and reproducible Quarto reports\nThis project prepares you for regression modeling and inference in Project 3 and your final manuscript.",
+    "text": "Purpose of Project 2\nThis project moves you from global health context into real biomedical surveillance data. You will work with the NHANES dataset, which contains nationally representative health, exam, and behavioral measures from U.S. adults and children.\nThe goal is to practice:\nThis project prepares you for regression modeling and inference in Project 3 and your final manuscript.",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2 — Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+    ]
+  },
+  {
+    "objectID": "project2.html#purpose-of-project-2",
+    "href": "project2.html#purpose-of-project-2",
+    "title": "Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)",
+    "section": "",
+    "text": "working with real-world health data\ncleaning and restructuring data for analysis\nmanaging missing values\ncreating new variables\ndocumenting analytic decisions\nwriting clear and reproducible Quarto reports",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   },
   {
     "objectID": "project2.html#dataset",
     "href": "project2.html#dataset",
-    "title": "Project 2 — Cleaning & Preparing Health Data for Analysis (NHANES)",
+    "title": "Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)",
     "section": "Dataset",
-    "text": "Dataset\nWe will use the curated NHANES dataset included in the NHANES R package.\nThis dataset includes variables such as:\n• demographics (age, gender, race/ethnicity, education, income) • health status • smoking behavior • BMI • blood pressure • activity levels • depression screening • medical conditions\nIt is real data — including missingness, limitations, and measurement constraints.",
+    "text": "Dataset\nWe will use the curated NHANES dataset included in the NHANES R package.\nThis dataset includes variables such as:\n\ndemographics (age, gender, race/ethnicity, education, income)\nhealth status\nsmoking behavior\nBMI\nblood pressure\nactivity levels\ndepression screening\nmedical conditions\n\nIt is real data — including missingness, limitations, and measurement constraints.",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2 — Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   },
   {
     "objectID": "project2.html#learning-objectives",
     "href": "project2.html#learning-objectives",
-    "title": "Project 2 — Cleaning & Preparing Health Data for Analysis (NHANES)",
+    "title": "Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy completing this project, you will be able to:\n• clean biomedical data using tidyverse tools • identify and manage missing data • construct analytic variables • describe population patterns in health outcomes • explain cleaning choices transparently • submit a fully reproducible Quarto report\nThese are core skills for public health data science.",
+    "text": "Learning Objectives\nBy completing this project, you will be able to:\n\nclean biomedical data using tidyverse tools\nidentify and manage missing data\nconstruct analytic variables\ndescribe population patterns in health outcomes\nexplain cleaning choices transparently\nsubmit a fully reproducible Quarto report\n\nThese are core skills for public health data science.",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2 — Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   },
   {
     "objectID": "project2.html#project-focus",
     "href": "project2.html#project-focus",
-    "title": "Project 2 — Cleaning & Preparing Health Data for Analysis (NHANES)",
+    "title": "Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)",
     "section": "Project Focus",
-    "text": "Project Focus\nYou will choose one health outcome, such as:\n• Hypertension • BMI (as continuous or categorized) • Depression symptoms • Diabetes status • Self-rated health • Smoking status\nand examine how it varies across predictors such as:\n• age • sex • race/ethnicity • income-to-poverty ratio • education • health behaviors\n\nYou may propose an alternative outcome with approval.\n\n##Project Tasks\nYour Quarto report must include the following sections:\n1. Introduction (≈ 2–3 paragraphs)\nBriefly explain:\n• What NHANES is and why it matters in public health • Your chosen outcome and why it is important • Key predictors you will examine • Your broad guiding question\n(Example: How is hypertension patterned across age and income?)\nUse clear, MPH-appropriate language.\n2. Data Preparation\nUsing tidyverse:\n• load the NHANES dataset • select your outcome and predictors • recode variables as needed (e.g., factors) • create at least one new variable, such as: o age category o BMI category o income group o binary hypertension status • remove or document missing data • provide a data dictionary table explaining variables\nAll choices must be transparent and explained in writing.\n3. Descriptive Statistics\nProduce:\n• summary statistics (means, proportions, counts) • stratified summaries where appropriate • at least one table formatted for publication style\nUse inline R code whenever possible.\n4. Visualizations\nCreate at least two figures, such as:\n• distributions of your outcome • outcome by age group • outcome by race/ethnicity • outcome by income category • outcome by smoking status\nEach figure must include:\n• clear title • labeled axes • readable formatting • a short interpretation paragraph\n5. Missing Data Review\nBriefly describe:\n• where missingness appears • how many cases were removed • why that matters for interpretation • potential bias concerns\nThis introduces ethical & methodological thinking.\n6. Reflection & Interpretation (≈ 3–4 paragraphs)\nDiscuss:\n• Public-health meaning of the patterns you observe • Possible explanations for disparities • Structural or contextual factors • What you would explore next with modeling\nThis section begins to sound like an early manuscript Results + Discussion.",
+    "text": "Project Focus\nYou will choose one health outcome, such as:\n\nHypertension\nBMI (as continuous or categorized)\nDepression symptoms\nDiabetes status\nSelf-rated health\nSmoking status\n\nand examine how it varies across predictors such as:\n\nage\nsex\nrace/ethnicity\nincome-to-poverty ratio\neducation\nhealth behaviors\n\n\nYou may propose an alternative outcome with approval.",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2 — Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+    ]
+  },
+  {
+    "objectID": "project2.html#project-tasks",
+    "href": "project2.html#project-tasks",
+    "title": "Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)",
+    "section": "Project Tasks",
+    "text": "Project Tasks\nYour Quarto report must include the following sections:\n\n1. Introduction (≈ 2–3 paragraphs)\nBriefly explain:\n\nWhat NHANES is and why it matters in public health\nYour chosen outcome and why it is important\nKey predictors you will examine\nYour broad guiding question\n\nUse clear, MPH-appropriate language.\n\n\n2. Data Preparation\nUsing tidyverse:\n\nload the NHANES dataset\nselect your outcome and predictors\nrecode variables as needed (e.g., factors)\ncreate at least one new variable, such as:\n\nage category\nBMI category\nincome group\nbinary hypertension status\n\nremove or document missing data\nprovide a data dictionary table explaining variables\n\nAll choices must be transparent and explained in writing.\n\n\n3. Descriptive Statistics\nProduce:\n\nsummary statistics (means, proportions, counts)\nstratified summaries where appropriate\nat least one table formatted for publication style\n\nUse inline R code whenever possible.\n\n\n4. Visualizations\nCreate at least two figures, such as:\n\ndistributions of your outcome\noutcome by age group\noutcome by race/ethnicity\noutcome by income category\noutcome by smoking status\n\nEach figure must include:\n\nclear title\nlabeled axes\nreadable formatting\na short interpretation paragraph\n\n\n\n5. Missing Data Review\nBriefly describe:\n\nwhere missingness appears\nhow many cases were removed\nwhy that matters for interpretation\npotential bias concerns\n\nThis introduces ethical & methodological thinking.\n\n\n6. Reflection & Interpretation (≈ 3–4 paragraphs)\nDiscuss:\n\nPublic-health meaning of the patterns you observe\nPossible explanations for disparities\nStructural or contextual factors\nWhat you would explore next with modeling\n\nThis section begins to sound like an early manuscript Results + Discussion.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   },
   {
     "objectID": "project2.html#formatting-requirements",
     "href": "project2.html#formatting-requirements",
-    "title": "Project 2 — Cleaning & Preparing Health Data for Analysis (NHANES)",
+    "title": "Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)",
     "section": "Formatting Requirements",
-    "text": "Formatting Requirements\nYour submission must:\n✔ be written entirely in Quarto ✔ knit without errors ✔ include inline code for reported values ✔ use tidy, readable R code ✔ apply organized section headings ✔ include citations where relevant ✔ use inclusive, professional language\nTarget length: 1,200–1,500 words (excluding code)",
+    "text": "Formatting Requirements\nYour submission must:\n\nbe written entirely in Quarto\nhidden code chunks\nknit without errors\ninclude inline code for reported values\nuse tidy, readable R code\napply organized section headings\ninclude citations where relevant (min. 8)\nuse inclusive, professional language\n\nTarget length: 1,200–1,500 words (excluding code)",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2 — Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   },
   {
     "objectID": "project2.html#submission-requirements",
     "href": "project2.html#submission-requirements",
-    "title": "Project 2 — Cleaning & Preparing Health Data for Analysis (NHANES)",
+    "title": "Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)",
     "section": "Submission Requirements",
-    "text": "Submission Requirements\nSubmit:\n• your knitted report (word doc) • your .qmd source file • your 3MT slide",
+    "text": "Submission Requirements\nSubmit:\n\nyour knitted report (word doc)\nyour .qmd source file\nyour 3MT slide",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2 — Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   }
 ]

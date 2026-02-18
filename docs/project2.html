@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project 2 — Cleaning &amp; Preparing Health Data for Analysis (NHANES) – R and Health Sciences</title>
+<title>Project 2: Cleaning &amp; Preparing Health Data for Analysis (NHANES) – R and Health Sciences</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project2.html"><span class="chapter-title">Project 2 — Cleaning &amp; Preparing Health Data for Analysis (NHANES)</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project2.html"><span class="chapter-title">Project 2: Cleaning &amp; Preparing Health Data for Analysis (NHANES)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -164,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./project2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Project 2 — Cleaning &amp; Preparing Health Data for Analysis (NHANES)</span></a>
+  <a href="./project2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Project 2: Cleaning &amp; Preparing Health Data for Analysis (NHANES)</span></a>
   </div>
 </li>
     </ul>
@@ -181,6 +181,15 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#project-focus" id="toc-project-focus" class="nav-link" data-scroll-target="#project-focus">Project Focus</a></li>
+  <li><a href="#project-tasks" id="toc-project-tasks" class="nav-link" data-scroll-target="#project-tasks">Project Tasks</a>
+  <ul class="collapse">
+  <li><a href="#introduction-23-paragraphs" id="toc-introduction-23-paragraphs" class="nav-link" data-scroll-target="#introduction-23-paragraphs">1. Introduction (≈ 2–3 paragraphs)</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">2. Data Preparation</a></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics">3. Descriptive Statistics</a></li>
+  <li><a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations">4. Visualizations</a></li>
+  <li><a href="#missing-data-review" id="toc-missing-data-review" class="nav-link" data-scroll-target="#missing-data-review">5. Missing Data Review</a></li>
+  <li><a href="#reflection-interpretation-34-paragraphs" id="toc-reflection-interpretation-34-paragraphs" class="nav-link" data-scroll-target="#reflection-interpretation-34-paragraphs">6. Reflection &amp; Interpretation (≈ 3–4 paragraphs)</a></li>
+  </ul></li>
   <li><a href="#formatting-requirements" id="toc-formatting-requirements" class="nav-link" data-scroll-target="#formatting-requirements">Formatting Requirements</a></li>
   <li><a href="#submission-requirements" id="toc-submission-requirements" class="nav-link" data-scroll-target="#submission-requirements">Submission Requirements</a></li>
   </ul>
@@ -191,7 +200,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Project 2 — Cleaning &amp; Preparing Health Data for Analysis (NHANES)</span></h1>
+<h1 class="title"><span class="chapter-title">Project 2: Cleaning &amp; Preparing Health Data for Analysis (NHANES)</span></h1>
 </div>
 
 
@@ -212,70 +221,176 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="purpose-of-project-2">Purpose of Project 2</h2>
 <p>This project moves you from global health context into real biomedical surveillance data. You will work with the <code>NHANES</code> dataset, which contains nationally representative health, exam, and behavioral measures from U.S. adults and children.</p>
 <p>The goal is to practice:</p>
-<p>• working with real-world health data • cleaning and restructuring data for analysis • managing missing values • creating new variables • documenting analytic decisions • writing clear and reproducible Quarto reports</p>
+<ul>
+<li>working with real-world health data</li>
+<li>cleaning and restructuring data for analysis</li>
+<li>managing missing values</li>
+<li>creating new variables</li>
+<li>documenting analytic decisions</li>
+<li>writing clear and reproducible Quarto reports</li>
+</ul>
 <p>This project prepares you for regression modeling and inference in Project 3 and your final manuscript.</p>
 </section>
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
 <p>We will use the curated NHANES dataset included in the <code>NHANES</code> R package.</p>
 <p>This dataset includes variables such as:</p>
-<p>• demographics (age, gender, race/ethnicity, education, income) • health status • smoking behavior • BMI • blood pressure • activity levels • depression screening • medical conditions</p>
+<ul>
+<li>demographics (age, gender, race/ethnicity, education, income)</li>
+<li>health status</li>
+<li>smoking behavior</li>
+<li>BMI</li>
+<li>blood pressure</li>
+<li>activity levels</li>
+<li>depression screening</li>
+<li>medical conditions</li>
+</ul>
 <p>It is real data — including missingness, limitations, and measurement constraints.</p>
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <p>By completing this project, you will be able to:</p>
-<p>• clean biomedical data using tidyverse tools • identify and manage missing data • construct analytic variables • describe population patterns in health outcomes • explain cleaning choices transparently • submit a fully reproducible Quarto report</p>
+<ul>
+<li>clean biomedical data using tidyverse tools</li>
+<li>identify and manage missing data</li>
+<li>construct analytic variables</li>
+<li>describe population patterns in health outcomes</li>
+<li>explain cleaning choices transparently</li>
+<li>submit a fully reproducible Quarto report</li>
+</ul>
 <p>These are core skills for public health data science.</p>
 </section>
 <section id="project-focus" class="level2">
 <h2 class="anchored" data-anchor-id="project-focus">Project Focus</h2>
 <p>You will choose one health outcome, such as:</p>
-<p>• Hypertension • BMI (as continuous or categorized) • Depression symptoms • Diabetes status • Self-rated health • Smoking status</p>
+<ul>
+<li>Hypertension</li>
+<li>BMI (as continuous or categorized)</li>
+<li>Depression symptoms</li>
+<li>Diabetes status</li>
+<li>Self-rated health</li>
+<li>Smoking status</li>
+</ul>
 <p>and examine how it varies across predictors such as:</p>
-<p>• age • sex • race/ethnicity • income-to-poverty ratio • education • health behaviors</p>
+<ul>
+<li>age</li>
+<li>sex</li>
+<li>race/ethnicity</li>
+<li>income-to-poverty ratio</li>
+<li>education</li>
+<li>health behaviors</li>
+</ul>
 <div class=".callout-tip">
 <p>You may propose an alternative outcome with approval.</p>
 </div>
-<p>##Project Tasks</p>
+</section>
+<section id="project-tasks" class="level2">
+<h2 class="anchored" data-anchor-id="project-tasks">Project Tasks</h2>
 <p>Your Quarto report must include the following sections:</p>
-<p><strong>1. Introduction (≈ 2–3 paragraphs)</strong></p>
+<section id="introduction-23-paragraphs" class="level3">
+<h3 class="anchored" data-anchor-id="introduction-23-paragraphs">1. Introduction (≈ 2–3 paragraphs)</h3>
 <p>Briefly explain:</p>
-<p>• What NHANES is and why it matters in public health • Your chosen outcome and why it is important • Key predictors you will examine • Your broad guiding question</p>
-<p>(Example: How is hypertension patterned across age and income?)</p>
+<ul>
+<li>What NHANES is and why it matters in public health</li>
+<li>Your chosen outcome and why it is important</li>
+<li>Key predictors you will examine</li>
+<li>Your broad guiding question</li>
+</ul>
 <p>Use clear, MPH-appropriate language.</p>
-<p><strong>2. Data Preparation</strong></p>
+</section>
+<section id="data-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="data-preparation">2. Data Preparation</h3>
 <p>Using tidyverse:</p>
-<p>• load the NHANES dataset • select your outcome and predictors • recode variables as needed (e.g., factors) • create at least one new variable, such as: o age category o BMI category o income group o binary hypertension status • remove or document missing data • provide a data dictionary table explaining variables</p>
+<ul>
+<li><p>load the NHANES dataset</p></li>
+<li><p>select your outcome and predictors</p></li>
+<li><p>recode variables as needed (e.g., factors)</p></li>
+<li><p>create at least one new variable, such as:</p>
+<ul>
+<li>age category</li>
+<li>BMI category</li>
+<li>income group</li>
+<li>binary hypertension status</li>
+</ul></li>
+<li><p>remove or document missing data</p></li>
+<li><p>provide a data dictionary table explaining variables</p></li>
+</ul>
 <p>All choices must be transparent and explained in writing.</p>
-<p><strong>3. Descriptive Statistics</strong></p>
+</section>
+<section id="descriptive-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="descriptive-statistics">3. Descriptive Statistics</h3>
 <p>Produce:</p>
-<p>• summary statistics (means, proportions, counts) • stratified summaries where appropriate • at least one table formatted for publication style</p>
+<ul>
+<li>summary statistics (means, proportions, counts)</li>
+<li>stratified summaries where appropriate</li>
+<li>at least one table formatted for publication style</li>
+</ul>
 <p>Use inline R code whenever possible.</p>
-<p><strong>4. Visualizations</strong></p>
+</section>
+<section id="visualizations" class="level3">
+<h3 class="anchored" data-anchor-id="visualizations">4. Visualizations</h3>
 <p>Create at least two figures, such as:</p>
-<p>• distributions of your outcome • outcome by age group • outcome by race/ethnicity • outcome by income category • outcome by smoking status</p>
+<ul>
+<li>distributions of your outcome</li>
+<li>outcome by age group</li>
+<li>outcome by race/ethnicity</li>
+<li>outcome by income category</li>
+<li>outcome by smoking status</li>
+</ul>
 <p>Each figure must include:</p>
-<p>• clear title • labeled axes • readable formatting • a short interpretation paragraph</p>
-<p><strong>5. Missing Data Review</strong></p>
+<ul>
+<li>clear title</li>
+<li>labeled axes</li>
+<li>readable formatting</li>
+<li>a short interpretation paragraph</li>
+</ul>
+</section>
+<section id="missing-data-review" class="level3">
+<h3 class="anchored" data-anchor-id="missing-data-review">5. Missing Data Review</h3>
 <p>Briefly describe:</p>
-<p>• where missingness appears • how many cases were removed • why that matters for interpretation • potential bias concerns</p>
+<ul>
+<li>where missingness appears</li>
+<li>how many cases were removed</li>
+<li>why that matters for interpretation</li>
+<li>potential bias concerns</li>
+</ul>
 <p>This introduces ethical &amp; methodological thinking.</p>
-<p><strong>6. Reflection &amp; Interpretation (≈ 3–4 paragraphs)</strong></p>
+</section>
+<section id="reflection-interpretation-34-paragraphs" class="level3">
+<h3 class="anchored" data-anchor-id="reflection-interpretation-34-paragraphs">6. Reflection &amp; Interpretation (≈ 3–4 paragraphs)</h3>
 <p>Discuss:</p>
-<p>• Public-health meaning of the patterns you observe • Possible explanations for disparities • Structural or contextual factors • What you would explore next with modeling</p>
+<ul>
+<li>Public-health meaning of the patterns you observe</li>
+<li>Possible explanations for disparities</li>
+<li>Structural or contextual factors</li>
+<li>What you would explore next with modeling</li>
+</ul>
 <p>This section begins to sound like an early manuscript Results + Discussion.</p>
+</section>
 </section>
 <section id="formatting-requirements" class="level2">
 <h2 class="anchored" data-anchor-id="formatting-requirements">Formatting Requirements</h2>
 <p>Your submission must:</p>
-<p>✔ be written entirely in Quarto ✔ knit without errors ✔ include inline code for reported values ✔ use tidy, readable R code ✔ apply organized section headings ✔ include citations where relevant ✔ use inclusive, professional language</p>
+<ul>
+<li>be written entirely in Quarto</li>
+<li>hidden code chunks</li>
+<li>knit without errors</li>
+<li>include inline code for reported values</li>
+<li>use tidy, readable R code</li>
+<li>apply organized section headings</li>
+<li>include citations where relevant (min. 8)</li>
+<li>use inclusive, professional language</li>
+</ul>
 <p><strong>Target length: 1,200–1,500 words (excluding code)</strong></p>
 </section>
 <section id="submission-requirements" class="level2">
 <h2 class="anchored" data-anchor-id="submission-requirements">Submission Requirements</h2>
 <p>Submit:</p>
-<p>• your knitted report (word doc) • your .qmd source file • your 3MT slide</p>
+<ul>
+<li>your knitted report (word doc)</li>
+<li>your .qmd source file</li>
+<li>your 3MT slide</li>
+</ul>
 
 
 </section>
