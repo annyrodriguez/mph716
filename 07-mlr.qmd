@@ -1,0 +1,204 @@
+---
+title: "Lesson 7: Multiple Linear Regression"
+---
+
+## Purpose of this lesson
+
+This lesson introduces **multiple linear regression**, which allows us to examine the association between a numeric outcome and multiple predictors at the same time. In public health, this is commonly used to estimate **adjusted associations**, meaning the association between a predictor and an outcome **while holding other variables constant**.
+
+The focus today is interpretation: how to read output, how to write results in plain language, and how to avoid causal claims when the study design is observational.
+
+---
+
+## Learning goals
+
+By the end of this lesson, you will be able to:
+
+- Explain why multiple regression is used in public health
+- Fit a multiple linear regression model using `lm()`
+- Interpret an adjusted slope ("holding other variables constant")
+- Interpret categorical predictors using a reference group
+- Compare a simple model vs an adjusted model
+- Report regression results using inline R code in Quarto
+
+---
+
+## Setup
+
+```{r}
+library(tidyverse)
+library(broom)
+library(NHANES)
+```
+
+### The Dataset
+
+```{r}
+data("NHANES")
+glimpse(NHANES)
+```
+
+### Outcome and Predictors
+
+For this lesson we will use:
+
+- Outcome (Y): BMI
+- Predictors (X):
+    - Age (numeric)
+    - Gender (categorical)
+    - Race1 (categorical)
+
+We will see how adding predictors changes interpretation.
+
+## Data Preparation
+
+```{r}
+df <- NHANES %>%
+  select(BMI, Age, Gender, Race1) %>%
+  drop_na()
+
+df %>% glimpse()
+```
+
+## Quick Checks
+
+### Scatterplot
+
+```{r}
+scatter_df <- ggplot(df, 
+                     aes(x = Age, 
+                         y = BMI
+                         )) +
+  geom_point(alpha = 0.25) +
+  labs(
+    title = "BMI vs Age (NHANES)",
+    x = "Age (years)",
+    y = "BMI"
+  )
+
+scatter_df
+```
+
+### Group Comparison (BMI by Gender)
+
+```{r}
+boxplot_df <- ggplot(df, 
+                     aes(x = Gender, 
+                         y = BMI
+                         )) +
+  geom_boxplot() +
+  labs(
+    title = "BMI by Gender (NHANES)",
+    x = "Gender",
+    y = "BMI"
+  )
+
+boxplot_df
+```
+
+### Interpretations
+
+What do you see?
+
+## Fit Simple Model
+
+Let's start with a simple regression of BMI on Age.
+
+```{r}
+m1 <- lm(BMI ~ Age, data = df)
+summary(m1)
+```
+
+## Fit Multiple Regression Model
+
+```{r}
+m2 <- lm (BMI ~ Age + Gender + Race1, data = df)
+summary(m2)
+```
+
+## Interpretations
+
+You learned in Lesson 6 how to interpret the outputs for **Simple Linear Regressions**. Now, let's learn how to interpret <span style="color:#9B8CFF;"><strong>Multiple Regression Coefficients</strong></span>. 
+
+In multiple regressions:
+
+- The coefficient for **Age** is interpreted as the association between Age and BMI holding **Gender and Race1 constant**.
+- Coefficients for **Gender** and **Race1** are interpreted as differences in mean BMI **relative to a reference group**, holding other variables constant.
+
+> What does **constant** mean in this case?
+
+## Identifying the Reference Groups
+
+R will automatically choose a reference group for categorical variables (typically the first level alphabetically, unless re-leveled).
+
+> What is a reference group?
+
+A reference group is the **baseline** categorical level omitted from the model, serving as a comparison point for dummy-coded predictors. 
+
+**Interpretation:** The intercept represents the average outcome for the reference group, and coefficients for other levels represent the average difference compared to the reference.
+
+
+```{r}
+levels(df$Gender)
+levels(df$Race1)
+```
+
+If you want to set a specific reference group:
+
+```{r}
+# Example only (do not run unless instructed):
+refernece_df <- df %>%
+   mutate(
+     Gender = relevel(Gender, ref = "female"),
+     Race1  = relevel(Race1, ref = "White")
+   )
+```
+
+### Extract Key Results
+
+```{r}
+tidy_m2 <- tidy(m2, conf.int = TRUE)
+tidy_m2
+
+# The tidy function will convert messy outputs and turn them into a tidy tibble.
+```
+
+### Extract the Age Coefficient and Confidence Interval
+
+```{r}
+age_row <- tidy_m2 %>% filter(term == "Age")
+
+age_slope <- age_row %>% pull(estimate)
+age_lo <- age_row %>% pull(conf.low)
+age_hi <- age_row %>% pull(conf.high)
+age_p  <- age_row %>% pull(p.value)
+```
+
+> Write the results using inline coding.
+
+After adjusting for gender and race/ethnicity, BMI changed by an average of `r round(age_slope, 3)` units per one-year increase in age (95% CI: `r round(age_lo, 3)` to `r round(age_hi, 3)`; p-value = `r signif(age_p, 3)`).
+
+## Compare the Simple and Adjusted Models
+
+```{r}
+tidy(m1, conf.int = TRUE) %>% filter(term == "Age")
+tidy(m2, conf.int = TRUE) %>% filter(term == "Age")
+```
+
+> Write your interpretation.
+
+Make sure to answer the following:
+
+1. Did the `Age` coefficient change from `m1` to `m2`?
+2. What might explain the change? Any confounders?
+3. How does "adjusted interpretation differ from the simple model interpretation?
+
+### Interpret Categorical Predictors
+
+Use the following code to help you pick a categorical predictor from `m2`.
+
+```{r}
+# tidy_m2 %>% filter(str_detect(term, "Gender|Race1"))
+```
+
+> Write your interpretation.

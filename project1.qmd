@@ -248,6 +248,7 @@ Submit:
 
 - the rendered document (word)  
 - the `.qmd` source file  
+- 3MT-style presentation slide
 
 Both are required.
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lesson 6: Simple Linear Regression – R and Health Sciences</title>
+<title>Lesson 7: Multiple Linear Regression – R and Health Sciences</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./07-mlr.html" rel="next">
-<link href="./06a-biostats1review.html" rel="prev">
+<link href="./project2.html" rel="next">
+<link href="./06-slr.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-slr.html"><span class="chapter-title">Lesson 6: Simple Linear Regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-mlr.html"><span class="chapter-title">Lesson 7: Multiple Linear Regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -195,12 +195,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-slr.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Lesson 6: Simple Linear Regression</span></a>
+  <a href="./06-slr.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 6: Simple Linear Regression</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-mlr.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 7: Multiple Linear Regression</span></a>
+  <a href="./07-mlr.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Lesson 7: Multiple Linear Regression</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -220,26 +220,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#purpose-of-this-lesson" id="toc-purpose-of-this-lesson" class="nav-link active" data-scroll-target="#purpose-of-this-lesson">Purpose of this lesson</a></li>
   <li><a href="#learning-goals" id="toc-learning-goals" class="nav-link" data-scroll-target="#learning-goals">Learning goals</a></li>
-  <li><a href="#key-terms" id="toc-key-terms" class="nav-link" data-scroll-target="#key-terms">Key Terms</a></li>
-  <li><a href="#key-terms-for-lesson-6" id="toc-key-terms-for-lesson-6" class="nav-link" data-scroll-target="#key-terms-for-lesson-6">Key terms for Lesson 6</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#exploring-the-data" id="toc-exploring-the-data" class="nav-link" data-scroll-target="#exploring-the-data">Exploring the Data</a>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a>
   <ul class="collapse">
-  <li><a href="#selecting-variables" id="toc-selecting-variables" class="nav-link" data-scroll-target="#selecting-variables">Selecting Variables</a></li>
+  <li><a href="#the-dataset" id="toc-the-dataset" class="nav-link" data-scroll-target="#the-dataset">The Dataset</a></li>
+  <li><a href="#outcome-and-predictors" id="toc-outcome-and-predictors" class="nav-link" data-scroll-target="#outcome-and-predictors">Outcome and Predictors</a></li>
   </ul></li>
-  <li><a href="#cleaning-the-data" id="toc-cleaning-the-data" class="nav-link" data-scroll-target="#cleaning-the-data">Cleaning the Data</a></li>
-  <li><a href="#lets-visualize" id="toc-lets-visualize" class="nav-link" data-scroll-target="#lets-visualize">Let’s Visualize</a></li>
-  <li><a href="#fit-simple-linear-regression" id="toc-fit-simple-linear-regression" class="nav-link" data-scroll-target="#fit-simple-linear-regression">Fit Simple Linear Regression</a></li>
-  <li><a href="#slope-and-confidence-interval" id="toc-slope-and-confidence-interval" class="nav-link" data-scroll-target="#slope-and-confidence-interval">Slope and Confidence Interval</a>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data Preparation</a></li>
+  <li><a href="#quick-checks" id="toc-quick-checks" class="nav-link" data-scroll-target="#quick-checks">Quick Checks</a>
   <ul class="collapse">
-  <li><a href="#inline-reporting-required" id="toc-inline-reporting-required" class="nav-link" data-scroll-target="#inline-reporting-required">Inline reporting (required)</a></li>
-  <li><a href="#how-to-interpret-this-sentence" id="toc-how-to-interpret-this-sentence" class="nav-link" data-scroll-target="#how-to-interpret-this-sentence">How to interpret this sentence</a></li>
+  <li><a href="#scatterplot" id="toc-scatterplot" class="nav-link" data-scroll-target="#scatterplot">Scatterplot</a></li>
+  <li><a href="#group-comparison-bmi-by-gender" id="toc-group-comparison-bmi-by-gender" class="nav-link" data-scroll-target="#group-comparison-bmi-by-gender">Group Comparison (BMI by Gender)</a></li>
+  <li><a href="#interpretations" id="toc-interpretations" class="nav-link" data-scroll-target="#interpretations">Interpretations</a></li>
   </ul></li>
-  <li><a href="#adding-a-regression-line" id="toc-adding-a-regression-line" class="nav-link" data-scroll-target="#adding-a-regression-line">Adding a Regression Line</a></li>
-  <li><a href="#running-diagnostics" id="toc-running-diagnostics" class="nav-link" data-scroll-target="#running-diagnostics">Running Diagnostics</a>
+  <li><a href="#fit-simple-model" id="toc-fit-simple-model" class="nav-link" data-scroll-target="#fit-simple-model">Fit Simple Model</a></li>
+  <li><a href="#fit-multiple-regression-model" id="toc-fit-multiple-regression-model" class="nav-link" data-scroll-target="#fit-multiple-regression-model">Fit Multiple Regression Model</a></li>
+  <li><a href="#interpretations-1" id="toc-interpretations-1" class="nav-link" data-scroll-target="#interpretations-1">Interpretations</a></li>
+  <li><a href="#identifying-the-reference-groups" id="toc-identifying-the-reference-groups" class="nav-link" data-scroll-target="#identifying-the-reference-groups">Identifying the Reference Groups</a>
   <ul class="collapse">
-  <li><a href="#plot-1-residuals-vs.-fitted" id="toc-plot-1-residuals-vs.-fitted" class="nav-link" data-scroll-target="#plot-1-residuals-vs.-fitted">Plot 1: Residuals vs.&nbsp;Fitted</a></li>
-  <li><a href="#plot-2-normasl-q-q-plot" id="toc-plot-2-normasl-q-q-plot" class="nav-link" data-scroll-target="#plot-2-normasl-q-q-plot">Plot 2: Normasl Q-Q Plot</a></li>
+  <li><a href="#extract-key-results" id="toc-extract-key-results" class="nav-link" data-scroll-target="#extract-key-results">Extract Key Results</a></li>
+  <li><a href="#extract-the-age-coefficient-and-confidence-interval" id="toc-extract-the-age-coefficient-and-confidence-interval" class="nav-link" data-scroll-target="#extract-the-age-coefficient-and-confidence-interval">Extract the Age Coefficient and Confidence Interval</a></li>
+  </ul></li>
+  <li><a href="#compare-the-simple-and-adjusted-models" id="toc-compare-the-simple-and-adjusted-models" class="nav-link" data-scroll-target="#compare-the-simple-and-adjusted-models">Compare the Simple and Adjusted Models</a>
+  <ul class="collapse">
+  <li><a href="#interpret-categorical-predictors" id="toc-interpret-categorical-predictors" class="nav-link" data-scroll-target="#interpret-categorical-predictors">Interpret Categorical Predictors</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -249,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Lesson 6: Simple Linear Regression</span></h1>
+<h1 class="title"><span class="chapter-title">Lesson 7: Multiple Linear Regression</span></h1>
 </div>
 
 
@@ -268,107 +271,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="purpose-of-this-lesson" class="level2">
 <h2 class="anchored" data-anchor-id="purpose-of-this-lesson">Purpose of this lesson</h2>
-<p>This lesson introduces <strong>simple linear regression</strong> using a workflow consistent with the OpenIntro Biostatistics approach: start with a research question, visualize the relationship, fit a model, interpret results in context, and communicate findings responsibly using a reproducible R + Quarto workflow.</p>
-<p>You are not expected to memorize formulas. You are expected to interpret results and report them clearly.</p>
+<p>This lesson introduces <strong>multiple linear regression</strong>, which allows us to examine the association between a numeric outcome and multiple predictors at the same time. In public health, this is commonly used to estimate <strong>adjusted associations</strong>, meaning the association between a predictor and an outcome <strong>while holding other variables constant</strong>.</p>
+<p>The focus today is interpretation: how to read output, how to write results in plain language, and how to avoid causal claims when the study design is observational.</p>
+<hr>
 </section>
 <section id="learning-goals" class="level2">
 <h2 class="anchored" data-anchor-id="learning-goals">Learning goals</h2>
 <p>By the end of this lesson, you will be able to:</p>
 <ul>
-<li>Identify the response and predictor variables in a regression question<br>
-</li>
-<li>Fit a simple linear regression model using <code>lm()</code><br>
-</li>
-<li>Interpret the slope as an association (not causation)<br>
-</li>
-<li>Visualize a regression relationship with a fitted line<br>
-</li>
-<li>Report regression results using inline R code<br>
-</li>
-<li>Perform basic visual checks of regression assumptions</li>
+<li>Explain why multiple regression is used in public health</li>
+<li>Fit a multiple linear regression model using <code>lm()</code></li>
+<li>Interpret an adjusted slope (“holding other variables constant”)</li>
+<li>Interpret categorical predictors using a reference group</li>
+<li>Compare a simple model vs an adjusted model</li>
+<li>Report regression results using inline R code in Quarto</li>
 </ul>
-</section>
-<section id="key-terms" class="level2">
-<h2 class="anchored" data-anchor-id="key-terms">Key Terms</h2>
-<p>You can refer to this table throughout the lesson (and beyond)</p>
-<p>As a <strong>super quick</strong> reminder: In this course, definitions emphasize interpretation and application, not mathematical formulas.</p>
-</section>
-<section id="key-terms-for-lesson-6" class="level2">
-<h2 class="anchored" data-anchor-id="key-terms-for-lesson-6">Key terms for Lesson 6</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 17%">
-<col style="width: 82%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Term</th>
-<th>Plain-language explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Simple linear regression</td>
-<td>A statistical method used to describe the average association between one numeric predictor and one numeric outcome.</td>
-</tr>
-<tr class="even">
-<td>Outcome (response variable)</td>
-<td>The numeric variable we are trying to explain or understand (e.g., BMI).</td>
-</tr>
-<tr class="odd">
-<td>Predictor (explanatory variable)</td>
-<td>The numeric variable used to help explain changes in the outcome (e.g., age).</td>
-</tr>
-<tr class="even">
-<td>Observational unit</td>
-<td>The entity represented by each row of the dataset (e.g., one survey participant).</td>
-</tr>
-<tr class="odd">
-<td>Regression line</td>
-<td>The line that represents the model’s estimated average relationship between the predictor and outcome.</td>
-</tr>
-<tr class="even">
-<td>Slope</td>
-<td>The estimated average change in the outcome for a one-unit increase in the predictor.</td>
-</tr>
-<tr class="odd">
-<td>Intercept</td>
-<td>The predicted value of the outcome when the predictor equals zero; often not meaningful in public health contexts.</td>
-</tr>
-<tr class="even">
-<td>Residual</td>
-<td>The difference between an observed outcome value and the value predicted by the regression model.</td>
-</tr>
-<tr class="odd">
-<td>Linearity</td>
-<td>The assumption that the relationship between the predictor and outcome can be reasonably approximated by a straight line.</td>
-</tr>
-<tr class="even">
-<td>Constant variance (homoscedasticity)</td>
-<td>The assumption that the variability of residuals is roughly the same across all values of the predictor.</td>
-</tr>
-<tr class="odd">
-<td>Normality of residuals</td>
-<td>The assumption that residuals are approximately normally distributed; important for confidence intervals and p-values.</td>
-</tr>
-<tr class="even">
-<td>Confidence interval</td>
-<td>A range of plausible values for the true population-level association, reflecting uncertainty in the estimate.</td>
-</tr>
-<tr class="odd">
-<td>P-value</td>
-<td>A measure of how consistent the observed association is with the assumption of no association in the population.</td>
-</tr>
-<tr class="even">
-<td>Association</td>
-<td>A statistical relationship between variables that does not, by itself, imply causation.</td>
-</tr>
-<tr class="odd">
-<td>Causation</td>
-<td>A relationship where changes in one variable directly produce changes in another; requires stronger study designs than simple regression.</td>
-</tr>
-</tbody>
-</table>
+<hr>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
@@ -387,15 +305,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Install once if needed:</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("NHANES")</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="exploring-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="exploring-the-data">Exploring the Data</h2>
-<p>We will use a state-level public health dataset distributed with OpenIntro materials. Each row represents <strong>one U.S. state</strong>.</p>
+<section id="the-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="the-dataset">The Dataset</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"NHANES"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(NHANES)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -480,82 +393,101 @@ $ SexOrientation   &lt;fct&gt; Heterosexual, Heterosexual, Heterosexual, NA, Het
 $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Do you know what all of these variables mean? Make sure to understand your dataset before you start to analyze.</p>
-</div>
-</div>
-<section id="selecting-variables" class="level3">
-<h3 class="anchored" data-anchor-id="selecting-variables">Selecting Variables</h3>
-<p>We need to pick one <strong>Response</strong> variable and one <strong>Predictor</strong> variable.</p>
-<div class="callout-question">
-<p>What is another way we can phrase this?</p>
-</div>
-<p>If we follow along our OpenIntro textbook, this aligns with:</p>
+</section>
+<section id="outcome-and-predictors" class="level3">
+<h3 class="anchored" data-anchor-id="outcome-and-predictors">Outcome and Predictors</h3>
+<p>For this lesson we will use:</p>
 <ul>
-<li>numeric response</li>
-<li>numeric predictor</li>
-<li>linear association</li>
-<li>interpretation before complexity</li>
+<li>Outcome (Y): BMI</li>
+<li>Predictors (X):
+<ul>
+<li>Age (numeric)</li>
+<li>Gender (categorical)</li>
+<li>Race1 (categorical)</li>
+</ul></li>
 </ul>
+<p>We will see how adding predictors changes interpretation.</p>
 </section>
 </section>
-<section id="cleaning-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="cleaning-the-data">Cleaning the Data</h2>
-<p>What did you first notice about this dataset?</p>
-<p>If you said “there’s a lot of missing data”, you’re right. This is a real-world dataset, with real-world problems. One of them being that there will be missing data.</p>
-<p>I have decided to use <code>age</code> and <code>bmi</code> as my predictor and response variables, respectively. I noticed that these variables have missing data.</p>
-<p>How do we handle this? Well, we can do the following:</p>
+<section id="data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation">Data Preparation</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Age, BMI) <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(BMI, Age, Gender, Race1) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 9,634
+Columns: 4
+$ BMI    &lt;dbl&gt; 32.22, 32.22, 32.22, 15.30, 30.57, 16.82, 20.64, 27.24, 27.24, …
+$ Age    &lt;int&gt; 34, 34, 34, 4, 49, 9, 8, 45, 45, 45, 66, 58, 54, 10, 58, 50, 9,…
+$ Gender &lt;fct&gt; male, male, male, male, female, male, male, female, female, fem…
+$ Race1  &lt;fct&gt; White, White, White, Other, White, White, White, White, White, …</code></pre>
 </div>
-<div class="callout-question">
-<p>What happened? And is this the best way to handle this?</p>
 </div>
-<p>Short answer: For the purpose of this course (and this lesson), by using <code>drop_na()</code>, it’s the simplest mechanical way to handle missing data. <strong>HOWEVER</strong>, this is not the ideal method. We will cover that in a later lesson.</p>
 </section>
-<section id="lets-visualize" class="level2">
-<h2 class="anchored" data-anchor-id="lets-visualize">Let’s Visualize</h2>
-<p>By now, you’re experts at creating graphs using <code>ggplot</code>.</p>
+<section id="quick-checks" class="level2">
+<h2 class="anchored" data-anchor-id="quick-checks">Quick Checks</h2>
+<section id="scatterplot" class="level3">
+<h3 class="anchored" data-anchor-id="scatterplot">Scatterplot</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> Age, </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> BMI)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.3</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"BMI vs Age (NHANES)"</span>,</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Body Mass Index"</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>scatter_df <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">aes</span>(<span class="at">x =</span> Age, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> BMI</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                         )) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"BMI vs Age (NHANES)"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"BMI"</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>scatter_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="06-slr_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="07-mlr_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Try to interpret the graph using <strong>public health</strong> terms and using <strong>plain English</strong>.</p>
 </section>
-<section id="fit-simple-linear-regression" class="level2">
-<h2 class="anchored" data-anchor-id="fit-simple-linear-regression">Fit Simple Linear Regression</h2>
+<section id="group-comparison-bmi-by-gender" class="level3">
+<h3 class="anchored" data-anchor-id="group-comparison-bmi-by-gender">Group Comparison (BMI by Gender)</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(BMI <span class="sc">~</span> Age, <span class="at">data =</span> df)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>boxplot_df <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">aes</span>(<span class="at">x =</span> Gender, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> BMI</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                         )) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"BMI by Gender (NHANES)"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"BMI"</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>boxplot_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07-mlr_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretations" class="level3">
+<h3 class="anchored" data-anchor-id="interpretations">Interpretations</h3>
+<p>What do you see?</p>
+</section>
+</section>
+<section id="fit-simple-model" class="level2">
+<h2 class="anchored" data-anchor-id="fit-simple-model">Fit Simple Model</h2>
+<p>Let’s start with a simple regression of BMI on Age.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(BMI <span class="sc">~</span> Age, <span class="at">data =</span> df)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -577,154 +509,150 @@ Multiple R-squared:  0.1664,    Adjusted R-squared:  0.1663
 F-statistic:  1922 on 1 and 9632 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>How would you interpret this table?</p>
-<p>You are not expected to interpret everything in the regression output.</p>
-<p>Instead, focus on one row only: the row corresponding to <strong>Age</strong>.</p>
-<p>From that row, identify:</p>
-<ul>
-<li><strong>Estimate</strong> → the slope (average change in BMI per year of age)</li>
-<li><strong>p-value</strong> → evidence of an association</li>
-<li><strong>Direction</strong> → positive or negative relationship</li>
-</ul>
-<p>Ignore the following for now:</p>
-<ul>
-<li>R-squared</li>
-<li>F-statistic</li>
-<li>Interpretation of the intercept</li>
-</ul>
 </section>
-<section id="slope-and-confidence-interval" class="level2">
-<h2 class="anchored" data-anchor-id="slope-and-confidence-interval">Slope and Confidence Interval</h2>
+<section id="fit-multiple-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="fit-multiple-regression-model">Fit Multiple Regression Model</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>slope <span class="ot">&lt;-</span> <span class="fu">coef</span>(model)[<span class="st">"Age"</span>]</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">confint</span>(model)[<span class="st">"Age"</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">lm</span> (BMI <span class="sc">~</span> Age <span class="sc">+</span> Gender <span class="sc">+</span> Race1, <span class="at">data =</span> df)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = BMI ~ Age + Gender + Race1, data = df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-18.650  -4.688  -1.171   3.338  56.126 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   23.145435   0.236101  98.032  &lt; 2e-16 ***
+Age            0.142054   0.003184  44.613  &lt; 2e-16 ***
+Gendermale     0.022571   0.136238   0.166    0.868    
+Race1Hispanic -1.442547   0.337861  -4.270 1.98e-05 ***
+Race1Mexican  -0.734311   0.292249  -2.513    0.012 *  
+Race1White    -2.222557   0.214599 -10.357  &lt; 2e-16 ***
+Race1Other    -3.426551   0.309443 -11.073  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6.675 on 9627 degrees of freedom
+Multiple R-squared:  0.1816,    Adjusted R-squared:  0.1811 
+F-statistic:   356 on 6 and 9627 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<p>The <strong>slope</strong> represents the average change in BMI for a <strong>one-year increase in age</strong>.</p>
-<section id="inline-reporting-required" class="level3">
-<h3 class="anchored" data-anchor-id="inline-reporting-required">Inline reporting (required)</h3>
-<p>Use inline R code to report results so that your document updates automatically if the model changes.</p>
-<p>For each additional year of age, BMI changes by an average of 0.138 units (95% CI: 0.132 to 0.144.</p>
+</div>
 </section>
-<section id="how-to-interpret-this-sentence" class="level3 callout.tip">
-<h3 class="anchored" data-anchor-id="how-to-interpret-this-sentence">How to interpret this sentence</h3>
-<p>This sentence communicates:</p>
+<section id="interpretations-1" class="level2">
+<h2 class="anchored" data-anchor-id="interpretations-1">Interpretations</h2>
+<p>You learned in Lesson 6 how to interpret the outputs for <strong>Simple Linear Regressions</strong>. Now, let’s learn how to interpret <span style="color:#9B8CFF;"><strong>Multiple Regression Coefficients</strong></span>.</p>
+<p>In multiple regressions:</p>
 <ul>
-<li>Direction of the association</li>
-<li>Magnitude of the change</li>
-<li>Uncertainty in the estimate</li>
+<li>The coefficient for <strong>Age</strong> is interpreted as the association between Age and BMI holding <strong>Gender and Race1 constant</strong>.</li>
+<li>Coefficients for <strong>Gender</strong> and <strong>Race1</strong> are interpreted as differences in mean BMI <strong>relative to a reference group</strong>, holding other variables constant.</li>
 </ul>
+<blockquote class="blockquote">
+<p>What does <strong>constant</strong> mean in this case?</p>
+</blockquote>
 </section>
-<p>This describes an <strong>association</strong>, not causation.</p>
-</section>
-<section id="adding-a-regression-line" class="level2">
-<h2 class="anchored" data-anchor-id="adding-a-regression-line">Adding a Regression Line</h2>
+<section id="identifying-the-reference-groups" class="level2">
+<h2 class="anchored" data-anchor-id="identifying-the-reference-groups">Identifying the Reference Groups</h2>
+<p>R will automatically choose a reference group for categorical variables (typically the first level alphabetically, unless re-leveled).</p>
+<blockquote class="blockquote">
+<p>What is a reference group?</p>
+</blockquote>
+<p>A reference group is the <strong>baseline</strong> categorical level omitted from the model, serving as a comparison point for dummy-coded predictors.</p>
+<p><strong>Interpretation:</strong> The intercept represents the average outcome for the reference group, and coefficients for other levels represent the average difference compared to the reference.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Age, <span class="at">y =</span> BMI)) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Simple Linear Regression of BMI on Age"</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Body Mass Index"</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>Gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "female" "male"  </code></pre>
 </div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="06-slr_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>Race1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Black"    "Hispanic" "Mexican"  "White"    "Other"   </code></pre>
 </div>
 </div>
-</div>
-<p>This plot combines:</p>
-<ul>
-<li>the raw data (points), and</li>
-<li>the model’s predicted average relationship (line).</li>
-</ul>
-<p>The shaded band around the line represents the <strong>95% confidence interval</strong> for the <em>mean</em> predicted BMI at each age.</p>
-<p>You should focus on:</p>
-<p><strong>Direction of the line</strong></p>
-<ul>
-<li>Does the line slope upward or downward?</li>
-<li>This should match the sign of the slope from the regression output.</li>
-</ul>
-<p><strong>How well the line summarizes the data</strong></p>
-<ul>
-<li>Do the points generally cluster around the line?</li>
-<li>Or is there substantial scatter?</li>
-</ul>
-<p><strong>Uncertainty around the line</strong></p>
-<ul>
-<li>Is the confidence band narrow or wide?</li>
-<li>Wider bands indicate more uncertainty in the estimated relationship.</li>
-</ul>
-</section>
-<section id="running-diagnostics" class="level2">
-<h2 class="anchored" data-anchor-id="running-diagnostics">Running Diagnostics</h2>
+<p>If you want to set a specific reference group:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model, <span class="at">which =</span> <span class="dv">1</span>)  <span class="co"># Residuals vs Fitted</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="06-slr_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example only (do not run unless instructed):</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>refernece_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">Gender =</span> <span class="fu">relevel</span>(Gender, <span class="at">ref =</span> <span class="st">"female"</span>),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">Race1  =</span> <span class="fu">relevel</span>(Race1, <span class="at">ref =</span> <span class="st">"White"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>   )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="extract-key-results" class="level3">
+<h3 class="anchored" data-anchor-id="extract-key-results">Extract Key Results</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tidy_m2 <span class="ot">&lt;-</span> <span class="fu">tidy</span>(m2, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>tidy_m2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 7
+  term          estimate std.error statistic  p.value conf.low conf.high
+  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)    23.1      0.236      98.0   0          22.7      23.6  
+2 Age             0.142    0.00318    44.6   0           0.136     0.148
+3 Gendermale      0.0226   0.136       0.166 8.68e- 1   -0.244     0.290
+4 Race1Hispanic  -1.44     0.338      -4.27  1.98e- 5   -2.10     -0.780
+5 Race1Mexican   -0.734    0.292      -2.51  1.20e- 2   -1.31     -0.161
+6 Race1White     -2.22     0.215     -10.4   5.27e-25   -2.64     -1.80 
+7 Race1Other     -3.43     0.309     -11.1   2.51e-28   -4.03     -2.82 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model, <span class="at">which =</span> <span class="dv">2</span>)  <span class="co"># Normal Q-Q</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="06-slr_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The tidy function will convert messy outputs and turn them into a tidy tibble.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
-<p>These plots help assess whether the assumptions of linear regression are reasonably met.</p>
-<p>You are expected to recognize <strong>obvious red flags</strong>.</p>
-<section id="plot-1-residuals-vs.-fitted" class="level3">
-<h3 class="anchored" data-anchor-id="plot-1-residuals-vs.-fitted">Plot 1: Residuals vs.&nbsp;Fitted</h3>
-<p>This plot checks:</p>
-<ul>
-<li>Linearity</li>
-<li>Constant variability (homoscedasticity)</li>
-</ul>
-<p>What <strong>YOU</strong> should look for:</p>
-<ul>
-<li>Residuals scattered randomly around zero</li>
-<li>No clear curve or pattern</li>
-<li>Roughly equal spread across fitted values</li>
-</ul>
-<p>Acceptable interpretation:</p>
-<p>The residuals appear randomly scattered around zero with no strong curvature, suggesting the linearity assumption is reasonable. The spread of residuals is fairly consistent across fitted values, indicating approximately constant variance.</p>
-<p>What would indicate a concern:</p>
-<ul>
-<li>Curved pattern → possible nonlinearity</li>
-<li>Funnel shape → non-constant variance</li>
-</ul>
-<p>You should identify, not fix, these issues (at least not yet anyways).</p>
 </section>
-<section id="plot-2-normasl-q-q-plot" class="level3">
-<h3 class="anchored" data-anchor-id="plot-2-normasl-q-q-plot">Plot 2: Normasl Q-Q Plot</h3>
-<p>What this plot checks:</p>
-<ul>
-<li>Approximate normality of residuals</li>
-</ul>
-<p>This matters for:</p>
-<ul>
-<li>confidence intervals</li>
-<li>p-values</li>
-</ul>
-<p>What <strong>YOU</strong> should look for:</p>
-<ul>
-<li>Points falling roughly along the diagonal line</li>
-<li>Small deviations at the ends are acceptable</li>
-</ul>
-<p>Normality is about the <strong>residuals</strong>, not the outcome variable itself.</p>
-<div class=".callout-warning">
-<p>In this course, you are expected to describe diagnostic plots in words and identify major issues if present, not to diagnose or correct subtle statistical problems.</p>
+<section id="extract-the-age-coefficient-and-confidence-interval" class="level3">
+<h3 class="anchored" data-anchor-id="extract-the-age-coefficient-and-confidence-interval">Extract the Age Coefficient and Confidence Interval</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>age_row <span class="ot">&lt;-</span> tidy_m2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"Age"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>age_slope <span class="ot">&lt;-</span> age_row <span class="sc">%&gt;%</span> <span class="fu">pull</span>(estimate)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>age_lo <span class="ot">&lt;-</span> age_row <span class="sc">%&gt;%</span> <span class="fu">pull</span>(conf.low)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>age_hi <span class="ot">&lt;-</span> age_row <span class="sc">%&gt;%</span> <span class="fu">pull</span>(conf.high)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>age_p  <span class="ot">&lt;-</span> age_row <span class="sc">%&gt;%</span> <span class="fu">pull</span>(p.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<blockquote class="blockquote">
+<p>Write the results using inline coding.</p>
+</blockquote>
+<p>After adjusting for gender and race/ethnicity, BMI changed by an average of 0.142 units per one-year increase in age (95% CI: 0.136 to 0.148; p-value = 0).</p>
+</section>
+</section>
+<section id="compare-the-simple-and-adjusted-models" class="level2">
+<h2 class="anchored" data-anchor-id="compare-the-simple-and-adjusted-models">Compare the Simple and Adjusted Models</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(m1, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 7
+  term  estimate std.error statistic p.value conf.low conf.high
+  &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 Age      0.138   0.00315      43.8       0    0.132     0.144</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(m2, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 7
+  term  estimate std.error statistic p.value conf.low conf.high
+  &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 Age      0.142   0.00318      44.6       0    0.136     0.148</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Write your interpretation.</p>
+</blockquote>
+<p>Make sure to answer the following:</p>
+<ol type="1">
+<li>Did the <code>Age</code> coefficient change from <code>m1</code> to <code>m2</code>?</li>
+<li>What might explain the change? Any confounders?</li>
+<li>How does “adjusted interpretation differ from the simple model interpretation?</li>
+</ol>
+<section id="interpret-categorical-predictors" class="level3">
+<h3 class="anchored" data-anchor-id="interpret-categorical-predictors">Interpret Categorical Predictors</h3>
+<p>Use the following code to help you pick a categorical predictor from <code>m2</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tidy_m2 %&gt;% filter(str_detect(term, "Gender|Race1"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Write your interpretation.</p>
+</blockquote>
 
 
 </section>
@@ -1132,13 +1060,13 @@ F-statistic:  1922 on 1 and 9632 DF,  p-value: &lt; 2.2e-16</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./06a-biostats1review.html" class="pagination-link" aria-label="Lesson 6a: Biostats 1 Review">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Lesson 6a: Biostats 1 Review</span></span>
+      <a href="./06-slr.html" class="pagination-link" aria-label="Lesson 6: Simple Linear Regression">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Lesson 6: Simple Linear Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./07-mlr.html" class="pagination-link" aria-label="Lesson 7: Multiple Linear Regression">
-        <span class="nav-page-text"><span class="chapter-title">Lesson 7: Multiple Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./project2.html" class="pagination-link" aria-label="Project 2: Cleaning &amp; Preparing Health Data for Analysis (NHANES)">
+        <span class="nav-page-text"><span class="chapter-title">Project 2: Cleaning &amp; Preparing Health Data for Analysis (NHANES)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
