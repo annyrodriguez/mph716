@@ -18,6 +18,7 @@ book:
     - 05-tidydata.qmd
     - 06a-biostats1review.qmd
     - 06-slr.qmd
+    - 06b-log.qmd
     - 07-mlr.qmd
     - project2.qmd
     

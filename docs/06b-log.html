@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lesson 2 Review: R Workflow, Quarto, and Core Functions – R and Health Sciences</title>
+<title>Lesson 6b: Logistic Regression for Public Health – R and Health Sciences</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./03-visualizations.html" rel="next">
-<link href="./02b-inline.html" rel="prev">
+<link href="./07-mlr.html" rel="next">
+<link href="./06-slr.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02c-review.html"><span class="chapter-title">Lesson 2 Review: R Workflow, Quarto, and Core Functions</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06b-log.html"><span class="chapter-title">Lesson 6b: Logistic Regression for Public Health</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02c-review.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Lesson 2 Review: R Workflow, Quarto, and Core Functions</span></a>
+  <a href="./02c-review.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 2 Review: R Workflow, Quarto, and Core Functions</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -200,7 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06b-log.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 6b: Logistic Regression for Public Health</span></a>
+  <a href="./06b-log.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Lesson 6b: Logistic Regression for Public Health</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -223,41 +223,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#purpose-of-this-review-lesson" id="toc-purpose-of-this-review-lesson" class="nav-link active" data-scroll-target="#purpose-of-this-review-lesson">Purpose of this review lesson</a></li>
-  <li><a href="#r-workflow-overview" id="toc-r-workflow-overview" class="nav-link" data-scroll-target="#r-workflow-overview">R workflow overview</a></li>
-  <li><a href="#r-scripts-vs-quarto-documents" id="toc-r-scripts-vs-quarto-documents" class="nav-link" data-scroll-target="#r-scripts-vs-quarto-documents">R scripts vs Quarto documents</a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#when-do-we-use-logistic-regression" id="toc-when-do-we-use-logistic-regression" class="nav-link" data-scroll-target="#when-do-we-use-logistic-regression">1. When Do We Use Logistic Regression?</a></li>
+  <li><a href="#load-nhanes-data" id="toc-load-nhanes-data" class="nav-link" data-scroll-target="#load-nhanes-data">2. Load NHANES Data</a>
   <ul class="collapse">
-  <li><a href="#r-scripts-.r-files" id="toc-r-scripts-.r-files" class="nav-link" data-scroll-target="#r-scripts-.r-files">R scripts (<code>.R</code> files)</a></li>
-  <li><a href="#quarto-documents-.qmd-files" id="toc-quarto-documents-.qmd-files" class="nav-link" data-scroll-target="#quarto-documents-.qmd-files">Quarto documents (<code>.qmd</code> files)</a></li>
+  <li><a href="#loading-libraries" id="toc-loading-libraries" class="nav-link" data-scroll-target="#loading-libraries">Loading Libraries</a></li>
+  <li><a href="#loading-the-dataset-creating-a-subsect" id="toc-loading-the-dataset-creating-a-subsect" class="nav-link" data-scroll-target="#loading-the-dataset-creating-a-subsect">Loading the Dataset &amp; Creating a Subsect</a></li>
   </ul></li>
-  <li><a href="#key-difference-important" id="toc-key-difference-important" class="nav-link" data-scroll-target="#key-difference-important">Key difference (important)</a></li>
-  <li><a href="#review-week-1-concepts-r-basics" id="toc-review-week-1-concepts-r-basics" class="nav-link" data-scroll-target="#review-week-1-concepts-r-basics">Review: Week 1 concepts (R basics)</a>
+  <li><a href="#fit-logistic-regression-model" id="toc-fit-logistic-regression-model" class="nav-link" data-scroll-target="#fit-logistic-regression-model">3. Fit Logistic Regression Model</a></li>
+  <li><a href="#convert-coefficients-to-odds-ratios" id="toc-convert-coefficients-to-odds-ratios" class="nav-link" data-scroll-target="#convert-coefficients-to-odds-ratios">4. Convert Coefficients to Odds Ratios</a></li>
+  <li><a href="#confidence-intervals-for-odds-ratios" id="toc-confidence-intervals-for-odds-ratios" class="nav-link" data-scroll-target="#confidence-intervals-for-odds-ratios">5. Confidence Intervals for Odds Ratios</a></li>
+  <li><a href="#predicted-probabilities" id="toc-predicted-probabilities" class="nav-link" data-scroll-target="#predicted-probabilities">6. Predicted Probabilities</a></li>
+  <li><a href="#visualizing-logistic-model" id="toc-visualizing-logistic-model" class="nav-link" data-scroll-target="#visualizing-logistic-model">7. Visualizing Logistic Model</a></li>
+  <li><a href="#odds-vs.-probability-concept-clarification" id="toc-odds-vs.-probability-concept-clarification" class="nav-link" data-scroll-target="#odds-vs.-probability-concept-clarification">8. Odds vs.&nbsp;Probability (Concept Clarification)</a>
   <ul class="collapse">
-  <li><a href="#rstudio-interface" id="toc-rstudio-interface" class="nav-link" data-scroll-target="#rstudio-interface">RStudio interface</a></li>
-  <li><a href="#objects-and-assignment" id="toc-objects-and-assignment" class="nav-link" data-scroll-target="#objects-and-assignment">Objects and assignment</a></li>
-  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors">Vectors</a></li>
-  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a></li>
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">Packages</a></li>
+  <li><a href="#public-health-interpretation" id="toc-public-health-interpretation" class="nav-link" data-scroll-target="#public-health-interpretation">9. Public Health Interpretation</a></li>
   </ul></li>
-  <li><a href="#review-week-2-concepts-quarto-reproducibility" id="toc-review-week-2-concepts-quarto-reproducibility" class="nav-link" data-scroll-target="#review-week-2-concepts-quarto-reproducibility">Review: Week 2 concepts (Quarto &amp; reproducibility)</a>
-  <ul class="collapse">
-  <li><a href="#yaml-header" id="toc-yaml-header" class="nav-link" data-scroll-target="#yaml-header">YAML header</a></li>
-  <li><a href="#markdown" id="toc-markdown" class="nav-link" data-scroll-target="#markdown">Markdown</a></li>
-  <li><a href="#code-chunks" id="toc-code-chunks" class="nav-link" data-scroll-target="#code-chunks">Code chunks</a></li>
-  <li><a href="#rendering" id="toc-rendering" class="nav-link" data-scroll-target="#rendering">Rendering</a></li>
-  <li><a href="#inline-r-code" id="toc-inline-r-code" class="nav-link" data-scroll-target="#inline-r-code">Inline R code</a></li>
-  </ul></li>
-  <li><a href="#go-to-r-functions-bookmark-this-section" id="toc-go-to-r-functions-bookmark-this-section" class="nav-link" data-scroll-target="#go-to-r-functions-bookmark-this-section">Go-to R functions (bookmark this section)</a>
-  <ul class="collapse">
-  <li><a href="#basic-r-functions" id="toc-basic-r-functions" class="nav-link" data-scroll-target="#basic-r-functions">Basic R functions</a></li>
-  <li><a href="#data-wrangling-tidyverse" id="toc-data-wrangling-tidyverse" class="nav-link" data-scroll-target="#data-wrangling-tidyverse">Data wrangling (tidyverse)</a></li>
-  <li><a href="#data-reshaping" id="toc-data-reshaping" class="nav-link" data-scroll-target="#data-reshaping">Data reshaping</a></li>
-  <li><a href="#visualization-preview" id="toc-visualization-preview" class="nav-link" data-scroll-target="#visualization-preview">Visualization (preview)</a></li>
-  <li><a href="#modeling-coming-soon" id="toc-modeling-coming-soon" class="nav-link" data-scroll-target="#modeling-coming-soon">Modeling (coming soon)</a></li>
-  </ul></li>
-  <li><a href="#reproducibility-expectations-review" id="toc-reproducibility-expectations-review" class="nav-link" data-scroll-target="#reproducibility-expectations-review">Reproducibility expectations (review)</a></li>
-  <li><a href="#self-check-recommended" id="toc-self-check-recommended" class="nav-link" data-scroll-target="#self-check-recommended">Self-check (recommended)</a></li>
-  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a></li>
   </ul>
 </nav>
     </div>
@@ -266,7 +247,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Lesson 2 Review: R Workflow, Quarto, and Core Functions</span></h1>
+<h1 class="title"><span class="chapter-title">Lesson 6b: Logistic Regression for Public Health</span></h1>
+<p class="subtitle lead">Modeling Binary Health Outcomes</p>
 </div>
 
 
@@ -283,426 +265,293 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="purpose-of-this-review-lesson" class="level2">
-<h2 class="anchored" data-anchor-id="purpose-of-this-review-lesson">Purpose of this review lesson</h2>
-<p>This lesson reviews and reinforces the foundational material from <strong>Lessons 1 and 2</strong>. Before moving on to visualization and data wrangling, it is important that you understand:</p>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By the end of this lesson, you will be able to:</p>
 <ul>
-<li>how R scripts differ from Quarto documents<br>
-</li>
-<li>how RStudio, Quarto, code chunks, and inline code fit together<br>
-</li>
-<li>the core workflow expected in this course<br>
-</li>
-<li>essential R functions you will use repeatedly</li>
+<li>Explain when logistic regression is appropriate</li>
+<li>Interpret odds and probabilities in health research</li>
+<li>Fit a logistic regression model in R</li>
+<li>Interpret odds ratios in public health language</li>
+<li>Generate predicted probabilities</li>
+<li>Communicate findings responsibly</li>
 </ul>
-<p>This lesson is designed as a reference you can return to throughout the semester.</p>
 <hr>
 </section>
-<section id="r-workflow-overview" class="level2">
-<h2 class="anchored" data-anchor-id="r-workflow-overview">R workflow overview</h2>
-<p>In this course, your workflow follows this pattern:</p>
-<ol type="1">
-<li>Write code in R scripts or Quarto documents<br>
-</li>
-<li>Use R to create objects, summaries, figures, and models<br>
-</li>
-<li>Use Quarto to combine analysis and writing<br>
-</li>
-<li>Render documents to produce final reports</li>
-</ol>
-<p>Understanding when to use <strong>a script</strong> versus <strong>a Quarto document</strong> is critical.</p>
-<hr>
-</section>
-<section id="r-scripts-vs-quarto-documents" class="level2">
-<h2 class="anchored" data-anchor-id="r-scripts-vs-quarto-documents">R scripts vs Quarto documents</h2>
-<section id="r-scripts-.r-files" class="level3">
-<h3 class="anchored" data-anchor-id="r-scripts-.r-files">R scripts (<code>.R</code> files)</h3>
-<p>An R script is a plain text file that contains <strong>only R code</strong>.</p>
-<p>You use R scripts to:</p>
+<section id="when-do-we-use-logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="when-do-we-use-logistic-regression">1. When Do We Use Logistic Regression?</h2>
+<p>Linear regression is used when:</p>
 <ul>
-<li>write and test code<br>
-</li>
-<li>clean and prepare data<br>
-</li>
-<li>experiment with analyses<br>
-</li>
-<li>run code step by step</li>
+<li>Outcome is <strong>continuous</strong> (BMI, blood pressure, cholesterol)</li>
 </ul>
-<p>R scripts do <strong>not</strong> include formatted writing, figures with captions, or narrative interpretation.</p>
-<p>Example use case: You are cleaning a dataset or testing code before putting results into a report.</p>
-<hr>
-</section>
-<section id="quarto-documents-.qmd-files" class="level3">
-<h3 class="anchored" data-anchor-id="quarto-documents-.qmd-files">Quarto documents (<code>.qmd</code> files)</h3>
-<p>A Quarto document combines <strong>writing and R code</strong> in a single file.</p>
-<p>You use Quarto documents to:</p>
+<p>Logistic regression is used when:</p>
 <ul>
-<li>write homework assignments<br>
-</li>
-<li>create reports and manuscripts<br>
-</li>
-<li>integrate code, figures, tables, and interpretation<br>
-</li>
-<li>produce reproducible outputs</li>
-</ul>
-<p>A Quarto document includes: - a YAML header<br>
-- written text (Markdown)<br>
-- R code chunks<br>
-- inline R code</p>
-<p>In this course, <strong>all submitted work must be written in Quarto</strong> unless otherwise stated.</p>
-<hr>
-</section>
-</section>
-<section id="key-difference-important" class="level2">
-<h2 class="anchored" data-anchor-id="key-difference-important">Key difference (important)</h2>
+<li>Outcome is <strong>binary</strong>
 <ul>
-<li>Use <strong>R scripts</strong> to <em>develop and test</em> code<br>
-</li>
-<li>Use <strong>Quarto documents</strong> to <em>present and submit</em> work</li>
+<li>Hypertension: Yes / No</li>
+<li>Diabetes: Yes / No</li>
+<li>Smoker: Yes / No</li>
+<li>Fair/Poor health: Yes / No</li>
+</ul></li>
 </ul>
-<p>Most students will use <strong>both</strong>: Write code in scripts → move finalized code into Quarto.</p>
-<hr>
-</section>
-<section id="review-week-1-concepts-r-basics" class="level2">
-<h2 class="anchored" data-anchor-id="review-week-1-concepts-r-basics">Review: Week 1 concepts (R basics)</h2>
-<p>From Week 1, you should understand:</p>
-<section id="rstudio-interface" class="level3">
-<h3 class="anchored" data-anchor-id="rstudio-interface">RStudio interface</h3>
+<p>Logistic regression models:</p>
+<p>[ log() = _0 + _1X ]</p>
+<p>Where:</p>
 <ul>
-<li>Source: where scripts and Quarto documents are written<br>
-</li>
-<li>Console: where R runs code<br>
-</li>
-<li>Environment: where objects are stored<br>
-</li>
-<li>Files/Plots/Help: where outputs appear</li>
+<li>(p) = probability of the outcome</li>
+<li>(p/(1-p)) = odds</li>
 </ul>
-<p>You should primarily work in the <strong>Source pane</strong>, not the Console.</p>
 <hr>
 </section>
-<section id="objects-and-assignment" class="level3">
-<h3 class="anchored" data-anchor-id="objects-and-assignment">Objects and assignment</h3>
-<p>You create objects using <code>&lt;-</code>.</p>
+<section id="load-nhanes-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-nhanes-data">2. Load NHANES Data</h2>
+<section id="loading-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="loading-libraries">Loading Libraries</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<p>Objects store values so you can reuse them.</p>
-<hr>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="vectors" class="level3">
-<h3 class="anchored" data-anchor-id="vectors">Vectors</h3>
-<p>Vectors store multiple values of the same type.</p>
+<section id="loading-the-dataset-creating-a-subsect" class="level3">
+<h3 class="anchored" data-anchor-id="loading-the-dataset-creating-a-subsect">Loading the Dataset &amp; Creating a Subsect</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">35</span>, <span class="dv">41</span>, <span class="dv">29</span>, <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(NHANES)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(BMI), <span class="sc">!</span><span class="fu">is.na</span>(Gender), <span class="sc">!</span><span class="fu">is.na</span>(Age)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">high_bmi =</span> <span class="fu">ifelse</span>(BMI <span class="sc">&gt;=</span> <span class="dv">30</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Common functions for vectors:</p>
+</section>
+</section>
+<section id="fit-logistic-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="fit-logistic-regression-model">3. Fit Logistic Regression Model</h2>
+<p>Our example research question: <strong>Is obesity associated with age?</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">glm</span>(high_bmi <span class="sc">~</span> Age, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> df, </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">family =</span> binomial)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 35.6</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 35</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.47855</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5</code></pre>
-</div>
-</div>
-<hr>
-</section>
-<section id="functions" class="level3">
-<h3 class="anchored" data-anchor-id="functions">Functions</h3>
-<p>Functions take inputs and return outputs.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 35.6</code></pre>
+<pre><code>
+Call:
+glm(formula = high_bmi ~ Age, family = binomial, data = df)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -1.865791   0.051335  -36.34   &lt;2e-16 ***
+Age          0.023872   0.001084   22.01   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 11552  on 9633  degrees of freedom
+Residual deviance: 11040  on 9632  degrees of freedom
+AIC: 11044
+
+Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
-<p>Understanding how to use functions is more important than memorizing them.</p>
-<hr>
-</section>
-<section id="packages" class="level3">
-<h3 class="anchored" data-anchor-id="packages">Packages</h3>
-<p>Packages extend R.</p>
-<p>You install once:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("tidyverse")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>You load every session:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<hr>
-</section>
-</section>
-<section id="review-week-2-concepts-quarto-reproducibility" class="level2">
-<h2 class="anchored" data-anchor-id="review-week-2-concepts-quarto-reproducibility">Review: Week 2 concepts (Quarto &amp; reproducibility)</h2>
-<section id="yaml-header" class="level3">
-<h3 class="anchored" data-anchor-id="yaml-header">YAML header</h3>
-<p>Every Quarto document begins with a YAML header.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Document"</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The YAML controls document settings.</p>
-<hr>
-</section>
-<section id="markdown" class="level3">
-<h3 class="anchored" data-anchor-id="markdown">Markdown</h3>
-<p>Markdown formats your writing using simple syntax.</p>
-<p>You use it for: - headings<br>
-- lists<br>
-- emphasis<br>
-- document structure</p>
-<p>Markdown keeps reports readable and professional.</p>
-<hr>
-</section>
-<section id="code-chunks" class="level3">
-<h3 class="anchored" data-anchor-id="code-chunks">Code chunks</h3>
-<p>R code is written inside code chunks.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-</div>
-<p>Code chunks run when you <strong>render</strong> the document.</p>
-<hr>
-</section>
-<section id="rendering" class="level3">
-<h3 class="anchored" data-anchor-id="rendering">Rendering</h3>
-<p>Rendering: - runs all code chunks<br>
-- generates the final document<br>
-- updates all figures and inline values</p>
-<p>Always render before submitting.</p>
-<hr>
-</section>
-<section id="inline-r-code" class="level3">
-<h3 class="anchored" data-anchor-id="inline-r-code">Inline R code</h3>
-<p>Inline code inserts R results into sentences.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>, <span class="dv">35</span>, <span class="dv">41</span>, <span class="dv">29</span>, <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The sample included 5 participants, and the mean age was 35.6 years.</p>
-<p>Inline code prevents copy-and-paste errors and is required for reporting values in this course.</p>
-<hr>
-</section>
-</section>
-<section id="go-to-r-functions-bookmark-this-section" class="level2">
-<h2 class="anchored" data-anchor-id="go-to-r-functions-bookmark-this-section">Go-to R functions (bookmark this section)</h2>
-<p>These are functions you will use <strong>throughout the semester</strong>.</p>
-<hr>
-<section id="basic-r-functions" class="level3">
-<h3 class="anchored" data-anchor-id="basic-r-functions">Basic R functions</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Purpose</th>
-<th>Function</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Create vector</td>
-<td><code>c()</code></td>
-</tr>
-<tr class="even">
-<td>Mean</td>
-<td><code>mean()</code></td>
-</tr>
-<tr class="odd">
-<td>Median</td>
-<td><code>median()</code></td>
-</tr>
-<tr class="even">
-<td>Standard deviation</td>
-<td><code>sd()</code></td>
-</tr>
-<tr class="odd">
-<td>Sample size</td>
-<td><code>length()</code></td>
-</tr>
-<tr class="even">
-<td>Summary</td>
-<td><code>summary()</code></td>
-</tr>
-<tr class="odd">
-<td>View data</td>
-<td><code>head()</code></td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-<section id="data-wrangling-tidyverse" class="level3">
-<h3 class="anchored" data-anchor-id="data-wrangling-tidyverse">Data wrangling (tidyverse)</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Task</th>
-<th>Function</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Select columns</td>
-<td><code>select()</code></td>
-</tr>
-<tr class="even">
-<td>Filter rows</td>
-<td><code>filter()</code></td>
-</tr>
-<tr class="odd">
-<td>Create variables</td>
-<td><code>mutate()</code></td>
-</tr>
-<tr class="even">
-<td>Sort data</td>
-<td><code>arrange()</code></td>
-</tr>
-<tr class="odd">
-<td>Group data</td>
-<td><code>group_by()</code></td>
-</tr>
-<tr class="even">
-<td>Summarize data</td>
-<td><code>summarise()</code></td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-<section id="data-reshaping" class="level3">
-<h3 class="anchored" data-anchor-id="data-reshaping">Data reshaping</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Task</th>
-<th>Function</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Wide → long</td>
-<td><code>pivot_longer()</code></td>
-</tr>
-<tr class="even">
-<td>Long → wide</td>
-<td><code>pivot_wider()</code></td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-<section id="visualization-preview" class="level3">
-<h3 class="anchored" data-anchor-id="visualization-preview">Visualization (preview)</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Task</th>
-<th>Function</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Create plot</td>
-<td><code>ggplot()</code></td>
-</tr>
-<tr class="even">
-<td>Scatterplot</td>
-<td><code>geom_point()</code></td>
-</tr>
-<tr class="odd">
-<td>Line plot</td>
-<td><code>geom_line()</code></td>
-</tr>
-<tr class="even">
-<td>Bar chart</td>
-<td><code>geom_col()</code></td>
-</tr>
-<tr class="odd">
-<td>Labels</td>
-<td><code>labs()</code></td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-<section id="modeling-coming-soon" class="level3">
-<h3 class="anchored" data-anchor-id="modeling-coming-soon">Modeling (coming soon)</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Task</th>
-<th>Function</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Linear model</td>
-<td><code>lm()</code></td>
-</tr>
-<tr class="even">
-<td>Logistic model</td>
-<td><code>glm()</code></td>
-</tr>
-<tr class="odd">
-<td>Model summary</td>
-<td><code>summary()</code></td>
-</tr>
-<tr class="even">
-<td>Confidence intervals</td>
-<td><code>confint()</code></td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-</section>
-<section id="reproducibility-expectations-review" class="level2">
-<h2 class="anchored" data-anchor-id="reproducibility-expectations-review">Reproducibility expectations (review)</h2>
-<p>In this course:</p>
+<section id="what-is-happening-here" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-happening-here">What Is Happening Here?</h4>
 <ul>
-<li>analysis and writing live together in Quarto<br>
-</li>
-<li>numbers should be generated by R, not typed<br>
-</li>
-<li>scripts and documents should be organized<br>
-</li>
-<li>work should render without errors</li>
+<li><code>glm()</code> fits a generalized linear model.</li>
+<li><code>family = binomial</code> specifies a binary outcome.</li>
+<li>The model estimates log-odds, not probabilities.</li>
 </ul>
-<p>Reproducibility is a professional skill, not just a technical one.</p>
-<hr>
+<p>The coefficient for Age is on the <strong>log-odds scale</strong>.</p>
+<p>It must be transformed before interpretation.</p>
 </section>
-<section id="self-check-recommended" class="level2">
-<h2 class="anchored" data-anchor-id="self-check-recommended">Self-check (recommended)</h2>
-<p>Before moving forward, ask yourself:</p>
-<ol type="1">
-<li>Do I know when to use a script vs a Quarto document?<br>
-</li>
-<li>Can I explain what rendering does?<br>
-</li>
-<li>Can I write a sentence using inline R code?<br>
-</li>
-<li>Do I recognize the core functions listed above?</li>
-</ol>
-<p>If not, revisit Weeks 1 and 2 before continuing.</p>
-<hr>
 </section>
-<section id="looking-ahead" class="level2">
-<h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
-<p>Next week, you will begin <strong>data visualization with ggplot2</strong>, where you will apply everything you learned about Quarto, reproducibility, and tidy workflows.</p>
-<p>This review lesson is your foundation — keep it bookmarked.</p>
+<section id="convert-coefficients-to-odds-ratios" class="level2">
+<h2 class="anchored" data-anchor-id="convert-coefficients-to-odds-ratios">4. Convert Coefficients to Odds Ratios</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)         Age 
+  0.1547737   1.0241594 </code></pre>
+</div>
+</div>
+<section id="interpretation" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation">Interpretation:</h4>
+<p>Each additional year of age is associated with a 3% increase in the odds of obesity.</p>
+<p><strong>Interpretation Rules</strong></p>
+<ul>
+<li>OR = 1 → No association</li>
+<li>OR &gt; 1 → Increased odds</li>
+<li>OR &lt; 1 → Decreased odds</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>OR = 1.25 → 25% higher odds</li>
+<li>OR = 0.80 → 20% lower odds</li>
+</ul>
+</section>
+</section>
+<section id="confidence-intervals-for-odds-ratios" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-intervals-for-odds-ratios">5. Confidence Intervals for Odds Ratios</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Waiting for profiling to be done...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                2.5 %    97.5 %
+(Intercept) 0.1398656 0.1710458
+Age         1.0219920 1.0263459</code></pre>
+</div>
+</div>
+<section id="interpretation-framework" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation-framework">Interpretation framework:</h4>
+<p>Each one-year increase in age was associated with a ___-fold increase in odds of obesity (95% CI: lower to upper).</p>
+<p><strong><em>How to Interpret Confidence Intervals</em></strong></p>
+<ul>
+<li>If the CI includes 1 → not statistically significant</li>
+<li>If the CI does not include 1 → statistically significant</li>
+<li>CIs communicate magnitude and uncertainty</li>
+</ul>
+<p>In public health research, effect size and uncertainty matter more than p-values alone.</p>
+</section>
+</section>
+<section id="predicted-probabilities" class="level2">
+<h2 class="anchored" data-anchor-id="predicted-probabilities">6. Predicted Probabilities</h2>
+<p>Odds ratios can be abstract.</p>
+<p>Public health audiences often understand probabilities better.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>new_ages <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">60</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, new_ages, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(new_ages, <span class="at">predicted_probability =</span> predicted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Age predicted_probability
+1  20             0.1996715
+2  40             0.2868146
+3  60             0.3932998</code></pre>
+</div>
+</div>
+<p><code>type = "response"</code> converts log-odds into probabilities.</p>
+<section id="interpretation-example" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation-example">Interpretation Example</h4>
+<ul>
+<li>If predicted probability at age 20 = 0.18 → 18% probability of obesity</li>
+<li>If predicted probability at age 60 = 0.34 → 34% probability of obesity</li>
+</ul>
+<p><strong>Notice</strong></p>
+<ul>
+<li>The increase is nonlinear.</li>
+<li>Predicted values stay between 0 and 1.</li>
+<li>Logistic regression produces an S-shaped curve.</li>
+</ul>
+</section>
+</section>
+<section id="visualizing-logistic-model" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-logistic-model">7. Visualizing Logistic Model</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>age_grid <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Age =</span> <span class="fu">seq</span>(<span class="fu">min</span>(df<span class="sc">$</span>Age), <span class="fu">max</span>(df<span class="sc">$</span>Age), <span class="at">length.out =</span> <span class="dv">200</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>age_grid<span class="sc">$</span>prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, age_grid, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> Age, </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> high_bmi</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>         )) <span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> age_grid, </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>              Age, </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>              prob), </span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Probability of Obesity"</span>,</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Predicted Probability of Obesity by Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06b-log_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What to observe:</p>
+<ul>
+<li>Points are binary (0 or 1).</li>
+<li>The curve is smooth.</li>
+<li>Probability increases gradually.</li>
+<li>Predictions remain within logical bounds.</li>
+</ul>
+<p>Linear regression could predict probabilities below 0 or above 1. Logistic regression avoids that issue.</p>
+</section>
+<section id="odds-vs.-probability-concept-clarification" class="level2">
+<h2 class="anchored" data-anchor-id="odds-vs.-probability-concept-clarification">8. Odds vs.&nbsp;Probability (Concept Clarification)</h2>
+<div class=".callout-tip">
+<p>People often confuse <strong>odds</strong> and <strong>probability</strong>.</p>
+</div>
+<p><strong>Probability</strong> is the <u>chance</u> that the event occurs. The range is 0 to 1.</p>
+<p><strong>Odds</strong> are the probability of something divided by 1 minus that probability.</p>
+<p>So, if the probability of something happening is 0.20, the the <strong>odds</strong> are (.20)/(1-.20) = (.20)/(.80) = .25.</p>
+<p><strong>Odds</strong> can exceed 1, <strong>probability</strong> cannot.</p>
+<section id="why-logistic-regression-uses-odds" class="level4">
+<h4 class="anchored" data-anchor-id="why-logistic-regression-uses-odds">Why Logistic Regression Uses Odds</h4>
+<ul>
+<li>Odds range from 0 to infinity.</li>
+<li>Log(odds) ranges from negative infinity to positive infinity.</li>
+<li>This makes the model mathematically stable.</li>
+</ul>
+<p>Important:</p>
+<ul>
+<li>Odds ratio ≠ risk ratio.</li>
+<li>An OR of 2 does not mean “twice as likely” unless the outcome is rare.</li>
+</ul>
+</section>
+<section id="public-health-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="public-health-interpretation">9. Public Health Interpretation</h3>
+<p>Avoid:</p>
+<ul>
+<li>“Age causes obesity.”</li>
+<li>“Risk doubles.”</li>
+</ul>
+<p>Use:</p>
+<ul>
+<li>“Age was associated with higher odds of obesity.”</li>
+<li>“After adjustment, age remained independently associated with obesity.”</li>
+</ul>
+<section id="limitations-to-consider" class="level4">
+<h4 class="anchored" data-anchor-id="limitations-to-consider">Limitations to Consider</h4>
+<ul>
+<li>Cross-sectional data cannot establish causality.</li>
+<li>Measurement error may bias results.</li>
+<li>Residual confounding may remain.</li>
+<li>Survey design limitations may affect inference.</li>
+</ul>
+</section>
+<section id="logistic-regression-assumptions-introductory" class="level4">
+<h4 class="anchored" data-anchor-id="logistic-regression-assumptions-introductory">Logistic Regression Assumptions (Introductory)</h4>
+<ul>
+<li>Independent observations</li>
+<li>Correct link function</li>
+<li>No severe multicollinearity</li>
+<li>Adequate sample size</li>
+</ul>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1107,13 +956,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./02b-inline.html" class="pagination-link" aria-label="Lesson 2b: Inline Code for Reproducible Writing">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Lesson 2b: Inline Code for Reproducible Writing</span></span>
+      <a href="./06-slr.html" class="pagination-link" aria-label="Lesson 6: Simple Linear Regression">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Lesson 6: Simple Linear Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./03-visualizations.html" class="pagination-link" aria-label="Lesson 3: Data Visualization with ggplot2">
-        <span class="nav-page-text"><span class="chapter-title">Lesson 3: Data Visualization with ggplot2</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07-mlr.html" class="pagination-link" aria-label="Lesson 7: Multiple Linear Regression">
+        <span class="nav-page-text"><span class="chapter-title">Lesson 7: Multiple Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

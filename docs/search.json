@@ -1680,13 +1680,113 @@
     ]
   },
   {
+    "objectID": "06b-log.html",
+    "href": "06b-log.html",
+    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "section": "",
+    "text": "Learning Objectives\nBy the end of this lesson, you will be able to:",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+    ]
+  },
+  {
+    "objectID": "06b-log.html#learning-objectives",
+    "href": "06b-log.html#learning-objectives",
+    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "section": "",
+    "text": "Explain when logistic regression is appropriate\nInterpret odds and probabilities in health research\nFit a logistic regression model in R\nInterpret odds ratios in public health language\nGenerate predicted probabilities\nCommunicate findings responsibly",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+    ]
+  },
+  {
+    "objectID": "06b-log.html#when-do-we-use-logistic-regression",
+    "href": "06b-log.html#when-do-we-use-logistic-regression",
+    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "section": "1. When Do We Use Logistic Regression?",
+    "text": "1. When Do We Use Logistic Regression?\nLinear regression is used when:\n\nOutcome is continuous (BMI, blood pressure, cholesterol)\n\nLogistic regression is used when:\n\nOutcome is binary\n\nHypertension: Yes / No\nDiabetes: Yes / No\nSmoker: Yes / No\nFair/Poor health: Yes / No\n\n\nLogistic regression models:\n[ log() = _0 + _1X ]\nWhere:\n\n(p) = probability of the outcome\n(p/(1-p)) = odds",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+    ]
+  },
+  {
+    "objectID": "06b-log.html#load-nhanes-data",
+    "href": "06b-log.html#load-nhanes-data",
+    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "section": "2. Load NHANES Data",
+    "text": "2. Load NHANES Data\n\nLoading Libraries\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(NHANES)\n\n\n\nLoading the Dataset & Creating a Subsect\n\ndata(NHANES)\n\ndf &lt;- NHANES %&gt;%\n  filter(!is.na(BMI), !is.na(Gender), !is.na(Age)) %&gt;%\n  mutate(\n    high_bmi = ifelse(BMI &gt;= 30, 1, 0)\n  )",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+    ]
+  },
+  {
+    "objectID": "06b-log.html#fit-logistic-regression-model",
+    "href": "06b-log.html#fit-logistic-regression-model",
+    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "section": "3. Fit Logistic Regression Model",
+    "text": "3. Fit Logistic Regression Model\nOur example research question: Is obesity associated with age?\n\nmodel &lt;- glm(high_bmi ~ Age, \n             data = df, \n             family = binomial)\n\nsummary(model)\n\n\nCall:\nglm(formula = high_bmi ~ Age, family = binomial, data = df)\n\nCoefficients:\n             Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -1.865791   0.051335  -36.34   &lt;2e-16 ***\nAge          0.023872   0.001084   22.01   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 11552  on 9633  degrees of freedom\nResidual deviance: 11040  on 9632  degrees of freedom\nAIC: 11044\n\nNumber of Fisher Scoring iterations: 4\n\n\n\nWhat Is Happening Here?\n\nglm() fits a generalized linear model.\nfamily = binomial specifies a binary outcome.\nThe model estimates log-odds, not probabilities.\n\nThe coefficient for Age is on the log-odds scale.\nIt must be transformed before interpretation.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+    ]
+  },
+  {
+    "objectID": "06b-log.html#convert-coefficients-to-odds-ratios",
+    "href": "06b-log.html#convert-coefficients-to-odds-ratios",
+    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "section": "4. Convert Coefficients to Odds Ratios",
+    "text": "4. Convert Coefficients to Odds Ratios\n\nexp(coef(model))\n\n(Intercept)         Age \n  0.1547737   1.0241594 \n\n\n\nInterpretation:\nEach additional year of age is associated with a 3% increase in the odds of obesity.\nInterpretation Rules\n\nOR = 1 → No association\nOR &gt; 1 → Increased odds\nOR &lt; 1 → Decreased odds\n\nExamples:\n\nOR = 1.25 → 25% higher odds\nOR = 0.80 → 20% lower odds",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+    ]
+  },
+  {
+    "objectID": "06b-log.html#confidence-intervals-for-odds-ratios",
+    "href": "06b-log.html#confidence-intervals-for-odds-ratios",
+    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "section": "5. Confidence Intervals for Odds Ratios",
+    "text": "5. Confidence Intervals for Odds Ratios\n\nexp(confint(model))\n\nWaiting for profiling to be done...\n\n\n                2.5 %    97.5 %\n(Intercept) 0.1398656 0.1710458\nAge         1.0219920 1.0263459\n\n\n\nInterpretation framework:\nEach one-year increase in age was associated with a ___-fold increase in odds of obesity (95% CI: lower to upper).\nHow to Interpret Confidence Intervals\n\nIf the CI includes 1 → not statistically significant\nIf the CI does not include 1 → statistically significant\nCIs communicate magnitude and uncertainty\n\nIn public health research, effect size and uncertainty matter more than p-values alone.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+    ]
+  },
+  {
+    "objectID": "06b-log.html#predicted-probabilities",
+    "href": "06b-log.html#predicted-probabilities",
+    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "section": "6. Predicted Probabilities",
+    "text": "6. Predicted Probabilities\nOdds ratios can be abstract.\nPublic health audiences often understand probabilities better.\n\nnew_ages &lt;- tibble(Age = c(20, 40, 60))\n\npredicted &lt;- predict(model, new_ages, type = \"response\")\n\ncbind(new_ages, predicted_probability = predicted)\n\n  Age predicted_probability\n1  20             0.1996715\n2  40             0.2868146\n3  60             0.3932998\n\n\ntype = \"response\" converts log-odds into probabilities.\n\nInterpretation Example\n\nIf predicted probability at age 20 = 0.18 → 18% probability of obesity\nIf predicted probability at age 60 = 0.34 → 34% probability of obesity\n\nNotice\n\nThe increase is nonlinear.\nPredicted values stay between 0 and 1.\nLogistic regression produces an S-shaped curve.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+    ]
+  },
+  {
+    "objectID": "06b-log.html#visualizing-logistic-model",
+    "href": "06b-log.html#visualizing-logistic-model",
+    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "section": "7. Visualizing Logistic Model",
+    "text": "7. Visualizing Logistic Model\n\nage_grid &lt;- tibble(Age = seq(min(df$Age), max(df$Age), length.out = 200))\n\nage_grid$prob &lt;- predict(model, age_grid, type = \"response\")\n\nggplot(df, \n       aes(\n         x = Age, \n         y = high_bmi\n         )) +\n  geom_point(alpha = 0.2) +\n  geom_line(data = age_grid, \n            aes(\n              Age, \n              prob), \n            linewidth = 1.2) +\n  labs(y = \"Probability of Obesity\",\n       title = \"Predicted Probability of Obesity by Age\")\n\n\n\n\n\n\n\n\nWhat to observe:\n\nPoints are binary (0 or 1).\nThe curve is smooth.\nProbability increases gradually.\nPredictions remain within logical bounds.\n\nLinear regression could predict probabilities below 0 or above 1. Logistic regression avoids that issue.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+    ]
+  },
+  {
+    "objectID": "06b-log.html#odds-vs.-probability-concept-clarification",
+    "href": "06b-log.html#odds-vs.-probability-concept-clarification",
+    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "section": "8. Odds vs. Probability (Concept Clarification)",
+    "text": "8. Odds vs. Probability (Concept Clarification)\n\nPeople often confuse odds and probability.\n\nProbability is the chance that the event occurs. The range is 0 to 1.\nOdds are the probability of something divided by 1 minus that probability.\nSo, if the probability of something happening is 0.20, the the odds are (.20)/(1-.20) = (.20)/(.80) = .25.\nOdds can exceed 1, probability cannot.\n\nWhy Logistic Regression Uses Odds\n\nOdds range from 0 to infinity.\nLog(odds) ranges from negative infinity to positive infinity.\nThis makes the model mathematically stable.\n\nImportant:\n\nOdds ratio ≠ risk ratio.\nAn OR of 2 does not mean “twice as likely” unless the outcome is rare.\n\n\n\n9. Public Health Interpretation\nAvoid:\n\n“Age causes obesity.”\n“Risk doubles.”\n\nUse:\n\n“Age was associated with higher odds of obesity.”\n“After adjustment, age remained independently associated with obesity.”\n\n\nLimitations to Consider\n\nCross-sectional data cannot establish causality.\nMeasurement error may bias results.\nResidual confounding may remain.\nSurvey design limitations may affect inference.\n\n\n\nLogistic Regression Assumptions (Introductory)\n\nIndependent observations\nCorrect link function\nNo severe multicollinearity\nAdequate sample size",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+    ]
+  },
+  {
     "objectID": "07-mlr.html",
     "href": "07-mlr.html",
     "title": "Lesson 7: Multiple Linear Regression",
     "section": "",
     "text": "Purpose of this lesson\nThis lesson introduces multiple linear regression, which allows us to examine the association between a numeric outcome and multiple predictors at the same time. In public health, this is commonly used to estimate adjusted associations, meaning the association between a predictor and an outcome while holding other variables constant.\nThe focus today is interpretation: how to read output, how to write results in plain language, and how to avoid causal claims when the study design is observational.",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
     ]
   },
   {
@@ -1696,7 +1796,7 @@
     "section": "Learning goals",
     "text": "Learning goals\nBy the end of this lesson, you will be able to:\n\nExplain why multiple regression is used in public health\nFit a multiple linear regression model using lm()\nInterpret an adjusted slope (“holding other variables constant”)\nInterpret categorical predictors using a reference group\nCompare a simple model vs an adjusted model\nReport regression results using inline R code in Quarto",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
     ]
   },
   {
@@ -1706,7 +1806,7 @@
     "section": "Setup",
     "text": "Setup\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(broom)\nlibrary(NHANES)\n\n\nThe Dataset\n\ndata(\"NHANES\")\nglimpse(NHANES)\n\nRows: 10,000\nColumns: 76\n$ ID               &lt;int&gt; 51624, 51624, 51624, 51625, 51630, 51638, 51646, 5164…\n$ SurveyYr         &lt;fct&gt; 2009_10, 2009_10, 2009_10, 2009_10, 2009_10, 2009_10,…\n$ Gender           &lt;fct&gt; male, male, male, male, female, male, male, female, f…\n$ Age              &lt;int&gt; 34, 34, 34, 4, 49, 9, 8, 45, 45, 45, 66, 58, 54, 10, …\n$ AgeDecade        &lt;fct&gt;  30-39,  30-39,  30-39,  0-9,  40-49,  0-9,  0-9,  40…\n$ AgeMonths        &lt;int&gt; 409, 409, 409, 49, 596, 115, 101, 541, 541, 541, 795,…\n$ Race1            &lt;fct&gt; White, White, White, Other, White, White, White, Whit…\n$ Race3            &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Education        &lt;fct&gt; High School, High School, High School, NA, Some Colle…\n$ MaritalStatus    &lt;fct&gt; Married, Married, Married, NA, LivePartner, NA, NA, M…\n$ HHIncome         &lt;fct&gt; 25000-34999, 25000-34999, 25000-34999, 20000-24999, 3…\n$ HHIncomeMid      &lt;int&gt; 30000, 30000, 30000, 22500, 40000, 87500, 60000, 8750…\n$ Poverty          &lt;dbl&gt; 1.36, 1.36, 1.36, 1.07, 1.91, 1.84, 2.33, 5.00, 5.00,…\n$ HomeRooms        &lt;int&gt; 6, 6, 6, 9, 5, 6, 7, 6, 6, 6, 5, 10, 6, 10, 10, 4, 3,…\n$ HomeOwn          &lt;fct&gt; Own, Own, Own, Own, Rent, Rent, Own, Own, Own, Own, O…\n$ Work             &lt;fct&gt; NotWorking, NotWorking, NotWorking, NA, NotWorking, N…\n$ Weight           &lt;dbl&gt; 87.4, 87.4, 87.4, 17.0, 86.7, 29.8, 35.2, 75.7, 75.7,…\n$ Length           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ HeadCirc         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Height           &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.…\n$ BMI              &lt;dbl&gt; 32.22, 32.22, 32.22, 15.30, 30.57, 16.82, 20.64, 27.2…\n$ BMICatUnder20yrs &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ BMI_WHO          &lt;fct&gt; 30.0_plus, 30.0_plus, 30.0_plus, 12.0_18.5, 30.0_plus…\n$ Pulse            &lt;int&gt; 70, 70, 70, NA, 86, 82, 72, 62, 62, 62, 60, 62, 76, 8…\n$ BPSysAve         &lt;int&gt; 113, 113, 113, NA, 112, 86, 107, 118, 118, 118, 111, …\n$ BPDiaAve         &lt;int&gt; 85, 85, 85, NA, 75, 47, 37, 64, 64, 64, 63, 74, 85, 6…\n$ BPSys1           &lt;int&gt; 114, 114, 114, NA, 118, 84, 114, 106, 106, 106, 124, …\n$ BPDia1           &lt;int&gt; 88, 88, 88, NA, 82, 50, 46, 62, 62, 62, 64, 76, 86, 6…\n$ BPSys2           &lt;int&gt; 114, 114, 114, NA, 108, 84, 108, 118, 118, 118, 108, …\n$ BPDia2           &lt;int&gt; 88, 88, 88, NA, 74, 50, 36, 68, 68, 68, 62, 72, 88, 6…\n$ BPSys3           &lt;int&gt; 112, 112, 112, NA, 116, 88, 106, 118, 118, 118, 114, …\n$ BPDia3           &lt;int&gt; 82, 82, 82, NA, 76, 44, 38, 60, 60, 60, 64, 76, 82, 7…\n$ Testosterone     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ DirectChol       &lt;dbl&gt; 1.29, 1.29, 1.29, NA, 1.16, 1.34, 1.55, 2.12, 2.12, 2…\n$ TotChol          &lt;dbl&gt; 3.49, 3.49, 3.49, NA, 6.70, 4.86, 4.09, 5.82, 5.82, 5…\n$ UrineVol1        &lt;int&gt; 352, 352, 352, NA, 77, 123, 238, 106, 106, 106, 113, …\n$ UrineFlow1       &lt;dbl&gt; NA, NA, NA, NA, 0.094, 1.538, 1.322, 1.116, 1.116, 1.…\n$ UrineVol2        &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ UrineFlow2       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Diabetes         &lt;fct&gt; No, No, No, No, No, No, No, No, No, No, No, No, No, N…\n$ DiabetesAge      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ HealthGen        &lt;fct&gt; Good, Good, Good, NA, Good, NA, NA, Vgood, Vgood, Vgo…\n$ DaysPhysHlthBad  &lt;int&gt; 0, 0, 0, NA, 0, NA, NA, 0, 0, 0, 10, 0, 4, NA, NA, 0,…\n$ DaysMentHlthBad  &lt;int&gt; 15, 15, 15, NA, 10, NA, NA, 3, 3, 3, 0, 0, 0, NA, NA,…\n$ LittleInterest   &lt;fct&gt; Most, Most, Most, NA, Several, NA, NA, None, None, No…\n$ Depressed        &lt;fct&gt; Several, Several, Several, NA, Several, NA, NA, None,…\n$ nPregnancies     &lt;int&gt; NA, NA, NA, NA, 2, NA, NA, 1, 1, 1, NA, NA, NA, NA, N…\n$ nBabies          &lt;int&gt; NA, NA, NA, NA, 2, NA, NA, NA, NA, NA, NA, NA, NA, NA…\n$ Age1stBaby       &lt;int&gt; NA, NA, NA, NA, 27, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ SleepHrsNight    &lt;int&gt; 4, 4, 4, NA, 8, NA, NA, 8, 8, 8, 7, 5, 4, NA, 5, 7, N…\n$ SleepTrouble     &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, No, No, No, No, No, Y…\n$ PhysActive       &lt;fct&gt; No, No, No, NA, No, NA, NA, Yes, Yes, Yes, Yes, Yes, …\n$ PhysActiveDays   &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, 5, 5, 5, 7, 5, 1, NA, 2, …\n$ TVHrsDay         &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ CompHrsDay       &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ TVHrsDayChild    &lt;int&gt; NA, NA, NA, 4, NA, 5, 1, NA, NA, NA, NA, NA, NA, 4, N…\n$ CompHrsDayChild  &lt;int&gt; NA, NA, NA, 1, NA, 0, 6, NA, NA, NA, NA, NA, NA, 3, N…\n$ Alcohol12PlusYr  &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, Yes, Yes, Yes, Yes, Y…\n$ AlcoholDay       &lt;int&gt; NA, NA, NA, NA, 2, NA, NA, 3, 3, 3, 1, 2, 6, NA, NA, …\n$ AlcoholYear      &lt;int&gt; 0, 0, 0, NA, 20, NA, NA, 52, 52, 52, 100, 104, 364, N…\n$ SmokeNow         &lt;fct&gt; No, No, No, NA, Yes, NA, NA, NA, NA, NA, No, NA, NA, …\n$ Smoke100         &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, No, No, No, Yes, No, …\n$ Smoke100n        &lt;fct&gt; Smoker, Smoker, Smoker, NA, Smoker, NA, NA, Non-Smoke…\n$ SmokeAge         &lt;int&gt; 18, 18, 18, NA, 38, NA, NA, NA, NA, NA, 13, NA, NA, N…\n$ Marijuana        &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, Yes, Yes, Yes, NA, Ye…\n$ AgeFirstMarij    &lt;int&gt; 17, 17, 17, NA, 18, NA, NA, 13, 13, 13, NA, 19, 15, N…\n$ RegularMarij     &lt;fct&gt; No, No, No, NA, No, NA, NA, No, No, No, NA, Yes, Yes,…\n$ AgeRegMarij      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 20, 15, N…\n$ HardDrugs        &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, No, No, No, No, Yes, …\n$ SexEver          &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, Yes, Yes, Yes, Yes, Y…\n$ SexAge           &lt;int&gt; 16, 16, 16, NA, 12, NA, NA, 13, 13, 13, 17, 22, 12, N…\n$ SexNumPartnLife  &lt;int&gt; 8, 8, 8, NA, 10, NA, NA, 20, 20, 20, 15, 7, 100, NA, …\n$ SexNumPartYear   &lt;int&gt; 1, 1, 1, NA, 1, NA, NA, 0, 0, 0, NA, 1, 1, NA, NA, 1,…\n$ SameSex          &lt;fct&gt; No, No, No, NA, Yes, NA, NA, Yes, Yes, Yes, No, No, N…\n$ SexOrientation   &lt;fct&gt; Heterosexual, Heterosexual, Heterosexual, NA, Heteros…\n$ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n\n\n\n\nOutcome and Predictors\nFor this lesson we will use:\n\nOutcome (Y): BMI\nPredictors (X):\n\nAge (numeric)\nGender (categorical)\nRace1 (categorical)\n\n\nWe will see how adding predictors changes interpretation.",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
     ]
   },
   {
@@ -1716,7 +1816,7 @@
     "section": "Data Preparation",
     "text": "Data Preparation\n\ndf &lt;- NHANES %&gt;%\n  select(BMI, Age, Gender, Race1) %&gt;%\n  drop_na()\n\ndf %&gt;% glimpse()\n\nRows: 9,634\nColumns: 4\n$ BMI    &lt;dbl&gt; 32.22, 32.22, 32.22, 15.30, 30.57, 16.82, 20.64, 27.24, 27.24, …\n$ Age    &lt;int&gt; 34, 34, 34, 4, 49, 9, 8, 45, 45, 45, 66, 58, 54, 10, 58, 50, 9,…\n$ Gender &lt;fct&gt; male, male, male, male, female, male, male, female, female, fem…\n$ Race1  &lt;fct&gt; White, White, White, Other, White, White, White, White, White, …",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
     ]
   },
   {
@@ -1726,7 +1826,7 @@
     "section": "Quick Checks",
     "text": "Quick Checks\n\nScatterplot\n\nscatter_df &lt;- ggplot(df, \n                     aes(x = Age, \n                         y = BMI\n                         )) +\n  geom_point(alpha = 0.25) +\n  labs(\n    title = \"BMI vs Age (NHANES)\",\n    x = \"Age (years)\",\n    y = \"BMI\"\n  )\n\nscatter_df\n\n\n\n\n\n\n\n\n\n\nGroup Comparison (BMI by Gender)\n\nboxplot_df &lt;- ggplot(df, \n                     aes(x = Gender, \n                         y = BMI\n                         )) +\n  geom_boxplot() +\n  labs(\n    title = \"BMI by Gender (NHANES)\",\n    x = \"Gender\",\n    y = \"BMI\"\n  )\n\nboxplot_df\n\n\n\n\n\n\n\n\n\n\nInterpretations\nWhat do you see?",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
     ]
   },
   {
@@ -1736,7 +1836,7 @@
     "section": "Fit Simple Model",
     "text": "Fit Simple Model\nLet’s start with a simple regression of BMI on Age.\n\nm1 &lt;- lm(BMI ~ Age, data = df)\nsummary(m1)\n\n\nCall:\nlm(formula = BMI ~ Age, data = df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-16.794  -4.803  -1.236   3.466  55.697 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 21.451688   0.137193  156.36   &lt;2e-16 ***\nAge          0.138033   0.003148   43.84   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 6.735 on 9632 degrees of freedom\nMultiple R-squared:  0.1664,    Adjusted R-squared:  0.1663 \nF-statistic:  1922 on 1 and 9632 DF,  p-value: &lt; 2.2e-16",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
     ]
   },
   {
@@ -1746,7 +1846,7 @@
     "section": "Fit Multiple Regression Model",
     "text": "Fit Multiple Regression Model\n\nm2 &lt;- lm (BMI ~ Age + Gender + Race1, data = df)\nsummary(m2)\n\n\nCall:\nlm(formula = BMI ~ Age + Gender + Race1, data = df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-18.650  -4.688  -1.171   3.338  56.126 \n\nCoefficients:\n               Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   23.145435   0.236101  98.032  &lt; 2e-16 ***\nAge            0.142054   0.003184  44.613  &lt; 2e-16 ***\nGendermale     0.022571   0.136238   0.166    0.868    \nRace1Hispanic -1.442547   0.337861  -4.270 1.98e-05 ***\nRace1Mexican  -0.734311   0.292249  -2.513    0.012 *  \nRace1White    -2.222557   0.214599 -10.357  &lt; 2e-16 ***\nRace1Other    -3.426551   0.309443 -11.073  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 6.675 on 9627 degrees of freedom\nMultiple R-squared:  0.1816,    Adjusted R-squared:  0.1811 \nF-statistic:   356 on 6 and 9627 DF,  p-value: &lt; 2.2e-16",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
     ]
   },
   {
@@ -1756,7 +1856,7 @@
     "section": "Interpretations",
     "text": "Interpretations\nYou learned in Lesson 6 how to interpret the outputs for Simple Linear Regressions. Now, let’s learn how to interpret Multiple Regression Coefficients.\nIn multiple regressions:\n\nThe coefficient for Age is interpreted as the association between Age and BMI holding Gender and Race1 constant.\nCoefficients for Gender and Race1 are interpreted as differences in mean BMI relative to a reference group, holding other variables constant.\n\n\nWhat does constant mean in this case?",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
     ]
   },
   {
@@ -1766,7 +1866,7 @@
     "section": "Identifying the Reference Groups",
     "text": "Identifying the Reference Groups\nR will automatically choose a reference group for categorical variables (typically the first level alphabetically, unless re-leveled).\n\nWhat is a reference group?\n\nA reference group is the baseline categorical level omitted from the model, serving as a comparison point for dummy-coded predictors.\nInterpretation: The intercept represents the average outcome for the reference group, and coefficients for other levels represent the average difference compared to the reference.\n\nlevels(df$Gender)\n\n[1] \"female\" \"male\"  \n\nlevels(df$Race1)\n\n[1] \"Black\"    \"Hispanic\" \"Mexican\"  \"White\"    \"Other\"   \n\n\nIf you want to set a specific reference group:\n\n# Example only (do not run unless instructed):\nrefernece_df &lt;- df %&gt;%\n   mutate(\n     Gender = relevel(Gender, ref = \"female\"),\n     Race1  = relevel(Race1, ref = \"White\")\n   )\n\n\nExtract Key Results\n\ntidy_m2 &lt;- tidy(m2, conf.int = TRUE)\ntidy_m2\n\n# A tibble: 7 × 7\n  term          estimate std.error statistic  p.value conf.low conf.high\n  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)    23.1      0.236      98.0   0          22.7      23.6  \n2 Age             0.142    0.00318    44.6   0           0.136     0.148\n3 Gendermale      0.0226   0.136       0.166 8.68e- 1   -0.244     0.290\n4 Race1Hispanic  -1.44     0.338      -4.27  1.98e- 5   -2.10     -0.780\n5 Race1Mexican   -0.734    0.292      -2.51  1.20e- 2   -1.31     -0.161\n6 Race1White     -2.22     0.215     -10.4   5.27e-25   -2.64     -1.80 \n7 Race1Other     -3.43     0.309     -11.1   2.51e-28   -4.03     -2.82 \n\n# The tidy function will convert messy outputs and turn them into a tidy tibble.\n\n\n\nExtract the Age Coefficient and Confidence Interval\n\nage_row &lt;- tidy_m2 %&gt;% filter(term == \"Age\")\n\nage_slope &lt;- age_row %&gt;% pull(estimate)\nage_lo &lt;- age_row %&gt;% pull(conf.low)\nage_hi &lt;- age_row %&gt;% pull(conf.high)\nage_p  &lt;- age_row %&gt;% pull(p.value)\n\n\nWrite the results using inline coding.\n\nAfter adjusting for gender and race/ethnicity, BMI changed by an average of 0.142 units per one-year increase in age (95% CI: 0.136 to 0.148; p-value = 0).",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
     ]
   },
   {
@@ -1776,7 +1876,7 @@
     "section": "Compare the Simple and Adjusted Models",
     "text": "Compare the Simple and Adjusted Models\n\ntidy(m1, conf.int = TRUE) %&gt;% filter(term == \"Age\")\n\n# A tibble: 1 × 7\n  term  estimate std.error statistic p.value conf.low conf.high\n  &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 Age      0.138   0.00315      43.8       0    0.132     0.144\n\ntidy(m2, conf.int = TRUE) %&gt;% filter(term == \"Age\")\n\n# A tibble: 1 × 7\n  term  estimate std.error statistic p.value conf.low conf.high\n  &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 Age      0.142   0.00318      44.6       0    0.136     0.148\n\n\n\nWrite your interpretation.\n\nMake sure to answer the following:\n\nDid the Age coefficient change from m1 to m2?\nWhat might explain the change? Any confounders?\nHow does “adjusted interpretation differ from the simple model interpretation?\n\n\nInterpret Categorical Predictors\nUse the following code to help you pick a categorical predictor from m2.\n\n# tidy_m2 %&gt;% filter(str_detect(term, \"Gender|Race1\"))\n\n\nWrite your interpretation.",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
     ]
   },
   {
@@ -1786,7 +1886,7 @@
     "section": "",
     "text": "Purpose of Project 2\nThis project moves you from global health context into real biomedical surveillance data. You will work with the NHANES dataset, which contains nationally representative health, exam, and behavioral measures from U.S. adults and children.\nThe goal is to practice:\nThis project prepares you for regression modeling and inference in Project 3 and your final manuscript.",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   },
   {
@@ -1796,7 +1896,7 @@
     "section": "",
     "text": "working with real-world health data\ncleaning and restructuring data for analysis\nmanaging missing values\ncreating new variables\ndocumenting analytic decisions\nwriting clear and reproducible Quarto reports",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   },
   {
@@ -1806,7 +1906,7 @@
     "section": "Dataset",
     "text": "Dataset\nWe will use the curated NHANES dataset included in the NHANES R package.\nThis dataset includes variables such as:\n\ndemographics (age, gender, race/ethnicity, education, income)\nhealth status\nsmoking behavior\nBMI\nblood pressure\nactivity levels\ndepression screening\nmedical conditions\n\nIt is real data — including missingness, limitations, and measurement constraints.",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   },
   {
@@ -1816,7 +1916,7 @@
     "section": "Learning Objectives",
     "text": "Learning Objectives\nBy completing this project, you will be able to:\n\nclean biomedical data using tidyverse tools\nidentify and manage missing data\nconstruct analytic variables\ndescribe population patterns in health outcomes\nexplain cleaning choices transparently\nsubmit a fully reproducible Quarto report\n\nThese are core skills for public health data science.",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   },
   {
@@ -1826,7 +1926,7 @@
     "section": "Project Focus",
     "text": "Project Focus\nYou will choose one health outcome, such as:\n\nHypertension\nBMI (as continuous or categorized)\nDepression symptoms\nDiabetes status\nSelf-rated health\nSmoking status\n\nand examine how it varies across predictors such as:\n\nage\nsex\nrace/ethnicity\nincome-to-poverty ratio\neducation\nhealth behaviors\n\n\nYou may propose an alternative outcome with approval.",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   },
   {
@@ -1836,7 +1936,7 @@
     "section": "Project Tasks",
     "text": "Project Tasks\nYour Quarto report must include the following sections:\n\n1. Introduction (≈ 2–3 paragraphs)\nBriefly explain:\n\nWhat NHANES is and why it matters in public health\nYour chosen outcome and why it is important\nKey predictors you will examine\nYour broad guiding question\n\nUse clear, MPH-appropriate language.\n\n\n2. Data Preparation\nUsing tidyverse:\n\nload the NHANES dataset\nselect your outcome and predictors\nrecode variables as needed (e.g., factors)\ncreate at least one new variable, such as:\n\nage category\nBMI category\nincome group\nbinary hypertension status\n\nremove or document missing data\nprovide a data dictionary table explaining variables\n\nAll choices must be transparent and explained in writing.\n\n\n3. Descriptive Statistics\nProduce:\n\nsummary statistics (means, proportions, counts)\nstratified summaries where appropriate\nat least one table formatted for publication style\n\nUse inline R code whenever possible.\n\n\n4. Visualizations\nCreate at least two figures, such as:\n\ndistributions of your outcome\noutcome by age group\noutcome by race/ethnicity\noutcome by income category\noutcome by smoking status\n\nEach figure must include:\n\nclear title\nlabeled axes\nreadable formatting\na short interpretation paragraph\n\n\n\n5. Missing Data Review\nBriefly describe:\n\nwhere missingness appears\nhow many cases were removed\nwhy that matters for interpretation\npotential bias concerns\n\nThis introduces ethical & methodological thinking.\n\n\n6. Reflection & Interpretation (≈ 3–4 paragraphs)\nDiscuss:\n\nPublic-health meaning of the patterns you observe\nPossible explanations for disparities\nStructural or contextual factors\nWhat you would explore next with modeling\n\nThis section begins to sound like an early manuscript Results + Discussion.",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   },
   {
@@ -1846,7 +1946,7 @@
     "section": "Formatting Requirements",
     "text": "Formatting Requirements\nYour submission must:\n\nbe written entirely in Quarto\nhidden code chunks\nknit without errors\ninclude inline code for reported values\nuse tidy, readable R code\napply organized section headings\ninclude citations where relevant (min. 8)\nuse inclusive, professional language\n\nTarget length: 1,200–1,500 words (excluding code)",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   },
   {
@@ -1856,7 +1956,7 @@
     "section": "Submission Requirements",
     "text": "Submission Requirements\nSubmit:\n\nyour knitted report (word doc)\nyour .qmd source file\nyour 3MT slide",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
     ]
   }
 ]

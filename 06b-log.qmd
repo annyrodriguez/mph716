@@ -1,5 +1,5 @@
 ---
-title: "Lesson 7: Logistic Regression for Public Health"
+title: "Lesson 6b: Logistic Regression for Public Health"
 subtitle: "Modeling Binary Health Outcomes"
 ---
 
