@@ -95,7 +95,7 @@ exp(coef(model))
 
 #### Interpretation:
 
-Each additional year of age is associated with a 3% increase in the odds of obesity.
+Each additional year of age is associated with a 2% increase in the odds of obesity.
 
 **Interpretation Rules**
 

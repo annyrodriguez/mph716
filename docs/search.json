@@ -1734,7 +1734,7 @@
     "href": "06b-log.html#convert-coefficients-to-odds-ratios",
     "title": "Lesson 6b: Logistic Regression for Public Health",
     "section": "4. Convert Coefficients to Odds Ratios",
-    "text": "4. Convert Coefficients to Odds Ratios\n\nexp(coef(model))\n\n(Intercept)         Age \n  0.1547737   1.0241594 \n\n\n\nInterpretation:\nEach additional year of age is associated with a 3% increase in the odds of obesity.\nInterpretation Rules\n\nOR = 1 → No association\nOR &gt; 1 → Increased odds\nOR &lt; 1 → Decreased odds\n\nExamples:\n\nOR = 1.25 → 25% higher odds\nOR = 0.80 → 20% lower odds",
+    "text": "4. Convert Coefficients to Odds Ratios\n\nexp(coef(model))\n\n(Intercept)         Age \n  0.1547737   1.0241594 \n\n\n\nInterpretation:\nEach additional year of age is associated with a 2% increase in the odds of obesity.\nInterpretation Rules\n\nOR = 1 → No association\nOR &gt; 1 → Increased odds\nOR &lt; 1 → Decreased odds\n\nExamples:\n\nOR = 1.25 → 25% higher odds\nOR = 0.80 → 20% lower odds",
     "crumbs": [
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
     ]
