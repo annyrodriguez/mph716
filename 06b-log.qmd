@@ -1,0 +1,239 @@
+---
+title: "Lesson 7: Logistic Regression for Public Health"
+subtitle: "Modeling Binary Health Outcomes"
+---
+
+## Learning Objectives
+
+By the end of this lesson, you will be able to:
+
+- Explain when logistic regression is appropriate
+- Interpret odds and probabilities in health research
+- Fit a logistic regression model in R
+- Interpret odds ratios in public health language
+- Generate predicted probabilities
+- Communicate findings responsibly
+
+---
+
+## 1. When Do We Use Logistic Regression?
+
+Linear regression is used when:
+
+- Outcome is **continuous** (BMI, blood pressure, cholesterol)
+
+Logistic regression is used when:
+
+- Outcome is **binary**
+  - Hypertension: Yes / No
+  - Diabetes: Yes / No
+  - Smoker: Yes / No
+  - Fair/Poor health: Yes / No
+
+Logistic regression models:
+
+\[
+log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1X
+\]
+
+Where:
+
+- \(p\) = probability of the outcome
+- \(p/(1-p)\) = odds
+
+---
+
+## 2. Load NHANES Data
+
+
+### Loading Libraries
+
+```{r}
+library(tidyverse)
+library(NHANES)
+```
+
+### Loading the Dataset & Creating a Subsect
+
+```{r}
+data(NHANES)
+
+df <- NHANES %>%
+  filter(!is.na(BMI), !is.na(Gender), !is.na(Age)) %>%
+  mutate(
+    high_bmi = ifelse(BMI >= 30, 1, 0)
+  )
+```
+
+## 3. Fit Logistic Regression Model
+
+Our example research question: **Is obesity associated with age?**
+
+```{r}
+model <- glm(high_bmi ~ Age, 
+             data = df, 
+             family = binomial)
+
+summary(model)
+```
+
+#### What Is Happening Here?
+
+- `glm()` fits a generalized linear model.
+- `family = binomial` specifies a binary outcome.
+- The model estimates log-odds, not probabilities.
+
+The coefficient for Age is on the **log-odds scale**.
+
+It must be transformed before interpretation.
+
+## 4. Convert Coefficients to Odds Ratios
+
+```{r}
+exp(coef(model))
+```
+
+#### Interpretation:
+
+Each additional year of age is associated with a 3% increase in the odds of obesity.
+
+**Interpretation Rules**
+
+- OR = 1 → No association
+- OR > 1 → Increased odds
+- OR < 1 → Decreased odds
+
+Examples:
+
+- OR = 1.25 → 25% higher odds
+- OR = 0.80 → 20% lower odds
+
+## 5. Confidence Intervals for Odds Ratios
+
+```{r}
+exp(confint(model))
+```
+
+#### Interpretation framework:
+
+Each one-year increase in age was associated with a ___-fold increase in odds of obesity (95% CI: lower to upper).
+
+***How to Interpret Confidence Intervals***
+
+- If the CI includes 1 → not statistically significant
+- If the CI does not include 1 → statistically significant
+- CIs communicate magnitude and uncertainty
+
+In public health research, effect size and uncertainty matter more than p-values alone.
+
+## 6. Predicted Probabilities
+
+Odds ratios can be abstract.
+
+Public health audiences often understand probabilities better.
+
+```{r}
+new_ages <- tibble(Age = c(20, 40, 60))
+
+predicted <- predict(model, new_ages, type = "response")
+
+cbind(new_ages, predicted_probability = predicted)
+```
+
+`type = "response"` converts log-odds into probabilities.
+
+#### Interpretation Example
+
+- If predicted probability at age 20 = 0.18
+→ 18% probability of obesity
+- If predicted probability at age 60 = 0.34
+→ 34% probability of obesity
+
+**Notice**
+
+- The increase is nonlinear.
+- Predicted values stay between 0 and 1.
+- Logistic regression produces an S-shaped curve.
+
+## 7. Visualizing Logistic Model
+
+```{r}
+age_grid <- tibble(Age = seq(min(df$Age), max(df$Age), length.out = 200))
+
+age_grid$prob <- predict(model, age_grid, type = "response")
+
+ggplot(df, 
+       aes(
+         x = Age, 
+         y = high_bmi
+         )) +
+  geom_point(alpha = 0.2) +
+  geom_line(data = age_grid, 
+            aes(
+              Age, 
+              prob), 
+            linewidth = 1.2) +
+  labs(y = "Probability of Obesity",
+       title = "Predicted Probability of Obesity by Age")
+```
+
+What to observe:
+
+- Points are binary (0 or 1).
+- The curve is smooth.
+- Probability increases gradually.
+- Predictions remain within logical bounds.
+
+Linear regression could predict probabilities below 0 or above 1. Logistic regression avoids that issue.
+
+
+## 8. Odds vs. Probability (Concept Clarification)
+
+:::.callout-tip
+People often confuse **odds** and **probability**.
+:::
+
+**Probability** is the <u>chance</u> that the event occurs. The range is 0 to 1.
+
+**Odds** are the probability of something divided by 1 minus that probability.
+
+So, if the probability of something happening is 0.20, the the **odds** are (.20)/(1-.20) = (.20)/(.80) = .25.
+
+**Odds** can exceed 1, **probability** cannot.
+
+#### Why Logistic Regression Uses Odds
+
+- Odds range from 0 to infinity.
+- Log(odds) ranges from negative infinity to positive infinity.
+- This makes the model mathematically stable.
+
+Important:
+
+- Odds ratio ≠ risk ratio.
+- An OR of 2 does not mean “twice as likely” unless the outcome is rare.
+
+### 9. Public Health Interpretation
+
+Avoid:
+
+- “Age causes obesity.”
+- “Risk doubles.”
+
+Use:
+
+- “Age was associated with higher odds of obesity.”
+- “After adjustment, age remained independently associated with obesity.”
+
+#### Limitations to Consider
+
+- Cross-sectional data cannot establish causality.
+- Measurement error may bias results.
+- Residual confounding may remain.
+- Survey design limitations may affect inference.
+
+#### Logistic Regression Assumptions (Introductory)
+
+- Independent observations
+- Correct link function
+- No severe multicollinearity
+- Adequate sample size
