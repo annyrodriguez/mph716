@@ -1,0 +1,305 @@
+---
+title: "Lesson 11: Hypothesis Testing"
+subtitle: "Simulation-First Thinking, P-values, and Biomedical Interpretation"
+---
+
+## Overview
+
+Hypothesis testing allows us to evaluate whether observed patterns in data are likely due to chance or reflect a real underlying relationship.
+
+In this lesson, we take a **simulation-first approach** to hypothesis testing, emphasizing intuition, interpretation, and real-world biomedical framing rather than memorizing formulas.
+
+------------------------------------------------------------------------
+
+## Learning Objectives
+
+By the end of this lesson, students will be able to:
+
+-   Explain the logic of hypothesis testing using simulation
+-   Define null and alternative hypotheses in public health contexts
+-   Interpret p-values as measures of evidence strength
+-   Avoid common misinterpretations of p-values
+-   Apply hypothesis testing to real-world biomedical questions
+-   Connect hypothesis testing to regression inference
+
+------------------------------------------------------------------------
+
+## Assigned Readings
+
+-   *OpenIntro Biostatistics*, Chapter 5\
+-   *Statistical Inference via Data Science*, Chapter 10: Inference for Regression
+
+------------------------------------------------------------------------
+
+## What Is Hypothesis Testing?
+
+Hypothesis testing is a framework used to evaluate whether observed data are consistent with a specific claim about a population.
+
+We compare:
+
+-   what we **observed in our data**
+-   what we would **expect under a null hypothesis**
+
+------------------------------------------------------------------------
+
+## Null and Alternative Hypotheses
+
+The **null hypothesis (H₀)** represents no effect or no association.
+
+The **alternative hypothesis (H₁ or Hₐ)** represents a meaningful effect or association.
+
+------------------------------------------------------------------------
+
+### Example (Public Health)
+
+-   H₀: There is no difference in screening rates between groups\
+-   Hₐ: There is a difference in screening rates between groups
+
+------------------------------------------------------------------------
+
+## Simulation-First Thinking
+
+Instead of jumping straight to formulas, we ask:
+
+> What would our data look like if the null hypothesis were true?
+
+We then simulate many datasets under the null and compare our observed statistic to that distribution.
+
+------------------------------------------------------------------------
+
+## Example: Simulating a Null Distribution
+
+```{r}
+library(tidyverse)
+
+set.seed(123)
+
+# Create two groups with no real difference
+group <- rep(c("A", "B"), each = 50)
+outcome <- rnorm(100, mean = 50, sd = 10)
+
+df <- tibble(group, outcome)
+
+# Observed difference in means
+obs_diff <- df |>
+  group_by(group) |>
+  summarise(mean_val = mean(outcome)) |>
+  summarise(diff = diff(mean_val)) |>
+  pull(diff)
+
+obs_diff
+```
+
+------------------------------------------------------------------------
+
+## Permutation Test (Simulation)
+
+```{r}
+set.seed(123)
+
+null_dist <- replicate(1000, {
+  shuffled <- df |>
+    mutate(group = sample(group))
+
+  shuffled |>
+    group_by(group) |>
+    summarise(mean_val = mean(outcome)) |>
+    summarise(diff = diff(mean_val)) |>
+    pull(diff)
+})
+
+null_df <- tibble(diff = null_dist)
+```
+
+------------------------------------------------------------------------
+
+## Visualizing the Null Distribution
+
+```{r}
+ggplot(null_df, aes(x = diff)) +
+  geom_histogram(bins = 30) +
+  geom_vline(xintercept = obs_diff, linetype = "dashed") +
+  labs(
+    title = "Null Distribution of Difference in Means",
+    x = "Difference in Means",
+    y = "Frequency"
+  )
+```
+
+------------------------------------------------------------------------
+
+## Interpreting the Simulation
+
+-   The histogram shows what differences we would expect **if there were no real effect**
+-   The dashed line shows our observed result
+-   We assess how extreme our observed value is relative to the null distribution
+
+------------------------------------------------------------------------
+
+## What Is a P-value?
+
+The **p-value** is the probability of observing a result as extreme (or more extreme) than what we observed, **assuming the null hypothesis is true**.
+
+------------------------------------------------------------------------
+
+## Calculating the P-value
+
+```{r}
+p_value <- mean(abs(null_df$diff) >= abs(obs_diff))
+p_value
+```
+
+------------------------------------------------------------------------
+
+## Interpreting the P-value
+
+-   Small p-value → strong evidence against the null\
+-   Large p-value → weak evidence against the null
+
+------------------------------------------------------------------------
+
+## P-values as Evidence Strength
+
+| P-value   | Interpretation       |
+|-----------|----------------------|
+| \< 0.01   | Very strong evidence |
+| 0.01–0.05 | Strong evidence      |
+| 0.05–0.10 | Moderate evidence    |
+| \> 0.10   | Weak evidence        |
+
+------------------------------------------------------------------------
+
+## What P-values Do NOT Mean
+
+-   ❌ The probability that the null hypothesis is true\
+-   ❌ The probability that the results are due to chance alone\
+-   ❌ The size or importance of an effect
+
+------------------------------------------------------------------------
+
+## Decision-Making Framework
+
+We often compare the p-value to a significance level (α), commonly 0.05.
+
+-   If p-value \< 0.05 → reject H₀\
+-   If p-value ≥ 0.05 → fail to reject H₀
+
+------------------------------------------------------------------------
+
+## Biomedical Framing
+
+In public health and medicine, hypothesis testing answers questions like:
+
+-   Does a treatment improve outcomes?
+-   Is an exposure associated with disease?
+-   Do disparities persist between populations?
+
+------------------------------------------------------------------------
+
+### Example Interpretation
+
+> The intervention group had lower blood pressure than the control group (p = 0.03).
+
+Interpretation:
+
+-   There is evidence of a difference\
+-   The observed result is unlikely under the null\
+-   The effect may be meaningful, but magnitude should also be considered
+
+------------------------------------------------------------------------
+
+## Hypothesis Testing in Regression
+
+Hypothesis testing is also used in regression models.
+
+Example:
+
+-   H₀: β₁ = 0 (no association between predictor and outcome)\
+-   Hₐ: β₁ ≠ 0
+
+------------------------------------------------------------------------
+
+### Example in R
+
+```{r}
+model <- lm(outcome ~ group, data = df)
+summary(model)
+```
+
+------------------------------------------------------------------------
+
+## Interpreting Regression Output
+
+-   The coefficient represents the estimated effect\
+-   The p-value tests whether that effect is different from zero\
+-   Confidence intervals provide a range of plausible values
+
+------------------------------------------------------------------------
+
+## Connecting to Confidence Intervals
+
+-   If CI excludes 0 (or 1 for ratios) → statistically significant\
+-   If CI includes 0 → not statistically significant
+
+------------------------------------------------------------------------
+
+## Key Terms
+
+| Term                   | Definition                             |
+|------------------------|----------------------------------------|
+| Null Hypothesis        | No effect or association               |
+| Alternative Hypothesis | Presence of effect                     |
+| Test Statistic         | Measure of observed effect             |
+| Null Distribution      | Distribution under H₀                  |
+| P-value                | Probability of extreme result under H₀ |
+| Significance Level     | Threshold for decision-making          |
+
+------------------------------------------------------------------------
+
+## Practice Activity
+
+1.  Simulate a null distribution\
+2.  Compute an observed statistic\
+3.  Calculate a p-value\
+4.  Interpret the result in plain language\
+5.  Decide whether to reject the null
+
+------------------------------------------------------------------------
+
+## Reflection Questions
+
+1.  Why do we simulate under the null hypothesis?\
+2.  What does a small p-value tell us?\
+3.  Why is statistical significance not the same as practical importance?\
+4.  How does this apply to real public health decisions?
+
+------------------------------------------------------------------------
+
+## Common Mistakes to Avoid
+
+-   Treating p-value as probability the null is true\
+-   Ignoring effect size\
+-   Over-relying on 0.05 cutoff\
+-   Confusing statistical and clinical significance
+
+------------------------------------------------------------------------
+
+## Conclusion
+
+Hypothesis testing provides a structured way to evaluate evidence.
+
+A simulation-first approach helps build intuition by showing what results look like under the null hypothesis.
+
+P-values quantify evidence strength, but must be interpreted carefully and alongside effect sizes and confidence intervals.
+
+------------------------------------------------------------------------
+
+## Looking Ahead
+
+Next lesson:
+
+-   Multiple testing\
+-   Type I and Type II errors\
+-   Power and sample size
+
+------------------------------------------------------------------------

@@ -1,0 +1,206 @@
+---
+title: "Project 3: Modeling Health Outcomes Using Regression & Simulation"
+subtitle: "NHANES"
+---
+
+## Project Overview
+
+In this project, you will move from descriptive analysis into statistical modeling and inference using the NHANES dataset. You will select a health outcome and model its association with key predictors using regression tools from *ModernDive* and interpretation frameworks from *OpenIntro Biostatistics*.
+
+Your goal is to answer a meaningful public-health question such as:
+
+-   How is hypertension risk patterned by age, BMI, smoking, and income?
+-   Do depression symptoms vary by socioeconomic status?
+-   How does BMI differ across demographic groups?
+-   Which factors predict fair/poor self-rated health?
+
+Your focus is not only on building models, but also on explaining what they mean in accessible and responsible language.
+
+This project prepares you for your final manuscript, where modeling results will form the core of the Results section.
+
+## Dataset
+
+You will continue working with the NHANES dataset from the `{NHANES}` R package. You may build on your Project 2 analytic dataset or refine your variables further.
+
+## Learning Objectives
+
+By completing this project, you will be able to:
+
+-   fit regression models in R
+-   interpret model coefficients in context
+-   evaluate model fit and limitations
+-   perform simulation-based inference
+-   communicate uncertainty responsibly
+-   present results in a manuscript-ready format
+
+## Project Tasks
+
+Your Quarto report must include the sections below.
+
+## 1. Research Question
+
+Write 1 to 2 paragraphs that clearly state:
+
+-   your outcome variable
+-   your primary predictors of interest
+-   your public-health motivation
+-   your hypothesis, if applicable
+
+### Example
+
+We examine whether hypertension prevalence differs by age, BMI, and income. We hypothesize that hypertension risk increases with age and BMI, and that risk may differ by socioeconomic status.
+
+## 2. Data and Methods
+
+Briefly summarize:
+
+-   your analytic sample
+-   inclusion and exclusion criteria
+-   variables and coding decisions
+-   missing-data handling
+-   analysis approach
+
+You should fit at least:
+
+-   one linear regression model, or
+-   one logistic regression model, depending on your outcome
+
+Optional additions are encouraged:
+
+-   multiple regression
+-   an interaction term
+-   model comparison
+
+## 3. Model Results
+
+Include:
+
+-   model summary tables generated in R
+-   key coefficients interpreted in plain language
+-   confidence intervals or bootstrap-based intervals
+-   at least one visualization of modeled relationships
+
+### Examples of acceptable visualizations
+
+-   predicted probabilities across age
+-   a regression line with a confidence band
+-   grouped means with confidence interval bars
+
+## 4. Inference and Uncertainty
+
+Discuss:
+
+-   what your results suggest
+-   what they do not prove
+-   uncertainty and sampling variability
+-   potential confounding
+-   causal limits
+
+This section should sound like applied epidemiology.
+
+## 5. Public-Health Interpretation
+
+Explain:
+
+-   equity implications
+-   population-health meaning
+-   which findings matter most
+-   reasonable next steps
+
+Avoid overstating conclusions.
+
+## 6. Reflection
+
+Briefly discuss:
+
+-   what was challenging
+-   what you learned
+-   how modeling changed your understanding of the question
+
+## Formatting Requirements
+
+Your submission must:
+
+-   be written fully in Quarto
+-   include inline code wherever possible
+-   knit successfully
+-   follow professional writing standards
+-   avoid jargon where possible
+-   be approximately 1,200 to 1,800 words, excluding code
+
+## Submission
+
+Submit:
+
+-   the knitted report as a word doc
+-   the `.qmd` source file
+-   the 3MT slide
+
+## Ethics Note
+
+NHANES includes variables tied to inequity and lived experience. Please write with sensitivity and respect.
+
+## Project 3 Rubric
+
+### 1. Model Specification and Execution — 25 points
+
+Assesses correctness and appropriateness of modeling.
+
+-   22–25: Model(s) correctly specified; predictors appropriate; code accurate; workflow clear
+-   17–21: Minor mistakes, but overall valid
+-   12–16: Major misunderstandings or mis-specification
+-   0–11: Modeling incomplete or incorrect
+
+### 2. Statistical Interpretation — 20 points
+
+Evaluates how well results are explained.
+
+-   17–20: Coefficients interpreted accurately in context; uncertainty clearly described
+-   13–16: Mostly correct with small errors
+-   8–12: Limited or partially incorrect interpretation
+-   0–7: Interpretation largely incorrect or missing
+
+### 3. Presentation of Results — 15 points
+
+Assesses tables, figures, and clarity.
+
+-   13–15: Professional, clear tables and figures; helpful formatting; at least one modeled visualization
+-   10–12: Mostly clear with minor weaknesses
+-   6–9: Limited clarity or missing elements
+-   0–5: Poor or missing presentation
+
+### 4. Public-Health Insight and Critical Thinking — 15 points
+
+Evaluates meaning-making.
+
+-   13–15: Findings thoughtfully connected to health outcomes, inequity, and context
+-   10–12: Some meaningful interpretation
+-   6–9: Minimal depth
+-   0–5: No meaningful interpretation
+
+### 5. Transparency and Documentation — 10 points
+
+Focus on reproducible workflow.
+
+-   9–10: Coding choices clearly explained; methods understandable; rationale provided
+-   7–8: Mostly clear
+-   4–6: Some ambiguity
+-   0–3: Opaque workflow
+
+### 6. Writing Quality and Organization — 10 points
+
+Evaluates readability and structure.
+
+-   9–10: Clear, polished, professional writing
+-   7–8: Mostly clear with minor issues
+-   4–6: Some disorganization or unclear writing
+-   0–3: Difficult to follow
+
+### 7. Quarto and Reproducibility — 5 points
+
+Rewards strong scientific reporting.
+
+-   5: Fully reproducible, cleanly structured, knits without error
+-   3–4: Minor issues
+-   1–2: Reproducibility inconsistent
+-   0: Not reproducible

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lesson 6a: Biostats 1 Review – R and Health Sciences</title>
+<title>Project 3: Modeling Health Outcomes Using Regression &amp; Simulation – R and Health Sciences</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./06-slr.html" rel="next">
-<link href="./05-tidydata.html" rel="prev">
+<link href="./11-hyptest.html" rel="next">
+<link href="./10-confint.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06a-biostats1review.html"><span class="chapter-title">Lesson 6a: Biostats 1 Review</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project3.html"><span class="chapter-title">Project 3: Modeling Health Outcomes Using Regression &amp; Simulation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -155,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06a-biostats1review.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Lesson 6a: Biostats 1 Review</span></a>
+  <a href="./06a-biostats1review.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 6a: Biostats 1 Review</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -190,7 +190,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./project3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Project 3: Modeling Health Outcomes Using Regression &amp; Simulation</span></a>
+  <a href="./project3.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Project 3: Modeling Health Outcomes Using Regression &amp; Simulation</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -223,54 +223,35 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#purpose-of-this-lesson" id="toc-purpose-of-this-lesson" class="nav-link active" data-scroll-target="#purpose-of-this-lesson">Purpose of this Lesson</a></li>
-  <li><a href="#chapter-1-refresher-data-and-variables" id="toc-chapter-1-refresher-data-and-variables" class="nav-link" data-scroll-target="#chapter-1-refresher-data-and-variables">Chapter 1 refresher: Data and variables</a>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">Project Overview</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#project-tasks" id="toc-project-tasks" class="nav-link" data-scroll-target="#project-tasks">Project Tasks</a></li>
+  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">1. Research Question</a>
   <ul class="collapse">
-  <li><a href="#types-of-variables" id="toc-types-of-variables" class="nav-link" data-scroll-target="#types-of-variables">Types of variables</a></li>
-  <li><a href="#observations-and-units-of-analysis" id="toc-observations-and-units-of-analysis" class="nav-link" data-scroll-target="#observations-and-units-of-analysis">Observations and units of analysis</a></li>
-  <li><a href="#study-design-and-causality" id="toc-study-design-and-causality" class="nav-link" data-scroll-target="#study-design-and-causality">Study design and causality</a></li>
-  <li><a href="#problem-sets" id="toc-problem-sets" class="nav-link" data-scroll-target="#problem-sets">Problem sets</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   </ul></li>
-  <li><a href="#chapter-2-refresher-probability" id="toc-chapter-2-refresher-probability" class="nav-link" data-scroll-target="#chapter-2-refresher-probability">Chapter 2 refresher: Probability</a>
+  <li><a href="#data-and-methods" id="toc-data-and-methods" class="nav-link" data-scroll-target="#data-and-methods">2. Data and Methods</a></li>
+  <li><a href="#model-results" id="toc-model-results" class="nav-link" data-scroll-target="#model-results">3. Model Results</a>
   <ul class="collapse">
-  <li><a href="#what-probability-represents" id="toc-what-probability-represents" class="nav-link" data-scroll-target="#what-probability-represents">What probability represents</a></li>
-  <li><a href="#conditional-probability-and-independence" id="toc-conditional-probability-and-independence" class="nav-link" data-scroll-target="#conditional-probability-and-independence">Conditional probability and independence</a></li>
-  <li><a href="#common-misconceptions" id="toc-common-misconceptions" class="nav-link" data-scroll-target="#common-misconceptions">Common misconceptions</a></li>
-  <li><a href="#numerical-summaries" id="toc-numerical-summaries" class="nav-link" data-scroll-target="#numerical-summaries">Numerical summaries</a></li>
-  <li><a href="#shape-center-and-spread" id="toc-shape-center-and-spread" class="nav-link" data-scroll-target="#shape-center-and-spread">Shape, center, and spread</a></li>
-  <li><a href="#problem-sets-1" id="toc-problem-sets-1" class="nav-link" data-scroll-target="#problem-sets-1">Problem sets</a></li>
+  <li><a href="#examples-of-acceptable-visualizations" id="toc-examples-of-acceptable-visualizations" class="nav-link" data-scroll-target="#examples-of-acceptable-visualizations">Examples of acceptable visualizations</a></li>
   </ul></li>
-  <li><a href="#chapter-3-refresher-distributions-of-random-variables" id="toc-chapter-3-refresher-distributions-of-random-variables" class="nav-link" data-scroll-target="#chapter-3-refresher-distributions-of-random-variables">Chapter 3 refresher: Distributions of random variables</a>
+  <li><a href="#inference-and-uncertainty" id="toc-inference-and-uncertainty" class="nav-link" data-scroll-target="#inference-and-uncertainty">4. Inference and Uncertainty</a></li>
+  <li><a href="#public-health-interpretation" id="toc-public-health-interpretation" class="nav-link" data-scroll-target="#public-health-interpretation">5. Public-Health Interpretation</a></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">6. Reflection</a></li>
+  <li><a href="#formatting-requirements" id="toc-formatting-requirements" class="nav-link" data-scroll-target="#formatting-requirements">Formatting Requirements</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#ethics-note" id="toc-ethics-note" class="nav-link" data-scroll-target="#ethics-note">Ethics Note</a></li>
+  <li><a href="#project-3-rubric" id="toc-project-3-rubric" class="nav-link" data-scroll-target="#project-3-rubric">Project 3 Rubric</a>
   <ul class="collapse">
-  <li><a href="#random-variables" id="toc-random-variables" class="nav-link" data-scroll-target="#random-variables">Random variables</a></li>
-  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions">Probability distributions</a></li>
-  <li><a href="#shape-center-and-spread-1" id="toc-shape-center-and-spread-1" class="nav-link" data-scroll-target="#shape-center-and-spread-1">Shape, center, and spread</a></li>
-  <li><a href="#purpose-of-visualization" id="toc-purpose-of-visualization" class="nav-link" data-scroll-target="#purpose-of-visualization">Purpose of visualization</a></li>
-  <li><a href="#matching-plots-to-variable-types" id="toc-matching-plots-to-variable-types" class="nav-link" data-scroll-target="#matching-plots-to-variable-types">Matching plots to variable types</a></li>
-  <li><a href="#problem-sets-2" id="toc-problem-sets-2" class="nav-link" data-scroll-target="#problem-sets-2">Problem sets</a></li>
+  <li><a href="#model-specification-and-execution-25-points" id="toc-model-specification-and-execution-25-points" class="nav-link" data-scroll-target="#model-specification-and-execution-25-points">1. Model Specification and Execution — 25 points</a></li>
+  <li><a href="#statistical-interpretation-20-points" id="toc-statistical-interpretation-20-points" class="nav-link" data-scroll-target="#statistical-interpretation-20-points">2. Statistical Interpretation — 20 points</a></li>
+  <li><a href="#presentation-of-results-15-points" id="toc-presentation-of-results-15-points" class="nav-link" data-scroll-target="#presentation-of-results-15-points">3. Presentation of Results — 15 points</a></li>
+  <li><a href="#public-health-insight-and-critical-thinking-15-points" id="toc-public-health-insight-and-critical-thinking-15-points" class="nav-link" data-scroll-target="#public-health-insight-and-critical-thinking-15-points">4. Public-Health Insight and Critical Thinking — 15 points</a></li>
+  <li><a href="#transparency-and-documentation-10-points" id="toc-transparency-and-documentation-10-points" class="nav-link" data-scroll-target="#transparency-and-documentation-10-points">5. Transparency and Documentation — 10 points</a></li>
+  <li><a href="#writing-quality-and-organization-10-points" id="toc-writing-quality-and-organization-10-points" class="nav-link" data-scroll-target="#writing-quality-and-organization-10-points">6. Writing Quality and Organization — 10 points</a></li>
+  <li><a href="#quarto-and-reproducibility-5-points" id="toc-quarto-and-reproducibility-5-points" class="nav-link" data-scroll-target="#quarto-and-reproducibility-5-points">7. Quarto and Reproducibility — 5 points</a></li>
   </ul></li>
-  <li><a href="#chapter-4-refresher-foundations-of-inference" id="toc-chapter-4-refresher-foundations-of-inference" class="nav-link" data-scroll-target="#chapter-4-refresher-foundations-of-inference">Chapter 4 refresher: Foundations of inference</a>
-  <ul class="collapse">
-  <li><a href="#why-inference-is-needed" id="toc-why-inference-is-needed" class="nav-link" data-scroll-target="#why-inference-is-needed">Why inference is needed</a></li>
-  <li><a href="#confidence-intervals-conceptual" id="toc-confidence-intervals-conceptual" class="nav-link" data-scroll-target="#confidence-intervals-conceptual">Confidence intervals (conceptual)</a></li>
-  <li><a href="#hypothesis-testing-logic-only" id="toc-hypothesis-testing-logic-only" class="nav-link" data-scroll-target="#hypothesis-testing-logic-only">Hypothesis testing (logic only)</a></li>
-  <li><a href="#why-probability-matters-in-public-health" id="toc-why-probability-matters-in-public-health" class="nav-link" data-scroll-target="#why-probability-matters-in-public-health">Why probability matters in public health</a></li>
-  <li><a href="#sampling-vs-population" id="toc-sampling-vs-population" class="nav-link" data-scroll-target="#sampling-vs-population">Sampling vs population</a></li>
-  <li><a href="#problem-sets-3" id="toc-problem-sets-3" class="nav-link" data-scroll-target="#problem-sets-3">Problem sets</a></li>
-  </ul></li>
-  <li><a href="#chapter-5-refresher-inference-for-numerical-data" id="toc-chapter-5-refresher-inference-for-numerical-data" class="nav-link" data-scroll-target="#chapter-5-refresher-inference-for-numerical-data">Chapter 5 refresher: Inference for numerical data</a>
-  <ul class="collapse">
-  <li><a href="#estimating-and-comparing-means" id="toc-estimating-and-comparing-means" class="nav-link" data-scroll-target="#estimating-and-comparing-means">Estimating and comparing means</a></li>
-  <li><a href="#statistical-vs-practical-significance" id="toc-statistical-vs-practical-significance" class="nav-link" data-scroll-target="#statistical-vs-practical-significance">Statistical vs practical significance</a></li>
-  <li><a href="#scope-of-inference" id="toc-scope-of-inference" class="nav-link" data-scroll-target="#scope-of-inference">Scope of inference</a></li>
-  <li><a href="#variability-and-uncertainty" id="toc-variability-and-uncertainty" class="nav-link" data-scroll-target="#variability-and-uncertainty">Variability and uncertainty</a></li>
-  <li><a href="#confidence-intervals-conceptual-1" id="toc-confidence-intervals-conceptual-1" class="nav-link" data-scroll-target="#confidence-intervals-conceptual-1">Confidence intervals (conceptual)</a></li>
-  <li><a href="#statistical-significance-vs-public-health-relevance" id="toc-statistical-significance-vs-public-health-relevance" class="nav-link" data-scroll-target="#statistical-significance-vs-public-health-relevance">Statistical significance vs public health relevance</a></li>
-  <li><a href="#problem-sets-4" id="toc-problem-sets-4" class="nav-link" data-scroll-target="#problem-sets-4">Problem sets</a></li>
-  </ul></li>
-  <li><a href="#connecting-openintro-concepts-to-r-and-quarto" id="toc-connecting-openintro-concepts-to-r-and-quarto" class="nav-link" data-scroll-target="#connecting-openintro-concepts-to-r-and-quarto">Connecting OpenIntro concepts to R and Quarto</a></li>
-  <li><a href="#what-you-are-expected-to-remember" id="toc-what-you-are-expected-to-remember" class="nav-link" data-scroll-target="#what-you-are-expected-to-remember">What you are expected to remember</a></li>
-  <li><a href="#self-check" id="toc-self-check" class="nav-link" data-scroll-target="#self-check">Self-check</a></li>
   </ul>
 </nav>
     </div>
@@ -279,7 +260,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Lesson 6a: Biostats 1 Review</span></h1>
+<h1 class="title"><span class="chapter-title">Project 3: Modeling Health Outcomes Using Regression &amp; Simulation</span></h1>
+<p class="subtitle lead">NHANES</p>
 </div>
 
 
@@ -296,449 +278,224 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="purpose-of-this-lesson" class="level2">
-<h2 class="anchored" data-anchor-id="purpose-of-this-lesson">Purpose of this Lesson</h2>
-<p>In this lesson, we will review what you should have learned in Biostats 1. The topics will include:</p>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<p>In this project, you will move from descriptive analysis into statistical modeling and inference using the NHANES dataset. You will select a health outcome and model its association with key predictors using regression tools from <em>ModernDive</em> and interpretation frameworks from <em>OpenIntro Biostatistics</em>.</p>
+<p>Your goal is to answer a meaningful public-health question such as:</p>
 <ul>
-<li>Introduction to Data</li>
-<li>Probability</li>
-<li>Distribution of Random Variables</li>
-<li>Inference</li>
+<li>How is hypertension risk patterned by age, BMI, smoking, and income?</li>
+<li>Do depression symptoms vary by socioeconomic status?</li>
+<li>How does BMI differ across demographic groups?</li>
+<li>Which factors predict fair/poor self-rated health?</li>
 </ul>
-<p>This lesson is not meant to <strong>teach</strong> you these items, but simply <strong>refresh</strong> your memory. We will learn how to run all of these items in R/RStudio.</p>
+<p>Your focus is not only on building models, but also on explaining what they mean in accessible and responsible language.</p>
+<p>This project prepares you for your final manuscript, where modeling results will form the core of the Results section.</p>
 </section>
-<section id="chapter-1-refresher-data-and-variables" class="level2">
-<h2 class="anchored" data-anchor-id="chapter-1-refresher-data-and-variables">Chapter 1 refresher: Data and variables</h2>
-<section id="types-of-variables" class="level3">
-<h3 class="anchored" data-anchor-id="types-of-variables">Types of variables</h3>
-<p>You should already be familiar with the distinction between:</p>
+<section id="dataset" class="level2">
+<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
+<p>You will continue working with the NHANES dataset from the <code>{NHANES}</code> R package. You may build on your Project 2 analytic dataset or refine your variables further.</p>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By completing this project, you will be able to:</p>
 <ul>
-<li><strong>Categorical variables</strong> (e.g., sex, race/ethnicity, region)</li>
-<li><strong>Numeric variables</strong> (e.g., age, BMI, blood pressure)</li>
+<li>fit regression models in R</li>
+<li>interpret model coefficients in context</li>
+<li>evaluate model fit and limitations</li>
+<li>perform simulation-based inference</li>
+<li>communicate uncertainty responsibly</li>
+<li>present results in a manuscript-ready format</li>
 </ul>
-<p>In R, this distinction affects: - which summaries are appropriate<br>
-- how plots are created<br>
-- how variables enter regression models</p>
-<hr>
 </section>
-<section id="observations-and-units-of-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="observations-and-units-of-analysis">Observations and units of analysis</h3>
-<p>Each row in a dataset represents <strong>one observational unit</strong>.</p>
-<p>Examples:</p>
+<section id="project-tasks" class="level2">
+<h2 class="anchored" data-anchor-id="project-tasks">Project Tasks</h2>
+<p>Your Quarto report must include the sections below.</p>
+</section>
+<section id="research-question" class="level2">
+<h2 class="anchored" data-anchor-id="research-question">1. Research Question</h2>
+<p>Write 1 to 2 paragraphs that clearly state:</p>
 <ul>
-<li>one person (NHANES)</li>
-<li>one country-year (Gapminder)</li>
-<li>one clinic visit</li>
+<li>your outcome variable</li>
+<li>your primary predictors of interest</li>
+<li>your public-health motivation</li>
+<li>your hypothesis, if applicable</li>
 </ul>
-<p>Before analyzing any dataset, you should always be able to answer:</p>
-<blockquote class="blockquote">
-<p>What does one row represent?</p>
-</blockquote>
-<hr>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<p>We examine whether hypertension prevalence differs by age, BMI, and income. We hypothesize that hypertension risk increases with age and BMI, and that risk may differ by socioeconomic status.</p>
 </section>
-<section id="study-design-and-causality" class="level3">
-<h3 class="anchored" data-anchor-id="study-design-and-causality">Study design and causality</h3>
-<p>Chapter 1 distinguishes between:</p>
+</section>
+<section id="data-and-methods" class="level2">
+<h2 class="anchored" data-anchor-id="data-and-methods">2. Data and Methods</h2>
+<p>Briefly summarize:</p>
 <ul>
-<li><strong>Observational studies</strong></li>
-<li><strong>Experimental studies</strong></li>
+<li>your analytic sample</li>
+<li>inclusion and exclusion criteria</li>
+<li>variables and coding decisions</li>
+<li>missing-data handling</li>
+<li>analysis approach</li>
 </ul>
-<p>You should be able to explain:</p>
+<p>You should fit at least:</p>
 <ul>
-<li>whether a study allows causal conclusions<br>
-</li>
-<li>why most public health datasets support <strong>associational</strong>, not causal, claims</li>
+<li>one linear regression model, or</li>
+<li>one logistic regression model, depending on your outcome</li>
 </ul>
-<hr>
-</section>
-<section id="problem-sets" class="level3">
-<h3 class="anchored" data-anchor-id="problem-sets">Problem sets</h3>
-<p>Complete problems from the OpenIntro Book 1.1, 1.3, 1.9, 1.12, 1.16, 1.26, 1.28, 1.33., 1.35, 1.36</p>
-<hr>
-</section>
-</section>
-<section id="chapter-2-refresher-probability" class="level2">
-<h2 class="anchored" data-anchor-id="chapter-2-refresher-probability">Chapter 2 refresher: Probability</h2>
-<section id="what-probability-represents" class="level3">
-<h3 class="anchored" data-anchor-id="what-probability-represents">What probability represents</h3>
-<p>Probability describes the <strong>long-run behavior</strong> of a random process.</p>
-<p>A probability:</p>
+<p>Optional additions are encouraged:</p>
 <ul>
-<li>quantifies uncertainty<br>
-</li>
-<li>does not predict individual outcomes</li>
+<li>multiple regression</li>
+<li>an interaction term</li>
+<li>model comparison</li>
 </ul>
-<p>In public health contexts, probabilities are often expressed as risks or proportions.</p>
-<hr>
 </section>
-<section id="conditional-probability-and-independence" class="level3">
-<h3 class="anchored" data-anchor-id="conditional-probability-and-independence">Conditional probability and independence</h3>
-<p>You should be able to reason about:</p>
+<section id="model-results" class="level2">
+<h2 class="anchored" data-anchor-id="model-results">3. Model Results</h2>
+<p>Include:</p>
 <ul>
-<li>probabilities given additional information<br>
-</li>
-<li>whether events are independent or related</li>
+<li>model summary tables generated in R</li>
+<li>key coefficients interpreted in plain language</li>
+<li>confidence intervals or bootstrap-based intervals</li>
+<li>at least one visualization of modeled relationships</li>
 </ul>
-<p>These ideas support later discussions of risk factors and outcomes.</p>
-<hr>
-</section>
-<section id="common-misconceptions" class="level3">
-<h3 class="anchored" data-anchor-id="common-misconceptions">Common misconceptions</h3>
-<p>A key goal of Chapter 2 is recognizing incorrect reasoning about chance.</p>
-<p>You should be able to explain why:</p>
+<section id="examples-of-acceptable-visualizations" class="level3">
+<h3 class="anchored" data-anchor-id="examples-of-acceptable-visualizations">Examples of acceptable visualizations</h3>
 <ul>
-<li>past outcomes do not “force” future outcomes<br>
-</li>
-<li>randomness does not imply lack of structure</li>
+<li>predicted probabilities across age</li>
+<li>a regression line with a confidence band</li>
+<li>grouped means with confidence interval bars</li>
 </ul>
-<hr>
 </section>
-<section id="numerical-summaries" class="level3">
-<h3 class="anchored" data-anchor-id="numerical-summaries">Numerical summaries</h3>
-<p>Key numerical summaries you should already recognize:</p>
+</section>
+<section id="inference-and-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="inference-and-uncertainty">4. Inference and Uncertainty</h2>
+<p>Discuss:</p>
 <ul>
-<li>mean<br>
-</li>
-<li>median<br>
-</li>
-<li>standard deviation<br>
-</li>
-<li>range<br>
-</li>
-<li>interquartile range</li>
+<li>what your results suggest</li>
+<li>what they do not prove</li>
+<li>uncertainty and sampling variability</li>
+<li>potential confounding</li>
+<li>causal limits</li>
 </ul>
-<p>In this course, you will:</p>
+<p>This section should sound like applied epidemiology.</p>
+</section>
+<section id="public-health-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="public-health-interpretation">5. Public-Health Interpretation</h2>
+<p>Explain:</p>
 <ul>
-<li>compute these in R<br>
-</li>
-<li>report them using <strong>inline code</strong><br>
-</li>
-<li>interpret them in writing</li>
+<li>equity implications</li>
+<li>population-health meaning</li>
+<li>which findings matter most</li>
+<li>reasonable next steps</li>
 </ul>
-<p>Example reminder (conceptual):</p>
-<p>The mean describes the average, while the standard deviation describes variability.</p>
-<hr>
+<p>Avoid overstating conclusions.</p>
 </section>
-<section id="shape-center-and-spread" class="level3">
-<h3 class="anchored" data-anchor-id="shape-center-and-spread">Shape, center, and spread</h3>
-<p>When describing a numeric variable, you should think about:</p>
+<section id="reflection" class="level2">
+<h2 class="anchored" data-anchor-id="reflection">6. Reflection</h2>
+<p>Briefly discuss:</p>
 <ul>
-<li><strong>center</strong> (mean or median)<br>
-</li>
-<li><strong>spread</strong> (SD or IQR)<br>
-</li>
-<li><strong>shape</strong> (symmetric, skewed, multimodal)</li>
+<li>what was challenging</li>
+<li>what you learned</li>
+<li>how modeling changed your understanding of the question</li>
 </ul>
-<p>These ideas will come up again when we assess model assumptions.</p>
-<hr>
 </section>
-<section id="problem-sets-1" class="level3">
-<h3 class="anchored" data-anchor-id="problem-sets-1">Problem sets</h3>
-<p>Complete problems from the OpenIntro Book 2.1, 2.5, 2.9, 2.11, 2.16, and 2.17.</p>
-<hr>
-</section>
-</section>
-<section id="chapter-3-refresher-distributions-of-random-variables" class="level2">
-<h2 class="anchored" data-anchor-id="chapter-3-refresher-distributions-of-random-variables">Chapter 3 refresher: Distributions of random variables</h2>
-<section id="random-variables" class="level3">
-<h3 class="anchored" data-anchor-id="random-variables">Random variables</h3>
-<p>A <strong>random variable</strong> assigns a numerical value to the outcome of a random process.</p>
-<p>You should be able to:</p>
+<section id="formatting-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="formatting-requirements">Formatting Requirements</h2>
+<p>Your submission must:</p>
 <ul>
-<li>define the random variable in context<br>
-</li>
-<li>state whether it is <strong>discrete or continuous</strong></li>
+<li>be written fully in Quarto</li>
+<li>include inline code wherever possible</li>
+<li>knit successfully</li>
+<li>follow professional writing standards</li>
+<li>avoid jargon where possible</li>
+<li>be approximately 1,200 to 1,800 words, excluding code</li>
 </ul>
-<p>This skill is essential for understanding model outcomes later in the course.</p>
-<hr>
 </section>
-<section id="probability-distributions" class="level3">
-<h3 class="anchored" data-anchor-id="probability-distributions">Probability distributions</h3>
-<p>A probability distribution describes: - which values are more or less likely<br>
-- how variability is structured</p>
-<p>The book introduces common distributions conceptually (e.g., binomial, normal), without emphasizing computation.</p>
-<hr>
-</section>
-<section id="shape-center-and-spread-1" class="level3">
-<h3 class="anchored" data-anchor-id="shape-center-and-spread-1">Shape, center, and spread</h3>
-<p>You should be able to describe a distribution in terms of:</p>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<p>Submit:</p>
 <ul>
-<li>typical values<br>
-</li>
-<li>variability<br>
-</li>
-<li>skewness or symmetry</li>
+<li>the knitted report as a word doc</li>
+<li>the <code>.qmd</code> source file</li>
+<li>the 3MT slide</li>
 </ul>
-<p>These ideas will reappear when assessing model assumptions.</p>
 </section>
-<section id="purpose-of-visualization" class="level3">
-<h3 class="anchored" data-anchor-id="purpose-of-visualization">Purpose of visualization</h3>
-<p>Plots help us:</p>
+<section id="ethics-note" class="level2">
+<h2 class="anchored" data-anchor-id="ethics-note">Ethics Note</h2>
+<p>NHANES includes variables tied to inequity and lived experience. Please write with sensitivity and respect.</p>
+</section>
+<section id="project-3-rubric" class="level2">
+<h2 class="anchored" data-anchor-id="project-3-rubric">Project 3 Rubric</h2>
+<section id="model-specification-and-execution-25-points" class="level3">
+<h3 class="anchored" data-anchor-id="model-specification-and-execution-25-points">1. Model Specification and Execution — 25 points</h3>
+<p>Assesses correctness and appropriateness of modeling.</p>
 <ul>
-<li>identify patterns<br>
-</li>
-<li>detect outliers<br>
-</li>
-<li>compare groups<br>
-</li>
-<li>assess relationships</li>
+<li>22–25: Model(s) correctly specified; predictors appropriate; code accurate; workflow clear</li>
+<li>17–21: Minor mistakes, but overall valid</li>
+<li>12–16: Major misunderstandings or mis-specification</li>
+<li>0–11: Modeling incomplete or incorrect</li>
 </ul>
-<p>In this course, visualization is not optional — every plot must be <strong>interpreted in writing</strong>.</p>
-<hr>
 </section>
-<section id="matching-plots-to-variable-types" class="level3">
-<h3 class="anchored" data-anchor-id="matching-plots-to-variable-types">Matching plots to variable types</h3>
-<p>You should already know:</p>
+<section id="statistical-interpretation-20-points" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-interpretation-20-points">2. Statistical Interpretation — 20 points</h3>
+<p>Evaluates how well results are explained.</p>
 <ul>
-<li>categorical → bar charts<br>
-</li>
-<li>numeric → histograms, boxplots<br>
-</li>
-<li>two numeric variables → scatterplots<br>
-</li>
-<li>numeric vs categorical → boxplots</li>
+<li>17–20: Coefficients interpreted accurately in context; uncertainty clearly described</li>
+<li>13–16: Mostly correct with small errors</li>
+<li>8–12: Limited or partially incorrect interpretation</li>
+<li>0–7: Interpretation largely incorrect or missing</li>
 </ul>
-<p>We will implement these using <code>ggplot2</code>, but the <strong>statistical reasoning</strong> comes first.</p>
-<hr>
 </section>
-<section id="problem-sets-2" class="level3">
-<h3 class="anchored" data-anchor-id="problem-sets-2">Problem sets</h3>
-<p>Complete problems from the OpenIntro Book 3.1, 3.4, 3.8, 3.18, 3.20, 3.21, 3.43, 3.57.</p>
-<hr>
-</section>
-</section>
-<section id="chapter-4-refresher-foundations-of-inference" class="level2">
-<h2 class="anchored" data-anchor-id="chapter-4-refresher-foundations-of-inference">Chapter 4 refresher: Foundations of inference</h2>
-<section id="why-inference-is-needed" class="level3">
-<h3 class="anchored" data-anchor-id="why-inference-is-needed">Why inference is needed</h3>
-<p>Chapter 4 explains why we cannot rely on a single sample to know a population value exactly.</p>
-<p>Key ideas include:</p>
+<section id="presentation-of-results-15-points" class="level3">
+<h3 class="anchored" data-anchor-id="presentation-of-results-15-points">3. Presentation of Results — 15 points</h3>
+<p>Assesses tables, figures, and clarity.</p>
 <ul>
-<li>sampling variability<br>
-</li>
-<li>uncertainty in estimates</li>
+<li>13–15: Professional, clear tables and figures; helpful formatting; at least one modeled visualization</li>
+<li>10–12: Mostly clear with minor weaknesses</li>
+<li>6–9: Limited clarity or missing elements</li>
+<li>0–5: Poor or missing presentation</li>
 </ul>
-<p>Inference provides tools to quantify this uncertainty.</p>
-<hr>
 </section>
-<section id="confidence-intervals-conceptual" class="level3">
-<h3 class="anchored" data-anchor-id="confidence-intervals-conceptual">Confidence intervals (conceptual)</h3>
-<p>A confidence interval gives a <strong>range of plausible values</strong> for a population parameter.</p>
-<p>You should be able to:</p>
+<section id="public-health-insight-and-critical-thinking-15-points" class="level3">
+<h3 class="anchored" data-anchor-id="public-health-insight-and-critical-thinking-15-points">4. Public-Health Insight and Critical Thinking — 15 points</h3>
+<p>Evaluates meaning-making.</p>
 <ul>
-<li>interpret a confidence interval in words<br>
-</li>
-<li>explain what it does <em>not</em> mean</li>
+<li>13–15: Findings thoughtfully connected to health outcomes, inequity, and context</li>
+<li>10–12: Some meaningful interpretation</li>
+<li>6–9: Minimal depth</li>
+<li>0–5: No meaningful interpretation</li>
 </ul>
-<p>This skill is critical for reporting results in manuscripts.</p>
-<hr>
 </section>
-<section id="hypothesis-testing-logic-only" class="level3">
-<h3 class="anchored" data-anchor-id="hypothesis-testing-logic-only">Hypothesis testing (logic only)</h3>
-<p>You should recognize:</p>
+<section id="transparency-and-documentation-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="transparency-and-documentation-10-points">5. Transparency and Documentation — 10 points</h3>
+<p>Focus on reproducible workflow.</p>
 <ul>
-<li>the role of a null hypothesis<br>
-</li>
-<li>what a small p-value suggests conceptually</li>
+<li>9–10: Coding choices clearly explained; methods understandable; rationale provided</li>
+<li>7–8: Mostly clear</li>
+<li>4–6: Some ambiguity</li>
+<li>0–3: Opaque workflow</li>
 </ul>
-<p>You are not expected to memorize testing procedures at this stage.</p>
 </section>
-<section id="why-probability-matters-in-public-health" class="level3">
-<h3 class="anchored" data-anchor-id="why-probability-matters-in-public-health">Why probability matters in public health</h3>
-<p>Probability underlies:</p>
+<section id="writing-quality-and-organization-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="writing-quality-and-organization-10-points">6. Writing Quality and Organization — 10 points</h3>
+<p>Evaluates readability and structure.</p>
 <ul>
-<li>sampling variability<br>
-</li>
-<li>uncertainty in estimates<br>
-</li>
-<li>confidence intervals<br>
-</li>
-<li>statistical inference</li>
+<li>9–10: Clear, polished, professional writing</li>
+<li>7–8: Mostly clear with minor issues</li>
+<li>4–6: Some disorganization or unclear writing</li>
+<li>0–3: Difficult to follow</li>
 </ul>
-<p>Even when we do not calculate probabilities directly, we rely on probabilistic reasoning.</p>
-<hr>
 </section>
-<section id="sampling-vs-population" class="level3">
-<h3 class="anchored" data-anchor-id="sampling-vs-population">Sampling vs population</h3>
-<p>Key distinction:</p>
+<section id="quarto-and-reproducibility-5-points" class="level3">
+<h3 class="anchored" data-anchor-id="quarto-and-reproducibility-5-points">7. Quarto and Reproducibility — 5 points</h3>
+<p>Rewards strong scientific reporting.</p>
 <ul>
-<li><strong>Population</strong>: the group we want to understand<br>
-</li>
-<li><strong>Sample</strong>: the group we observe</li>
+<li>5: Fully reproducible, cleanly structured, knits without error</li>
+<li>3–4: Minor issues</li>
+<li>1–2: Reproducibility inconsistent</li>
+<li>0: Not reproducible</li>
 </ul>
-<p>Most public health data are samples, even large ones.</p>
-<p>This distinction motivates:</p>
-<ul>
-<li>uncertainty estimates<br>
-</li>
-<li>cautious interpretation</li>
-</ul>
-<hr>
-</section>
-<section id="problem-sets-3" class="level3">
-<h3 class="anchored" data-anchor-id="problem-sets-3">Problem sets</h3>
-<p>Complete problems from the OpenIntro Book 4.1, 4.4, 4.7, 4.12, 4.16, 4.20, 4.24.</p>
-<hr>
-</section>
-</section>
-<section id="chapter-5-refresher-inference-for-numerical-data" class="level2">
-<h2 class="anchored" data-anchor-id="chapter-5-refresher-inference-for-numerical-data">Chapter 5 refresher: Inference for numerical data</h2>
-<section id="estimating-and-comparing-means" class="level3">
-<h3 class="anchored" data-anchor-id="estimating-and-comparing-means">Estimating and comparing means</h3>
-<p>Chapter 5 applies inference ideas to numerical outcomes.</p>
-<p>You should be comfortable:</p>
-<ul>
-<li>identifying the parameter being estimated<br>
-</li>
-<li>explaining comparisons between groups conceptually</li>
-</ul>
-<hr>
-</section>
-<section id="statistical-vs-practical-significance" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-vs-practical-significance">Statistical vs practical significance</h3>
-<p>A recurring theme is that:</p>
-<ul>
-<li>statistical significance does not equal importance<br>
-</li>
-<li>context and magnitude matter</li>
-</ul>
-<p>This distinction is central to public health interpretation.</p>
-<hr>
-</section>
-<section id="scope-of-inference" class="level3">
-<h3 class="anchored" data-anchor-id="scope-of-inference">Scope of inference</h3>
-<p>You should always consider:</p>
-<ul>
-<li>who was studied<br>
-</li>
-<li>who the results apply to</li>
-</ul>
-<p>This affects how findings are communicated responsibly.</p>
-<hr>
-</section>
-<section id="variability-and-uncertainty" class="level3">
-<h3 class="anchored" data-anchor-id="variability-and-uncertainty">Variability and uncertainty</h3>
-<p>Two important ideas:</p>
-<ol type="1">
-<li>Different samples give different results<br>
-</li>
-<li>We quantify this variability using statistical methods</li>
-</ol>
-<p>This is why:</p>
-<ul>
-<li>confidence intervals exist<br>
-</li>
-<li>p-values are used (with caution)</li>
-</ul>
-<hr>
-</section>
-<section id="confidence-intervals-conceptual-1" class="level3">
-<h3 class="anchored" data-anchor-id="confidence-intervals-conceptual-1">Confidence intervals (conceptual)</h3>
-<p>A confidence interval provides a <strong>range of plausible values</strong> for a population parameter.</p>
-<p>In this course, you will:</p>
-<ul>
-<li>compute confidence intervals in R<br>
-</li>
-<li>report them using inline code<br>
-</li>
-<li>interpret them in plain language</li>
-</ul>
-<p>Example interpretation:</p>
-<blockquote class="blockquote">
-<p>We are reasonably confident the true population value lies within this range.</p>
-</blockquote>
-<hr>
-</section>
-<section id="statistical-significance-vs-public-health-relevance" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-significance-vs-public-health-relevance">Statistical significance vs public health relevance</h3>
-<p>You should already know that:</p>
-<ul>
-<li>statistical significance does not imply importance<br>
-</li>
-<li>large samples can detect small differences<br>
-</li>
-<li>context and magnitude matter</li>
-</ul>
-<p>This distinction is critical in public health writing.</p>
-<hr>
-</section>
-<section id="problem-sets-4" class="level3">
-<h3 class="anchored" data-anchor-id="problem-sets-4">Problem sets</h3>
-<p>Complete problems from the OpenIntro Book 5.1, 5.2, 5.4, 5.8, 5.17, 5.19, 5.24, 5.36, 5.41, 5.44.</p>
-<hr>
-</section>
-</section>
-<section id="connecting-openintro-concepts-to-r-and-quarto" class="level2">
-<h2 class="anchored" data-anchor-id="connecting-openintro-concepts-to-r-and-quarto">Connecting OpenIntro concepts to R and Quarto</h2>
-<p>Here is how these concepts show up technically in this course:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Concept</th>
-<th>How it appears in this course</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Variables</td>
-<td>Column types in datasets</td>
-</tr>
-<tr class="even">
-<td>Observations</td>
-<td>Rows in data frames</td>
-</tr>
-<tr class="odd">
-<td>Summaries</td>
-<td><code>mean()</code>, <code>sd()</code>, <code>summary()</code></td>
-</tr>
-<tr class="even">
-<td>Visualization</td>
-<td><code>ggplot2</code></td>
-</tr>
-<tr class="odd">
-<td>Inference</td>
-<td>regression estimates and confidence intervals</td>
-</tr>
-<tr class="even">
-<td>Interpretation</td>
-<td>inline code + written text</td>
-</tr>
-</tbody>
-</table>
-<p>Statistics guide <strong>what we do</strong>; R helps us <strong>do it reproducibly</strong>.</p>
-<hr>
-</section>
-<section id="what-you-are-expected-to-remember" class="level2">
-<h2 class="anchored" data-anchor-id="what-you-are-expected-to-remember">What you are expected to remember</h2>
-<p>You are <strong>not</strong> expected to memorize formulas.</p>
-<p>You <strong>are</strong> expected to:</p>
-<ul>
-<li>recognize variable types<br>
-</li>
-<li>choose appropriate summaries<br>
-</li>
-<li>interpret plots and model output<br>
-</li>
-<li>distinguish association from causation<br>
-</li>
-<li>communicate uncertainty clearly</li>
-</ul>
-<p>These skills will be assessed repeatedly.</p>
-<hr>
-</section>
-<section id="self-check" class="level2">
-<h2 class="anchored" data-anchor-id="self-check">Self-check</h2>
-<p>Before moving on, ask yourself:</p>
-<ol type="1">
-<li>Can I identify the outcome and predictor in a question?</li>
-<li>Do I know which summaries are appropriate for different variables?</li>
-<li>Can I interpret a confidence interval in words?</li>
-<li>Can I explain why uncertainty exists?</li>
-</ol>
-<p>If any of these feel shaky, briefly revisit OpenIntro Chapters 1–5 alongside this lesson.</p>
-<hr>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1143,13 +900,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./05-tidydata.html" class="pagination-link" aria-label="Lesson 5: Tidy Data and Reshaping">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Lesson 5: Tidy Data and Reshaping</span></span>
+      <a href="./10-confint.html" class="pagination-link" aria-label="Lesson 10: Confidence Intervals &amp; Uncertainty">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Lesson 10: Confidence Intervals &amp; Uncertainty</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./06-slr.html" class="pagination-link" aria-label="Lesson 6: Simple Linear Regression">
-        <span class="nav-page-text"><span class="chapter-title">Lesson 6: Simple Linear Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./11-hyptest.html" class="pagination-link" aria-label="Lesson 11: Hypothesis Testing">
+        <span class="nav-page-text"><span class="chapter-title">Lesson 11: Hypothesis Testing</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

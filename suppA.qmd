@@ -1,0 +1,220 @@
+---
+title: "Supplemental Lesson: Creating Table 1, Table 2, and References"
+subtitle: "Applied Epidemiologic Reporting in Quarto"
+---
+
+## Overview
+
+In this lesson, you will learn how to create **Table 1 (Descriptive Statistics)**, **Table 2 (Analytic Results)**, and properly format **references** in a reproducible Quarto workflow.
+
+These are essential components of epidemiologic manuscripts and will be required for your final project.
+
+------------------------------------------------------------------------
+
+## Learning Objectives
+
+By the end of this lesson, students will be able to:
+
+-   Create a publication-style Table 1
+-   Create a regression-based Table 2
+-   Interpret tables in plain language
+-   Export clean tables from R
+-   Add and format references in Quarto
+
+------------------------------------------------------------------------
+
+## Required Packages
+
+```{r}
+library(tidyverse)
+library(gtsummary)
+library(gt)
+library(broom)
+```
+
+------------------------------------------------------------------------
+
+## Example Dataset
+
+```{r}
+library(NHANES)
+
+df <- NHANES %>%
+  select(Age, Gender, BMI, BPSysAve, Diabetes) %>%
+  drop_na()
+```
+
+------------------------------------------------------------------------
+
+## Table 1: Descriptive Statistics
+
+Table 1 summarizes the characteristics of your study population.
+
+### Step 1: Create Table 1
+
+```{r}
+table1 <- df %>%
+  tbl_summary(
+    by = Diabetes,
+    statistic = list(
+      all_continuous() ~ "{mean} ({sd})",
+      all_categorical() ~ "{n} ({p}%)"
+    )
+  ) %>%
+  add_p()
+
+table1
+```
+
+------------------------------------------------------------------------
+
+## Interpretation of Table 1
+
+-   Continuous variables: mean (SD)
+-   Categorical variables: n (%)
+-   p-values: compare groups
+
+------------------------------------------------------------------------
+
+## Export Table 1
+
+```{r}
+table1 %>%
+  as_gt() %>%
+  gt::gtsave("table1.html")
+```
+
+------------------------------------------------------------------------
+
+## Table 2: Regression Results
+
+Table 2 presents results from regression models.
+
+### Step 1: Fit Model
+
+```{r}
+model <- lm(BMI ~ Age + Gender + Diabetes, data = df)
+summary(model)
+```
+
+------------------------------------------------------------------------
+
+### Step 2: Create Table 2
+
+```{r}
+table2 <- tbl_regression(model) %>%
+  bold_labels()
+
+table2
+```
+
+------------------------------------------------------------------------
+
+## Interpretation of Table 2
+
+-   Coefficients show direction and magnitude
+-   Confidence intervals show uncertainty
+-   p-values show statistical evidence
+
+------------------------------------------------------------------------
+
+## Optional: Logistic Regression
+
+```{r}
+log_model <- glm(Diabetes ~ Age + BMI + Gender,
+                 data = df,
+                 family = binomial)
+
+tbl_regression(log_model, exponentiate = TRUE)
+```
+
+------------------------------------------------------------------------
+
+## Export Table 2
+
+```{r}
+table2 %>%
+  as_gt() %>%
+  gt::gtsave("table2.html")
+```
+
+------------------------------------------------------------------------
+
+## Writing About Tables
+
+Example:
+
+"The mean BMI was higher among individuals with diabetes compared to those without (p \< 0.05). In adjusted models, age and BMI were significantly associated with diabetes status."
+
+------------------------------------------------------------------------
+
+## Adding References in Quarto
+
+### Step 1: Create a `.bib` File
+
+Example `references.bib`:
+
+```         
+@article{nhanes,
+  title={National Health and Nutrition Examination Survey},
+  author={CDC},
+  year={2023}
+}
+```
+
+------------------------------------------------------------------------
+
+### Step 2: Add to YAML
+
+```         
+bibliography: references.bib
+csl: apa.csl
+```
+
+------------------------------------------------------------------------
+
+### Step 3: Cite in Text
+
+Example:
+
+This dataset comes from NHANES [@nhanes].
+
+------------------------------------------------------------------------
+
+### Step 4: References Section
+
+Add this at the end:
+
+```         
+## References
+```
+
+Quarto will automatically generate the reference list.
+
+------------------------------------------------------------------------
+
+## Key Takeaways
+
+-   Table 1 describes your sample
+-   Table 2 presents analytic results
+-   Use `gtsummary` for clean outputs
+-   Always interpret results in plain language
+-   Use Quarto citation tools for references
+
+------------------------------------------------------------------------
+
+## Practice Activity
+
+1.  Create Table 1 using your Project dataset\
+2.  Create Table 2 using a regression model\
+3.  Export both tables\
+4.  Write 2–3 sentences interpreting each table\
+5.  Add at least one reference using `.bib`
+
+------------------------------------------------------------------------
+
+## Conclusion
+
+Tables and references are essential for scientific communication. Mastering these skills will help you produce clear, professional, and reproducible public health reports.
+
+------------------------------------------------------------------------

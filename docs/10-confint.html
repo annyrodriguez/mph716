@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project 1 Lesson: Exploratory Data Story with Gapminder – R and Health Sciences</title>
+<title>Lesson 10: Confidence Intervals &amp; Uncertainty – R and Health Sciences</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./05-tidydata.html" rel="next">
-<link href="./04-dplyr.html" rel="prev">
+<link href="./project3.html" rel="next">
+<link href="./09-statinf.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -105,6 +105,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -118,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project1.html"><span class="chapter-title">Project 1 Lesson: Exploratory Data Story with Gapminder</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-confint.html"><span class="chapter-title">Lesson 10: Confidence Intervals &amp; Uncertainty</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -180,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./project1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Project 1 Lesson: Exploratory Data Story with Gapminder</span></a>
+  <a href="./project1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Project 1 Lesson: Exploratory Data Story with Gapminder</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -220,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-confint.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 10: Confidence Intervals &amp; Uncertainty</span></a>
+  <a href="./10-confint.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Lesson 10: Confidence Intervals &amp; Uncertainty</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -258,27 +287,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#purpose-of-project-1" id="toc-purpose-of-project-1" class="nav-link active" data-scroll-target="#purpose-of-project-1">Purpose of Project 1</a></li>
-  <li><a href="#why-we-use-gapminder-for-project-1" id="toc-why-we-use-gapminder-for-project-1" class="nav-link" data-scroll-target="#why-we-use-gapminder-for-project-1">Why we use Gapminder for Project 1</a></li>
-  <li><a href="#what-you-are-expected-to-demonstrate" id="toc-what-you-are-expected-to-demonstrate" class="nav-link" data-scroll-target="#what-you-are-expected-to-demonstrate">What you are expected to demonstrate</a></li>
-  <li><a href="#project-setup" id="toc-project-setup" class="nav-link" data-scroll-target="#project-setup">Project setup</a></li>
-  <li><a href="#loading-the-data" id="toc-loading-the-data" class="nav-link" data-scroll-target="#loading-the-data">Loading the data</a></li>
-  <li><a href="#choosing-a-focus" id="toc-choosing-a-focus" class="nav-link" data-scroll-target="#choosing-a-focus">Choosing a focus</a></li>
-  <li><a href="#section-1-introduction" id="toc-section-1-introduction" class="nav-link" data-scroll-target="#section-1-introduction">Section 1: Introduction</a></li>
-  <li><a href="#section-2-descriptive-exploration" id="toc-section-2-descriptive-exploration" class="nav-link" data-scroll-target="#section-2-descriptive-exploration">Section 2: Descriptive exploration</a></li>
-  <li><a href="#section-3-visualizations" id="toc-section-3-visualizations" class="nav-link" data-scroll-target="#section-3-visualizations">Section 3: Visualizations</a>
-  <ul class="collapse">
-  <li><a href="#required-figure-trend-over-time" id="toc-required-figure-trend-over-time" class="nav-link" data-scroll-target="#required-figure-trend-over-time">Required figure: trend over time</a></li>
-  <li><a href="#optional-second-figure-examples" id="toc-optional-second-figure-examples" class="nav-link" data-scroll-target="#optional-second-figure-examples">Optional second figure (examples)</a></li>
-  </ul></li>
-  <li><a href="#writing-interpretation-paragraphs" id="toc-writing-interpretation-paragraphs" class="nav-link" data-scroll-target="#writing-interpretation-paragraphs">Writing interpretation paragraphs</a></li>
-  <li><a href="#section-4-data-quality-and-limitations" id="toc-section-4-data-quality-and-limitations" class="nav-link" data-scroll-target="#section-4-data-quality-and-limitations">Section 4: Data quality and limitations</a></li>
-  <li><a href="#section-5-reflection" id="toc-section-5-reflection" class="nav-link" data-scroll-target="#section-5-reflection">Section 5: Reflection</a></li>
-  <li><a href="#formatting-and-reproducibility-requirements" id="toc-formatting-and-reproducibility-requirements" class="nav-link" data-scroll-target="#formatting-and-reproducibility-requirements">Formatting and reproducibility requirements</a></li>
-  <li><a href="#submission-instructions" id="toc-submission-instructions" class="nav-link" data-scroll-target="#submission-instructions">Submission instructions</a></li>
-  <li><a href="#how-this-project-prepares-you-for-the-rest-of-the-course" id="toc-how-this-project-prepares-you-for-the-rest-of-the-course" class="nav-link" data-scroll-target="#how-this-project-prepares-you-for-the-rest-of-the-course">How this project prepares you for the rest of the course</a></li>
-  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key takeaways</a></li>
-  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#assigned-readings" id="toc-assigned-readings" class="nav-link" data-scroll-target="#assigned-readings">Assigned Readings</a></li>
+  <li><a href="#what-is-a-confidence-interval" id="toc-what-is-a-confidence-interval" class="nav-link" data-scroll-target="#what-is-a-confidence-interval">What Is a Confidence Interval?</a></li>
+  <li><a href="#interval-logic" id="toc-interval-logic" class="nav-link" data-scroll-target="#interval-logic">Interval Logic</a></li>
+  <li><a href="#why-intervals-matter" id="toc-why-intervals-matter" class="nav-link" data-scroll-target="#why-intervals-matter">Why Intervals Matter</a></li>
+  <li><a href="#visualizing-uncertainty" id="toc-visualizing-uncertainty" class="nav-link" data-scroll-target="#visualizing-uncertainty">Visualizing Uncertainty</a></li>
+  <li><a href="#plotting-confidence-intervals" id="toc-plotting-confidence-intervals" class="nav-link" data-scroll-target="#plotting-confidence-intervals">Plotting Confidence Intervals</a></li>
+  <li><a href="#key-insight" id="toc-key-insight" class="nav-link" data-scroll-target="#key-insight">Key Insight</a></li>
+  <li><a href="#correct-interpretation" id="toc-correct-interpretation" class="nav-link" data-scroll-target="#correct-interpretation">Correct Interpretation</a></li>
+  <li><a href="#what-95-confidence-really-means" id="toc-what-95-confidence-really-means" class="nav-link" data-scroll-target="#what-95-confidence-really-means">What “95% Confidence” Really Means</a></li>
+  <li><a href="#common-incorrect-interpretations" id="toc-common-incorrect-interpretations" class="nav-link" data-scroll-target="#common-incorrect-interpretations">Common Incorrect Interpretations</a></li>
+  <li><a href="#interpreting-instead-of-calculating" id="toc-interpreting-instead-of-calculating" class="nav-link" data-scroll-target="#interpreting-instead-of-calculating">Interpreting Instead of Calculating</a></li>
+  <li><a href="#width-of-confidence-intervals" id="toc-width-of-confidence-intervals" class="nav-link" data-scroll-target="#width-of-confidence-intervals">Width of Confidence Intervals</a></li>
+  <li><a href="#demonstration-sample-size-effect" id="toc-demonstration-sample-size-effect" class="nav-link" data-scroll-target="#demonstration-sample-size-effect">Demonstration: Sample Size Effect</a></li>
+  <li><a href="#communicating-uncertainty" id="toc-communicating-uncertainty" class="nav-link" data-scroll-target="#communicating-uncertainty">Communicating Uncertainty</a></li>
+  <li><a href="#public-health-example" id="toc-public-health-example" class="nav-link" data-scroll-target="#public-health-example">Public Health Example</a></li>
+  <li><a href="#confidence-intervals-hypothesis-testing" id="toc-confidence-intervals-hypothesis-testing" class="nav-link" data-scroll-target="#confidence-intervals-hypothesis-testing">Confidence Intervals &amp; Hypothesis Testing</a></li>
+  <li><a href="#example-interpretation" id="toc-example-interpretation" class="nav-link" data-scroll-target="#example-interpretation">Example Interpretation</a></li>
+  <li><a href="#key-terms" id="toc-key-terms" class="nav-link" data-scroll-target="#key-terms">Key Terms</a></li>
+  <li><a href="#practice-activity" id="toc-practice-activity" class="nav-link" data-scroll-target="#practice-activity">Practice Activity</a></li>
+  <li><a href="#reflection-questions" id="toc-reflection-questions" class="nav-link" data-scroll-target="#reflection-questions">Reflection Questions</a></li>
+  <li><a href="#common-mistakes-to-avoid" id="toc-common-mistakes-to-avoid" class="nav-link" data-scroll-target="#common-mistakes-to-avoid">Common Mistakes to Avoid</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking Ahead</a></li>
   </ul>
 </nav>
     </div>
@@ -287,7 +320,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Project 1 Lesson: Exploratory Data Story with Gapminder</span></h1>
+<h1 class="title"><span class="chapter-title">Lesson 10: Confidence Intervals &amp; Uncertainty</span></h1>
+<p class="subtitle lead">Interval Logic, Interpretation, and Communication</p>
 </div>
 
 
@@ -304,329 +338,423 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="purpose-of-project-1" class="level2">
-<h2 class="anchored" data-anchor-id="purpose-of-project-1">Purpose of Project 1</h2>
-<p>Project 1 is designed to help you practice the <strong>core workflow</strong> of this course before working with complex health datasets.</p>
-<p>This project focuses on:</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Confidence intervals are one of the most important tools in statistical inference. They allow us to move beyond a single estimate and instead communicate a <strong>range of plausible values</strong> for a population parameter.</p>
+<p>In this lesson, we focus less on calculation and more on <strong>interpretation, logic, and communication</strong>, which are essential skills in public health and data science.</p>
+<hr>
+</section>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By the end of this lesson, students will be able to:</p>
 <ul>
-<li>working comfortably in R and Quarto<br>
-</li>
-<li>exploring a dataset using descriptive statistics<br>
-</li>
-<li>creating clear data visualizations<br>
-</li>
-<li>writing interpretations in plain public health language<br>
-</li>
-<li>using inline R code to report values reproducibly</li>
+<li>Explain the logic behind confidence intervals</li>
+<li>Interpret confidence intervals in plain language</li>
+<li>Distinguish correct vs incorrect interpretations</li>
+<li>Communicate uncertainty effectively in public health contexts</li>
+<li>Connect confidence intervals to hypothesis testing concepts</li>
 </ul>
-<p>This is <strong>not</strong> a modeling project. The goal is exploration, clarity, and workflow.</p>
 <hr>
 </section>
-<section id="why-we-use-gapminder-for-project-1" class="level2">
-<h2 class="anchored" data-anchor-id="why-we-use-gapminder-for-project-1">Why we use Gapminder for Project 1</h2>
-<p>The Gapminder dataset is:</p>
+<section id="assigned-readings" class="level2">
+<h2 class="anchored" data-anchor-id="assigned-readings">Assigned Readings</h2>
 <ul>
-<li>clean and well-documented<br>
+<li><em>OpenIntro Biostatistics</em>, Chapter 4<br>
 </li>
-<li>structured in tidy format<br>
-</li>
-<li>widely used in teaching data science<br>
-</li>
-<li>rich enough to tell meaningful public health stories</li>
+<li><em>Statistical Inference via Data Science</em>, Chapter 9: Hypothesis Testing</li>
 </ul>
-<p>Using Gapminder allows you to focus on <strong>skills</strong>, not data complexity. These same skills will transfer directly to NHANES later in the course.</p>
 <hr>
 </section>
-<section id="what-you-are-expected-to-demonstrate" class="level2">
-<h2 class="anchored" data-anchor-id="what-you-are-expected-to-demonstrate">What you are expected to demonstrate</h2>
-<p>By the end of Project 1, you should be able to:</p>
+<section id="what-is-a-confidence-interval" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-confidence-interval">What Is a Confidence Interval?</h2>
+<p>A confidence interval (CI) provides a <strong>range of plausible values</strong> for a population parameter.</p>
+<p>Instead of reporting:</p>
+<blockquote class="blockquote">
+<p>“The mean BMI is 27.3”</p>
+</blockquote>
+<p>we report:</p>
+<blockquote class="blockquote">
+<p>“The mean BMI is 27.3 (95% CI: 26.5 to 28.1)”</p>
+</blockquote>
+<hr>
+</section>
+<section id="interval-logic" class="level2">
+<h2 class="anchored" data-anchor-id="interval-logic">Interval Logic</h2>
+<p>Confidence intervals are built on three key components:</p>
+<ol type="1">
+<li><strong>Estimate</strong> (sample statistic)</li>
+<li><strong>Standard Error</strong> (variability)</li>
+<li><strong>Critical Value</strong> (confidence level)</li>
+</ol>
+<p>Mathematically:</p>
+<p><span class="math display">\[
+\text{Estimate} \pm \text{Critical Value} \times SE
+\]</span></p>
+<hr>
+</section>
+<section id="why-intervals-matter" class="level2">
+<h2 class="anchored" data-anchor-id="why-intervals-matter">Why Intervals Matter</h2>
+<p>A single number does not show uncertainty.</p>
+<p>Confidence intervals:</p>
 <ul>
-<li>work entirely in a Quarto document<br>
+<li>show precision of estimates<br>
 </li>
-<li>load and explore a dataset<br>
+<li>reflect sampling variability<br>
 </li>
-<li>compute descriptive summaries<br>
-</li>
-<li>create at least two well-labeled figures<br>
-</li>
-<li>interpret patterns in writing<br>
-</li>
-<li>use inline code for reported values</li>
+<li>provide context for decision-making</li>
 </ul>
-<p>Effort, clarity, and reproducibility matter more than sophistication.</p>
 <hr>
 </section>
-<section id="project-setup" class="level2">
-<h2 class="anchored" data-anchor-id="project-setup">Project setup</h2>
-<p>Create a new Quarto document named:</p>
-<pre><code>project1-lastname.qmd</code></pre>
-<p>At the top of your document, include a clear title and your name.</p>
-<hr>
-</section>
-<section id="loading-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="loading-the-data">Loading the data</h2>
-<p>Install packages if needed (only once):</p>
+<section id="visualizing-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-uncertainty">Visualizing Uncertainty</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("tidyverse")</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("gapminder")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.5.1</code></pre>
 </div>
-<p>Load packages each session:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.0     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<p>Load the dataset:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>gapminder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate many confidence intervals</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>true_mean <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>population <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>, <span class="at">mean =</span> true_mean, <span class="at">sd =</span> <span class="dv">10</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>ci_sim <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">100</span>, {</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  samp <span class="ot">&lt;-</span> <span class="fu">sample</span>(population, <span class="dv">50</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">mean</span>(samp)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  se <span class="ot">&lt;-</span> <span class="fu">sd</span>(samp)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">50</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  lower <span class="ot">&lt;-</span> m <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  upper <span class="ot">&lt;-</span> m <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(lower, upper)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>ci_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">t</span>(ci_sim))</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(ci_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lower"</span>, <span class="st">"upper"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>ci_df<span class="sc">$</span>id <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(ci_df)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>ci_df<span class="sc">$</span>contains_true <span class="ot">&lt;-</span> ci_df<span class="sc">$</span>lower <span class="sc">&lt;=</span> true_mean <span class="sc">&amp;</span> ci_df<span class="sc">$</span>upper <span class="sc">&gt;=</span> true_mean</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ci_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,704 × 6
-   country     continent  year lifeExp      pop gdpPercap
-   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
- 1 Afghanistan Asia       1952    28.8  8425333      779.
- 2 Afghanistan Asia       1957    30.3  9240934      821.
- 3 Afghanistan Asia       1962    32.0 10267083      853.
- 4 Afghanistan Asia       1967    34.0 11537966      836.
- 5 Afghanistan Asia       1972    36.1 13079460      740.
- 6 Afghanistan Asia       1977    38.4 14880372      786.
- 7 Afghanistan Asia       1982    39.9 12881816      978.
- 8 Afghanistan Asia       1987    40.8 13867957      852.
- 9 Afghanistan Asia       1992    41.7 16317921      649.
-10 Afghanistan Asia       1997    41.8 22227415      635.
-# ℹ 1,694 more rows</code></pre>
+<pre><code>     lower    upper id contains_true
+1 47.29454 53.13681  1          TRUE
+2 46.60280 52.71860  2          TRUE
+3 47.78533 52.12986  3          TRUE
+4 45.76855 51.46971  4          TRUE
+5 49.58307 55.63141  5          TRUE
+6 46.82376 52.55915  6          TRUE</code></pre>
 </div>
 </div>
 <hr>
 </section>
-<section id="choosing-a-focus" class="level2">
-<h2 class="anchored" data-anchor-id="choosing-a-focus">Choosing a focus</h2>
-<p>You will be assigned a country and you will be comparing all results to the <strong>United States</strong>.</p>
-<p>Once selected, filter the dataset.</p>
+<section id="plotting-confidence-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-confidence-intervals">Plotting Confidence Intervals</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>country_df <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"United States"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>country_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 6
-   country       continent  year lifeExp       pop gdpPercap
-   &lt;fct&gt;         &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
- 1 United States Americas   1952    68.4 157553000    13990.
- 2 United States Americas   1957    69.5 171984000    14847.
- 3 United States Americas   1962    70.2 186538000    16173.
- 4 United States Americas   1967    70.8 198712000    19530.
- 5 United States Americas   1972    71.3 209896000    21806.
- 6 United States Americas   1977    73.4 220239000    24073.
- 7 United States Americas   1982    74.6 232187835    25010.
- 8 United States Americas   1987    75.0 242803533    29884.
- 9 United States Americas   1992    76.1 256894189    32004.
-10 United States Americas   1997    76.8 272911760    35767.
-11 United States Americas   2002    77.3 287675526    39097.
-12 United States Americas   2007    78.2 301139947    42952.</code></pre>
-</div>
-</div>
-<p>Your entire project should focus on <strong>one country and the clearly defined comparison</strong>.</p>
-<hr>
-</section>
-<section id="section-1-introduction" class="level2">
-<h2 class="anchored" data-anchor-id="section-1-introduction">Section 1: Introduction</h2>
-<p>In your Introduction section, briefly describe:</p>
-<ul>
-<li>the country you are examining<br>
-</li>
-<li>why it is of interest from a public health perspective<br>
-</li>
-<li>what outcomes you plan to explore</li>
-</ul>
-<p>This section should be written in complete sentences and should not include code.</p>
-<hr>
-</section>
-<section id="section-2-descriptive-exploration" class="level2">
-<h2 class="anchored" data-anchor-id="section-2-descriptive-exploration">Section 2: Descriptive exploration</h2>
-<p>Start by computing basic descriptive statistics.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mean_lifeExp <span class="ot">&lt;-</span> <span class="fu">mean</span>(country_df<span class="sc">$</span>lifeExp)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sd_lifeExp <span class="ot">&lt;-</span> <span class="fu">sd</span>(country_df<span class="sc">$</span>lifeExp)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>n_years <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(country_df<span class="sc">$</span>year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Report values using <strong>inline code</strong>, not by typing numbers manually.</p>
-<p>Example:</p>
-<p>Across 12 years of available data, the mean life expectancy was 73.5 years (SD = 3.3).</p>
-<hr>
-</section>
-<section id="section-3-visualizations" class="level2">
-<h2 class="anchored" data-anchor-id="section-3-visualizations">Section 3: Visualizations</h2>
-<p>You must include <strong>at least two figures</strong>.</p>
-<section id="required-figure-trend-over-time" class="level3">
-<h3 class="anchored" data-anchor-id="required-figure-trend-over-time">Required figure: trend over time</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(country_df, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Life Expectancy Over Time"</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Life Expectancy (years)"</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ci_df, <span class="fu">aes</span>(<span class="at">x =</span> id, <span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper, <span class="at">color =</span> contains_true)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>() <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> true_mean, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Simulated 95% Confidence Intervals"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Sample"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Confidence Interval"</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="project1_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="optional-second-figure-examples" class="level3">
-<h3 class="anchored" data-anchor-id="optional-second-figure-examples">Optional second figure (examples)</h3>
-<p>You may choose one of the following:</p>
-<ul>
-<li>GDP per capita vs life expectancy<br>
-</li>
-<li>population trends over time<br>
-</li>
-<li>comparison with another country</li>
-</ul>
-<p>Example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(country_df, </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> gdpPercap, </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> lifeExp)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Life Expectancy vs GDP per Capita"</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"GDP per Capita (log scale)"</span>,</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Life Expectancy (years)"</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="project1_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="10-confint_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <hr>
 </section>
-</section>
-<section id="writing-interpretation-paragraphs" class="level2">
-<h2 class="anchored" data-anchor-id="writing-interpretation-paragraphs">Writing interpretation paragraphs</h2>
-<p>Every figure must be followed by a short interpretation paragraph.</p>
-<p>A strong interpretation includes:</p>
+<section id="key-insight" class="level2">
+<h2 class="anchored" data-anchor-id="key-insight">Key Insight</h2>
 <ul>
-<li>what the plot shows<br>
+<li>Most intervals contain the true mean<br>
 </li>
-<li>notable trends or changes<br>
-</li>
-<li>a public health interpretation<br>
-</li>
-<li>a brief limitation</li>
+<li>Some do not (about 5% for a 95% CI)</li>
 </ul>
-<p>Example structure:</p>
-<ul>
-<li>What do you observe?<br>
-</li>
-<li>When do changes occur?<br>
-</li>
-<li>Why might this matter for population health?</li>
-</ul>
-<p>Do not describe code or aesthetics. Focus on meaning.</p>
+<p>This is the meaning of “95% confidence”</p>
 <hr>
 </section>
-<section id="section-4-data-quality-and-limitations" class="level2">
-<h2 class="anchored" data-anchor-id="section-4-data-quality-and-limitations">Section 4: Data quality and limitations</h2>
-<p>Include a short section discussing:</p>
-<ul>
-<li>missingness (if any)<br>
-</li>
-<li>time coverage of the data<br>
-</li>
-<li>what the data cannot tell us</li>
-</ul>
-<p>This helps build good scientific habits early.</p>
+<section id="correct-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="correct-interpretation">Correct Interpretation</h2>
+<p>A correct interpretation is:</p>
+<blockquote class="blockquote">
+<p>We are 95% confident that the true population parameter lies within this interval.</p>
+</blockquote>
 <hr>
 </section>
-<section id="section-5-reflection" class="level2">
-<h2 class="anchored" data-anchor-id="section-5-reflection">Section 5: Reflection</h2>
-<p>Conclude with a brief reflection addressing:</p>
+<section id="what-95-confidence-really-means" class="level2">
+<h2 class="anchored" data-anchor-id="what-95-confidence-really-means">What “95% Confidence” Really Means</h2>
+<p>If we repeated the sampling process many times:</p>
 <ul>
-<li>what you learned from exploring the data<br>
+<li>95% of constructed intervals would contain the true parameter<br>
 </li>
-<li>what surprised you<br>
-</li>
-<li>what questions you would explore next</li>
+<li>5% would miss it</li>
 </ul>
-<p>This section is about <strong>thinking</strong>, not technical skill.</p>
 <hr>
 </section>
-<section id="formatting-and-reproducibility-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="formatting-and-reproducibility-requirements">Formatting and reproducibility requirements</h2>
-<p>Your project must:</p>
+<section id="common-incorrect-interpretations" class="level2">
+<h2 class="anchored" data-anchor-id="common-incorrect-interpretations">Common Incorrect Interpretations</h2>
 <ul>
-<li>be written entirely in Quarto<br>
-</li>
-<li>render without errors<br>
-</li>
-<li>use inline code for reported values<br>
-</li>
-<li>include labeled figures<br>
-</li>
-<li>avoid screenshots of plots<br>
-</li>
-<li>be clearly organized with headings</li>
-<li>have peer-reviewed sources (at least 8)</li>
+<li>❌ “There is a 95% probability the true value is in this interval”</li>
+<li>❌ “95% of individuals fall within this range”</li>
+<li>❌ “The parameter changes from sample to sample”</li>
 </ul>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<hr>
+</section>
+<section id="interpreting-instead-of-calculating" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-instead-of-calculating">Interpreting Instead of Calculating</h2>
+<p>In practice, you will often be given confidence intervals rather than calculating them.</p>
+<p>Example:</p>
+<blockquote class="blockquote">
+<p>Odds Ratio = 1.5 (95% CI: 1.2 to 1.9)</p>
+</blockquote>
+<p>Interpretation:</p>
+<ul>
+<li>The exposure is associated with higher odds of the outcome<br>
+</li>
+<li>The interval does not include 1 → statistically significant<br>
+</li>
+<li>The plausible effect size ranges from 1.2 to 1.9</li>
+</ul>
+<hr>
+</section>
+<section id="width-of-confidence-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="width-of-confidence-intervals">Width of Confidence Intervals</h2>
+<p>The width of a confidence interval depends on:</p>
+<ul>
+<li>Sample size (larger → narrower)<br>
+</li>
+<li>Variability (higher → wider)<br>
+</li>
+<li>Confidence level (higher → wider)</li>
+</ul>
+<hr>
+</section>
+<section id="demonstration-sample-size-effect" class="level2">
+<h2 class="anchored" data-anchor-id="demonstration-sample-size-effect">Demonstration: Sample Size Effect</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">456</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>get_ci_width <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  samp <span class="ot">&lt;-</span> <span class="fu">sample</span>(population, n)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  se <span class="ot">&lt;-</span> <span class="fu">sd</span>(samp)<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  width <span class="ot">&lt;-</span> (<span class="fl">1.96</span> <span class="sc">*</span> se) <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  width</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_size =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">200</span>, <span class="dv">500</span>),</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ci_width =</span> <span class="fu">c</span>(<span class="fu">get_ci_width</span>(<span class="dv">50</span>), <span class="fu">get_ci_width</span>(<span class="dv">200</span>), <span class="fu">get_ci_width</span>(<span class="dv">500</span>))</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  sample_size ci_width
+        &lt;dbl&gt;    &lt;dbl&gt;
+1          50     5.99
+2         200     2.81
+3         500     1.83</code></pre>
 </div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Projects that do not render cleanly cannot be graded.</p>
-</div>
 </div>
 <hr>
 </section>
-<section id="submission-instructions" class="level2">
-<h2 class="anchored" data-anchor-id="submission-instructions">Submission instructions</h2>
-<p>Submit:</p>
+<section id="communicating-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="communicating-uncertainty">Communicating Uncertainty</h2>
+<p>In public health, it is essential to communicate uncertainty clearly.</p>
+<p>Instead of saying:</p>
+<blockquote class="blockquote">
+<p>“The intervention works”</p>
+</blockquote>
+<p>Say:</p>
+<blockquote class="blockquote">
+<p>“The intervention is associated with improved outcomes (95% CI: X to Y), suggesting a likely positive effect, though uncertainty remains.”</p>
+</blockquote>
+<hr>
+</section>
+<section id="public-health-example" class="level2">
+<h2 class="anchored" data-anchor-id="public-health-example">Public Health Example</h2>
+<p>Suppose:</p>
 <ul>
-<li>the rendered document (word)<br>
+<li>Screening rate = 72%<br>
 </li>
-<li>the <code>.qmd</code> source file<br>
-</li>
-<li>3MT-style presentation slide</li>
+<li>95% CI = 68% to 76%</li>
 </ul>
-<p>Both are required.</p>
-<hr>
-</section>
-<section id="how-this-project-prepares-you-for-the-rest-of-the-course" class="level2">
-<h2 class="anchored" data-anchor-id="how-this-project-prepares-you-for-the-rest-of-the-course">How this project prepares you for the rest of the course</h2>
-<p>Project 1 builds the foundation for:</p>
+<p>Interpretation:</p>
 <ul>
-<li>Project 2 (cleaning NHANES data)<br>
+<li>The true screening rate is likely between 68% and 76%<br>
 </li>
-<li>Project 3 (modeling and inference)<br>
+<li>The estimate is reasonably precise<br>
 </li>
-<li>Project 4 (final manuscript)</li>
+<li>Policy decisions should consider this range</li>
 </ul>
-<p>The workflow you practice here will be reused all semester.</p>
 <hr>
 </section>
-<section id="key-takeaways" class="level2">
-<h2 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
-<p>Project 1 is about learning how to explore data, write clearly, and work reproducibly in Quarto. Focus on effort, clarity, and honest interpretation. You are not expected to be an expert — you are expected to engage.</p>
+<section id="confidence-intervals-hypothesis-testing" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-intervals-hypothesis-testing">Confidence Intervals &amp; Hypothesis Testing</h2>
+<p>Confidence intervals are closely related to hypothesis testing.</p>
+<p>Key connection:</p>
+<ul>
+<li>If the CI excludes the null value → statistically significant<br>
+</li>
+<li>If the CI includes the null value → not statistically significant</li>
+</ul>
+<p>Examples:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th>Null Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean Difference</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Risk Difference</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>Odds Ratio</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Risk Ratio</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="example-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="example-interpretation">Example Interpretation</h2>
+<p>If:</p>
+<ul>
+<li>Risk Ratio = 1.3 (95% CI: 0.9 to 1.8)</li>
+</ul>
+<p>Then:</p>
+<ul>
+<li>CI includes 1 → not statistically significant<br>
+</li>
+<li>Evidence is inconclusive</li>
+</ul>
+<hr>
+</section>
+<section id="key-terms" class="level2">
+<h2 class="anchored" data-anchor-id="key-terms">Key Terms</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Confidence Interval</td>
+<td>Range of plausible values</td>
+</tr>
+<tr class="even">
+<td>Margin of Error</td>
+<td>Distance from estimate to bounds</td>
+</tr>
+<tr class="odd">
+<td>Precision</td>
+<td>Narrowness of interval</td>
+</tr>
+<tr class="even">
+<td>Statistical Significance</td>
+<td>CI excludes null value</td>
+</tr>
+<tr class="odd">
+<td>Null Value</td>
+<td>Value representing no effect</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="practice-activity" class="level2">
+<h2 class="anchored" data-anchor-id="practice-activity">Practice Activity</h2>
+<ol type="1">
+<li>Given a confidence interval, interpret it in plain language<br>
+</li>
+<li>Determine whether it is statistically significant<br>
+</li>
+<li>Identify whether the interval is wide or narrow<br>
+</li>
+<li>Explain what that implies about precision</li>
+</ol>
+<hr>
+</section>
+<section id="reflection-questions" class="level2">
+<h2 class="anchored" data-anchor-id="reflection-questions">Reflection Questions</h2>
+<ol type="1">
+<li>Why are confidence intervals more informative than single estimates?<br>
+</li>
+<li>What does it mean when a confidence interval is wide?<br>
+</li>
+<li>How does sample size affect confidence intervals?<br>
+</li>
+<li>Why is correct interpretation important in public health?</li>
+</ol>
+<hr>
+</section>
+<section id="common-mistakes-to-avoid" class="level2">
+<h2 class="anchored" data-anchor-id="common-mistakes-to-avoid">Common Mistakes to Avoid</h2>
+<ul>
+<li>Treating CI as probability of parameter<br>
+</li>
+<li>Ignoring width of interval<br>
+</li>
+<li>Overstating certainty<br>
+</li>
+<li>Misinterpreting statistical significance</li>
+</ul>
+<hr>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Confidence intervals provide a powerful way to communicate uncertainty.</p>
+<p>They allow us to:</p>
+<ul>
+<li>quantify variability<br>
+</li>
+<li>interpret results meaningfully<br>
+</li>
+<li>connect estimation to decision-making</li>
+</ul>
+<p>Understanding how to interpret and communicate confidence intervals is essential for evidence-based public health practice.</p>
 <hr>
 </section>
 <section id="looking-ahead" class="level2">
-<h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
-<p>After Project 1, we will transition to <strong>real U.S. health data</strong> and begin preparing datasets for modeling and inference.</p>
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking Ahead</h2>
+<p>Next lesson:</p>
+<ul>
+<li>Hypothesis testing in depth<br>
+</li>
+<li>p-values<br>
+</li>
+<li>Type I and Type II errors<br>
+</li>
+<li>Decision-making frameworks</li>
+</ul>
+<hr>
 
 
 </section>
@@ -1033,13 +1161,13 @@ Warning
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./04-dplyr.html" class="pagination-link" aria-label="Lesson 4: Data Wrangling with dplyr">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Lesson 4: Data Wrangling with dplyr</span></span>
+      <a href="./09-statinf.html" class="pagination-link" aria-label="Lesson 9: Introduction to Statistical Inference">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Lesson 9: Introduction to Statistical Inference</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./05-tidydata.html" class="pagination-link" aria-label="Lesson 5: Tidy Data and Reshaping">
-        <span class="nav-page-text"><span class="chapter-title">Lesson 5: Tidy Data and Reshaping</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./project3.html" class="pagination-link" aria-label="Project 3: Modeling Health Outcomes Using Regression &amp; Simulation">
+        <span class="nav-page-text"><span class="chapter-title">Project 3: Modeling Health Outcomes Using Regression &amp; Simulation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

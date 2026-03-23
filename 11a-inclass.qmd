@@ -1,0 +1,104 @@
+---
+title: "Lesson 11a: In-Class Activity: Hypothesis Testing Simulation"
+---
+
+## Activity Overview
+
+In this activity, you will use simulation to understand hypothesis testing and p-values.
+
+**Scenario:**\
+A researcher wants to know whether a new intervention changes an outcome compared to a control group.
+
+------------------------------------------------------------------------
+
+## Step 1: Set Up the Data
+
+```{r}
+library(tidyverse)
+
+set.seed(123)
+
+group <- rep(c("Control", "Intervention"), each = 50)
+outcome <- rnorm(100, mean = 50, sd = 10)
+
+df <- tibble(group, outcome)
+
+df
+```
+
+------------------------------------------------------------------------
+
+## Step 2: Calculate Observed Difference
+
+```{r}
+obs_diff <- df |>
+  group_by(group) |>
+  summarise(mean_val = mean(outcome)) |>
+  summarise(diff = diff(mean_val)) |>
+  pull(diff)
+
+obs_diff
+```
+
+------------------------------------------------------------------------
+
+## Step 3: Simulate Under the Null
+
+```{r}
+set.seed(123)
+
+null_dist <- replicate(1000, {
+  shuffled <- df |>
+    mutate(group = sample(group))
+
+  shuffled |>
+    group_by(group) |>
+    summarise(mean_val = mean(outcome)) |>
+    summarise(diff = diff(mean_val)) |>
+    pull(diff)
+})
+
+null_df <- tibble(diff = null_dist)
+```
+
+------------------------------------------------------------------------
+
+## Step 4: Visualize
+
+```{r}
+ggplot(null_df, aes(x = diff)) +
+  geom_histogram(bins = 30) +
+  geom_vline(xintercept = obs_diff, linetype = "dashed") +
+  labs(
+    title = "Null Distribution",
+    x = "Difference in Means",
+    y = "Frequency"
+  )
+```
+
+------------------------------------------------------------------------
+
+## Step 5: Compute p-value
+
+```{r}
+p_value <- mean(abs(null_df$diff) >= abs(obs_diff))
+p_value
+```
+
+------------------------------------------------------------------------
+
+## Step 6: Interpretation Questions
+
+-   Is the observed result extreme compared to the null?
+-   Is the p-value small or large?
+-   What does this say about evidence against the null?
+-   Would you reject the null hypothesis?
+
+------------------------------------------------------------------------
+
+## Key Takeaway
+
+A p-value tells us how surprising our data are under the null hypothesis.
+
+Small p-value → strong evidence against the null\
+Large p-value → weak evidence against the null

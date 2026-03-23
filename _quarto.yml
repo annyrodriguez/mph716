@@ -18,9 +18,16 @@ book:
     - 05-tidydata.qmd
     - 06a-biostats1review.qmd
     - 06-slr.qmd
-    - 06b-log.qmd
-    - 07-mlr.qmd
+    - 07-log.qmd
+    - 08-mlr.qmd
     - project2.qmd
+    - 09-statinf.qmd
+    - 10-confint.qmd
+    - project3.qmd
+    - 11-hyptest.qmd
+    - 11a-inclass.qmd
+    - project4.qmd
+    - suppA.qmd
     
 format:
   html:

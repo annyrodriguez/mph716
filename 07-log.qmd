@@ -1,5 +1,5 @@
 ---
-title: "Lesson 6b: Logistic Regression for Public Health"
+title: "Lesson 7: Logistic Regression for Public Health"
 subtitle: "Modeling Binary Health Outcomes"
 ---
 
@@ -13,6 +13,14 @@ By the end of this lesson, you will be able to:
 - Interpret odds ratios in public health language
 - Generate predicted probabilities
 - Communicate findings responsibly
+
+---
+
+
+## Assigned Readings
+
+-   *OpenIntro Biostatistics*, Chapter 8\
+-   *Statistical Inference via Data Science*, Chapter 6
 
 ---
 

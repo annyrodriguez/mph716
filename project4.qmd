@@ -1,0 +1,223 @@
+---
+title: "Project 4: Final Manuscript & Presentation"
+subtitle: "NHANES"
+---
+
+## Project Overview
+
+This final project brings together everything you have learned about R, data science, and applied public-health analytics. You will produce a scientific manuscript written entirely in Quarto, using NHANES data to answer a meaningful health research question.
+
+Your manuscript will include:
+
+-   a clearly defined research question
+-   a transparent analytic workflow
+-   descriptive data summaries
+-   regression modeling
+-   inference and uncertainty
+-   thoughtful interpretation grounded in public health
+
+You will also give a 10-minute presentation summarizing the study and findings in a professional, conference-style format.
+
+This project is designed to simulate real-world research writing in an MPH context.
+
+## Dataset
+
+You will continue using the NHANES dataset from the `{NHANES}` package. You may refine your analytic dataset based on feedback from Projects 2 and 3.
+
+## Learning Objectives
+
+By completing this project, you will be able to:
+
+-   write a scientific manuscript using reproducible workflows
+-   communicate data analysis and modeling in clear language
+-   interpret results in a biomedical and equity-aware context
+-   produce publication-quality tables and figures
+-   present findings orally in a professional manner
+
+## Manuscript Structure
+
+Your manuscript must follow this structure.
+
+## Title Page
+
+Include:
+
+-   title
+-   author name
+-   course and institution
+-   date
+
+## Abstract
+
+Write 150 to 250 words summarizing:
+
+-   background
+-   purpose
+-   methods
+-   key findings
+-   implications
+
+## Introduction
+
+Explain:
+
+-   the health topic
+-   why it matters
+-   key background or epidemiologic context
+-   your research question(s) or hypothesis
+
+Write for an informed public-health audience.
+
+## Methods
+
+Describe:
+
+-   data source and sample
+-   variables and coding
+-   missing-data handling
+-   analytic plan, including models used
+-   ethical considerations
+
+Be transparent and precise.
+
+## Results
+
+Include:
+
+-   descriptive statistics
+-   at least one regression model
+-   tables and figures produced in R
+-   uncertainty measures such as confidence intervals
+-   plain-language interpretation
+
+Let the data speak clearly.
+
+## Discussion
+
+Address:
+
+-   key findings
+-   possible mechanisms or interpretation
+-   equity implications
+-   limitations
+-   directions for future research
+-   practice or policy relevance
+
+Avoid overstating causality.
+
+## References
+
+Use APA format.
+
+## Appendix
+
+Include code excerpts or supplemental tables as needed.
+
+## Presentation
+
+You will give a 10-minute presentation including:
+
+-   research question
+-   methods overview
+-   key results
+-   interpretation
+-   reflection
+
+Slides should be clear and professional.
+
+## Formatting Requirements
+
+Your manuscript must:
+
+-   be written completely in Quarto
+-   knit without errors
+-   use inline code for statistics where possible
+-   include at least two figures and one table
+-   be approximately 2,000 to 3,000 words, excluding code
+-   reflect professional writing quality
+
+## Submission
+
+Submit:
+
+-   your knitted manuscript in word
+-   your `.qmd` source file
+-   your presentation slides
+
+## Academic Integrity
+
+All writing and code must be your own. Collaboration on ideas is permitted; copying is not.
+
+## Project 4 Rubric
+
+### 1. Research Question and Framing — 15 points
+
+Evaluates clarity, significance, and grounding.
+
+-   13–15: Clear, meaningful health question; strong rationale; excellent framing
+-   10–12: Good question with moderate depth
+-   6–9: Question vague or weakly justified
+-   0–5: Lacks clarity or purpose
+
+### 2. Methods and Transparency — 15 points
+
+Assesses documentation and rigor.
+
+-   13–15: Methods clearly described; coding choices transparent; reproducible workflow obvious
+-   10–12: Mostly clear with some gaps
+-   6–9: Limited clarity or detail
+-   0–5: Methods unclear or inappropriate
+
+### 3. Data Analysis and Modeling — 20 points
+
+Evaluates execution and appropriateness.
+
+-   17–20: Models appropriate; data handling correct; output interpreted properly
+-   13–16: Minor errors but overall sound
+-   8–12: Substantial misunderstanding or weaknesses
+-   0–7: Incorrect or incomplete analysis
+
+### 4. Interpretation, Uncertainty, and Public-Health Insight — 20 points
+
+Focuses on meaning-making.
+
+-   17–20: Thoughtful interpretation with nuance; uncertainty addressed; equity implications considered
+-   13–16: Interpretation generally correct with moderate depth
+-   8–12: Limited interpretation
+-   0–7: Incorrect or missing interpretation
+
+### 5. Tables, Figures, and Presentation of Results — 10 points
+
+Assesses clarity and professionalism.
+
+-   9–10: Publication-quality outputs; clearly labeled; visually effective
+-   7–8: Mostly clear but could be improved
+-   4–6: Limited polish or clarity
+-   0–3: Poor or missing presentation
+
+### 6. Writing Quality and Organization — 10 points
+
+Evaluates readability and tone.
+
+-   9–10: Clear, cohesive, professional writing throughout
+-   7–8: Mostly clear with minor issues
+-   4–6: Some difficulty following structure
+-   0–3: Poor clarity or organization
+
+### 7. Reproducibility and Quarto Workflow — 5 points
+
+Rewards transparent scientific computing.
+
+-   5: Fully reproducible; clean structure; knits without errors
+-   3–4: Minor issues present
+-   1–2: Inconsistent reproducibility
+-   0: Not reproducible
+
+### 8. Oral Presentation — 5 points
+
+Evaluates clarity and professionalism.
+
+-   5: Engaging, clear, organized, and confident
+-   3–4: Generally clear with minor gaps
+-   1–2: Difficult to follow
+-   0: Presentation not delivered

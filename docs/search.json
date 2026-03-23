@@ -1604,7 +1604,7 @@
     "href": "06-slr.html#setup",
     "title": "Lesson 6: Simple Linear Regression",
     "section": "Setup",
-    "text": "Setup\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(broom)\n\n# Install once if needed:\n# install.packages(\"NHANES\")\nlibrary(NHANES)",
+    "text": "Setup\n\nlibrary(tidyverse)\n\nWarning: package 'dplyr' was built under R version 4.5.1\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.2.0     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(broom)\n\n# Install once if needed:\n# install.packages(\"NHANES\")\nlibrary(NHANES)",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Lesson 6: Simple Linear Regression</span>"
     ]
@@ -1680,203 +1680,213 @@
     ]
   },
   {
-    "objectID": "06b-log.html",
-    "href": "06b-log.html",
-    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "objectID": "07-log.html",
+    "href": "07-log.html",
+    "title": "Lesson 7: Logistic Regression for Public Health",
     "section": "",
     "text": "Learning Objectives\nBy the end of this lesson, you will be able to:",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Logistic Regression for Public Health</span>"
     ]
   },
   {
-    "objectID": "06b-log.html#learning-objectives",
-    "href": "06b-log.html#learning-objectives",
-    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "objectID": "07-log.html#learning-objectives",
+    "href": "07-log.html#learning-objectives",
+    "title": "Lesson 7: Logistic Regression for Public Health",
     "section": "",
     "text": "Explain when logistic regression is appropriate\nInterpret odds and probabilities in health research\nFit a logistic regression model in R\nInterpret odds ratios in public health language\nGenerate predicted probabilities\nCommunicate findings responsibly",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Logistic Regression for Public Health</span>"
     ]
   },
   {
-    "objectID": "06b-log.html#when-do-we-use-logistic-regression",
-    "href": "06b-log.html#when-do-we-use-logistic-regression",
-    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "objectID": "07-log.html#assigned-readings",
+    "href": "07-log.html#assigned-readings",
+    "title": "Lesson 7: Logistic Regression for Public Health",
+    "section": "Assigned Readings",
+    "text": "Assigned Readings\n\nOpenIntro Biostatistics, Chapter 8\n\nStatistical Inference via Data Science, Chapter 6",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Logistic Regression for Public Health</span>"
+    ]
+  },
+  {
+    "objectID": "07-log.html#when-do-we-use-logistic-regression",
+    "href": "07-log.html#when-do-we-use-logistic-regression",
+    "title": "Lesson 7: Logistic Regression for Public Health",
     "section": "1. When Do We Use Logistic Regression?",
     "text": "1. When Do We Use Logistic Regression?\nLinear regression is used when:\n\nOutcome is continuous (BMI, blood pressure, cholesterol)\n\nLogistic regression is used when:\n\nOutcome is binary\n\nHypertension: Yes / No\nDiabetes: Yes / No\nSmoker: Yes / No\nFair/Poor health: Yes / No\n\n\nLogistic regression models:\n[ log() = _0 + _1X ]\nWhere:\n\n(p) = probability of the outcome\n(p/(1-p)) = odds",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Logistic Regression for Public Health</span>"
     ]
   },
   {
-    "objectID": "06b-log.html#load-nhanes-data",
-    "href": "06b-log.html#load-nhanes-data",
-    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "objectID": "07-log.html#load-nhanes-data",
+    "href": "07-log.html#load-nhanes-data",
+    "title": "Lesson 7: Logistic Regression for Public Health",
     "section": "2. Load NHANES Data",
-    "text": "2. Load NHANES Data\n\nLoading Libraries\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(NHANES)\n\n\n\nLoading the Dataset & Creating a Subsect\n\ndata(NHANES)\n\ndf &lt;- NHANES %&gt;%\n  filter(!is.na(BMI), !is.na(Gender), !is.na(Age)) %&gt;%\n  mutate(\n    high_bmi = ifelse(BMI &gt;= 30, 1, 0)\n  )",
+    "text": "2. Load NHANES Data\n\nLoading Libraries\n\nlibrary(tidyverse)\n\nWarning: package 'dplyr' was built under R version 4.5.1\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.2.0     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(NHANES)\n\n\n\nLoading the Dataset & Creating a Subsect\n\ndata(NHANES)\n\ndf &lt;- NHANES %&gt;%\n  filter(!is.na(BMI), !is.na(Gender), !is.na(Age)) %&gt;%\n  mutate(\n    high_bmi = ifelse(BMI &gt;= 30, 1, 0)\n  )",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Logistic Regression for Public Health</span>"
     ]
   },
   {
-    "objectID": "06b-log.html#fit-logistic-regression-model",
-    "href": "06b-log.html#fit-logistic-regression-model",
-    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "objectID": "07-log.html#fit-logistic-regression-model",
+    "href": "07-log.html#fit-logistic-regression-model",
+    "title": "Lesson 7: Logistic Regression for Public Health",
     "section": "3. Fit Logistic Regression Model",
     "text": "3. Fit Logistic Regression Model\nOur example research question: Is obesity associated with age?\n\nmodel &lt;- glm(high_bmi ~ Age, \n             data = df, \n             family = binomial)\n\nsummary(model)\n\n\nCall:\nglm(formula = high_bmi ~ Age, family = binomial, data = df)\n\nCoefficients:\n             Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -1.865791   0.051335  -36.34   &lt;2e-16 ***\nAge          0.023872   0.001084   22.01   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 11552  on 9633  degrees of freedom\nResidual deviance: 11040  on 9632  degrees of freedom\nAIC: 11044\n\nNumber of Fisher Scoring iterations: 4\n\n\n\nWhat Is Happening Here?\n\nglm() fits a generalized linear model.\nfamily = binomial specifies a binary outcome.\nThe model estimates log-odds, not probabilities.\n\nThe coefficient for Age is on the log-odds scale.\nIt must be transformed before interpretation.",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Logistic Regression for Public Health</span>"
     ]
   },
   {
-    "objectID": "06b-log.html#convert-coefficients-to-odds-ratios",
-    "href": "06b-log.html#convert-coefficients-to-odds-ratios",
-    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "objectID": "07-log.html#convert-coefficients-to-odds-ratios",
+    "href": "07-log.html#convert-coefficients-to-odds-ratios",
+    "title": "Lesson 7: Logistic Regression for Public Health",
     "section": "4. Convert Coefficients to Odds Ratios",
     "text": "4. Convert Coefficients to Odds Ratios\n\nexp(coef(model))\n\n(Intercept)         Age \n  0.1547737   1.0241594 \n\n\n\nInterpretation:\nEach additional year of age is associated with a 2% increase in the odds of obesity.\nInterpretation Rules\n\nOR = 1 → No association\nOR &gt; 1 → Increased odds\nOR &lt; 1 → Decreased odds\n\nExamples:\n\nOR = 1.25 → 25% higher odds\nOR = 0.80 → 20% lower odds",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Logistic Regression for Public Health</span>"
     ]
   },
   {
-    "objectID": "06b-log.html#confidence-intervals-for-odds-ratios",
-    "href": "06b-log.html#confidence-intervals-for-odds-ratios",
-    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "objectID": "07-log.html#confidence-intervals-for-odds-ratios",
+    "href": "07-log.html#confidence-intervals-for-odds-ratios",
+    "title": "Lesson 7: Logistic Regression for Public Health",
     "section": "5. Confidence Intervals for Odds Ratios",
     "text": "5. Confidence Intervals for Odds Ratios\n\nexp(confint(model))\n\nWaiting for profiling to be done...\n\n\n                2.5 %    97.5 %\n(Intercept) 0.1398656 0.1710458\nAge         1.0219920 1.0263459\n\n\n\nInterpretation framework:\nEach one-year increase in age was associated with a ___-fold increase in odds of obesity (95% CI: lower to upper).\nHow to Interpret Confidence Intervals\n\nIf the CI includes 1 → not statistically significant\nIf the CI does not include 1 → statistically significant\nCIs communicate magnitude and uncertainty\n\nIn public health research, effect size and uncertainty matter more than p-values alone.",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Logistic Regression for Public Health</span>"
     ]
   },
   {
-    "objectID": "06b-log.html#predicted-probabilities",
-    "href": "06b-log.html#predicted-probabilities",
-    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "objectID": "07-log.html#predicted-probabilities",
+    "href": "07-log.html#predicted-probabilities",
+    "title": "Lesson 7: Logistic Regression for Public Health",
     "section": "6. Predicted Probabilities",
     "text": "6. Predicted Probabilities\nOdds ratios can be abstract.\nPublic health audiences often understand probabilities better.\n\nnew_ages &lt;- tibble(Age = c(20, 40, 60))\n\npredicted &lt;- predict(model, new_ages, type = \"response\")\n\ncbind(new_ages, predicted_probability = predicted)\n\n  Age predicted_probability\n1  20             0.1996715\n2  40             0.2868146\n3  60             0.3932998\n\n\ntype = \"response\" converts log-odds into probabilities.\n\nInterpretation Example\n\nIf predicted probability at age 20 = 0.18 → 18% probability of obesity\nIf predicted probability at age 60 = 0.34 → 34% probability of obesity\n\nNotice\n\nThe increase is nonlinear.\nPredicted values stay between 0 and 1.\nLogistic regression produces an S-shaped curve.",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Logistic Regression for Public Health</span>"
     ]
   },
   {
-    "objectID": "06b-log.html#visualizing-logistic-model",
-    "href": "06b-log.html#visualizing-logistic-model",
-    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "objectID": "07-log.html#visualizing-logistic-model",
+    "href": "07-log.html#visualizing-logistic-model",
+    "title": "Lesson 7: Logistic Regression for Public Health",
     "section": "7. Visualizing Logistic Model",
     "text": "7. Visualizing Logistic Model\n\nage_grid &lt;- tibble(Age = seq(min(df$Age), max(df$Age), length.out = 200))\n\nage_grid$prob &lt;- predict(model, age_grid, type = \"response\")\n\nggplot(df, \n       aes(\n         x = Age, \n         y = high_bmi\n         )) +\n  geom_point(alpha = 0.2) +\n  geom_line(data = age_grid, \n            aes(\n              Age, \n              prob), \n            linewidth = 1.2) +\n  labs(y = \"Probability of Obesity\",\n       title = \"Predicted Probability of Obesity by Age\")\n\n\n\n\n\n\n\n\nWhat to observe:\n\nPoints are binary (0 or 1).\nThe curve is smooth.\nProbability increases gradually.\nPredictions remain within logical bounds.\n\nLinear regression could predict probabilities below 0 or above 1. Logistic regression avoids that issue.",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Logistic Regression for Public Health</span>"
     ]
   },
   {
-    "objectID": "06b-log.html#odds-vs.-probability-concept-clarification",
-    "href": "06b-log.html#odds-vs.-probability-concept-clarification",
-    "title": "Lesson 6b: Logistic Regression for Public Health",
+    "objectID": "07-log.html#odds-vs.-probability-concept-clarification",
+    "href": "07-log.html#odds-vs.-probability-concept-clarification",
+    "title": "Lesson 7: Logistic Regression for Public Health",
     "section": "8. Odds vs. Probability (Concept Clarification)",
     "text": "8. Odds vs. Probability (Concept Clarification)\n\nPeople often confuse odds and probability.\n\nProbability is the chance that the event occurs. The range is 0 to 1.\nOdds are the probability of something divided by 1 minus that probability.\nSo, if the probability of something happening is 0.20, the the odds are (.20)/(1-.20) = (.20)/(.80) = .25.\nOdds can exceed 1, probability cannot.\n\nWhy Logistic Regression Uses Odds\n\nOdds range from 0 to infinity.\nLog(odds) ranges from negative infinity to positive infinity.\nThis makes the model mathematically stable.\n\nImportant:\n\nOdds ratio ≠ risk ratio.\nAn OR of 2 does not mean “twice as likely” unless the outcome is rare.\n\n\n\n9. Public Health Interpretation\nAvoid:\n\n“Age causes obesity.”\n“Risk doubles.”\n\nUse:\n\n“Age was associated with higher odds of obesity.”\n“After adjustment, age remained independently associated with obesity.”\n\n\nLimitations to Consider\n\nCross-sectional data cannot establish causality.\nMeasurement error may bias results.\nResidual confounding may remain.\nSurvey design limitations may affect inference.\n\n\n\nLogistic Regression Assumptions (Introductory)\n\nIndependent observations\nCorrect link function\nNo severe multicollinearity\nAdequate sample size",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 6b: Logistic Regression for Public Health</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lesson 7: Logistic Regression for Public Health</span>"
     ]
   },
   {
-    "objectID": "07-mlr.html",
-    "href": "07-mlr.html",
-    "title": "Lesson 7: Multiple Linear Regression",
+    "objectID": "08-mlr.html",
+    "href": "08-mlr.html",
+    "title": "Lesson 8: Multiple Linear Regression",
     "section": "",
     "text": "Purpose of this lesson\nThis lesson introduces multiple linear regression, which allows us to examine the association between a numeric outcome and multiple predictors at the same time. In public health, this is commonly used to estimate adjusted associations, meaning the association between a predictor and an outcome while holding other variables constant.\nThe focus today is interpretation: how to read output, how to write results in plain language, and how to avoid causal claims when the study design is observational.",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 8: Multiple Linear Regression</span>"
     ]
   },
   {
-    "objectID": "07-mlr.html#learning-goals",
-    "href": "07-mlr.html#learning-goals",
-    "title": "Lesson 7: Multiple Linear Regression",
+    "objectID": "08-mlr.html#learning-goals",
+    "href": "08-mlr.html#learning-goals",
+    "title": "Lesson 8: Multiple Linear Regression",
     "section": "Learning goals",
     "text": "Learning goals\nBy the end of this lesson, you will be able to:\n\nExplain why multiple regression is used in public health\nFit a multiple linear regression model using lm()\nInterpret an adjusted slope (“holding other variables constant”)\nInterpret categorical predictors using a reference group\nCompare a simple model vs an adjusted model\nReport regression results using inline R code in Quarto",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 8: Multiple Linear Regression</span>"
     ]
   },
   {
-    "objectID": "07-mlr.html#setup",
-    "href": "07-mlr.html#setup",
-    "title": "Lesson 7: Multiple Linear Regression",
+    "objectID": "08-mlr.html#setup",
+    "href": "08-mlr.html#setup",
+    "title": "Lesson 8: Multiple Linear Regression",
     "section": "Setup",
-    "text": "Setup\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(broom)\nlibrary(NHANES)\n\n\nThe Dataset\n\ndata(\"NHANES\")\nglimpse(NHANES)\n\nRows: 10,000\nColumns: 76\n$ ID               &lt;int&gt; 51624, 51624, 51624, 51625, 51630, 51638, 51646, 5164…\n$ SurveyYr         &lt;fct&gt; 2009_10, 2009_10, 2009_10, 2009_10, 2009_10, 2009_10,…\n$ Gender           &lt;fct&gt; male, male, male, male, female, male, male, female, f…\n$ Age              &lt;int&gt; 34, 34, 34, 4, 49, 9, 8, 45, 45, 45, 66, 58, 54, 10, …\n$ AgeDecade        &lt;fct&gt;  30-39,  30-39,  30-39,  0-9,  40-49,  0-9,  0-9,  40…\n$ AgeMonths        &lt;int&gt; 409, 409, 409, 49, 596, 115, 101, 541, 541, 541, 795,…\n$ Race1            &lt;fct&gt; White, White, White, Other, White, White, White, Whit…\n$ Race3            &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Education        &lt;fct&gt; High School, High School, High School, NA, Some Colle…\n$ MaritalStatus    &lt;fct&gt; Married, Married, Married, NA, LivePartner, NA, NA, M…\n$ HHIncome         &lt;fct&gt; 25000-34999, 25000-34999, 25000-34999, 20000-24999, 3…\n$ HHIncomeMid      &lt;int&gt; 30000, 30000, 30000, 22500, 40000, 87500, 60000, 8750…\n$ Poverty          &lt;dbl&gt; 1.36, 1.36, 1.36, 1.07, 1.91, 1.84, 2.33, 5.00, 5.00,…\n$ HomeRooms        &lt;int&gt; 6, 6, 6, 9, 5, 6, 7, 6, 6, 6, 5, 10, 6, 10, 10, 4, 3,…\n$ HomeOwn          &lt;fct&gt; Own, Own, Own, Own, Rent, Rent, Own, Own, Own, Own, O…\n$ Work             &lt;fct&gt; NotWorking, NotWorking, NotWorking, NA, NotWorking, N…\n$ Weight           &lt;dbl&gt; 87.4, 87.4, 87.4, 17.0, 86.7, 29.8, 35.2, 75.7, 75.7,…\n$ Length           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ HeadCirc         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Height           &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.…\n$ BMI              &lt;dbl&gt; 32.22, 32.22, 32.22, 15.30, 30.57, 16.82, 20.64, 27.2…\n$ BMICatUnder20yrs &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ BMI_WHO          &lt;fct&gt; 30.0_plus, 30.0_plus, 30.0_plus, 12.0_18.5, 30.0_plus…\n$ Pulse            &lt;int&gt; 70, 70, 70, NA, 86, 82, 72, 62, 62, 62, 60, 62, 76, 8…\n$ BPSysAve         &lt;int&gt; 113, 113, 113, NA, 112, 86, 107, 118, 118, 118, 111, …\n$ BPDiaAve         &lt;int&gt; 85, 85, 85, NA, 75, 47, 37, 64, 64, 64, 63, 74, 85, 6…\n$ BPSys1           &lt;int&gt; 114, 114, 114, NA, 118, 84, 114, 106, 106, 106, 124, …\n$ BPDia1           &lt;int&gt; 88, 88, 88, NA, 82, 50, 46, 62, 62, 62, 64, 76, 86, 6…\n$ BPSys2           &lt;int&gt; 114, 114, 114, NA, 108, 84, 108, 118, 118, 118, 108, …\n$ BPDia2           &lt;int&gt; 88, 88, 88, NA, 74, 50, 36, 68, 68, 68, 62, 72, 88, 6…\n$ BPSys3           &lt;int&gt; 112, 112, 112, NA, 116, 88, 106, 118, 118, 118, 114, …\n$ BPDia3           &lt;int&gt; 82, 82, 82, NA, 76, 44, 38, 60, 60, 60, 64, 76, 82, 7…\n$ Testosterone     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ DirectChol       &lt;dbl&gt; 1.29, 1.29, 1.29, NA, 1.16, 1.34, 1.55, 2.12, 2.12, 2…\n$ TotChol          &lt;dbl&gt; 3.49, 3.49, 3.49, NA, 6.70, 4.86, 4.09, 5.82, 5.82, 5…\n$ UrineVol1        &lt;int&gt; 352, 352, 352, NA, 77, 123, 238, 106, 106, 106, 113, …\n$ UrineFlow1       &lt;dbl&gt; NA, NA, NA, NA, 0.094, 1.538, 1.322, 1.116, 1.116, 1.…\n$ UrineVol2        &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ UrineFlow2       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Diabetes         &lt;fct&gt; No, No, No, No, No, No, No, No, No, No, No, No, No, N…\n$ DiabetesAge      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ HealthGen        &lt;fct&gt; Good, Good, Good, NA, Good, NA, NA, Vgood, Vgood, Vgo…\n$ DaysPhysHlthBad  &lt;int&gt; 0, 0, 0, NA, 0, NA, NA, 0, 0, 0, 10, 0, 4, NA, NA, 0,…\n$ DaysMentHlthBad  &lt;int&gt; 15, 15, 15, NA, 10, NA, NA, 3, 3, 3, 0, 0, 0, NA, NA,…\n$ LittleInterest   &lt;fct&gt; Most, Most, Most, NA, Several, NA, NA, None, None, No…\n$ Depressed        &lt;fct&gt; Several, Several, Several, NA, Several, NA, NA, None,…\n$ nPregnancies     &lt;int&gt; NA, NA, NA, NA, 2, NA, NA, 1, 1, 1, NA, NA, NA, NA, N…\n$ nBabies          &lt;int&gt; NA, NA, NA, NA, 2, NA, NA, NA, NA, NA, NA, NA, NA, NA…\n$ Age1stBaby       &lt;int&gt; NA, NA, NA, NA, 27, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ SleepHrsNight    &lt;int&gt; 4, 4, 4, NA, 8, NA, NA, 8, 8, 8, 7, 5, 4, NA, 5, 7, N…\n$ SleepTrouble     &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, No, No, No, No, No, Y…\n$ PhysActive       &lt;fct&gt; No, No, No, NA, No, NA, NA, Yes, Yes, Yes, Yes, Yes, …\n$ PhysActiveDays   &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, 5, 5, 5, 7, 5, 1, NA, 2, …\n$ TVHrsDay         &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ CompHrsDay       &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ TVHrsDayChild    &lt;int&gt; NA, NA, NA, 4, NA, 5, 1, NA, NA, NA, NA, NA, NA, 4, N…\n$ CompHrsDayChild  &lt;int&gt; NA, NA, NA, 1, NA, 0, 6, NA, NA, NA, NA, NA, NA, 3, N…\n$ Alcohol12PlusYr  &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, Yes, Yes, Yes, Yes, Y…\n$ AlcoholDay       &lt;int&gt; NA, NA, NA, NA, 2, NA, NA, 3, 3, 3, 1, 2, 6, NA, NA, …\n$ AlcoholYear      &lt;int&gt; 0, 0, 0, NA, 20, NA, NA, 52, 52, 52, 100, 104, 364, N…\n$ SmokeNow         &lt;fct&gt; No, No, No, NA, Yes, NA, NA, NA, NA, NA, No, NA, NA, …\n$ Smoke100         &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, No, No, No, Yes, No, …\n$ Smoke100n        &lt;fct&gt; Smoker, Smoker, Smoker, NA, Smoker, NA, NA, Non-Smoke…\n$ SmokeAge         &lt;int&gt; 18, 18, 18, NA, 38, NA, NA, NA, NA, NA, 13, NA, NA, N…\n$ Marijuana        &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, Yes, Yes, Yes, NA, Ye…\n$ AgeFirstMarij    &lt;int&gt; 17, 17, 17, NA, 18, NA, NA, 13, 13, 13, NA, 19, 15, N…\n$ RegularMarij     &lt;fct&gt; No, No, No, NA, No, NA, NA, No, No, No, NA, Yes, Yes,…\n$ AgeRegMarij      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 20, 15, N…\n$ HardDrugs        &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, No, No, No, No, Yes, …\n$ SexEver          &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, Yes, Yes, Yes, Yes, Y…\n$ SexAge           &lt;int&gt; 16, 16, 16, NA, 12, NA, NA, 13, 13, 13, 17, 22, 12, N…\n$ SexNumPartnLife  &lt;int&gt; 8, 8, 8, NA, 10, NA, NA, 20, 20, 20, 15, 7, 100, NA, …\n$ SexNumPartYear   &lt;int&gt; 1, 1, 1, NA, 1, NA, NA, 0, 0, 0, NA, 1, 1, NA, NA, 1,…\n$ SameSex          &lt;fct&gt; No, No, No, NA, Yes, NA, NA, Yes, Yes, Yes, No, No, N…\n$ SexOrientation   &lt;fct&gt; Heterosexual, Heterosexual, Heterosexual, NA, Heteros…\n$ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n\n\n\n\nOutcome and Predictors\nFor this lesson we will use:\n\nOutcome (Y): BMI\nPredictors (X):\n\nAge (numeric)\nGender (categorical)\nRace1 (categorical)\n\n\nWe will see how adding predictors changes interpretation.",
+    "text": "Setup\n\nlibrary(tidyverse)\n\nWarning: package 'dplyr' was built under R version 4.5.1\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.2.0     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(broom)\nlibrary(NHANES)\n\n\nThe Dataset\n\ndata(\"NHANES\")\nglimpse(NHANES)\n\nRows: 10,000\nColumns: 76\n$ ID               &lt;int&gt; 51624, 51624, 51624, 51625, 51630, 51638, 51646, 5164…\n$ SurveyYr         &lt;fct&gt; 2009_10, 2009_10, 2009_10, 2009_10, 2009_10, 2009_10,…\n$ Gender           &lt;fct&gt; male, male, male, male, female, male, male, female, f…\n$ Age              &lt;int&gt; 34, 34, 34, 4, 49, 9, 8, 45, 45, 45, 66, 58, 54, 10, …\n$ AgeDecade        &lt;fct&gt;  30-39,  30-39,  30-39,  0-9,  40-49,  0-9,  0-9,  40…\n$ AgeMonths        &lt;int&gt; 409, 409, 409, 49, 596, 115, 101, 541, 541, 541, 795,…\n$ Race1            &lt;fct&gt; White, White, White, Other, White, White, White, Whit…\n$ Race3            &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Education        &lt;fct&gt; High School, High School, High School, NA, Some Colle…\n$ MaritalStatus    &lt;fct&gt; Married, Married, Married, NA, LivePartner, NA, NA, M…\n$ HHIncome         &lt;fct&gt; 25000-34999, 25000-34999, 25000-34999, 20000-24999, 3…\n$ HHIncomeMid      &lt;int&gt; 30000, 30000, 30000, 22500, 40000, 87500, 60000, 8750…\n$ Poverty          &lt;dbl&gt; 1.36, 1.36, 1.36, 1.07, 1.91, 1.84, 2.33, 5.00, 5.00,…\n$ HomeRooms        &lt;int&gt; 6, 6, 6, 9, 5, 6, 7, 6, 6, 6, 5, 10, 6, 10, 10, 4, 3,…\n$ HomeOwn          &lt;fct&gt; Own, Own, Own, Own, Rent, Rent, Own, Own, Own, Own, O…\n$ Work             &lt;fct&gt; NotWorking, NotWorking, NotWorking, NA, NotWorking, N…\n$ Weight           &lt;dbl&gt; 87.4, 87.4, 87.4, 17.0, 86.7, 29.8, 35.2, 75.7, 75.7,…\n$ Length           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ HeadCirc         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Height           &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.…\n$ BMI              &lt;dbl&gt; 32.22, 32.22, 32.22, 15.30, 30.57, 16.82, 20.64, 27.2…\n$ BMICatUnder20yrs &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ BMI_WHO          &lt;fct&gt; 30.0_plus, 30.0_plus, 30.0_plus, 12.0_18.5, 30.0_plus…\n$ Pulse            &lt;int&gt; 70, 70, 70, NA, 86, 82, 72, 62, 62, 62, 60, 62, 76, 8…\n$ BPSysAve         &lt;int&gt; 113, 113, 113, NA, 112, 86, 107, 118, 118, 118, 111, …\n$ BPDiaAve         &lt;int&gt; 85, 85, 85, NA, 75, 47, 37, 64, 64, 64, 63, 74, 85, 6…\n$ BPSys1           &lt;int&gt; 114, 114, 114, NA, 118, 84, 114, 106, 106, 106, 124, …\n$ BPDia1           &lt;int&gt; 88, 88, 88, NA, 82, 50, 46, 62, 62, 62, 64, 76, 86, 6…\n$ BPSys2           &lt;int&gt; 114, 114, 114, NA, 108, 84, 108, 118, 118, 118, 108, …\n$ BPDia2           &lt;int&gt; 88, 88, 88, NA, 74, 50, 36, 68, 68, 68, 62, 72, 88, 6…\n$ BPSys3           &lt;int&gt; 112, 112, 112, NA, 116, 88, 106, 118, 118, 118, 114, …\n$ BPDia3           &lt;int&gt; 82, 82, 82, NA, 76, 44, 38, 60, 60, 60, 64, 76, 82, 7…\n$ Testosterone     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ DirectChol       &lt;dbl&gt; 1.29, 1.29, 1.29, NA, 1.16, 1.34, 1.55, 2.12, 2.12, 2…\n$ TotChol          &lt;dbl&gt; 3.49, 3.49, 3.49, NA, 6.70, 4.86, 4.09, 5.82, 5.82, 5…\n$ UrineVol1        &lt;int&gt; 352, 352, 352, NA, 77, 123, 238, 106, 106, 106, 113, …\n$ UrineFlow1       &lt;dbl&gt; NA, NA, NA, NA, 0.094, 1.538, 1.322, 1.116, 1.116, 1.…\n$ UrineVol2        &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ UrineFlow2       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Diabetes         &lt;fct&gt; No, No, No, No, No, No, No, No, No, No, No, No, No, N…\n$ DiabetesAge      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ HealthGen        &lt;fct&gt; Good, Good, Good, NA, Good, NA, NA, Vgood, Vgood, Vgo…\n$ DaysPhysHlthBad  &lt;int&gt; 0, 0, 0, NA, 0, NA, NA, 0, 0, 0, 10, 0, 4, NA, NA, 0,…\n$ DaysMentHlthBad  &lt;int&gt; 15, 15, 15, NA, 10, NA, NA, 3, 3, 3, 0, 0, 0, NA, NA,…\n$ LittleInterest   &lt;fct&gt; Most, Most, Most, NA, Several, NA, NA, None, None, No…\n$ Depressed        &lt;fct&gt; Several, Several, Several, NA, Several, NA, NA, None,…\n$ nPregnancies     &lt;int&gt; NA, NA, NA, NA, 2, NA, NA, 1, 1, 1, NA, NA, NA, NA, N…\n$ nBabies          &lt;int&gt; NA, NA, NA, NA, 2, NA, NA, NA, NA, NA, NA, NA, NA, NA…\n$ Age1stBaby       &lt;int&gt; NA, NA, NA, NA, 27, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ SleepHrsNight    &lt;int&gt; 4, 4, 4, NA, 8, NA, NA, 8, 8, 8, 7, 5, 4, NA, 5, 7, N…\n$ SleepTrouble     &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, No, No, No, No, No, Y…\n$ PhysActive       &lt;fct&gt; No, No, No, NA, No, NA, NA, Yes, Yes, Yes, Yes, Yes, …\n$ PhysActiveDays   &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, 5, 5, 5, 7, 5, 1, NA, 2, …\n$ TVHrsDay         &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ CompHrsDay       &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ TVHrsDayChild    &lt;int&gt; NA, NA, NA, 4, NA, 5, 1, NA, NA, NA, NA, NA, NA, 4, N…\n$ CompHrsDayChild  &lt;int&gt; NA, NA, NA, 1, NA, 0, 6, NA, NA, NA, NA, NA, NA, 3, N…\n$ Alcohol12PlusYr  &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, Yes, Yes, Yes, Yes, Y…\n$ AlcoholDay       &lt;int&gt; NA, NA, NA, NA, 2, NA, NA, 3, 3, 3, 1, 2, 6, NA, NA, …\n$ AlcoholYear      &lt;int&gt; 0, 0, 0, NA, 20, NA, NA, 52, 52, 52, 100, 104, 364, N…\n$ SmokeNow         &lt;fct&gt; No, No, No, NA, Yes, NA, NA, NA, NA, NA, No, NA, NA, …\n$ Smoke100         &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, No, No, No, Yes, No, …\n$ Smoke100n        &lt;fct&gt; Smoker, Smoker, Smoker, NA, Smoker, NA, NA, Non-Smoke…\n$ SmokeAge         &lt;int&gt; 18, 18, 18, NA, 38, NA, NA, NA, NA, NA, 13, NA, NA, N…\n$ Marijuana        &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, Yes, Yes, Yes, NA, Ye…\n$ AgeFirstMarij    &lt;int&gt; 17, 17, 17, NA, 18, NA, NA, 13, 13, 13, NA, 19, 15, N…\n$ RegularMarij     &lt;fct&gt; No, No, No, NA, No, NA, NA, No, No, No, NA, Yes, Yes,…\n$ AgeRegMarij      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, 20, 15, N…\n$ HardDrugs        &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, No, No, No, No, Yes, …\n$ SexEver          &lt;fct&gt; Yes, Yes, Yes, NA, Yes, NA, NA, Yes, Yes, Yes, Yes, Y…\n$ SexAge           &lt;int&gt; 16, 16, 16, NA, 12, NA, NA, 13, 13, 13, 17, 22, 12, N…\n$ SexNumPartnLife  &lt;int&gt; 8, 8, 8, NA, 10, NA, NA, 20, 20, 20, 15, 7, 100, NA, …\n$ SexNumPartYear   &lt;int&gt; 1, 1, 1, NA, 1, NA, NA, 0, 0, 0, NA, 1, 1, NA, NA, 1,…\n$ SameSex          &lt;fct&gt; No, No, No, NA, Yes, NA, NA, Yes, Yes, Yes, No, No, N…\n$ SexOrientation   &lt;fct&gt; Heterosexual, Heterosexual, Heterosexual, NA, Heteros…\n$ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n\n\n\n\nOutcome and Predictors\nFor this lesson we will use:\n\nOutcome (Y): BMI\nPredictors (X):\n\nAge (numeric)\nGender (categorical)\nRace1 (categorical)\n\n\nWe will see how adding predictors changes interpretation.",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 8: Multiple Linear Regression</span>"
     ]
   },
   {
-    "objectID": "07-mlr.html#data-preparation",
-    "href": "07-mlr.html#data-preparation",
-    "title": "Lesson 7: Multiple Linear Regression",
+    "objectID": "08-mlr.html#data-preparation",
+    "href": "08-mlr.html#data-preparation",
+    "title": "Lesson 8: Multiple Linear Regression",
     "section": "Data Preparation",
     "text": "Data Preparation\n\ndf &lt;- NHANES %&gt;%\n  select(BMI, Age, Gender, Race1) %&gt;%\n  drop_na()\n\ndf %&gt;% glimpse()\n\nRows: 9,634\nColumns: 4\n$ BMI    &lt;dbl&gt; 32.22, 32.22, 32.22, 15.30, 30.57, 16.82, 20.64, 27.24, 27.24, …\n$ Age    &lt;int&gt; 34, 34, 34, 4, 49, 9, 8, 45, 45, 45, 66, 58, 54, 10, 58, 50, 9,…\n$ Gender &lt;fct&gt; male, male, male, male, female, male, male, female, female, fem…\n$ Race1  &lt;fct&gt; White, White, White, Other, White, White, White, White, White, …",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 8: Multiple Linear Regression</span>"
     ]
   },
   {
-    "objectID": "07-mlr.html#quick-checks",
-    "href": "07-mlr.html#quick-checks",
-    "title": "Lesson 7: Multiple Linear Regression",
+    "objectID": "08-mlr.html#quick-checks",
+    "href": "08-mlr.html#quick-checks",
+    "title": "Lesson 8: Multiple Linear Regression",
     "section": "Quick Checks",
     "text": "Quick Checks\n\nScatterplot\n\nscatter_df &lt;- ggplot(df, \n                     aes(x = Age, \n                         y = BMI\n                         )) +\n  geom_point(alpha = 0.25) +\n  labs(\n    title = \"BMI vs Age (NHANES)\",\n    x = \"Age (years)\",\n    y = \"BMI\"\n  )\n\nscatter_df\n\n\n\n\n\n\n\n\n\n\nGroup Comparison (BMI by Gender)\n\nboxplot_df &lt;- ggplot(df, \n                     aes(x = Gender, \n                         y = BMI\n                         )) +\n  geom_boxplot() +\n  labs(\n    title = \"BMI by Gender (NHANES)\",\n    x = \"Gender\",\n    y = \"BMI\"\n  )\n\nboxplot_df\n\n\n\n\n\n\n\n\n\n\nInterpretations\nWhat do you see?",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 8: Multiple Linear Regression</span>"
     ]
   },
   {
-    "objectID": "07-mlr.html#fit-simple-model",
-    "href": "07-mlr.html#fit-simple-model",
-    "title": "Lesson 7: Multiple Linear Regression",
+    "objectID": "08-mlr.html#fit-simple-model",
+    "href": "08-mlr.html#fit-simple-model",
+    "title": "Lesson 8: Multiple Linear Regression",
     "section": "Fit Simple Model",
     "text": "Fit Simple Model\nLet’s start with a simple regression of BMI on Age.\n\nm1 &lt;- lm(BMI ~ Age, data = df)\nsummary(m1)\n\n\nCall:\nlm(formula = BMI ~ Age, data = df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-16.794  -4.803  -1.236   3.466  55.697 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 21.451688   0.137193  156.36   &lt;2e-16 ***\nAge          0.138033   0.003148   43.84   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 6.735 on 9632 degrees of freedom\nMultiple R-squared:  0.1664,    Adjusted R-squared:  0.1663 \nF-statistic:  1922 on 1 and 9632 DF,  p-value: &lt; 2.2e-16",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 8: Multiple Linear Regression</span>"
     ]
   },
   {
-    "objectID": "07-mlr.html#fit-multiple-regression-model",
-    "href": "07-mlr.html#fit-multiple-regression-model",
-    "title": "Lesson 7: Multiple Linear Regression",
+    "objectID": "08-mlr.html#fit-multiple-regression-model",
+    "href": "08-mlr.html#fit-multiple-regression-model",
+    "title": "Lesson 8: Multiple Linear Regression",
     "section": "Fit Multiple Regression Model",
     "text": "Fit Multiple Regression Model\n\nm2 &lt;- lm (BMI ~ Age + Gender + Race1, data = df)\nsummary(m2)\n\n\nCall:\nlm(formula = BMI ~ Age + Gender + Race1, data = df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-18.650  -4.688  -1.171   3.338  56.126 \n\nCoefficients:\n               Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   23.145435   0.236101  98.032  &lt; 2e-16 ***\nAge            0.142054   0.003184  44.613  &lt; 2e-16 ***\nGendermale     0.022571   0.136238   0.166    0.868    \nRace1Hispanic -1.442547   0.337861  -4.270 1.98e-05 ***\nRace1Mexican  -0.734311   0.292249  -2.513    0.012 *  \nRace1White    -2.222557   0.214599 -10.357  &lt; 2e-16 ***\nRace1Other    -3.426551   0.309443 -11.073  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 6.675 on 9627 degrees of freedom\nMultiple R-squared:  0.1816,    Adjusted R-squared:  0.1811 \nF-statistic:   356 on 6 and 9627 DF,  p-value: &lt; 2.2e-16",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 8: Multiple Linear Regression</span>"
     ]
   },
   {
-    "objectID": "07-mlr.html#interpretations-1",
-    "href": "07-mlr.html#interpretations-1",
-    "title": "Lesson 7: Multiple Linear Regression",
+    "objectID": "08-mlr.html#interpretations-1",
+    "href": "08-mlr.html#interpretations-1",
+    "title": "Lesson 8: Multiple Linear Regression",
     "section": "Interpretations",
     "text": "Interpretations\nYou learned in Lesson 6 how to interpret the outputs for Simple Linear Regressions. Now, let’s learn how to interpret Multiple Regression Coefficients.\nIn multiple regressions:\n\nThe coefficient for Age is interpreted as the association between Age and BMI holding Gender and Race1 constant.\nCoefficients for Gender and Race1 are interpreted as differences in mean BMI relative to a reference group, holding other variables constant.\n\n\nWhat does constant mean in this case?",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 8: Multiple Linear Regression</span>"
     ]
   },
   {
-    "objectID": "07-mlr.html#identifying-the-reference-groups",
-    "href": "07-mlr.html#identifying-the-reference-groups",
-    "title": "Lesson 7: Multiple Linear Regression",
+    "objectID": "08-mlr.html#identifying-the-reference-groups",
+    "href": "08-mlr.html#identifying-the-reference-groups",
+    "title": "Lesson 8: Multiple Linear Regression",
     "section": "Identifying the Reference Groups",
     "text": "Identifying the Reference Groups\nR will automatically choose a reference group for categorical variables (typically the first level alphabetically, unless re-leveled).\n\nWhat is a reference group?\n\nA reference group is the baseline categorical level omitted from the model, serving as a comparison point for dummy-coded predictors.\nInterpretation: The intercept represents the average outcome for the reference group, and coefficients for other levels represent the average difference compared to the reference.\n\nlevels(df$Gender)\n\n[1] \"female\" \"male\"  \n\nlevels(df$Race1)\n\n[1] \"Black\"    \"Hispanic\" \"Mexican\"  \"White\"    \"Other\"   \n\n\nIf you want to set a specific reference group:\n\n# Example only (do not run unless instructed):\nrefernece_df &lt;- df %&gt;%\n   mutate(\n     Gender = relevel(Gender, ref = \"female\"),\n     Race1  = relevel(Race1, ref = \"White\")\n   )\n\n\nExtract Key Results\n\ntidy_m2 &lt;- tidy(m2, conf.int = TRUE)\ntidy_m2\n\n# A tibble: 7 × 7\n  term          estimate std.error statistic  p.value conf.low conf.high\n  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)    23.1      0.236      98.0   0          22.7      23.6  \n2 Age             0.142    0.00318    44.6   0           0.136     0.148\n3 Gendermale      0.0226   0.136       0.166 8.68e- 1   -0.244     0.290\n4 Race1Hispanic  -1.44     0.338      -4.27  1.98e- 5   -2.10     -0.780\n5 Race1Mexican   -0.734    0.292      -2.51  1.20e- 2   -1.31     -0.161\n6 Race1White     -2.22     0.215     -10.4   5.27e-25   -2.64     -1.80 \n7 Race1Other     -3.43     0.309     -11.1   2.51e-28   -4.03     -2.82 \n\n# The tidy function will convert messy outputs and turn them into a tidy tibble.\n\n\n\nExtract the Age Coefficient and Confidence Interval\n\nage_row &lt;- tidy_m2 %&gt;% filter(term == \"Age\")\n\nage_slope &lt;- age_row %&gt;% pull(estimate)\nage_lo &lt;- age_row %&gt;% pull(conf.low)\nage_hi &lt;- age_row %&gt;% pull(conf.high)\nage_p  &lt;- age_row %&gt;% pull(p.value)\n\n\nWrite the results using inline coding.\n\nAfter adjusting for gender and race/ethnicity, BMI changed by an average of 0.142 units per one-year increase in age (95% CI: 0.136 to 0.148; p-value = 0).",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 8: Multiple Linear Regression</span>"
     ]
   },
   {
-    "objectID": "07-mlr.html#compare-the-simple-and-adjusted-models",
-    "href": "07-mlr.html#compare-the-simple-and-adjusted-models",
-    "title": "Lesson 7: Multiple Linear Regression",
+    "objectID": "08-mlr.html#compare-the-simple-and-adjusted-models",
+    "href": "08-mlr.html#compare-the-simple-and-adjusted-models",
+    "title": "Lesson 8: Multiple Linear Regression",
     "section": "Compare the Simple and Adjusted Models",
     "text": "Compare the Simple and Adjusted Models\n\ntidy(m1, conf.int = TRUE) %&gt;% filter(term == \"Age\")\n\n# A tibble: 1 × 7\n  term  estimate std.error statistic p.value conf.low conf.high\n  &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 Age      0.138   0.00315      43.8       0    0.132     0.144\n\ntidy(m2, conf.int = TRUE) %&gt;% filter(term == \"Age\")\n\n# A tibble: 1 × 7\n  term  estimate std.error statistic p.value conf.low conf.high\n  &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 Age      0.142   0.00318      44.6       0    0.136     0.148\n\n\n\nWrite your interpretation.\n\nMake sure to answer the following:\n\nDid the Age coefficient change from m1 to m2?\nWhat might explain the change? Any confounders?\nHow does “adjusted interpretation differ from the simple model interpretation?\n\n\nInterpret Categorical Predictors\nUse the following code to help you pick a categorical predictor from m2.\n\n# tidy_m2 %&gt;% filter(str_detect(term, \"Gender|Race1\"))\n\n\nWrite your interpretation.",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 7: Multiple Linear Regression</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lesson 8: Multiple Linear Regression</span>"
     ]
   },
   {
@@ -1957,6 +1967,1436 @@
     "text": "Submission Requirements\nSubmit:\n\nyour knitted report (word doc)\nyour .qmd source file\nyour 3MT slide",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Project 2: Cleaning & Preparing Health Data for Analysis (NHANES)</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html",
+    "href": "09-statinf.html",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "",
+    "text": "Overview\nStatistical inference helps us use data from a sample to learn about a larger population. In public health, we often do not have access to an entire population, so we rely on sample data to estimate population values and quantify uncertainty.\nIn this lesson, we will introduce the foundational ideas behind statistical inference, including sampling variability, standard error, simulation intuition, and the connection between observed data and uncertainty.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#learning-objectives",
+    "href": "09-statinf.html#learning-objectives",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this lesson, students will be able to:\n\nDefine statistical inference in the context of public health research\nExplain sampling variability and why sample estimates differ\nDefine and interpret the standard error\nUse simulation to build intuition about uncertainty\nExplain how confidence intervals connect data to uncertainty\nInterpret results from estimation procedures in plain language",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#assigned-readings",
+    "href": "09-statinf.html#assigned-readings",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Assigned Readings",
+    "text": "Assigned Readings\n\nOpenIntro Biostatistics, Chapter 3\nStatistical Inference via Data Science, Chapter 8: Estimation, Confidence Intervals, and Bootstrapping",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#what-is-statistical-inference",
+    "href": "09-statinf.html#what-is-statistical-inference",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "What Is Statistical Inference?",
+    "text": "What Is Statistical Inference?\nStatistical inference is the process of using sample data to draw conclusions about a population.\nFor example, researchers may want to estimate:\n\nthe average body mass index in a community\nthe proportion of adults who are up to date on cancer screening\nthe difference in blood pressure between two treatment groups\n\nBecause these values are usually unknown for the full population, we use sample statistics to estimate them.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#from-sample-to-population",
+    "href": "09-statinf.html#from-sample-to-population",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "From Sample to Population",
+    "text": "From Sample to Population\nA population is the full group we want to understand.\nA sample is the subset of that population that we actually observe.\nA parameter is a numerical summary of the population, such as a population mean or population proportion.\nA statistic is a numerical summary calculated from the sample, such as a sample mean or sample proportion.\nStatistical inference uses sample statistics to estimate unknown population parameters.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#sampling-variability",
+    "href": "09-statinf.html#sampling-variability",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Sampling Variability",
+    "text": "Sampling Variability\nOne of the most important ideas in inference is sampling variability.\nIf we take many different random samples from the same population, the sample results will not be exactly the same each time. This happens because each sample contains slightly different observations.\nThat natural variation from sample to sample is called sampling variability.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#why-sampling-variability-matters",
+    "href": "09-statinf.html#why-sampling-variability-matters",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Why Sampling Variability Matters",
+    "text": "Why Sampling Variability Matters\nSampling variability explains why we should not expect one sample statistic to equal the true population value exactly.\nIt also explains why we need tools like:\n\nstandard errors\nconfidence intervals\nbootstrap distributions\nhypothesis tests\n\nThese tools help us measure and communicate uncertainty.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#example-simulating-a-population",
+    "href": "09-statinf.html#example-simulating-a-population",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Example: Simulating a Population",
+    "text": "Example: Simulating a Population\nIn the example below, we create a population and repeatedly draw samples from it. Then we compute the sample mean for each sample.\n\nlibrary(tidyverse)\n\nWarning: package 'dplyr' was built under R version 4.5.1\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.2.0     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nset.seed(123)\n\npopulation &lt;- tibble(\n  value = rnorm(10000, mean = 50, sd = 10)\n)\n\nhead(population)\n\n# A tibble: 6 × 1\n  value\n  &lt;dbl&gt;\n1  44.4\n2  47.7\n3  65.6\n4  50.7\n5  51.3\n6  67.2",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#repeated-sampling",
+    "href": "09-statinf.html#repeated-sampling",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Repeated Sampling",
+    "text": "Repeated Sampling\nNow we take many random samples of size 50 and calculate the mean for each sample.\n\nset.seed(123)\n\nsample_means &lt;- replicate(1000, {\n  population |&gt;\n    slice_sample(n = 50) |&gt;\n    summarise(mean_value = mean(value)) |&gt;\n    pull(mean_value)\n})\n\nsample_means_df &lt;- tibble(sample_mean = sample_means)\n\nhead(sample_means_df)\n\n# A tibble: 6 × 1\n  sample_mean\n        &lt;dbl&gt;\n1        49.9\n2        47.5\n3        50.4\n4        51.0\n5        50.1\n6        50.4",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#visualizing-sampling-variability",
+    "href": "09-statinf.html#visualizing-sampling-variability",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Visualizing Sampling Variability",
+    "text": "Visualizing Sampling Variability\n\nggplot(sample_means_df, aes(x = sample_mean)) +\n  geom_histogram(bins = 30) +\n  labs(\n    title = \"Sampling Distribution of the Sample Mean\",\n    x = \"Sample Mean\",\n    y = \"Frequency\"\n  )",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#interpreting-the-plot",
+    "href": "09-statinf.html#interpreting-the-plot",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Interpreting the Plot",
+    "text": "Interpreting the Plot\nThis histogram shows the distribution of sample means across many repeated samples.\nNotice:\n\nthe sample means are not all identical\nmost sample means cluster around the true population mean\nsome sample means are a little higher or lower just by chance\n\nThis is sampling variability in action.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#the-standard-error",
+    "href": "09-statinf.html#the-standard-error",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "The Standard Error",
+    "text": "The Standard Error\nThe standard error tells us how much a sample statistic tends to vary from sample to sample.\nFor a sample mean, the standard error is often written as:\n\\[\nSE = \\frac{s}{\\sqrt{n}}\n\\]\nwhere:\n\n( s ) is the sample standard deviation\n( n ) is the sample size",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#interpreting-the-standard-error",
+    "href": "09-statinf.html#interpreting-the-standard-error",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Interpreting the Standard Error",
+    "text": "Interpreting the Standard Error\nA smaller standard error means the estimate is more precise.\nA larger standard error means the estimate is less precise.\nIn general:\n\nlarger samples produce smaller standard errors\nmore variability in the data produces larger standard errors",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#calculate-a-standard-error",
+    "href": "09-statinf.html#calculate-a-standard-error",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Calculate a Standard Error",
+    "text": "Calculate a Standard Error\n\nset.seed(456)\n\nsample_data &lt;- population |&gt;\n  slice_sample(n = 50)\n\nsample_mean &lt;- mean(sample_data$value)\nsample_sd &lt;- sd(sample_data$value)\nsample_n &lt;- nrow(sample_data)\nsample_se &lt;- sample_sd / sqrt(sample_n)\n\nsample_mean\n\n[1] 51.61875\n\nsample_sd\n\n[1] 10.79668\n\nsample_n\n\n[1] 50\n\nsample_se\n\n[1] 1.526882",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#plain-language-interpretation",
+    "href": "09-statinf.html#plain-language-interpretation",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Plain-Language Interpretation",
+    "text": "Plain-Language Interpretation\nThe sample mean is our estimate of the population mean.\nThe standard error tells us how much we would expect that estimate to change across repeated random samples of the same size.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#how-sample-size-affects-standard-error",
+    "href": "09-statinf.html#how-sample-size-affects-standard-error",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "How Sample Size Affects Standard Error",
+    "text": "How Sample Size Affects Standard Error\nLet us compare standard errors for different sample sizes.\n\nset.seed(789)\n\nget_se &lt;- function(n) {\n  samp &lt;- population |&gt;\n    slice_sample(n = n)\n  sd(samp$value) / sqrt(n)\n}\n\nse_50 &lt;- get_se(50)\nse_200 &lt;- get_se(200)\nse_500 &lt;- get_se(500)\n\ntibble(\n  sample_size = c(50, 200, 500),\n  standard_error = c(se_50, se_200, se_500)\n)\n\n# A tibble: 3 × 2\n  sample_size standard_error\n        &lt;dbl&gt;          &lt;dbl&gt;\n1          50          1.29 \n2         200          0.716\n3         500          0.460",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#interpretation-of-sample-size-comparison",
+    "href": "09-statinf.html#interpretation-of-sample-size-comparison",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Interpretation of Sample Size Comparison",
+    "text": "Interpretation of Sample Size Comparison\nAs the sample size increases, the standard error usually gets smaller.\nThis means larger samples tend to produce more stable and precise estimates.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#simulation-intuition",
+    "href": "09-statinf.html#simulation-intuition",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Simulation Intuition",
+    "text": "Simulation Intuition\nSometimes formulas can feel abstract. Simulation helps us build intuition by letting us see uncertainty directly.\nInstead of only calculating a standard error with a formula, we can simulate many samples and watch the estimate vary.\nThis helps students understand that uncertainty is not a flaw in the data. It is a natural part of working with samples.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#bootstrap-intuition",
+    "href": "09-statinf.html#bootstrap-intuition",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Bootstrap Intuition",
+    "text": "Bootstrap Intuition\nBootstrapping is a simulation-based method for estimating uncertainty.\nThe basic idea is:\n\nStart with your observed sample.\nResample from that sample with replacement many times.\nCalculate the statistic of interest for each resample.\nUse the resulting distribution to understand variability and build confidence intervals.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#bootstrap-example",
+    "href": "09-statinf.html#bootstrap-example",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Bootstrap Example",
+    "text": "Bootstrap Example\n\nlibrary(infer)\n\nWarning: package 'infer' was built under R version 4.5.1\n\nset.seed(101)\n\nboot_dist &lt;- sample_data |&gt;\n  specify(response = value) |&gt;\n  generate(reps = 1000, type = \"bootstrap\") |&gt;\n  calculate(stat = \"mean\")\n\nhead(boot_dist)\n\nResponse: value (numeric)\n# A tibble: 6 × 2\n  replicate  stat\n      &lt;int&gt; &lt;dbl&gt;\n1         1  55.3\n2         2  51.9\n3         3  49.3\n4         4  50.9\n5         5  50.2\n6         6  50.2",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#visualizing-the-bootstrap-distribution",
+    "href": "09-statinf.html#visualizing-the-bootstrap-distribution",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Visualizing the Bootstrap Distribution",
+    "text": "Visualizing the Bootstrap Distribution\n\nggplot(boot_dist, aes(x = stat)) +\n  geom_histogram(bins = 30) +\n  labs(\n    title = \"Bootstrap Distribution of the Sample Mean\",\n    x = \"Bootstrap Mean\",\n    y = \"Frequency\"\n  )",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#what-the-bootstrap-distribution-shows",
+    "href": "09-statinf.html#what-the-bootstrap-distribution-shows",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "What the Bootstrap Distribution Shows",
+    "text": "What the Bootstrap Distribution Shows\nThe bootstrap distribution shows the range of values we might reasonably get for the sample mean based on resampling from our observed data.\nThis gives us a practical way to estimate uncertainty even when formulas are harder to apply.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#confidence-intervals",
+    "href": "09-statinf.html#confidence-intervals",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Confidence Intervals",
+    "text": "Confidence Intervals\nA confidence interval gives a range of plausible values for a population parameter.\nA 95% confidence interval is often written as:\n\\[\n\\text{estimate} \\pm 1.96 \\times SE\n\\]\nThis is a common large-sample approximation for a mean.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#calculate-a-95-confidence-interval",
+    "href": "09-statinf.html#calculate-a-95-confidence-interval",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Calculate a 95% Confidence Interval",
+    "text": "Calculate a 95% Confidence Interval\n\nlower_ci &lt;- sample_mean - 1.96 * sample_se\nupper_ci &lt;- sample_mean + 1.96 * sample_se\n\ntibble(\n  estimate = sample_mean,\n  lower_ci = lower_ci,\n  upper_ci = upper_ci\n)\n\n# A tibble: 1 × 3\n  estimate lower_ci upper_ci\n     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1     51.6     48.6     54.6",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#interpreting-a-confidence-interval",
+    "href": "09-statinf.html#interpreting-a-confidence-interval",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Interpreting a Confidence Interval",
+    "text": "Interpreting a Confidence Interval\nA 95% confidence interval gives a range of plausible values for the true population mean.\nA correct interpretation is:\nWe are 95% confident that the true population mean lies between the lower and upper confidence limits.\nFor this sample, the interval is:\n48.63 to 54.61",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#important-note-about-confidence-intervals",
+    "href": "09-statinf.html#important-note-about-confidence-intervals",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Important Note About Confidence Intervals",
+    "text": "Important Note About Confidence Intervals\nA confidence interval does not mean that 95% of individual observations fall in that range.\nIt also does not mean there is a 95% probability that the fixed population parameter changes from sample to sample.\nInstead, it means that if we repeated this process many times, about 95% of similarly constructed intervals would capture the true population parameter.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#connecting-data-to-uncertainty",
+    "href": "09-statinf.html#connecting-data-to-uncertainty",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Connecting Data to Uncertainty",
+    "text": "Connecting Data to Uncertainty\nOne of the main goals of inference is to connect sample data to uncertainty in a transparent way.\nWhen we report only a single estimate, such as a sample mean, we are not showing how much that estimate could vary.\nWhen we report:\n\na standard error\na confidence interval\na bootstrap distribution\n\nwe give readers more information about the strength and precision of the estimate.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#public-health-example",
+    "href": "09-statinf.html#public-health-example",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Public Health Example",
+    "text": "Public Health Example\nSuppose a study estimates that 72% of women in a sample are up to date on screening.\nThat number is useful, but it is incomplete by itself.\nIf the study also reports a 95% confidence interval of 68% to 76%, we now understand that:\n\nthe estimate is not exact\nthere is sampling uncertainty\nthe true population value is plausibly somewhere in that interval\n\nThis is why uncertainty matters in public health decision-making.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#key-terms",
+    "href": "09-statinf.html#key-terms",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Key Terms",
+    "text": "Key Terms\n\n\n\n\n\n\n\nTerm\nDefinition\n\n\n\n\nPopulation\nThe full group of interest\n\n\nSample\nThe observed subset of the population\n\n\nParameter\nA numerical summary of a population\n\n\nStatistic\nA numerical summary of a sample\n\n\nSampling Variability\nThe natural variation in sample results from one sample to another\n\n\nStandard Error\nThe typical variability of a sample statistic across repeated samples\n\n\nBootstrap\nA resampling method used to estimate uncertainty\n\n\nConfidence Interval\nA range of plausible values for a population parameter",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#worked-example-summary",
+    "href": "09-statinf.html#worked-example-summary",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Worked Example Summary",
+    "text": "Worked Example Summary\nWe used a simulated population to show that:\n\ndifferent samples produce different means\nthe distribution of sample means reflects sampling variability\nthe standard error summarizes the variability of an estimate\nbootstrap methods provide a simulation-based way to estimate uncertainty\nconfidence intervals help communicate plausible values for the population parameter",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#practice-activity",
+    "href": "09-statinf.html#practice-activity",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Practice Activity",
+    "text": "Practice Activity\nUse the steps below to practice the ideas from this lesson.\n\nDraw a random sample of size 50 from a dataset.\nCalculate the sample mean.\nCalculate the standard deviation.\nCalculate the standard error.\nConstruct a 95% confidence interval.\nRepeat using a sample of size 200.\nCompare the standard errors and confidence interval widths.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#reflection-questions",
+    "href": "09-statinf.html#reflection-questions",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Reflection Questions",
+    "text": "Reflection Questions\nAnswer the following questions after completing the activity:\n\nWhy do sample estimates change from one sample to another?\nWhat does the standard error tell us?\nHow did increasing the sample size affect the standard error?\nHow did increasing the sample size affect the confidence interval?\nWhy is it important to report uncertainty in public health research?",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#common-misconceptions",
+    "href": "09-statinf.html#common-misconceptions",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Common Misconceptions",
+    "text": "Common Misconceptions\nHere are a few common misunderstandings to avoid:\n\nSampling variability does not mean the study was done incorrectly.\nA larger sample does not remove all uncertainty, but it usually reduces it.\nA confidence interval does not describe where most individual observations fall.\nBootstrapping does not create new data from the population; it resamples the observed sample.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#conclusion",
+    "href": "09-statinf.html#conclusion",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Conclusion",
+    "text": "Conclusion\nStatistical inference allows us to move from data to evidence-based conclusions about a larger population.\nBecause every sample is only one possible sample, all estimates come with uncertainty.\nSampling variability explains why estimates differ, the standard error quantifies that variability, simulation helps us visualize it, and confidence intervals help us communicate it clearly.\nThese ideas form the foundation for later topics such as hypothesis testing, p-values, and statistical modeling.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "09-statinf.html#looking-ahead",
+    "href": "09-statinf.html#looking-ahead",
+    "title": "Lesson 9: Introduction to Statistical Inference",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nIn the next lesson, we will build on these ideas by introducing hypothesis testing, p-values, and the logic of decision-making under uncertainty.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Lesson 9: Introduction to Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html",
+    "href": "10-confint.html",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "",
+    "text": "Overview\nConfidence intervals are one of the most important tools in statistical inference. They allow us to move beyond a single estimate and instead communicate a range of plausible values for a population parameter.\nIn this lesson, we focus less on calculation and more on interpretation, logic, and communication, which are essential skills in public health and data science.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#learning-objectives",
+    "href": "10-confint.html#learning-objectives",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this lesson, students will be able to:\n\nExplain the logic behind confidence intervals\nInterpret confidence intervals in plain language\nDistinguish correct vs incorrect interpretations\nCommunicate uncertainty effectively in public health contexts\nConnect confidence intervals to hypothesis testing concepts",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#assigned-readings",
+    "href": "10-confint.html#assigned-readings",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Assigned Readings",
+    "text": "Assigned Readings\n\nOpenIntro Biostatistics, Chapter 4\n\nStatistical Inference via Data Science, Chapter 9: Hypothesis Testing",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#what-is-a-confidence-interval",
+    "href": "10-confint.html#what-is-a-confidence-interval",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "What Is a Confidence Interval?",
+    "text": "What Is a Confidence Interval?\nA confidence interval (CI) provides a range of plausible values for a population parameter.\nInstead of reporting:\n\n“The mean BMI is 27.3”\n\nwe report:\n\n“The mean BMI is 27.3 (95% CI: 26.5 to 28.1)”",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#interval-logic",
+    "href": "10-confint.html#interval-logic",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Interval Logic",
+    "text": "Interval Logic\nConfidence intervals are built on three key components:\n\nEstimate (sample statistic)\nStandard Error (variability)\nCritical Value (confidence level)\n\nMathematically:\n\\[\n\\text{Estimate} \\pm \\text{Critical Value} \\times SE\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#why-intervals-matter",
+    "href": "10-confint.html#why-intervals-matter",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Why Intervals Matter",
+    "text": "Why Intervals Matter\nA single number does not show uncertainty.\nConfidence intervals:\n\nshow precision of estimates\n\nreflect sampling variability\n\nprovide context for decision-making",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#visualizing-uncertainty",
+    "href": "10-confint.html#visualizing-uncertainty",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Visualizing Uncertainty",
+    "text": "Visualizing Uncertainty\n\nlibrary(tidyverse)\n\nWarning: package 'dplyr' was built under R version 4.5.1\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.2.0     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nset.seed(123)\n\n# Simulate many confidence intervals\ntrue_mean &lt;- 50\npopulation &lt;- rnorm(10000, mean = true_mean, sd = 10)\n\nci_sim &lt;- replicate(100, {\n  samp &lt;- sample(population, 50)\n  m &lt;- mean(samp)\n  se &lt;- sd(samp)/sqrt(50)\n  lower &lt;- m - 1.96 * se\n  upper &lt;- m + 1.96 * se\n  c(lower, upper)\n})\n\nci_df &lt;- as.data.frame(t(ci_sim))\nnames(ci_df) &lt;- c(\"lower\", \"upper\")\nci_df$id &lt;- 1:nrow(ci_df)\nci_df$contains_true &lt;- ci_df$lower &lt;= true_mean & ci_df$upper &gt;= true_mean\n\nhead(ci_df)\n\n     lower    upper id contains_true\n1 47.29454 53.13681  1          TRUE\n2 46.60280 52.71860  2          TRUE\n3 47.78533 52.12986  3          TRUE\n4 45.76855 51.46971  4          TRUE\n5 49.58307 55.63141  5          TRUE\n6 46.82376 52.55915  6          TRUE",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#plotting-confidence-intervals",
+    "href": "10-confint.html#plotting-confidence-intervals",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Plotting Confidence Intervals",
+    "text": "Plotting Confidence Intervals\n\nggplot(ci_df, aes(x = id, ymin = lower, ymax = upper, color = contains_true)) +\n  geom_linerange() +\n  geom_hline(yintercept = true_mean, linetype = \"dashed\") +\n  labs(\n    title = \"Simulated 95% Confidence Intervals\",\n    x = \"Sample\",\n    y = \"Confidence Interval\"\n  ) +\n  theme_minimal()",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#key-insight",
+    "href": "10-confint.html#key-insight",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Key Insight",
+    "text": "Key Insight\n\nMost intervals contain the true mean\n\nSome do not (about 5% for a 95% CI)\n\nThis is the meaning of “95% confidence”",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#correct-interpretation",
+    "href": "10-confint.html#correct-interpretation",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Correct Interpretation",
+    "text": "Correct Interpretation\nA correct interpretation is:\n\nWe are 95% confident that the true population parameter lies within this interval.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#what-95-confidence-really-means",
+    "href": "10-confint.html#what-95-confidence-really-means",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "What “95% Confidence” Really Means",
+    "text": "What “95% Confidence” Really Means\nIf we repeated the sampling process many times:\n\n95% of constructed intervals would contain the true parameter\n\n5% would miss it",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#common-incorrect-interpretations",
+    "href": "10-confint.html#common-incorrect-interpretations",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Common Incorrect Interpretations",
+    "text": "Common Incorrect Interpretations\n\n❌ “There is a 95% probability the true value is in this interval”\n❌ “95% of individuals fall within this range”\n❌ “The parameter changes from sample to sample”",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#interpreting-instead-of-calculating",
+    "href": "10-confint.html#interpreting-instead-of-calculating",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Interpreting Instead of Calculating",
+    "text": "Interpreting Instead of Calculating\nIn practice, you will often be given confidence intervals rather than calculating them.\nExample:\n\nOdds Ratio = 1.5 (95% CI: 1.2 to 1.9)\n\nInterpretation:\n\nThe exposure is associated with higher odds of the outcome\n\nThe interval does not include 1 → statistically significant\n\nThe plausible effect size ranges from 1.2 to 1.9",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#width-of-confidence-intervals",
+    "href": "10-confint.html#width-of-confidence-intervals",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Width of Confidence Intervals",
+    "text": "Width of Confidence Intervals\nThe width of a confidence interval depends on:\n\nSample size (larger → narrower)\n\nVariability (higher → wider)\n\nConfidence level (higher → wider)",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#demonstration-sample-size-effect",
+    "href": "10-confint.html#demonstration-sample-size-effect",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Demonstration: Sample Size Effect",
+    "text": "Demonstration: Sample Size Effect\n\nset.seed(456)\n\nget_ci_width &lt;- function(n) {\n  samp &lt;- sample(population, n)\n  se &lt;- sd(samp)/sqrt(n)\n  width &lt;- (1.96 * se) * 2\n  width\n}\n\ntibble(\n  sample_size = c(50, 200, 500),\n  ci_width = c(get_ci_width(50), get_ci_width(200), get_ci_width(500))\n)\n\n# A tibble: 3 × 2\n  sample_size ci_width\n        &lt;dbl&gt;    &lt;dbl&gt;\n1          50     5.99\n2         200     2.81\n3         500     1.83",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#communicating-uncertainty",
+    "href": "10-confint.html#communicating-uncertainty",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Communicating Uncertainty",
+    "text": "Communicating Uncertainty\nIn public health, it is essential to communicate uncertainty clearly.\nInstead of saying:\n\n“The intervention works”\n\nSay:\n\n“The intervention is associated with improved outcomes (95% CI: X to Y), suggesting a likely positive effect, though uncertainty remains.”",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#public-health-example",
+    "href": "10-confint.html#public-health-example",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Public Health Example",
+    "text": "Public Health Example\nSuppose:\n\nScreening rate = 72%\n\n95% CI = 68% to 76%\n\nInterpretation:\n\nThe true screening rate is likely between 68% and 76%\n\nThe estimate is reasonably precise\n\nPolicy decisions should consider this range",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#confidence-intervals-hypothesis-testing",
+    "href": "10-confint.html#confidence-intervals-hypothesis-testing",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Confidence Intervals & Hypothesis Testing",
+    "text": "Confidence Intervals & Hypothesis Testing\nConfidence intervals are closely related to hypothesis testing.\nKey connection:\n\nIf the CI excludes the null value → statistically significant\n\nIf the CI includes the null value → not statistically significant\n\nExamples:\n\n\n\nMeasure\nNull Value\n\n\n\n\nMean Difference\n0\n\n\nRisk Difference\n0\n\n\nOdds Ratio\n1\n\n\nRisk Ratio\n1",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#example-interpretation",
+    "href": "10-confint.html#example-interpretation",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Example Interpretation",
+    "text": "Example Interpretation\nIf:\n\nRisk Ratio = 1.3 (95% CI: 0.9 to 1.8)\n\nThen:\n\nCI includes 1 → not statistically significant\n\nEvidence is inconclusive",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#key-terms",
+    "href": "10-confint.html#key-terms",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Key Terms",
+    "text": "Key Terms\n\n\n\nTerm\nDefinition\n\n\n\n\nConfidence Interval\nRange of plausible values\n\n\nMargin of Error\nDistance from estimate to bounds\n\n\nPrecision\nNarrowness of interval\n\n\nStatistical Significance\nCI excludes null value\n\n\nNull Value\nValue representing no effect",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#practice-activity",
+    "href": "10-confint.html#practice-activity",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Practice Activity",
+    "text": "Practice Activity\n\nGiven a confidence interval, interpret it in plain language\n\nDetermine whether it is statistically significant\n\nIdentify whether the interval is wide or narrow\n\nExplain what that implies about precision",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#reflection-questions",
+    "href": "10-confint.html#reflection-questions",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Reflection Questions",
+    "text": "Reflection Questions\n\nWhy are confidence intervals more informative than single estimates?\n\nWhat does it mean when a confidence interval is wide?\n\nHow does sample size affect confidence intervals?\n\nWhy is correct interpretation important in public health?",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#common-mistakes-to-avoid",
+    "href": "10-confint.html#common-mistakes-to-avoid",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Common Mistakes to Avoid",
+    "text": "Common Mistakes to Avoid\n\nTreating CI as probability of parameter\n\nIgnoring width of interval\n\nOverstating certainty\n\nMisinterpreting statistical significance",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#conclusion",
+    "href": "10-confint.html#conclusion",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Conclusion",
+    "text": "Conclusion\nConfidence intervals provide a powerful way to communicate uncertainty.\nThey allow us to:\n\nquantify variability\n\ninterpret results meaningfully\n\nconnect estimation to decision-making\n\nUnderstanding how to interpret and communicate confidence intervals is essential for evidence-based public health practice.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "10-confint.html#looking-ahead",
+    "href": "10-confint.html#looking-ahead",
+    "title": "Lesson 10: Confidence Intervals & Uncertainty",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nNext lesson:\n\nHypothesis testing in depth\n\np-values\n\nType I and Type II errors\n\nDecision-making frameworks",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Lesson 10: Confidence Intervals & Uncertainty</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html",
+    "href": "project3.html",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "",
+    "text": "Project Overview\nIn this project, you will move from descriptive analysis into statistical modeling and inference using the NHANES dataset. You will select a health outcome and model its association with key predictors using regression tools from ModernDive and interpretation frameworks from OpenIntro Biostatistics.\nYour goal is to answer a meaningful public-health question such as:\nYour focus is not only on building models, but also on explaining what they mean in accessible and responsible language.\nThis project prepares you for your final manuscript, where modeling results will form the core of the Results section.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#project-overview",
+    "href": "project3.html#project-overview",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "",
+    "text": "How is hypertension risk patterned by age, BMI, smoking, and income?\nDo depression symptoms vary by socioeconomic status?\nHow does BMI differ across demographic groups?\nWhich factors predict fair/poor self-rated health?",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#dataset",
+    "href": "project3.html#dataset",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "Dataset",
+    "text": "Dataset\nYou will continue working with the NHANES dataset from the {NHANES} R package. You may build on your Project 2 analytic dataset or refine your variables further.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#learning-objectives",
+    "href": "project3.html#learning-objectives",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy completing this project, you will be able to:\n\nfit regression models in R\ninterpret model coefficients in context\nevaluate model fit and limitations\nperform simulation-based inference\ncommunicate uncertainty responsibly\npresent results in a manuscript-ready format",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#project-tasks",
+    "href": "project3.html#project-tasks",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "Project Tasks",
+    "text": "Project Tasks\nYour Quarto report must include the sections below.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#research-question",
+    "href": "project3.html#research-question",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "1. Research Question",
+    "text": "1. Research Question\nWrite 1 to 2 paragraphs that clearly state:\n\nyour outcome variable\nyour primary predictors of interest\nyour public-health motivation\nyour hypothesis, if applicable\n\n\nExample\nWe examine whether hypertension prevalence differs by age, BMI, and income. We hypothesize that hypertension risk increases with age and BMI, and that risk may differ by socioeconomic status.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#data-and-methods",
+    "href": "project3.html#data-and-methods",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "2. Data and Methods",
+    "text": "2. Data and Methods\nBriefly summarize:\n\nyour analytic sample\ninclusion and exclusion criteria\nvariables and coding decisions\nmissing-data handling\nanalysis approach\n\nYou should fit at least:\n\none linear regression model, or\none logistic regression model, depending on your outcome\n\nOptional additions are encouraged:\n\nmultiple regression\nan interaction term\nmodel comparison",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#model-results",
+    "href": "project3.html#model-results",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "3. Model Results",
+    "text": "3. Model Results\nInclude:\n\nmodel summary tables generated in R\nkey coefficients interpreted in plain language\nconfidence intervals or bootstrap-based intervals\nat least one visualization of modeled relationships\n\n\nExamples of acceptable visualizations\n\npredicted probabilities across age\na regression line with a confidence band\ngrouped means with confidence interval bars",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#inference-and-uncertainty",
+    "href": "project3.html#inference-and-uncertainty",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "4. Inference and Uncertainty",
+    "text": "4. Inference and Uncertainty\nDiscuss:\n\nwhat your results suggest\nwhat they do not prove\nuncertainty and sampling variability\npotential confounding\ncausal limits\n\nThis section should sound like applied epidemiology.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#public-health-interpretation",
+    "href": "project3.html#public-health-interpretation",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "5. Public-Health Interpretation",
+    "text": "5. Public-Health Interpretation\nExplain:\n\nequity implications\npopulation-health meaning\nwhich findings matter most\nreasonable next steps\n\nAvoid overstating conclusions.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#reflection",
+    "href": "project3.html#reflection",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "6. Reflection",
+    "text": "6. Reflection\nBriefly discuss:\n\nwhat was challenging\nwhat you learned\nhow modeling changed your understanding of the question",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#formatting-requirements",
+    "href": "project3.html#formatting-requirements",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "Formatting Requirements",
+    "text": "Formatting Requirements\nYour submission must:\n\nbe written fully in Quarto\ninclude inline code wherever possible\nknit successfully\nfollow professional writing standards\navoid jargon where possible\nbe approximately 1,200 to 1,800 words, excluding code",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#submission",
+    "href": "project3.html#submission",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "Submission",
+    "text": "Submission\nSubmit:\n\nthe knitted report as a word doc\nthe .qmd source file\nthe 3MT slide",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#ethics-note",
+    "href": "project3.html#ethics-note",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "Ethics Note",
+    "text": "Ethics Note\nNHANES includes variables tied to inequity and lived experience. Please write with sensitivity and respect.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project3.html#project-3-rubric",
+    "href": "project3.html#project-3-rubric",
+    "title": "Project 3: Modeling Health Outcomes Using Regression & Simulation",
+    "section": "Project 3 Rubric",
+    "text": "Project 3 Rubric\n\n1. Model Specification and Execution — 25 points\nAssesses correctness and appropriateness of modeling.\n\n22–25: Model(s) correctly specified; predictors appropriate; code accurate; workflow clear\n17–21: Minor mistakes, but overall valid\n12–16: Major misunderstandings or mis-specification\n0–11: Modeling incomplete or incorrect\n\n\n\n2. Statistical Interpretation — 20 points\nEvaluates how well results are explained.\n\n17–20: Coefficients interpreted accurately in context; uncertainty clearly described\n13–16: Mostly correct with small errors\n8–12: Limited or partially incorrect interpretation\n0–7: Interpretation largely incorrect or missing\n\n\n\n3. Presentation of Results — 15 points\nAssesses tables, figures, and clarity.\n\n13–15: Professional, clear tables and figures; helpful formatting; at least one modeled visualization\n10–12: Mostly clear with minor weaknesses\n6–9: Limited clarity or missing elements\n0–5: Poor or missing presentation\n\n\n\n4. Public-Health Insight and Critical Thinking — 15 points\nEvaluates meaning-making.\n\n13–15: Findings thoughtfully connected to health outcomes, inequity, and context\n10–12: Some meaningful interpretation\n6–9: Minimal depth\n0–5: No meaningful interpretation\n\n\n\n5. Transparency and Documentation — 10 points\nFocus on reproducible workflow.\n\n9–10: Coding choices clearly explained; methods understandable; rationale provided\n7–8: Mostly clear\n4–6: Some ambiguity\n0–3: Opaque workflow\n\n\n\n6. Writing Quality and Organization — 10 points\nEvaluates readability and structure.\n\n9–10: Clear, polished, professional writing\n7–8: Mostly clear with minor issues\n4–6: Some disorganization or unclear writing\n0–3: Difficult to follow\n\n\n\n7. Quarto and Reproducibility — 5 points\nRewards strong scientific reporting.\n\n5: Fully reproducible, cleanly structured, knits without error\n3–4: Minor issues\n1–2: Reproducibility inconsistent\n0: Not reproducible",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Project 3: Modeling Health Outcomes Using Regression & Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html",
+    "href": "11-hyptest.html",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "",
+    "text": "Overview\nHypothesis testing allows us to evaluate whether observed patterns in data are likely due to chance or reflect a real underlying relationship.\nIn this lesson, we take a simulation-first approach to hypothesis testing, emphasizing intuition, interpretation, and real-world biomedical framing rather than memorizing formulas.",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#learning-objectives",
+    "href": "11-hyptest.html#learning-objectives",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this lesson, students will be able to:\n\nExplain the logic of hypothesis testing using simulation\nDefine null and alternative hypotheses in public health contexts\nInterpret p-values as measures of evidence strength\nAvoid common misinterpretations of p-values\nApply hypothesis testing to real-world biomedical questions\nConnect hypothesis testing to regression inference",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#assigned-readings",
+    "href": "11-hyptest.html#assigned-readings",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Assigned Readings",
+    "text": "Assigned Readings\n\nOpenIntro Biostatistics, Chapter 5\n\nStatistical Inference via Data Science, Chapter 10: Inference for Regression",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#what-is-hypothesis-testing",
+    "href": "11-hyptest.html#what-is-hypothesis-testing",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "What Is Hypothesis Testing?",
+    "text": "What Is Hypothesis Testing?\nHypothesis testing is a framework used to evaluate whether observed data are consistent with a specific claim about a population.\nWe compare:\n\nwhat we observed in our data\nwhat we would expect under a null hypothesis",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#null-and-alternative-hypotheses",
+    "href": "11-hyptest.html#null-and-alternative-hypotheses",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Null and Alternative Hypotheses",
+    "text": "Null and Alternative Hypotheses\nThe null hypothesis (H₀) represents no effect or no association.\nThe alternative hypothesis (H₁ or Hₐ) represents a meaningful effect or association.\n\n\nExample (Public Health)\n\nH₀: There is no difference in screening rates between groups\n\nHₐ: There is a difference in screening rates between groups",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#simulation-first-thinking",
+    "href": "11-hyptest.html#simulation-first-thinking",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Simulation-First Thinking",
+    "text": "Simulation-First Thinking\nInstead of jumping straight to formulas, we ask:\n\nWhat would our data look like if the null hypothesis were true?\n\nWe then simulate many datasets under the null and compare our observed statistic to that distribution.",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#example-simulating-a-null-distribution",
+    "href": "11-hyptest.html#example-simulating-a-null-distribution",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Example: Simulating a Null Distribution",
+    "text": "Example: Simulating a Null Distribution\n\nlibrary(tidyverse)\n\nWarning: package 'dplyr' was built under R version 4.5.1\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.2.0     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nset.seed(123)\n\n# Create two groups with no real difference\ngroup &lt;- rep(c(\"A\", \"B\"), each = 50)\noutcome &lt;- rnorm(100, mean = 50, sd = 10)\n\ndf &lt;- tibble(group, outcome)\n\n# Observed difference in means\nobs_diff &lt;- df |&gt;\n  group_by(group) |&gt;\n  summarise(mean_val = mean(outcome)) |&gt;\n  summarise(diff = diff(mean_val)) |&gt;\n  pull(diff)\n\nobs_diff\n\n[1] 1.120047",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#permutation-test-simulation",
+    "href": "11-hyptest.html#permutation-test-simulation",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Permutation Test (Simulation)",
+    "text": "Permutation Test (Simulation)\n\nset.seed(123)\n\nnull_dist &lt;- replicate(1000, {\n  shuffled &lt;- df |&gt;\n    mutate(group = sample(group))\n\n  shuffled |&gt;\n    group_by(group) |&gt;\n    summarise(mean_val = mean(outcome)) |&gt;\n    summarise(diff = diff(mean_val)) |&gt;\n    pull(diff)\n})\n\nnull_df &lt;- tibble(diff = null_dist)",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#visualizing-the-null-distribution",
+    "href": "11-hyptest.html#visualizing-the-null-distribution",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Visualizing the Null Distribution",
+    "text": "Visualizing the Null Distribution\n\nggplot(null_df, aes(x = diff)) +\n  geom_histogram(bins = 30) +\n  geom_vline(xintercept = obs_diff, linetype = \"dashed\") +\n  labs(\n    title = \"Null Distribution of Difference in Means\",\n    x = \"Difference in Means\",\n    y = \"Frequency\"\n  )",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#interpreting-the-simulation",
+    "href": "11-hyptest.html#interpreting-the-simulation",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Interpreting the Simulation",
+    "text": "Interpreting the Simulation\n\nThe histogram shows what differences we would expect if there were no real effect\nThe dashed line shows our observed result\nWe assess how extreme our observed value is relative to the null distribution",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#what-is-a-p-value",
+    "href": "11-hyptest.html#what-is-a-p-value",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "What Is a P-value?",
+    "text": "What Is a P-value?\nThe p-value is the probability of observing a result as extreme (or more extreme) than what we observed, assuming the null hypothesis is true.",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#calculating-the-p-value",
+    "href": "11-hyptest.html#calculating-the-p-value",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Calculating the P-value",
+    "text": "Calculating the P-value\n\np_value &lt;- mean(abs(null_df$diff) &gt;= abs(obs_diff))\np_value\n\n[1] 0.56",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#interpreting-the-p-value",
+    "href": "11-hyptest.html#interpreting-the-p-value",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Interpreting the P-value",
+    "text": "Interpreting the P-value\n\nSmall p-value → strong evidence against the null\n\nLarge p-value → weak evidence against the null",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#p-values-as-evidence-strength",
+    "href": "11-hyptest.html#p-values-as-evidence-strength",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "P-values as Evidence Strength",
+    "text": "P-values as Evidence Strength\n\n\n\nP-value\nInterpretation\n\n\n\n\n&lt; 0.01\nVery strong evidence\n\n\n0.01–0.05\nStrong evidence\n\n\n0.05–0.10\nModerate evidence\n\n\n&gt; 0.10\nWeak evidence",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#what-p-values-do-not-mean",
+    "href": "11-hyptest.html#what-p-values-do-not-mean",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "What P-values Do NOT Mean",
+    "text": "What P-values Do NOT Mean\n\n❌ The probability that the null hypothesis is true\n\n❌ The probability that the results are due to chance alone\n\n❌ The size or importance of an effect",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#decision-making-framework",
+    "href": "11-hyptest.html#decision-making-framework",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Decision-Making Framework",
+    "text": "Decision-Making Framework\nWe often compare the p-value to a significance level (α), commonly 0.05.\n\nIf p-value &lt; 0.05 → reject H₀\n\nIf p-value ≥ 0.05 → fail to reject H₀",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#biomedical-framing",
+    "href": "11-hyptest.html#biomedical-framing",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Biomedical Framing",
+    "text": "Biomedical Framing\nIn public health and medicine, hypothesis testing answers questions like:\n\nDoes a treatment improve outcomes?\nIs an exposure associated with disease?\nDo disparities persist between populations?\n\n\n\nExample Interpretation\n\nThe intervention group had lower blood pressure than the control group (p = 0.03).\n\nInterpretation:\n\nThere is evidence of a difference\n\nThe observed result is unlikely under the null\n\nThe effect may be meaningful, but magnitude should also be considered",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#hypothesis-testing-in-regression",
+    "href": "11-hyptest.html#hypothesis-testing-in-regression",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Hypothesis Testing in Regression",
+    "text": "Hypothesis Testing in Regression\nHypothesis testing is also used in regression models.\nExample:\n\nH₀: β₁ = 0 (no association between predictor and outcome)\n\nHₐ: β₁ ≠ 0\n\n\n\nExample in R\n\nmodel &lt;- lm(outcome ~ group, data = df)\nsummary(model)\n\n\nCall:\nlm(formula = outcome ~ group, data = df)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-24.5558  -5.9140  -0.5798   6.5742  21.3455 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   50.344      1.295  38.875   &lt;2e-16 ***\ngroupB         1.120      1.831   0.612    0.542    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 9.157 on 98 degrees of freedom\nMultiple R-squared:  0.003802,  Adjusted R-squared:  -0.006363 \nF-statistic: 0.374 on 1 and 98 DF,  p-value: 0.5422",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#interpreting-regression-output",
+    "href": "11-hyptest.html#interpreting-regression-output",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Interpreting Regression Output",
+    "text": "Interpreting Regression Output\n\nThe coefficient represents the estimated effect\n\nThe p-value tests whether that effect is different from zero\n\nConfidence intervals provide a range of plausible values",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#connecting-to-confidence-intervals",
+    "href": "11-hyptest.html#connecting-to-confidence-intervals",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Connecting to Confidence Intervals",
+    "text": "Connecting to Confidence Intervals\n\nIf CI excludes 0 (or 1 for ratios) → statistically significant\n\nIf CI includes 0 → not statistically significant",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#key-terms",
+    "href": "11-hyptest.html#key-terms",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Key Terms",
+    "text": "Key Terms\n\n\n\nTerm\nDefinition\n\n\n\n\nNull Hypothesis\nNo effect or association\n\n\nAlternative Hypothesis\nPresence of effect\n\n\nTest Statistic\nMeasure of observed effect\n\n\nNull Distribution\nDistribution under H₀\n\n\nP-value\nProbability of extreme result under H₀\n\n\nSignificance Level\nThreshold for decision-making",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#practice-activity",
+    "href": "11-hyptest.html#practice-activity",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Practice Activity",
+    "text": "Practice Activity\n\nSimulate a null distribution\n\nCompute an observed statistic\n\nCalculate a p-value\n\nInterpret the result in plain language\n\nDecide whether to reject the null",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#reflection-questions",
+    "href": "11-hyptest.html#reflection-questions",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Reflection Questions",
+    "text": "Reflection Questions\n\nWhy do we simulate under the null hypothesis?\n\nWhat does a small p-value tell us?\n\nWhy is statistical significance not the same as practical importance?\n\nHow does this apply to real public health decisions?",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#common-mistakes-to-avoid",
+    "href": "11-hyptest.html#common-mistakes-to-avoid",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Common Mistakes to Avoid",
+    "text": "Common Mistakes to Avoid\n\nTreating p-value as probability the null is true\n\nIgnoring effect size\n\nOver-relying on 0.05 cutoff\n\nConfusing statistical and clinical significance",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#conclusion",
+    "href": "11-hyptest.html#conclusion",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Conclusion",
+    "text": "Conclusion\nHypothesis testing provides a structured way to evaluate evidence.\nA simulation-first approach helps build intuition by showing what results look like under the null hypothesis.\nP-values quantify evidence strength, but must be interpreted carefully and alongside effect sizes and confidence intervals.",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11-hyptest.html#looking-ahead",
+    "href": "11-hyptest.html#looking-ahead",
+    "title": "Lesson 11: Hypothesis Testing",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nNext lesson:\n\nMultiple testing\n\nType I and Type II errors\n\nPower and sample size",
+    "crumbs": [
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Lesson 11: Hypothesis Testing</span>"
+    ]
+  },
+  {
+    "objectID": "11a-inclass.html",
+    "href": "11a-inclass.html",
+    "title": "Lesson 11a: In-Class Activity: Hypothesis Testing Simulation",
+    "section": "",
+    "text": "Activity Overview\nIn this activity, you will use simulation to understand hypothesis testing and p-values.\nScenario:\nA researcher wants to know whether a new intervention changes an outcome compared to a control group.",
+    "crumbs": [
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Lesson 11a: In-Class Activity: Hypothesis Testing Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "11a-inclass.html#step-1-set-up-the-data",
+    "href": "11a-inclass.html#step-1-set-up-the-data",
+    "title": "Lesson 11a: In-Class Activity: Hypothesis Testing Simulation",
+    "section": "Step 1: Set Up the Data",
+    "text": "Step 1: Set Up the Data\n\nlibrary(tidyverse)\n\nWarning: package 'dplyr' was built under R version 4.5.1\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.2.0     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nset.seed(123)\n\ngroup &lt;- rep(c(\"Control\", \"Intervention\"), each = 50)\noutcome &lt;- rnorm(100, mean = 50, sd = 10)\n\ndf &lt;- tibble(group, outcome)\n\ndf\n\n# A tibble: 100 × 2\n   group   outcome\n   &lt;chr&gt;     &lt;dbl&gt;\n 1 Control    44.4\n 2 Control    47.7\n 3 Control    65.6\n 4 Control    50.7\n 5 Control    51.3\n 6 Control    67.2\n 7 Control    54.6\n 8 Control    37.3\n 9 Control    43.1\n10 Control    45.5\n# ℹ 90 more rows",
+    "crumbs": [
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Lesson 11a: In-Class Activity: Hypothesis Testing Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "11a-inclass.html#step-2-calculate-observed-difference",
+    "href": "11a-inclass.html#step-2-calculate-observed-difference",
+    "title": "Lesson 11a: In-Class Activity: Hypothesis Testing Simulation",
+    "section": "Step 2: Calculate Observed Difference",
+    "text": "Step 2: Calculate Observed Difference\n\nobs_diff &lt;- df |&gt;\n  group_by(group) |&gt;\n  summarise(mean_val = mean(outcome)) |&gt;\n  summarise(diff = diff(mean_val)) |&gt;\n  pull(diff)\n\nobs_diff\n\n[1] 1.120047",
+    "crumbs": [
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Lesson 11a: In-Class Activity: Hypothesis Testing Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "11a-inclass.html#step-3-simulate-under-the-null",
+    "href": "11a-inclass.html#step-3-simulate-under-the-null",
+    "title": "Lesson 11a: In-Class Activity: Hypothesis Testing Simulation",
+    "section": "Step 3: Simulate Under the Null",
+    "text": "Step 3: Simulate Under the Null\n\nset.seed(123)\n\nnull_dist &lt;- replicate(1000, {\n  shuffled &lt;- df |&gt;\n    mutate(group = sample(group))\n\n  shuffled |&gt;\n    group_by(group) |&gt;\n    summarise(mean_val = mean(outcome)) |&gt;\n    summarise(diff = diff(mean_val)) |&gt;\n    pull(diff)\n})\n\nnull_df &lt;- tibble(diff = null_dist)",
+    "crumbs": [
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Lesson 11a: In-Class Activity: Hypothesis Testing Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "11a-inclass.html#step-4-visualize",
+    "href": "11a-inclass.html#step-4-visualize",
+    "title": "Lesson 11a: In-Class Activity: Hypothesis Testing Simulation",
+    "section": "Step 4: Visualize",
+    "text": "Step 4: Visualize\n\nggplot(null_df, aes(x = diff)) +\n  geom_histogram(bins = 30) +\n  geom_vline(xintercept = obs_diff, linetype = \"dashed\") +\n  labs(\n    title = \"Null Distribution\",\n    x = \"Difference in Means\",\n    y = \"Frequency\"\n  )",
+    "crumbs": [
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Lesson 11a: In-Class Activity: Hypothesis Testing Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "11a-inclass.html#step-5-compute-p-value",
+    "href": "11a-inclass.html#step-5-compute-p-value",
+    "title": "Lesson 11a: In-Class Activity: Hypothesis Testing Simulation",
+    "section": "Step 5: Compute p-value",
+    "text": "Step 5: Compute p-value\n\np_value &lt;- mean(abs(null_df$diff) &gt;= abs(obs_diff))\np_value\n\n[1] 0.56",
+    "crumbs": [
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Lesson 11a: In-Class Activity: Hypothesis Testing Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "11a-inclass.html#step-6-interpretation-questions",
+    "href": "11a-inclass.html#step-6-interpretation-questions",
+    "title": "Lesson 11a: In-Class Activity: Hypothesis Testing Simulation",
+    "section": "Step 6: Interpretation Questions",
+    "text": "Step 6: Interpretation Questions\n\nIs the observed result extreme compared to the null?\nIs the p-value small or large?\nWhat does this say about evidence against the null?\nWould you reject the null hypothesis?",
+    "crumbs": [
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Lesson 11a: In-Class Activity: Hypothesis Testing Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "11a-inclass.html#key-takeaway",
+    "href": "11a-inclass.html#key-takeaway",
+    "title": "Lesson 11a: In-Class Activity: Hypothesis Testing Simulation",
+    "section": "Key Takeaway",
+    "text": "Key Takeaway\nA p-value tells us how surprising our data are under the null hypothesis.\nSmall p-value → strong evidence against the null\nLarge p-value → weak evidence against the null",
+    "crumbs": [
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Lesson 11a: In-Class Activity: Hypothesis Testing Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html",
+    "href": "project4.html",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "",
+    "text": "Project Overview\nThis final project brings together everything you have learned about R, data science, and applied public-health analytics. You will produce a scientific manuscript written entirely in Quarto, using NHANES data to answer a meaningful health research question.\nYour manuscript will include:\nYou will also give a 10-minute presentation summarizing the study and findings in a professional, conference-style format.\nThis project is designed to simulate real-world research writing in an MPH context.",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#project-overview",
+    "href": "project4.html#project-overview",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "",
+    "text": "a clearly defined research question\na transparent analytic workflow\ndescriptive data summaries\nregression modeling\ninference and uncertainty\nthoughtful interpretation grounded in public health",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#dataset",
+    "href": "project4.html#dataset",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Dataset",
+    "text": "Dataset\nYou will continue using the NHANES dataset from the {NHANES} package. You may refine your analytic dataset based on feedback from Projects 2 and 3.",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#learning-objectives",
+    "href": "project4.html#learning-objectives",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy completing this project, you will be able to:\n\nwrite a scientific manuscript using reproducible workflows\ncommunicate data analysis and modeling in clear language\ninterpret results in a biomedical and equity-aware context\nproduce publication-quality tables and figures\npresent findings orally in a professional manner",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#manuscript-structure",
+    "href": "project4.html#manuscript-structure",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Manuscript Structure",
+    "text": "Manuscript Structure\nYour manuscript must follow this structure.",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#title-page",
+    "href": "project4.html#title-page",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Title Page",
+    "text": "Title Page\nInclude:\n\ntitle\nauthor name\ncourse and institution\ndate",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#abstract",
+    "href": "project4.html#abstract",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Abstract",
+    "text": "Abstract\nWrite 150 to 250 words summarizing:\n\nbackground\npurpose\nmethods\nkey findings\nimplications",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#introduction",
+    "href": "project4.html#introduction",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Introduction",
+    "text": "Introduction\nExplain:\n\nthe health topic\nwhy it matters\nkey background or epidemiologic context\nyour research question(s) or hypothesis\n\nWrite for an informed public-health audience.",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#methods",
+    "href": "project4.html#methods",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Methods",
+    "text": "Methods\nDescribe:\n\ndata source and sample\nvariables and coding\nmissing-data handling\nanalytic plan, including models used\nethical considerations\n\nBe transparent and precise.",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#results",
+    "href": "project4.html#results",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Results",
+    "text": "Results\nInclude:\n\ndescriptive statistics\nat least one regression model\ntables and figures produced in R\nuncertainty measures such as confidence intervals\nplain-language interpretation\n\nLet the data speak clearly.",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#discussion",
+    "href": "project4.html#discussion",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Discussion",
+    "text": "Discussion\nAddress:\n\nkey findings\npossible mechanisms or interpretation\nequity implications\nlimitations\ndirections for future research\npractice or policy relevance\n\nAvoid overstating causality.",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#references",
+    "href": "project4.html#references",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "References",
+    "text": "References\nUse APA format.",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#appendix",
+    "href": "project4.html#appendix",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Appendix",
+    "text": "Appendix\nInclude code excerpts or supplemental tables as needed.",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#presentation",
+    "href": "project4.html#presentation",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Presentation",
+    "text": "Presentation\nYou will give a 10-minute presentation including:\n\nresearch question\nmethods overview\nkey results\ninterpretation\nreflection\n\nSlides should be clear and professional.",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#formatting-requirements",
+    "href": "project4.html#formatting-requirements",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Formatting Requirements",
+    "text": "Formatting Requirements\nYour manuscript must:\n\nbe written completely in Quarto\nknit without errors\nuse inline code for statistics where possible\ninclude at least two figures and one table\nbe approximately 2,000 to 3,000 words, excluding code\nreflect professional writing quality",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#submission",
+    "href": "project4.html#submission",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Submission",
+    "text": "Submission\nSubmit:\n\nyour knitted manuscript in word\nyour .qmd source file\nyour presentation slides",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#academic-integrity",
+    "href": "project4.html#academic-integrity",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Academic Integrity",
+    "text": "Academic Integrity\nAll writing and code must be your own. Collaboration on ideas is permitted; copying is not.",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "project4.html#project-4-rubric",
+    "href": "project4.html#project-4-rubric",
+    "title": "Project 4: Final Manuscript & Presentation",
+    "section": "Project 4 Rubric",
+    "text": "Project 4 Rubric\n\n1. Research Question and Framing — 15 points\nEvaluates clarity, significance, and grounding.\n\n13–15: Clear, meaningful health question; strong rationale; excellent framing\n10–12: Good question with moderate depth\n6–9: Question vague or weakly justified\n0–5: Lacks clarity or purpose\n\n\n\n2. Methods and Transparency — 15 points\nAssesses documentation and rigor.\n\n13–15: Methods clearly described; coding choices transparent; reproducible workflow obvious\n10–12: Mostly clear with some gaps\n6–9: Limited clarity or detail\n0–5: Methods unclear or inappropriate\n\n\n\n3. Data Analysis and Modeling — 20 points\nEvaluates execution and appropriateness.\n\n17–20: Models appropriate; data handling correct; output interpreted properly\n13–16: Minor errors but overall sound\n8–12: Substantial misunderstanding or weaknesses\n0–7: Incorrect or incomplete analysis\n\n\n\n4. Interpretation, Uncertainty, and Public-Health Insight — 20 points\nFocuses on meaning-making.\n\n17–20: Thoughtful interpretation with nuance; uncertainty addressed; equity implications considered\n13–16: Interpretation generally correct with moderate depth\n8–12: Limited interpretation\n0–7: Incorrect or missing interpretation\n\n\n\n5. Tables, Figures, and Presentation of Results — 10 points\nAssesses clarity and professionalism.\n\n9–10: Publication-quality outputs; clearly labeled; visually effective\n7–8: Mostly clear but could be improved\n4–6: Limited polish or clarity\n0–3: Poor or missing presentation\n\n\n\n6. Writing Quality and Organization — 10 points\nEvaluates readability and tone.\n\n9–10: Clear, cohesive, professional writing throughout\n7–8: Mostly clear with minor issues\n4–6: Some difficulty following structure\n0–3: Poor clarity or organization\n\n\n\n7. Reproducibility and Quarto Workflow — 5 points\nRewards transparent scientific computing.\n\n5: Fully reproducible; clean structure; knits without errors\n3–4: Minor issues present\n1–2: Inconsistent reproducibility\n0: Not reproducible\n\n\n\n8. Oral Presentation — 5 points\nEvaluates clarity and professionalism.\n\n5: Engaging, clear, organized, and confident\n3–4: Generally clear with minor gaps\n1–2: Difficult to follow\n0: Presentation not delivered",
+    "crumbs": [
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Project 4: Final Manuscript & Presentation</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html",
+    "href": "suppA.html",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "",
+    "text": "Overview\nIn this lesson, you will learn how to create Table 1 (Descriptive Statistics), Table 2 (Analytic Results), and properly format references in a reproducible Quarto workflow.\nThese are essential components of epidemiologic manuscripts and will be required for your final project.",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#learning-objectives",
+    "href": "suppA.html#learning-objectives",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this lesson, students will be able to:\n\nCreate a publication-style Table 1\nCreate a regression-based Table 2\nInterpret tables in plain language\nExport clean tables from R\nAdd and format references in Quarto",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#required-packages",
+    "href": "suppA.html#required-packages",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Required Packages",
+    "text": "Required Packages\n\nlibrary(tidyverse)\n\nWarning: package 'dplyr' was built under R version 4.5.1\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.2.0     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(gtsummary)\n\nWarning: package 'gtsummary' was built under R version 4.5.1\n\nlibrary(gt)\n\nWarning: package 'gt' was built under R version 4.5.1\n\nlibrary(broom)",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#example-dataset",
+    "href": "suppA.html#example-dataset",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Example Dataset",
+    "text": "Example Dataset\n\nlibrary(NHANES)\n\ndf &lt;- NHANES %&gt;%\n  select(Age, Gender, BMI, BPSysAve, Diabetes) %&gt;%\n  drop_na()",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#table-1-descriptive-statistics",
+    "href": "suppA.html#table-1-descriptive-statistics",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Table 1: Descriptive Statistics",
+    "text": "Table 1: Descriptive Statistics\nTable 1 summarizes the characteristics of your study population.\n\nStep 1: Create Table 1\n\ntable1 &lt;- df %&gt;%\n  tbl_summary(\n    by = Diabetes,\n    statistic = list(\n      all_continuous() ~ \"{mean} ({sd})\",\n      all_categorical() ~ \"{n} ({p}%)\"\n    )\n  ) %&gt;%\n  add_p()\n\ntable1\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nNo\nN = 7,7491\nYes\nN = 7331\np-value2\n\n\n\n\nAge\n39 (20)\n59 (15)\n&lt;0.001\n\n\nGender\n\n\n\n\n0.078\n\n\n    female\n3,922 (51%)\n346 (47%)\n\n\n\n\n    male\n3,827 (49%)\n387 (53%)\n\n\n\n\nBMI\n27 (7)\n33 (8)\n&lt;0.001\n\n\nBPSysAve\n117 (17)\n128 (19)\n&lt;0.001\n\n\n\n1 Mean (SD); n (%)\n\n\n2 Wilcoxon rank sum test; Pearson’s Chi-squared test",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#interpretation-of-table-1",
+    "href": "suppA.html#interpretation-of-table-1",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Interpretation of Table 1",
+    "text": "Interpretation of Table 1\n\nContinuous variables: mean (SD)\nCategorical variables: n (%)\np-values: compare groups",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#export-table-1",
+    "href": "suppA.html#export-table-1",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Export Table 1",
+    "text": "Export Table 1\n\ntable1 %&gt;%\n  as_gt() %&gt;%\n  gt::gtsave(\"table1.html\")",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#table-2-regression-results",
+    "href": "suppA.html#table-2-regression-results",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Table 2: Regression Results",
+    "text": "Table 2: Regression Results\nTable 2 presents results from regression models.\n\nStep 1: Fit Model\n\nmodel &lt;- lm(BMI ~ Age + Gender + Diabetes, data = df)\nsummary(model)\n\n\nCall:\nlm(formula = BMI ~ Age + Gender + Diabetes, data = df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-18.350  -4.699  -1.120   3.416  54.564 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 24.102908   0.182482 132.084   &lt;2e-16 ***\nAge          0.077325   0.003742  20.663   &lt;2e-16 ***\nGendermale   0.014369   0.144809   0.099    0.921    \nDiabetesYes  3.921536   0.267997  14.633   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 6.661 on 8478 degrees of freedom\nMultiple R-squared:  0.09376,   Adjusted R-squared:  0.09344 \nF-statistic: 292.4 on 3 and 8478 DF,  p-value: &lt; 2.2e-16\n\n\n\n\n\nStep 2: Create Table 2\n\ntable2 &lt;- tbl_regression(model) %&gt;%\n  bold_labels()\n\ntable2\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI\np-value\n\n\n\n\nAge\n0.08\n0.07, 0.08\n&lt;0.001\n\n\nGender\n\n\n\n\n\n\n\n\n    female\n—\n—\n\n\n\n\n    male\n0.01\n-0.27, 0.30\n&gt;0.9\n\n\nDiabetes\n\n\n\n\n\n\n\n\n    No\n—\n—\n\n\n\n\n    Yes\n3.9\n3.4, 4.4\n&lt;0.001\n\n\n\nAbbreviation: CI = Confidence Interval",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#interpretation-of-table-2",
+    "href": "suppA.html#interpretation-of-table-2",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Interpretation of Table 2",
+    "text": "Interpretation of Table 2\n\nCoefficients show direction and magnitude\nConfidence intervals show uncertainty\np-values show statistical evidence",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#optional-logistic-regression",
+    "href": "suppA.html#optional-logistic-regression",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Optional: Logistic Regression",
+    "text": "Optional: Logistic Regression\n\nlog_model &lt;- glm(Diabetes ~ Age + BMI + Gender,\n                 data = df,\n                 family = binomial)\n\ntbl_regression(log_model, exponentiate = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nOR\n95% CI\np-value\n\n\n\n\nAge\n1.06\n1.05, 1.06\n&lt;0.001\n\n\nBMI\n1.10\n1.09, 1.11\n&lt;0.001\n\n\nGender\n\n\n\n\n\n\n\n\n    female\n—\n—\n\n\n\n\n    male\n1.42\n1.20, 1.67\n&lt;0.001\n\n\n\nAbbreviations: CI = Confidence Interval, OR = Odds Ratio",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#export-table-2",
+    "href": "suppA.html#export-table-2",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Export Table 2",
+    "text": "Export Table 2\n\ntable2 %&gt;%\n  as_gt() %&gt;%\n  gt::gtsave(\"table2.html\")",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#writing-about-tables",
+    "href": "suppA.html#writing-about-tables",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Writing About Tables",
+    "text": "Writing About Tables\nExample:\n“The mean BMI was higher among individuals with diabetes compared to those without (p &lt; 0.05). In adjusted models, age and BMI were significantly associated with diabetes status.”",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#adding-references-in-quarto",
+    "href": "suppA.html#adding-references-in-quarto",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Adding References in Quarto",
+    "text": "Adding References in Quarto\n\nStep 1: Create a .bib File\nExample references.bib:\n@article{nhanes,\n  title={National Health and Nutrition Examination Survey},\n  author={CDC},\n  year={2023}\n}\n\n\n\nStep 2: Add to YAML\nbibliography: references.bib\ncsl: apa.csl\n\n\n\nStep 3: Cite in Text\nExample:\nThis dataset comes from NHANES [@nhanes].\n\n\n\nStep 4: References Section\nAdd this at the end:\n## References\nQuarto will automatically generate the reference list.",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#key-takeaways",
+    "href": "suppA.html#key-takeaways",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\nTable 1 describes your sample\nTable 2 presents analytic results\nUse gtsummary for clean outputs\nAlways interpret results in plain language\nUse Quarto citation tools for references",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#practice-activity",
+    "href": "suppA.html#practice-activity",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Practice Activity",
+    "text": "Practice Activity\n\nCreate Table 1 using your Project dataset\n\nCreate Table 2 using a regression model\n\nExport both tables\n\nWrite 2–3 sentences interpreting each table\n\nAdd at least one reference using .bib",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
+    ]
+  },
+  {
+    "objectID": "suppA.html#conclusion",
+    "href": "suppA.html#conclusion",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and References",
+    "section": "Conclusion",
+    "text": "Conclusion\nTables and references are essential for scientific communication. Mastering these skills will help you produce clear, professional, and reproducible public health reports.",
+    "crumbs": [
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
     ]
   }
 ]

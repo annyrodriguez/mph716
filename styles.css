@@ -1,9 +1,6 @@
-/* ============================================================
-   QUARTO BOOK THEME
-   Neutral off-white base + pink sidebars + fun headings
-============================================================ */
+/* ---------- MPH716 Quarto Book Theme ----------   */
 
-/* ---------- Palette ---------- */
+/* ---------- Palette ----------  */
 :root{
   /* Neutrals */
   --page-bg: #F7F4EF;          /* warm off-white */
@@ -13,10 +10,10 @@
   --border: #E6E3DC;
 
   /* Pops (DesignPixie-inspired) */
-  --pink: #FF6B6B;             /* main pink (coral-pink) */
-  --pink-soft: #FFE6E6;        /* lighter pink for hover/accents */
-  --pink-deep: #E84F6A;        /* deeper pink for emphasis */
-  --aqua: #2CB7B3;             /* supporting pop */
+  --pink: #FF6B6B;             
+  --pink-soft: #FFE6E6;        
+  --pink-deep: #E84F6A;        
+  --aqua: #2CB7B3;             
   --butter: #F6C945;
   --sage: #7BC9A4;
   --lavender: #9B8CFF;
