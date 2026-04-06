@@ -28,6 +28,7 @@ book:
     - 11a-inclass.qmd
     - project4.qmd
     - suppA.qmd
+    - suppB.qmd
     
 format:
   html:

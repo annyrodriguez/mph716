@@ -1,0 +1,133 @@
+---
+title: "Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks"
+subtitle: "Alternative Method for `gtsummary()`"
+---
+
+## Overview
+
+This lesson shows you how to: 
+
+- Create **Table 1 (descriptive statistics)** 
+- Create **Table 2 (regression results)** 
+- Use **Quarto chunk options** to control code and output 
+- Write cleaner, more impactful reports
+
+------------------------------------------------------------------------
+
+## Setup
+
+```{r}
+# install.packages(c("dplyr", "knitr", "broom"))
+library(dplyr)
+library(knitr)
+library(broom)
+```
+
+------------------------------------------------------------------------
+
+## Example Dataset
+
+```{r}
+data(starwars)
+
+df <- starwars %>%
+  select(sex, height, mass) %>%
+  filter(!is.na(sex))
+```
+
+------------------------------------------------------------------------
+
+## Table 1: Descriptive Statistics
+
+### Simple Summary Table
+
+```{r}
+table1 <- df %>%
+  group_by(sex) %>%
+  summarise(
+    n = n(),
+    mean_height = mean(height, na.rm = TRUE),
+    mean_mass = mean(mass, na.rm = TRUE)
+  )
+
+kable(table1, caption = "Table 1. Descriptive Statistics by Sex")
+```
+
+------------------------------------------------------------------------
+
+## Table 2: Regression Results
+
+```{r}
+model <- lm(mass ~ height, data = df)
+
+table2 <- tidy(model)
+
+kable(table2, digits = 3, caption = "Table 2. Linear Regression Results")
+```
+
+------------------------------------------------------------------------
+
+## Quarto Tips: Controlling Code & Output
+
+**REMEMBER** - The code goes INSIDE of the `{r}`. Make sure to use a comma after each new command.
+
+### 1. Hide Code, Show Output
+
+```{r, echo=FALSE}
+summary(df$height)
+```
+
+The code: `echo=FALSE`
+
+------------------------------------------------------------------------
+
+### 2. Show Code, Hide Output
+
+```{r, results='hide'}
+summary(df$height)
+```
+
+The code: `results='hide'`
+
+------------------------------------------------------------------------
+
+### 3. Hide Both Code and Output
+
+```{r, include=FALSE}
+summary(df$height)
+```
+
+The code: `include=FALSE`
+
+------------------------------------------------------------------------
+
+### 4. Clean Tables (No Messages or Warnings)
+
+```{r, message=FALSE, warning=FALSE}
+kable(head(df), caption = "Clean Table Example")
+```
+
+The code: `message=FALSE, warning=FALSE`
+
+------------------------------------------------------------------------
+
+## Writing Tips for Quarto Reports
+
+-   Keep text **short and clear**
+-   Always **interpret your results**
+-   Use **table captions** to explain what the reader is seeing
+-   Avoid dumping raw output — format it into tables
+-   Use headings to organize your report
+
+### Example Interpretation
+
+The results suggest that height is positively associated with mass, indicating that taller individuals tend to have higher body mass on average.
+
+------------------------------------------------------------------------
+
+## Key Takeaways
+
+-   Use `kable()` for clean, simple tables
+-   Always structure Table 1 (descriptive) and Table 2 (model results)
+-   Control what your audience sees using chunk options
+-   Focus on interpretation, not just output

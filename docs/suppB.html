@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lesson 11: Hypothesis Testing – R and Health Sciences</title>
+<title>Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks – R and Health Sciences</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./11a-inclass.html" rel="next">
-<link href="./project3.html" rel="prev">
+<link href="./suppA.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -118,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./11-hyptest.html"><span class="chapter-title">Lesson 11: Hypothesis Testing</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./suppB.html"><span class="chapter-title">Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -230,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11-hyptest.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Lesson 11: Hypothesis Testing</span></a>
+  <a href="./11-hyptest.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Lesson 11: Hypothesis Testing</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -250,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./suppB.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks</span></a>
+  <a href="./suppB.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks</span></a>
   </div>
 </li>
     </ul>
@@ -264,40 +263,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
-  <li><a href="#assigned-readings" id="toc-assigned-readings" class="nav-link" data-scroll-target="#assigned-readings">Assigned Readings</a></li>
-  <li><a href="#what-is-hypothesis-testing" id="toc-what-is-hypothesis-testing" class="nav-link" data-scroll-target="#what-is-hypothesis-testing">What Is Hypothesis Testing?</a></li>
-  <li><a href="#null-and-alternative-hypotheses" id="toc-null-and-alternative-hypotheses" class="nav-link" data-scroll-target="#null-and-alternative-hypotheses">Null and Alternative Hypotheses</a>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#example-dataset" id="toc-example-dataset" class="nav-link" data-scroll-target="#example-dataset">Example Dataset</a></li>
+  <li><a href="#table-1-descriptive-statistics" id="toc-table-1-descriptive-statistics" class="nav-link" data-scroll-target="#table-1-descriptive-statistics">Table 1: Descriptive Statistics</a>
   <ul class="collapse">
-  <li><a href="#example-public-health" id="toc-example-public-health" class="nav-link" data-scroll-target="#example-public-health">Example (Public Health)</a></li>
+  <li><a href="#simple-summary-table" id="toc-simple-summary-table" class="nav-link" data-scroll-target="#simple-summary-table">Simple Summary Table</a></li>
   </ul></li>
-  <li><a href="#simulation-first-thinking" id="toc-simulation-first-thinking" class="nav-link" data-scroll-target="#simulation-first-thinking">Simulation-First Thinking</a></li>
-  <li><a href="#example-simulating-a-null-distribution" id="toc-example-simulating-a-null-distribution" class="nav-link" data-scroll-target="#example-simulating-a-null-distribution">Example: Simulating a Null Distribution</a></li>
-  <li><a href="#permutation-test-simulation" id="toc-permutation-test-simulation" class="nav-link" data-scroll-target="#permutation-test-simulation">Permutation Test (Simulation)</a></li>
-  <li><a href="#visualizing-the-null-distribution" id="toc-visualizing-the-null-distribution" class="nav-link" data-scroll-target="#visualizing-the-null-distribution">Visualizing the Null Distribution</a></li>
-  <li><a href="#interpreting-the-simulation" id="toc-interpreting-the-simulation" class="nav-link" data-scroll-target="#interpreting-the-simulation">Interpreting the Simulation</a></li>
-  <li><a href="#what-is-a-p-value" id="toc-what-is-a-p-value" class="nav-link" data-scroll-target="#what-is-a-p-value">What Is a P-value?</a></li>
-  <li><a href="#calculating-the-p-value" id="toc-calculating-the-p-value" class="nav-link" data-scroll-target="#calculating-the-p-value">Calculating the P-value</a></li>
-  <li><a href="#interpreting-the-p-value" id="toc-interpreting-the-p-value" class="nav-link" data-scroll-target="#interpreting-the-p-value">Interpreting the P-value</a></li>
-  <li><a href="#p-values-as-evidence-strength" id="toc-p-values-as-evidence-strength" class="nav-link" data-scroll-target="#p-values-as-evidence-strength">P-values as Evidence Strength</a></li>
-  <li><a href="#what-p-values-do-not-mean" id="toc-what-p-values-do-not-mean" class="nav-link" data-scroll-target="#what-p-values-do-not-mean">What P-values Do NOT Mean</a></li>
-  <li><a href="#decision-making-framework" id="toc-decision-making-framework" class="nav-link" data-scroll-target="#decision-making-framework">Decision-Making Framework</a></li>
-  <li><a href="#biomedical-framing" id="toc-biomedical-framing" class="nav-link" data-scroll-target="#biomedical-framing">Biomedical Framing</a>
+  <li><a href="#table-2-regression-results" id="toc-table-2-regression-results" class="nav-link" data-scroll-target="#table-2-regression-results">Table 2: Regression Results</a></li>
+  <li><a href="#quarto-tips-controlling-code-output" id="toc-quarto-tips-controlling-code-output" class="nav-link" data-scroll-target="#quarto-tips-controlling-code-output">Quarto Tips: Controlling Code &amp; Output</a>
+  <ul class="collapse">
+  <li><a href="#hide-code-show-output" id="toc-hide-code-show-output" class="nav-link" data-scroll-target="#hide-code-show-output">1. Hide Code, Show Output</a></li>
+  <li><a href="#show-code-hide-output" id="toc-show-code-hide-output" class="nav-link" data-scroll-target="#show-code-hide-output">2. Show Code, Hide Output</a></li>
+  <li><a href="#hide-both-code-and-output" id="toc-hide-both-code-and-output" class="nav-link" data-scroll-target="#hide-both-code-and-output">3. Hide Both Code and Output</a></li>
+  <li><a href="#clean-tables-no-messages-or-warnings" id="toc-clean-tables-no-messages-or-warnings" class="nav-link" data-scroll-target="#clean-tables-no-messages-or-warnings">4. Clean Tables (No Messages or Warnings)</a></li>
+  </ul></li>
+  <li><a href="#writing-tips-for-quarto-reports" id="toc-writing-tips-for-quarto-reports" class="nav-link" data-scroll-target="#writing-tips-for-quarto-reports">Writing Tips for Quarto Reports</a>
   <ul class="collapse">
   <li><a href="#example-interpretation" id="toc-example-interpretation" class="nav-link" data-scroll-target="#example-interpretation">Example Interpretation</a></li>
   </ul></li>
-  <li><a href="#hypothesis-testing-in-regression" id="toc-hypothesis-testing-in-regression" class="nav-link" data-scroll-target="#hypothesis-testing-in-regression">Hypothesis Testing in Regression</a>
-  <ul class="collapse">
-  <li><a href="#example-in-r" id="toc-example-in-r" class="nav-link" data-scroll-target="#example-in-r">Example in R</a></li>
-  </ul></li>
-  <li><a href="#interpreting-regression-output" id="toc-interpreting-regression-output" class="nav-link" data-scroll-target="#interpreting-regression-output">Interpreting Regression Output</a></li>
-  <li><a href="#connecting-to-confidence-intervals" id="toc-connecting-to-confidence-intervals" class="nav-link" data-scroll-target="#connecting-to-confidence-intervals">Connecting to Confidence Intervals</a></li>
-  <li><a href="#key-terms" id="toc-key-terms" class="nav-link" data-scroll-target="#key-terms">Key Terms</a></li>
-  <li><a href="#practice-activity" id="toc-practice-activity" class="nav-link" data-scroll-target="#practice-activity">Practice Activity</a></li>
-  <li><a href="#reflection-questions" id="toc-reflection-questions" class="nav-link" data-scroll-target="#reflection-questions">Reflection Questions</a></li>
-  <li><a href="#common-mistakes-to-avoid" id="toc-common-mistakes-to-avoid" class="nav-link" data-scroll-target="#common-mistakes-to-avoid">Common Mistakes to Avoid</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking Ahead</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
   </ul>
 </nav>
     </div>
@@ -306,8 +290,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Lesson 11: Hypothesis Testing</span></h1>
-<p class="subtitle lead">Simulation-First Thinking, P-values, and Biomedical Interpretation</p>
+<h1 class="title"><span class="chapter-title">Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks</span></h1>
+<p class="subtitle lead">Alternative Method for <code>gtsummary()</code></p>
 </div>
 
 
@@ -326,414 +310,254 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>Hypothesis testing allows us to evaluate whether observed patterns in data are likely due to chance or reflect a real underlying relationship.</p>
-<p>In this lesson, we take a <strong>simulation-first approach</strong> to hypothesis testing, emphasizing intuition, interpretation, and real-world biomedical framing rather than memorizing formulas.</p>
-<hr>
-</section>
-<section id="learning-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
-<p>By the end of this lesson, students will be able to:</p>
+<p>This lesson shows you how to:</p>
 <ul>
-<li>Explain the logic of hypothesis testing using simulation</li>
-<li>Define null and alternative hypotheses in public health contexts</li>
-<li>Interpret p-values as measures of evidence strength</li>
-<li>Avoid common misinterpretations of p-values</li>
-<li>Apply hypothesis testing to real-world biomedical questions</li>
-<li>Connect hypothesis testing to regression inference</li>
+<li>Create <strong>Table 1 (descriptive statistics)</strong></li>
+<li>Create <strong>Table 2 (regression results)</strong></li>
+<li>Use <strong>Quarto chunk options</strong> to control code and output</li>
+<li>Write cleaner, more impactful reports</li>
 </ul>
 <hr>
 </section>
-<section id="assigned-readings" class="level2">
-<h2 class="anchored" data-anchor-id="assigned-readings">Assigned Readings</h2>
-<ul>
-<li><em>OpenIntro Biostatistics</em>, Chapter 5<br>
-</li>
-<li><em>Statistical Inference via Data Science</em>, Chapter 10: Inference for Regression</li>
-</ul>
-<hr>
-</section>
-<section id="what-is-hypothesis-testing" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-hypothesis-testing">What Is Hypothesis Testing?</h2>
-<p>Hypothesis testing is a framework used to evaluate whether observed data are consistent with a specific claim about a population.</p>
-<p>We compare:</p>
-<ul>
-<li>what we <strong>observed in our data</strong></li>
-<li>what we would <strong>expect under a null hypothesis</strong></li>
-</ul>
-<hr>
-</section>
-<section id="null-and-alternative-hypotheses" class="level2">
-<h2 class="anchored" data-anchor-id="null-and-alternative-hypotheses">Null and Alternative Hypotheses</h2>
-<p>The <strong>null hypothesis (H₀)</strong> represents no effect or no association.</p>
-<p>The <strong>alternative hypothesis (H₁ or Hₐ)</strong> represents a meaningful effect or association.</p>
-<hr>
-<section id="example-public-health" class="level3">
-<h3 class="anchored" data-anchor-id="example-public-health">Example (Public Health)</h3>
-<ul>
-<li>H₀: There is no difference in screening rates between groups<br>
-</li>
-<li>Hₐ: There is a difference in screening rates between groups</li>
-</ul>
-<hr>
-</section>
-</section>
-<section id="simulation-first-thinking" class="level2">
-<h2 class="anchored" data-anchor-id="simulation-first-thinking">Simulation-First Thinking</h2>
-<p>Instead of jumping straight to formulas, we ask:</p>
-<blockquote class="blockquote">
-<p>What would our data look like if the null hypothesis were true?</p>
-</blockquote>
-<p>We then simulate many datasets under the null and compare our observed statistic to that distribution.</p>
-<hr>
-</section>
-<section id="example-simulating-a-null-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="example-simulating-a-null-distribution">Example: Simulating a Null Distribution</h2>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(c("dplyr", "knitr", "broom"))</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'dplyr' was built under R version 4.5.1</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.2.0     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.0.4     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create two groups with no real difference</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>group <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), <span class="at">each =</span> <span class="dv">50</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>outcome <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">50</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(group, outcome)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Observed difference in means</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>obs_diff <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">|&gt;</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_val =</span> <span class="fu">mean</span>(outcome)) <span class="sc">|&gt;</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">diff =</span> <span class="fu">diff</span>(mean_val)) <span class="sc">|&gt;</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(diff)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>obs_diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.120047</code></pre>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
 </div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 </section>
-<section id="permutation-test-simulation" class="level2">
-<h2 class="anchored" data-anchor-id="permutation-test-simulation">Permutation Test (Simulation)</h2>
+<section id="example-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="example-dataset">Example Dataset</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>null_dist <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, {</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  shuffled <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">sample</span>(group))</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  shuffled <span class="sc">|&gt;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(group) <span class="sc">|&gt;</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean_val =</span> <span class="fu">mean</span>(outcome)) <span class="sc">|&gt;</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">diff =</span> <span class="fu">diff</span>(mean_val)) <span class="sc">|&gt;</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(diff)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>null_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">diff =</span> null_dist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(starwars)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> starwars <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sex, height, mass) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 </section>
-<section id="visualizing-the-null-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="visualizing-the-null-distribution">Visualizing the Null Distribution</h2>
+<section id="table-1-descriptive-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="table-1-descriptive-statistics">Table 1: Descriptive Statistics</h2>
+<section id="simple-summary-table" class="level3">
+<h3 class="anchored" data-anchor-id="simple-summary-table">Simple Summary Table</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(null_df, <span class="fu">aes</span>(<span class="at">x =</span> diff)) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> obs_diff, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Null Distribution of Difference in Means"</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Difference in Means"</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_height =</span> <span class="fu">mean</span>(height, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_mass =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(table1, <span class="at">caption =</span> <span class="st">"Table 1. Descriptive Statistics by Sex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="11-hyptest_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<hr>
-</section>
-<section id="interpreting-the-simulation" class="level2">
-<h2 class="anchored" data-anchor-id="interpreting-the-simulation">Interpreting the Simulation</h2>
-<ul>
-<li>The histogram shows what differences we would expect <strong>if there were no real effect</strong></li>
-<li>The dashed line shows our observed result</li>
-<li>We assess how extreme our observed value is relative to the null distribution</li>
-</ul>
-<hr>
-</section>
-<section id="what-is-a-p-value" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-a-p-value">What Is a P-value?</h2>
-<p>The <strong>p-value</strong> is the probability of observing a result as extreme (or more extreme) than what we observed, <strong>assuming the null hypothesis is true</strong>.</p>
-<hr>
-</section>
-<section id="calculating-the-p-value" class="level2">
-<h2 class="anchored" data-anchor-id="calculating-the-p-value">Calculating the P-value</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(null_df<span class="sc">$</span>diff) <span class="sc">&gt;=</span> <span class="fu">abs</span>(obs_diff))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.56</code></pre>
-</div>
-</div>
-<hr>
-</section>
-<section id="interpreting-the-p-value" class="level2">
-<h2 class="anchored" data-anchor-id="interpreting-the-p-value">Interpreting the P-value</h2>
-<ul>
-<li>Small p-value → strong evidence against the null<br>
-</li>
-<li>Large p-value → weak evidence against the null</li>
-</ul>
-<hr>
-</section>
-<section id="p-values-as-evidence-strength" class="level2">
-<h2 class="anchored" data-anchor-id="p-values-as-evidence-strength">P-values as Evidence Strength</h2>
-<table class="caption-top table">
+<table class="caption-top table table-sm table-striped small">
+<caption>Table 1. Descriptive Statistics by Sex</caption>
 <thead>
 <tr class="header">
-<th>P-value</th>
-<th>Interpretation</th>
+<th style="text-align: left;">sex</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">mean_height</th>
+<th style="text-align: right;">mean_mass</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>&lt; 0.01</td>
-<td>Very strong evidence</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">171.5714</td>
+<td style="text-align: right;">54.68889</td>
 </tr>
 <tr class="even">
-<td>0.01–0.05</td>
-<td>Strong evidence</td>
+<td style="text-align: left;">hermaphroditic</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">175.0000</td>
+<td style="text-align: right;">1358.00000</td>
 </tr>
 <tr class="odd">
-<td>0.05–0.10</td>
-<td>Moderate evidence</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">179.1228</td>
+<td style="text-align: right;">80.21905</td>
 </tr>
 <tr class="even">
-<td>&gt; 0.10</td>
-<td>Weak evidence</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">131.2000</td>
+<td style="text-align: right;">69.75000</td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
 <hr>
 </section>
-<section id="what-p-values-do-not-mean" class="level2">
-<h2 class="anchored" data-anchor-id="what-p-values-do-not-mean">What P-values Do NOT Mean</h2>
-<ul>
-<li>❌ The probability that the null hypothesis is true<br>
-</li>
-<li>❌ The probability that the results are due to chance alone<br>
-</li>
-<li>❌ The size or importance of an effect</li>
-</ul>
+</section>
+<section id="table-2-regression-results" class="level2">
+<h2 class="anchored" data-anchor-id="table-2-regression-results">Table 2: Regression Results</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(mass <span class="sc">~</span> height, <span class="at">data =</span> df)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>table2 <span class="ot">&lt;-</span> <span class="fu">tidy</span>(model)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(table2, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">caption =</span> <span class="st">"Table 2. Linear Regression Results"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Table 2. Linear Regression Results</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">-11.248</td>
+<td style="text-align: right;">114.345</td>
+<td style="text-align: right;">-0.098</td>
+<td style="text-align: right;">0.922</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">height</td>
+<td style="text-align: right;">0.629</td>
+<td style="text-align: right;">0.643</td>
+<td style="text-align: right;">0.977</td>
+<td style="text-align: right;">0.333</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <hr>
 </section>
-<section id="decision-making-framework" class="level2">
-<h2 class="anchored" data-anchor-id="decision-making-framework">Decision-Making Framework</h2>
-<p>We often compare the p-value to a significance level (α), commonly 0.05.</p>
-<ul>
-<li>If p-value &lt; 0.05 → reject H₀<br>
-</li>
-<li>If p-value ≥ 0.05 → fail to reject H₀</li>
-</ul>
+<section id="quarto-tips-controlling-code-output" class="level2">
+<h2 class="anchored" data-anchor-id="quarto-tips-controlling-code-output">Quarto Tips: Controlling Code &amp; Output</h2>
+<p><strong>REMEMBER</strong> - The code goes INSIDE of the <code>{r}</code>. Make sure to use a comma after each new command.</p>
+<section id="hide-code-show-output" class="level3">
+<h3 class="anchored" data-anchor-id="hide-code-show-output">1. Hide Code, Show Output</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+   66.0   167.0   180.0   174.6   191.0   264.0       6 </code></pre>
+</div>
+</div>
+<p>The code: <code>echo=FALSE</code></p>
 <hr>
 </section>
-<section id="biomedical-framing" class="level2">
-<h2 class="anchored" data-anchor-id="biomedical-framing">Biomedical Framing</h2>
-<p>In public health and medicine, hypothesis testing answers questions like:</p>
-<ul>
-<li>Does a treatment improve outcomes?</li>
-<li>Is an exposure associated with disease?</li>
-<li>Do disparities persist between populations?</li>
-</ul>
+<section id="show-code-hide-output" class="level3">
+<h3 class="anchored" data-anchor-id="show-code-hide-output">2. Show Code, Hide Output</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df<span class="sc">$</span>height)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The code: <code>results='hide'</code></p>
 <hr>
+</section>
+<section id="hide-both-code-and-output" class="level3">
+<h3 class="anchored" data-anchor-id="hide-both-code-and-output">3. Hide Both Code and Output</h3>
+<p>The code: <code>include=FALSE</code></p>
+<hr>
+</section>
+<section id="clean-tables-no-messages-or-warnings" class="level3">
+<h3 class="anchored" data-anchor-id="clean-tables-no-messages-or-warnings">4. Clean Tables (No Messages or Warnings)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(df), <span class="at">caption =</span> <span class="st">"Clean Table Example"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Clean Table Example</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">sex</th>
+<th style="text-align: right;">height</th>
+<th style="text-align: right;">mass</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">77</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">167</td>
+<td style="text-align: right;">75</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">136</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">178</td>
+<td style="text-align: right;">120</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The code: <code>message=FALSE, warning=FALSE</code></p>
+<hr>
+</section>
+</section>
+<section id="writing-tips-for-quarto-reports" class="level2">
+<h2 class="anchored" data-anchor-id="writing-tips-for-quarto-reports">Writing Tips for Quarto Reports</h2>
+<ul>
+<li>Keep text <strong>short and clear</strong></li>
+<li>Always <strong>interpret your results</strong></li>
+<li>Use <strong>table captions</strong> to explain what the reader is seeing</li>
+<li>Avoid dumping raw output — format it into tables</li>
+<li>Use headings to organize your report</li>
+</ul>
 <section id="example-interpretation" class="level3">
 <h3 class="anchored" data-anchor-id="example-interpretation">Example Interpretation</h3>
-<blockquote class="blockquote">
-<p>The intervention group had lower blood pressure than the control group (p = 0.03).</p>
-</blockquote>
-<p>Interpretation:</p>
+<p>The results suggest that height is positively associated with mass, indicating that taller individuals tend to have higher body mass on average.</p>
+<hr>
+</section>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h2>
 <ul>
-<li>There is evidence of a difference<br>
-</li>
-<li>The observed result is unlikely under the null<br>
-</li>
-<li>The effect may be meaningful, but magnitude should also be considered</li>
+<li>Use <code>kable()</code> for clean, simple tables</li>
+<li>Always structure Table 1 (descriptive) and Table 2 (model results)</li>
+<li>Control what your audience sees using chunk options</li>
+<li>Focus on interpretation, not just output</li>
 </ul>
-<hr>
-</section>
-</section>
-<section id="hypothesis-testing-in-regression" class="level2">
-<h2 class="anchored" data-anchor-id="hypothesis-testing-in-regression">Hypothesis Testing in Regression</h2>
-<p>Hypothesis testing is also used in regression models.</p>
-<p>Example:</p>
-<ul>
-<li>H₀: β₁ = 0 (no association between predictor and outcome)<br>
-</li>
-<li>Hₐ: β₁ ≠ 0</li>
-</ul>
-<hr>
-<section id="example-in-r" class="level3">
-<h3 class="anchored" data-anchor-id="example-in-r">Example in R</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> group, <span class="at">data =</span> df)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = outcome ~ group, data = df)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--24.5558  -5.9140  -0.5798   6.5742  21.3455 
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   50.344      1.295  38.875   &lt;2e-16 ***
-groupB         1.120      1.831   0.612    0.542    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 9.157 on 98 degrees of freedom
-Multiple R-squared:  0.003802,  Adjusted R-squared:  -0.006363 
-F-statistic: 0.374 on 1 and 98 DF,  p-value: 0.5422</code></pre>
-</div>
-</div>
-<hr>
-</section>
-</section>
-<section id="interpreting-regression-output" class="level2">
-<h2 class="anchored" data-anchor-id="interpreting-regression-output">Interpreting Regression Output</h2>
-<ul>
-<li>The coefficient represents the estimated effect<br>
-</li>
-<li>The p-value tests whether that effect is different from zero<br>
-</li>
-<li>Confidence intervals provide a range of plausible values</li>
-</ul>
-<hr>
-</section>
-<section id="connecting-to-confidence-intervals" class="level2">
-<h2 class="anchored" data-anchor-id="connecting-to-confidence-intervals">Connecting to Confidence Intervals</h2>
-<ul>
-<li>If CI excludes 0 (or 1 for ratios) → statistically significant<br>
-</li>
-<li>If CI includes 0 → not statistically significant</li>
-</ul>
-<hr>
-</section>
-<section id="key-terms" class="level2">
-<h2 class="anchored" data-anchor-id="key-terms">Key Terms</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Term</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Null Hypothesis</td>
-<td>No effect or association</td>
-</tr>
-<tr class="even">
-<td>Alternative Hypothesis</td>
-<td>Presence of effect</td>
-</tr>
-<tr class="odd">
-<td>Test Statistic</td>
-<td>Measure of observed effect</td>
-</tr>
-<tr class="even">
-<td>Null Distribution</td>
-<td>Distribution under H₀</td>
-</tr>
-<tr class="odd">
-<td>P-value</td>
-<td>Probability of extreme result under H₀</td>
-</tr>
-<tr class="even">
-<td>Significance Level</td>
-<td>Threshold for decision-making</td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-<section id="practice-activity" class="level2">
-<h2 class="anchored" data-anchor-id="practice-activity">Practice Activity</h2>
-<ol type="1">
-<li>Simulate a null distribution<br>
-</li>
-<li>Compute an observed statistic<br>
-</li>
-<li>Calculate a p-value<br>
-</li>
-<li>Interpret the result in plain language<br>
-</li>
-<li>Decide whether to reject the null</li>
-</ol>
-<hr>
-</section>
-<section id="reflection-questions" class="level2">
-<h2 class="anchored" data-anchor-id="reflection-questions">Reflection Questions</h2>
-<ol type="1">
-<li>Why do we simulate under the null hypothesis?<br>
-</li>
-<li>What does a small p-value tell us?<br>
-</li>
-<li>Why is statistical significance not the same as practical importance?<br>
-</li>
-<li>How does this apply to real public health decisions?</li>
-</ol>
-<hr>
-</section>
-<section id="common-mistakes-to-avoid" class="level2">
-<h2 class="anchored" data-anchor-id="common-mistakes-to-avoid">Common Mistakes to Avoid</h2>
-<ul>
-<li>Treating p-value as probability the null is true<br>
-</li>
-<li>Ignoring effect size<br>
-</li>
-<li>Over-relying on 0.05 cutoff<br>
-</li>
-<li>Confusing statistical and clinical significance</li>
-</ul>
-<hr>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>Hypothesis testing provides a structured way to evaluate evidence.</p>
-<p>A simulation-first approach helps build intuition by showing what results look like under the null hypothesis.</p>
-<p>P-values quantify evidence strength, but must be interpreted carefully and alongside effect sizes and confidence intervals.</p>
-<hr>
-</section>
-<section id="looking-ahead" class="level2">
-<h2 class="anchored" data-anchor-id="looking-ahead">Looking Ahead</h2>
-<p>Next lesson:</p>
-<ul>
-<li>Multiple testing<br>
-</li>
-<li>Type I and Type II errors<br>
-</li>
-<li>Power and sample size</li>
-</ul>
-<hr>
 
 
 </section>
@@ -1140,14 +964,11 @@ F-statistic: 0.374 on 1 and 98 DF,  p-value: 0.5422</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./project3.html" class="pagination-link" aria-label="Project 3: Modeling Health Outcomes Using Regression &amp; Simulation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Project 3: Modeling Health Outcomes Using Regression &amp; Simulation</span></span>
+      <a href="./suppA.html" class="pagination-link" aria-label="Supplemental Lesson: Creating Table 1, Table 2, and References">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Supplemental Lesson: Creating Table 1, Table 2, and References</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./11a-inclass.html" class="pagination-link" aria-label="Lesson 11a: In-Class Activity: Hypothesis Testing Simulation">
-        <span class="nav-page-text"><span class="chapter-title">Lesson 11a: In-Class Activity: Hypothesis Testing Simulation</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

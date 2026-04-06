@@ -3398,5 +3398,95 @@
     "crumbs": [
       "<span class='chapter-number'>21</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and References</span>"
     ]
+  },
+  {
+    "objectID": "suppB.html",
+    "href": "suppB.html",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks",
+    "section": "",
+    "text": "Overview\nThis lesson shows you how to:",
+    "crumbs": [
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks</span>"
+    ]
+  },
+  {
+    "objectID": "suppB.html#overview",
+    "href": "suppB.html#overview",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks",
+    "section": "",
+    "text": "Create Table 1 (descriptive statistics)\nCreate Table 2 (regression results)\nUse Quarto chunk options to control code and output\nWrite cleaner, more impactful reports",
+    "crumbs": [
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks</span>"
+    ]
+  },
+  {
+    "objectID": "suppB.html#setup",
+    "href": "suppB.html#setup",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks",
+    "section": "Setup",
+    "text": "Setup\n\n# install.packages(c(\"dplyr\", \"knitr\", \"broom\"))\nlibrary(dplyr)\n\nWarning: package 'dplyr' was built under R version 4.5.1\n\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\nlibrary(knitr)\nlibrary(broom)",
+    "crumbs": [
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks</span>"
+    ]
+  },
+  {
+    "objectID": "suppB.html#example-dataset",
+    "href": "suppB.html#example-dataset",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks",
+    "section": "Example Dataset",
+    "text": "Example Dataset\n\ndata(starwars)\n\ndf &lt;- starwars %&gt;%\n  select(sex, height, mass) %&gt;%\n  filter(!is.na(sex))",
+    "crumbs": [
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks</span>"
+    ]
+  },
+  {
+    "objectID": "suppB.html#table-1-descriptive-statistics",
+    "href": "suppB.html#table-1-descriptive-statistics",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks",
+    "section": "Table 1: Descriptive Statistics",
+    "text": "Table 1: Descriptive Statistics\n\nSimple Summary Table\n\ntable1 &lt;- df %&gt;%\n  group_by(sex) %&gt;%\n  summarise(\n    n = n(),\n    mean_height = mean(height, na.rm = TRUE),\n    mean_mass = mean(mass, na.rm = TRUE)\n  )\n\nkable(table1, caption = \"Table 1. Descriptive Statistics by Sex\")\n\n\nTable 1. Descriptive Statistics by Sex\n\n\nsex\nn\nmean_height\nmean_mass\n\n\n\n\nfemale\n16\n171.5714\n54.68889\n\n\nhermaphroditic\n1\n175.0000\n1358.00000\n\n\nmale\n60\n179.1228\n80.21905\n\n\nnone\n6\n131.2000\n69.75000",
+    "crumbs": [
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks</span>"
+    ]
+  },
+  {
+    "objectID": "suppB.html#table-2-regression-results",
+    "href": "suppB.html#table-2-regression-results",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks",
+    "section": "Table 2: Regression Results",
+    "text": "Table 2: Regression Results\n\nmodel &lt;- lm(mass ~ height, data = df)\n\ntable2 &lt;- tidy(model)\n\nkable(table2, digits = 3, caption = \"Table 2. Linear Regression Results\")\n\n\nTable 2. Linear Regression Results\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n-11.248\n114.345\n-0.098\n0.922\n\n\nheight\n0.629\n0.643\n0.977\n0.333",
+    "crumbs": [
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks</span>"
+    ]
+  },
+  {
+    "objectID": "suppB.html#quarto-tips-controlling-code-output",
+    "href": "suppB.html#quarto-tips-controlling-code-output",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks",
+    "section": "Quarto Tips: Controlling Code & Output",
+    "text": "Quarto Tips: Controlling Code & Output\nREMEMBER - The code goes INSIDE of the {r}. Make sure to use a comma after each new command.\n\n1. Hide Code, Show Output\n\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   66.0   167.0   180.0   174.6   191.0   264.0       6 \n\n\nThe code: echo=FALSE\n\n\n\n2. Show Code, Hide Output\n\nsummary(df$height)\n\nThe code: results='hide'\n\n\n\n3. Hide Both Code and Output\nThe code: include=FALSE\n\n\n\n4. Clean Tables (No Messages or Warnings)\n\nkable(head(df), caption = \"Clean Table Example\")\n\n\nClean Table Example\n\n\nsex\nheight\nmass\n\n\n\n\nmale\n172\n77\n\n\nnone\n167\n75\n\n\nnone\n96\n32\n\n\nmale\n202\n136\n\n\nfemale\n150\n49\n\n\nmale\n178\n120\n\n\n\n\n\nThe code: message=FALSE, warning=FALSE",
+    "crumbs": [
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks</span>"
+    ]
+  },
+  {
+    "objectID": "suppB.html#writing-tips-for-quarto-reports",
+    "href": "suppB.html#writing-tips-for-quarto-reports",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks",
+    "section": "Writing Tips for Quarto Reports",
+    "text": "Writing Tips for Quarto Reports\n\nKeep text short and clear\nAlways interpret your results\nUse table captions to explain what the reader is seeing\nAvoid dumping raw output — format it into tables\nUse headings to organize your report\n\n\nExample Interpretation\nThe results suggest that height is positively associated with mass, indicating that taller individuals tend to have higher body mass on average.",
+    "crumbs": [
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks</span>"
+    ]
+  },
+  {
+    "objectID": "suppB.html#key-takeaways",
+    "href": "suppB.html#key-takeaways",
+    "title": "Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\nUse kable() for clean, simple tables\nAlways structure Table 1 (descriptive) and Table 2 (model results)\nControl what your audience sees using chunk options\nFocus on interpretation, not just output",
+    "crumbs": [
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Supplemental Lesson: Creating Table 1, Table 2, and Code Chunks</span>"
+    ]
   }
 ]
